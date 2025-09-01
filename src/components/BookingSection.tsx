@@ -142,7 +142,7 @@ ${formData.selectedPackage === 'vip' ? `🎫 Booking number: ${newBookingCount}`
 📧 Email: ${formData.email}
 👥 Guests: ${formData.participants}
 📅 Booking Date: ${bookingDateDisplay}
-💰 Total Price: €${totalPrice.toLocaleString()}
+€ Total Price: €${totalPrice.toLocaleString()}
 ${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `;
