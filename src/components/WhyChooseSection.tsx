@@ -32,7 +32,7 @@ const WhyChooseSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 bg-gray-900">
+    <section id="why-us" className="py-12 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-5xl font-light text-white mb-8 tracking-wide">

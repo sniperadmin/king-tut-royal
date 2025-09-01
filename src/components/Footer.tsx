@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import PrivacyPolicy from './PrivacyPolicy';
+import { smoothScroll } from '../utils/smoothScroll';
 
 const Footer: React.FC = () => {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
@@ -32,9 +33,9 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold text-amber-400 mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#packages" className="text-gray-300 hover:text-amber-400 transition-colors">Packages</a></li>
-              <li><a href="#about" className="text-gray-300 hover:text-amber-400 transition-colors">About Us</a></li>
-              <li><a href="#booking" className="text-gray-300 hover:text-amber-400 transition-colors">Book Now</a></li>
+              <li><button onClick={() => smoothScroll('packages')} className="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Packages</button></li>
+              <li><button onClick={() => smoothScroll('why-us')} className="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Why Us</button></li>
+              <li><button onClick={() => smoothScroll('booking')} className="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Book Now</button></li>
             </ul>
           </div>
 

@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { smoothScroll } from '../utils/smoothScroll';
+
 const HeroSection: React.FC = () => {
   const scrollToPackages = () => {
-    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+    smoothScroll('packages');
   };
 
   return (

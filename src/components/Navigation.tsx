@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
+import { smoothScroll } from '../utils/smoothScroll';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const scrollToBooking = () => {
-    const bookingSection = document.getElementById('booking');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollToSection = (id: string) => {
+    smoothScroll(id);
     setIsMenuOpen(false); // Close mobile menu if open
   };
 
@@ -22,11 +20,11 @@ const Navigation: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-white hover:text-yellow-400 transition-colors duration-200">Home</a>
-            <a href="#packages" className="text-white hover:text-yellow-400 transition-colors duration-200">Packages</a>
-            <a href="#experiences" className="text-white hover:text-yellow-400 transition-colors duration-200">Experiences</a>
+            <button onClick={() => scrollToSection('home')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Home</button>
+            <button onClick={() => scrollToSection('packages')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Packages</button>
+            <button onClick={() => scrollToSection('why-us')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
             <button 
-              onClick={scrollToBooking}
+              onClick={() => scrollToSection('booking')}
               className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold transition-all duration-300"
             >
               Book Now
@@ -51,11 +49,11 @@ const Navigation: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-yellow-400/20">
             <div className="flex flex-col space-y-4">
-              <a href="#home" className="text-white hover:text-yellow-400 transition-colors duration-200">Home</a>
-              <a href="#packages" className="text-white hover:text-yellow-400 transition-colors duration-200">Packages</a>
-              <a href="#experiences" className="text-white hover:text-yellow-400 transition-colors duration-200">Experiences</a>
+              <button onClick={() => scrollToSection('home')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
+              <button onClick={() => scrollToSection('packages')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</button>
+              <button onClick={() => scrollToSection('experiences')} className="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Experiences</button>
               <button 
-                onClick={scrollToBooking}
+                onClick={() => scrollToSection('booking')}
                 className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold w-full"
               >
                 Book Now

@@ -291,7 +291,6 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                         selected={formData.oneDayDate}
                         onSelect={(date) => setFormData(prev => ({ ...prev, oneDayDate: date }))}
                         initialFocus
-                        disabled={(date) => date.getDay() === 4} // Disable Thursdays (Thursday is 4)
                       />
                     </PopoverContent>
                   </Popover>
