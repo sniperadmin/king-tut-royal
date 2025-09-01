@@ -4,7 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar, Clock, Users, MessageCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Users, MessageCircle } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { format } from 'date-fns';
 import { supabase } from '@/lib/supabase';
 
 interface WeeklyBooking {
@@ -19,7 +22,9 @@ export default function BookingSection() {
     phone: '',
     selectedWeek: '',
     participants: '1',
-    selectedPackage: 'vip' // Default to Royal VIP package
+    selectedPackage: 'vip', // Default to Royal VIP package
+    specialRequests: '',
+    oneDayDate: undefined as Date | undefined
   });
   const [availableWeeks, setAvailableWeeks] = useState<WeeklyBooking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -74,9 +79,9 @@ export default function BookingSection() {
     return 50 - weekData.booking_count;
   };
 
-  const generateBookingNumber = (bookingCount: number) => {
-    return 'KT' + bookingCount.toString().padStart(4, '0');
-  };
+  // const generateBookingNumber = (bookingCount: number) => {
+  //   return 'KT' + bookingCount.toString().padStart(4, '0');
+  // };
   const calculateTotalPrice = (packageType: string, guests: number) => {
     const pricePerPerson = packageType === 'vip' ? 2900 : 900;
     return pricePerPerson * guests;
@@ -84,49 +89,73 @@ export default function BookingSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.selectedWeek) return;
+
+    if (formData.selectedPackage === 'vip' && !formData.selectedWeek) {
+      alert('Please select a week for the Royal VIP package.');
+      return;
+    }
+
+    if (formData.selectedPackage === 'oneday' && !formData.oneDayDate) {
+      alert('Please select a date for the One Day package.');
+      return;
+    }
 
     setSubmitting(true);
-    
+
+    let bookingDateDisplay = '';
+    let newBookingCount = 0;
+    let remainingSlots = 0;
+
     try {
-      // Book the slot
-      const { data, error } = await supabase.functions.invoke('book-weekly-slot', {
-        body: { weekStartDate: formData.selectedWeek }
-      });
+      if (formData.selectedPackage === 'vip') {
+        // Book the slot for VIP package
+        const { data, error } = await supabase.functions.invoke('book-weekly-slot', {
+          body: { weekStartDate: formData.selectedWeek }
+        });
 
-      if (error) throw error;
-      if (!data.success) throw new Error(data.message);
+        if (error) throw error;
+        if (!data.success) throw new Error(data.message);
 
-      const bookingNumber = generateBookingNumber(data.newCount);
-      const selectedWeekData = availableWeeks.find(w => w.week_start_date === formData.selectedWeek);
-      const thursdayDate = getThursdayDate(formData.selectedWeek);
-      const remainingSlots = getAvailableSlots(selectedWeekData!) - parseInt(formData.participants);
+        newBookingCount = data.newCount;
+        const selectedWeekData = availableWeeks.find(w => w.week_start_date === formData.selectedWeek);
+        bookingDateDisplay = getThursdayDate(formData.selectedWeek);
+        remainingSlots = getAvailableSlots(selectedWeekData!) - parseInt(formData.participants);
+      } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
+        // For one-day package, no slot booking needed on backend for now
+        // Just format the date for display
+        bookingDateDisplay = format(formData.oneDayDate, 'EEEE dd, MMMM yyyy'); // e.g., 'Monday 25, October 2024'
+        newBookingCount = 0; // Not applicable for one-day
+        remainingSlots = 0; // Not applicable for one-day
+      }
+
       const totalPrice = calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants));
-
       const packageName = formData.selectedPackage === 'vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day';
-      
+
       const message = `
 🎭 *King Tut Booking Request*
 
 📋 *Booking Details:*
+${formData.selectedPackage === 'vip' ? `• Booking queue number: ${newBookingCount}` : ''}
 • Name: ${formData.name}
 • Phone: ${formData.phone}
 • Package: ${packageName}
-• Participants: ${formData.participants}
-• Booking Date: ${thursdayDate}
+• Guests: ${formData.participants}
+• Booking Date: ${bookingDateDisplay}
 • Total Price: €${totalPrice.toLocaleString()}
-• Booking Count: ${data.newCount}
-• Remaining Slots: ${remainingSlots}
+${formData.selectedPackage === 'vip' ? `• Remaining Slots: ${remainingSlots}` : ''}
+${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}` : ''}
 `;
 
       const whatsappUrl = `https://wa.me/+971585923054?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
 
-      // Refresh available weeks
-      await fetchAvailableWeeks();
-      
+      // Refresh available weeks (only relevant for VIP package)
+      if (formData.selectedPackage === 'vip') {
+        await fetchAvailableWeeks();
+      }
+
       // Reset form
-      setFormData({ name: '', phone: '', selectedWeek: '', participants: '1', selectedPackage: 'vip' });
+      setFormData({ name: '', phone: '', selectedWeek: '', participants: '1', selectedPackage: 'vip', specialRequests: '', oneDayDate: undefined });
     } catch (error) {
       console.error('Booking error:', error);
       alert('Booking failed. Please try again.');
@@ -148,7 +177,6 @@ export default function BookingSection() {
         <Card className="bg-gray-900 border border-amber-400 shadow-xl">
           <CardHeader className="text-center border-b border-amber-400/20">
             <CardTitle className="flex items-center justify-center gap-2 text-2xl text-white">
-              <Calendar className="h-6 w-6 text-amber-400" />
               Select Your Package
             </CardTitle>
             <CardDescription className="text-gray-300">Choose your preferred package and date</CardDescription>
@@ -245,28 +273,51 @@ export default function BookingSection() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="week" className="text-white">Select Date *</Label>
-                <Select
-                  value={formData.selectedWeek}
-                  onValueChange={(value) => setFormData(prev => ({...prev, selectedWeek: value}))}
-                  required
-                >
-                  <SelectTrigger className="h-12 bg-gray-800 border-gray-600 text-white">
-                    <SelectValue placeholder={loading ? "Loading dates..." : "Choose your Thursday"} />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-600">
-                    {availableWeeks.map((week) => (
-                      <SelectItem key={week.id} value={week.week_start_date} className="text-white hover:bg-gray-700">
-                        <div className="flex items-center justify-between w-full">
-                          <span>{getThursdayDate(week.week_start_date)}</span>
-                          <span className="ml-4 text-sm text-green-400">
-                            {getAvailableSlots(week)} slots available
-                          </span>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="date" className="text-white">Select Date *</Label>
+                {formData.selectedPackage === 'oneday' ? (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={`w-full justify-start text-left font-normal h-12 bg-gray-800 border-gray-600 text-white ${!formData.oneDayDate && "text-muted-foreground"}`}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData.oneDayDate ? format(formData.oneDayDate, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0 bg-gray-800 border-gray-600 text-white">
+                      <Calendar
+                        mode="single"
+                        selected={formData.oneDayDate}
+                        onSelect={(date) => setFormData(prev => ({ ...prev, oneDayDate: date }))}
+                        initialFocus
+                        disabled={(date) => date.getDay() === 4} // Disable Thursdays (Thursday is 4)
+                      />
+                    </PopoverContent>
+                  </Popover>
+                ) : (
+                  <Select
+                    value={formData.selectedWeek}
+                    onValueChange={(value) => setFormData(prev => ({...prev, selectedWeek: value}))}
+                    required
+                  >
+                    <SelectTrigger className="h-12 bg-gray-800 border-gray-600 text-white">
+                      <SelectValue placeholder={loading ? "Loading dates..." : "Choose your Thursday"} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-gray-800 border-gray-600">
+                      {availableWeeks.map((week) => (
+                        <SelectItem key={week.id} value={week.week_start_date} className="text-white hover:bg-gray-700">
+                          <div className="flex items-center justify-between w-full">
+                            <span>{getThursdayDate(week.week_start_date)}</span>
+                            <span className="ml-4 text-sm text-green-400">
+                              {getAvailableSlots(week)} slots available
+                            </span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -274,6 +325,8 @@ export default function BookingSection() {
                 <textarea
                   id="requests"
                   rows={4}
+                  value={formData.specialRequests}
+                  onChange={(e) => setFormData(prev => ({ ...prev, specialRequests: e.target.value }))}
                   className="w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none"
                   placeholder="Any special requests or requirements..."
                 />
@@ -281,7 +334,7 @@ export default function BookingSection() {
 
               <Button
                 type="submit"
-                disabled={!formData.name || !formData.selectedWeek || submitting}
+                disabled={!formData.name || (formData.selectedPackage === 'vip' && !formData.selectedWeek) || (formData.selectedPackage === 'oneday' && !formData.oneDayDate) || submitting}
                 className="w-full h-14 text-lg bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 font-semibold"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />

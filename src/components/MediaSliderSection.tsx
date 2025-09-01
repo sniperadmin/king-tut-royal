@@ -9,37 +9,49 @@ const MediaSliderSection: React.FC = () => {
   
   const mediaItems = [
     {
+      id: 0,
+      src: "/images/vip.jpeg",
+      title: "VIP Experience",
+      description: "Exclusive access and personalized service"
+    },
+    {
       id: 1,
-      src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756563688699_c9cc1e54.jpeg",
-      title: "Egypt in Style",
-      description: "Private access, curated itineraries, 24/7 concierge"
+      src: "/images/luxury.jpeg",
+      title: "Luxury Travel",
+      description: "Unforgettable journeys with unparalleled comfort"
     },
     {
       id: 2,
+      src: "/images/chills.jpeg",
+      title: "Luxury Travel",
+      description: "Unforgettable journeys with unparalleled comfort"
+    },
+    {
+      id: 3,
       src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756563690287_c291debe.jpeg",
       title: "Core Services",
       description: "Luxury accommodations and premium experiences"
     },
     {
-      id: 3,
+      id: 4,
       src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756563690822_f6641d5a.jpeg",
       title: "Digital Experience",
       description: "AR-enhanced tours and mobile concierge"
     },
     {
-      id: 4,
+      id: 5,
       src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569116369_624ffd5b.jpeg",
       title: "Royal Dinner on the Nile",
       description: "Exclusive dining experiences with ancient Egyptian ambiance"
     },
     {
-      id: 5,
+      id: 6,
       src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569118036_1d19752f.jpeg",
       title: "King Tut Royal Collection",
       description: "Limited edition luxury items inspired by pharaonic treasures"
     },
     {
-      id: 6,
+      id: 7,
       src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569118786_e66e165b.jpeg",
       title: "VIP Experience Package",
       description: "Premium access and personalized Egyptian adventure"
