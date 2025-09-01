@@ -20,8 +20,9 @@ export default function BookingSection() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     selectedWeek: '',
-    participants: '1',
+    participants: '1', // Default to 1, will be updated based on package selection
     selectedPackage: 'vip', // Default to Royal VIP package
     specialRequests: '',
     oneDayDate: undefined as Date | undefined
@@ -132,18 +133,18 @@ export default function BookingSection() {
       const packageName = formData.selectedPackage === 'vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day';
 
       const message = `
-🎭 *King Tut Booking Request*
+🎁 *${packageName}*
 
 📋 *Booking Details:*
-${formData.selectedPackage === 'vip' ? `• Booking queue number: ${newBookingCount}` : ''}
-• Name: ${formData.name}
-• Phone: ${formData.phone}
-• Package: ${packageName}
-• Guests: ${formData.participants}
-• Booking Date: ${bookingDateDisplay}
-• Total Price: €${totalPrice.toLocaleString()}
-${formData.selectedPackage === 'vip' ? `• Remaining Slots: ${remainingSlots}` : ''}
-${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}` : ''}
+${formData.selectedPackage === 'vip' ? `🎫 Booking number: ${newBookingCount}` : ''}
+👤 Name: ${formData.name}
+📱 Phone: ${formData.phone}
+📧 Email: ${formData.email}
+👥 Guests: ${formData.participants}
+📅 Booking Date: ${bookingDateDisplay}
+💰 Total Price: €${totalPrice.toLocaleString()}
+${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
+${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `;
 
       const whatsappUrl = `https://wa.me/+971585923054?text=${encodeURIComponent(message)}`;
@@ -155,7 +156,7 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
       }
 
       // Reset form
-      setFormData({ name: '', phone: '', selectedWeek: '', participants: '1', selectedPackage: 'vip', specialRequests: '', oneDayDate: undefined });
+      setFormData({ name: '', phone: '', email: '', selectedWeek: '', participants: '1', selectedPackage: 'vip', specialRequests: '', oneDayDate: undefined });
     } catch (error) {
       console.error('Booking error:', error);
       alert('Booking failed. Please try again.');
@@ -205,7 +206,7 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                       ? 'bg-amber-400/20 border-amber-400' 
                       : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
                   }`}
-                  onClick={() => setFormData(prev => ({...prev, selectedPackage: 'oneday'}))}
+                  onClick={() => setFormData(prev => ({...prev, selectedPackage: 'oneday', participants: '4'}))}
                 >
                   <h3 className="text-lg font-semibold text-white mb-2">King Tut VIP One Day</h3>
                   <p className="text-white text-2xl font-bold">€900</p>
@@ -234,6 +235,9 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                   <Input
                     id="email"
                     type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))}
+                    required
                     className="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
                   />
                 </div>
@@ -255,18 +259,31 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                   <Label htmlFor="participants" className="text-white">Number of Guests</Label>
                   <Select
                     value={formData.participants}
-                    onValueChange={(value) => setFormData(prev => ({...prev, participants: value}))}
+                    onValueChange={(value) => setFormData(prev => ({
+                      ...prev,
+                      participants: value
+                    }))}
                   >
                     <SelectTrigger className="h-12 bg-gray-800 border-gray-600 text-white">
                       <SelectValue placeholder="Select guests" />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border-gray-600">
-                      <SelectItem value="1" className="text-white hover:bg-gray-700">1 Guest</SelectItem>
-                      <SelectItem value="2" className="text-white hover:bg-gray-700">2 Guests</SelectItem>
-                      <SelectItem value="3" className="text-white hover:bg-gray-700">3 Guests</SelectItem>
-                      <SelectItem value="4" className="text-white hover:bg-gray-700">4 Guests</SelectItem>
-                      <SelectItem value="5" className="text-white hover:bg-gray-700">5 Guests</SelectItem>
-                      <SelectItem value="6" className="text-white hover:bg-gray-700">6 Guests</SelectItem>
+                      {formData.selectedPackage === 'oneday' ? (
+                        <>
+                          <SelectItem value="4" className="text-white hover:bg-gray-700">4 Guests</SelectItem>
+                          <SelectItem value="5" className="text-white hover:bg-gray-700">5 Guests</SelectItem>
+                          <SelectItem value="6" className="text-white hover:bg-gray-700">6 Guests</SelectItem>
+                        </>
+                      ) : (
+                        <>
+                          <SelectItem value="1" className="text-white hover:bg-gray-700">1 Guest</SelectItem>
+                          <SelectItem value="2" className="text-white hover:bg-gray-700">2 Guests</SelectItem>
+                          <SelectItem value="3" className="text-white hover:bg-gray-700">3 Guests</SelectItem>
+                          <SelectItem value="4" className="text-white hover:bg-gray-700">4 Guests</SelectItem>
+                          <SelectItem value="5" className="text-white hover:bg-gray-700">5 Guests</SelectItem>
+                          <SelectItem value="6" className="text-white hover:bg-gray-700">6 Guests</SelectItem>
+                        </>
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -291,6 +308,7 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                         selected={formData.oneDayDate}
                         onSelect={(date) => setFormData(prev => ({ ...prev, oneDayDate: date }))}
                         initialFocus
+                        month={new Date(new Date().getFullYear(), 10)} // Set initial month to November (month index 10)
                       />
                     </PopoverContent>
                   </Popover>
@@ -329,6 +347,10 @@ ${formData.specialRequests ? `• Special Requests: ${formData.specialRequests}`
                   className="w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none"
                   placeholder="Any special requests or requirements..."
                 />
+              </div>
+
+              <div className="mt-8 text-center">
+                <p className="text-primary text-2xl font-bold">Total Price: €{calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)).toLocaleString()}</p>
               </div>
 
               <Button
