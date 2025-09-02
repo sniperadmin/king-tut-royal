@@ -1,6 +1,6 @@
 # UI Design Template Documentation
 
-This document outlines the UI design template used in the Luxury Travel Exclusive application. The design is based on a modern, elegant, and luxurious aesthetic, primarily utilizing Tailwind CSS for styling and React components for structure.
+This document outlines the UI design template used in the Luxury Travel Exclusive application. The design is based on a modern, elegant, and luxurious aesthetic, primarily utilizing Tailwind CSS for styling and Vue 3 components for structure.
 
 ## 1. Color Palette
 
@@ -208,18 +208,18 @@ Custom CSS classes are defined in `src/index.css` for specific visual effects:
 
 ## 4. Component Structure
 
-The application is built using React components, organized within the `src/components` directory. Key components include:
+The application is built using Vue 3 components, organized within the `src/components` directory. Key components include:
 
-- **`AppLayout.tsx`**: The main layout component that orchestrates the display of various sections.
-- **`Navigation.tsx`**: Handles site navigation.
-- **`HeroSection.tsx`**: The main introductory section, often featuring a large image and call to action.
-- **`MediaSliderSection.tsx`**: Displays a carousel or slider of media.
-- **`PackagesSection.tsx`**: Showcases different travel packages.
-- **`WhyChooseSection.tsx`**: Highlights the unique selling points.
-- **`BookingSection.tsx`**: Provides a form or interface for booking.
-- **`Footer.tsx`**: The application footer.
+- **`AppLayout.vue`**: The main layout component that orchestrates the display of various sections.
+- **`Navigation.vue`**: Handles site navigation.
+- **`HeroSection.vue`**: The main introductory section, often featuring a large image and call to action.
+- **`MediaSliderSection.vue`**: Displays a carousel or slider of media.
+- **`PackagesSection.vue`**: Showcases different travel packages.
+- **`WhyChooseSection.vue`**: Highlights the unique selling points.
+- **`BookingSection.vue`**: Provides a form or interface for booking.
+- **`Footer.vue`**: The application footer.
 
-Additionally, a `ui` subdirectory within `src/components` contains a collection of reusable UI components (e.g., `button.tsx`, `card.tsx`, `dialog.tsx`) built using Shadcn UI principles, providing a consistent and accessible design system.
+Additionally, the components use Vue 3 Composition API with TypeScript for type safety and reactivity.
 
 ## 5. Responsiveness
 
