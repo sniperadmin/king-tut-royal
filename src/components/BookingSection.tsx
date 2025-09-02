@@ -16,6 +16,8 @@ interface WeeklyBooking {
   booking_count: number;
 }
 
+const MAX_CAPACITY = 50;
+
 export default function BookingSection() {
   const [formData, setFormData] = useState({
     name: '',
@@ -55,8 +57,8 @@ export default function BookingSection() {
       const { data, error } = await supabase.functions.invoke('get-weekly-bookings');
       if (error) throw error;
       
-      // Filter weeks that have available slots (less than 50 bookings)
-      const available = data.data.filter((week: WeeklyBooking) => week.booking_count < 50);
+      // Filter weeks that have available slots (less than MAX_CAPACITY bookings)
+      const available = data.data.filter((week: WeeklyBooking) => week.booking_count < MAX_CAPACITY);
       setAvailableWeeks(available);
     } catch (error) {
       console.error('Error fetching available weeks:', error);
@@ -77,7 +79,7 @@ export default function BookingSection() {
   };
 
   const getAvailableSlots = (weekData: WeeklyBooking) => {
-    return 50 - weekData.booking_count;
+    return MAX_CAPACITY - weekData.booking_count;
   };
 
   // const generateBookingNumber = (bookingCount: number) => {
@@ -109,9 +111,24 @@ export default function BookingSection() {
 
     try {
       if (formData.selectedPackage === 'vip') {
+        // Check if enough slots are available
+        const selectedWeekData = availableWeeks.find(w => w.week_start_date === formData.selectedWeek);
+        if (!selectedWeekData) {
+          throw new Error('Selected week data not found');
+        }
+        
+        const availableSlots = getAvailableSlots(selectedWeekData);
+        const requestedParticipants = parseInt(formData.participants);
+        
+        if (requestedParticipants > availableSlots) {
+          alert(`Not enough slots available. Requested: ${requestedParticipants}, Available: ${availableSlots}`);
+          setSubmitting(false);
+          return;
+        }
+
         // Book the slot for VIP package
         const { data, error } = await supabase.functions.invoke('book-weekly-slot', {
-          body: { weekStartDate: formData.selectedWeek }
+          body: { weekStartDate: formData.selectedWeek, participants: requestedParticipants }
         });
 
         if (error) throw error;
@@ -120,7 +137,7 @@ export default function BookingSection() {
         newBookingCount = data.newCount;
         const selectedWeekData = availableWeeks.find(w => w.week_start_date === formData.selectedWeek);
         bookingDateDisplay = getThursdayDate(formData.selectedWeek);
-        remainingSlots = getAvailableSlots(selectedWeekData!) - parseInt(formData.participants);
+        remainingSlots = MAX_CAPACITY - newBookingCount;
       } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
         // For one-day package, no slot booking needed on backend for now
         // Just format the date for display
