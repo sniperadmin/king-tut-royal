@@ -135,7 +135,6 @@ export default function BookingSection() {
         if (!data.success) throw new Error(data.message);
 
         newBookingCount = data.newCount;
-        const selectedWeekData = availableWeeks.find(w => w.week_start_date === formData.selectedWeek);
         bookingDateDisplay = getThursdayDate(formData.selectedWeek);
         remainingSlots = MAX_CAPACITY - newBookingCount;
       } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
