@@ -91,17 +91,23 @@
                 <select
                   v-model="formData.participants"
                   class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
+                  style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
                 >
-                  <option v-if="formData.selectedPackage === 'oneday'" value="4">4 Guests</option>
-                  <option v-if="formData.selectedPackage === 'oneday'" value="5">5 Guests</option>
-                  <option v-if="formData.selectedPackage === 'oneday'" value="6">6 Guests</option>
+                  <option value="" disabled selected>Select number of guests</option>
+                  <template v-if="formData.selectedPackage === 'oneday'">
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6">6 Guests</option>
+                  </template>
                   
-                  <option v-if="formData.selectedPackage === 'vip'" value="1">1 Guest</option>
-                  <option v-if="formData.selectedPackage === 'vip'" value="2">2 Guests</option>
-                  <option v-if="formData.selectedPackage === 'vip'" value="3">3 Guests</option>
-                  <option v-if="formData.selectedPackage === 'vip'" value="4">4 Guests</option>
-                  <option v-if="formData.selectedPackage === 'vip'" value="5">5 Guests</option>
-                  <option v-if="formData.selectedPackage === 'vip'" value="6">6 Guests</option>
+                  <template v-if="formData.selectedPackage === 'vip'">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6">6 Guests</option>
+                  </template>
                 </select>
               </div>
             </div>
@@ -123,13 +129,20 @@
                   class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
                 >
                   <option value="">{{ loading ? "Loading dates..." : "Choose your Thursday" }}</option>
-                  <option 
-                    v-for="week in availableWeeks" 
-                    :key="week.id" 
-                    :value="week.week_start_date"
-                  >
-                    {{ getThursdayDate(week.week_start_date) }} - {{ getAvailableSlots(week) }} slots available
-                  </option>
+                  <template v-for="week in availableWeeks" :key="week.id">
+                    <template v-if="new Date(week.week_start_date) >= new Date()">
+                      <option 
+                        :value="week.week_start_date"
+                        :class="{
+                          'text-green-400': getAvailableSlots(week) > 25,
+                          'text-yellow-400': getAvailableSlots(week) > 12 && getAvailableSlots(week) <= 25,
+                          'text-orange-400': getAvailableSlots(week) <= 12
+                        }"
+                      >
+                        {{ getThursdayDate(week.week_start_date) }} - {{ getAvailableSlots(week) }} slots available
+                      </option>
+                    </template>
+                  </template>
                 </select>
               </div>
             </div>
@@ -256,14 +269,8 @@ const fetchAvailableWeeks = async () => {
 }
 
 const getThursdayDate = (weekStartDate: string) => {
-  // The weekStartDate should already be the Thursday date selected by user
   const selectedDate = new Date(weekStartDate)
-  return selectedDate.toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  })
+  return format(selectedDate, 'EEEE dd, MMMM yyyy')
 }
 
 const getAvailableSlots = (weekData: WeeklyBooking) => {

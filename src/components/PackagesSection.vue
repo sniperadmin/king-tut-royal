@@ -131,7 +131,7 @@ const packages = [
         }
       ],
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
-      booking: "Price: €1,200 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
+      booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
         "/images/vip.jpeg",
         "/images/luxury.jpeg",
