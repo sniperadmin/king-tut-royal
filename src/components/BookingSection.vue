@@ -77,10 +77,11 @@
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="phone" class="text-white">Phone</Label>
-                <Input
+                <VueTelInput
                   id="phone"
                   v-model="formData.phone"
-                  type="tel"
+                  mode="international"
+                  :inputOptions="{ placeholder: 'Enter your phone number' }"
                   class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
                 />
               </div>
@@ -179,6 +180,8 @@ import Button from '@/components/ui/button.vue'
 import Input from '@/components/ui/input.vue'
 import Label from '@/components/ui/label.vue'
 import LuxuryDatePicker from '@/components/LuxuryDatePicker.vue'
+import { VueTelInput } from 'vue-tel-input'
+import 'vue-tel-input/vue-tel-input.css'
 
 interface WeeklyBooking {
   id: number
@@ -410,3 +413,44 @@ onUnmounted(() => {
   }
 })
 </script>
+
+<style>
+.vue-tel-input {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  border-color: #4b5563 !important; /* border-gray-600 */
+  color: #ffffff !important; /* text-white */
+  border-radius: 0.375rem !important; /* rounded-md */
+}
+
+.vue-tel-input:focus-within {
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5) !important; /* focus:border-amber-400 with shadow */
+  border-color: #fbbf24 !important; /* focus:border-amber-400 */
+}
+
+.vue-tel-input .vti__dropdown {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  border-color: #4b5563 !important; /* border-gray-600 */
+  color: #ffffff !important; /* text-white */
+}
+
+.vue-tel-input .vti__dropdown.open {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  border-color: #4b5563 !important; /* border-gray-600 */
+}
+
+.vue-tel-input .vti__dropdown-item {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  color: #ffffff !important; /* text-white */
+}
+
+.vue-tel-input .vti__dropdown-item.highlighted {
+  background-color: #2d3748 !important; /* A slightly lighter gray for hover/focus */
+}
+
+.vue-tel-input .vti__input {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  border-color: #4b5563 !important; /* border-gray-600 */
+  color: #ffffff !important; /* text-white */
+  border-radius: 0.375rem !important; /* rounded-md */
+}
+</style>

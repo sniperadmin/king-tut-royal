@@ -29,6 +29,7 @@
     "vee-validate": "^4.13.0",
     "vue": "^3.4.0",
     "vue-router": "^4.4.0",
+    "vue-tel-input": "^9.5.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
