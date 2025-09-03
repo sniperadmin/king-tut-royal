@@ -1,56 +1,56 @@
 <template>
-  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg flex flex-col items-center text-center', isPopular ? 'border-yellow-400' : 'border-gray-800']">
-    <div v-if="isPopular" class="bg-yellow-400 text-black px-4 py-1 text-sm font-medium text-center">
-      MOST POPULAR
-    </div>
-
-    <div class="relative h-80 overflow-hidden bg-gray-800">
+  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg flex flex-col text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
+    <div class="relative w-full h-48 overflow-hidden bg-gray-600">
       <img
         :src="image"
         :alt="title"
         class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
       />
+      <div v-if="isPopular" class="absolute top-2 right-2 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full">
+        Popular
+      </div>
     </div>
 
-    <div class="p-8">
-      <div class="text-center mb-8">
-        <div class="flex items-center justify-center mb-4">
-          <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4">
-            <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"/>
-            </svg>
-          </div>
-          <h3 class="text-3xl font-semibold text-white">{{ title }}</h3>
+    <div class="p-6 flex flex-col flex-grow">
+      <div class="flex items-center justify-center mb-3">
+        <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
+          <component :is="LucideIcon" :size="20" class="text-black" />
         </div>
-        <p class="text-gray-300 text-lg tracking-wide font-medium">{{ duration }}</p>
+        <h3 class="text-xl font-semibold text-white">{{ title }}</h3>
       </div>
+      <p class="text-gray-300 text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
+      <div class="text-2xl font-semibold text-yellow-400 mb-4">{{ price }} <span class="text-gray-300 text-sm font-medium">per person</span></div>
 
-      <div class="text-center mb-8">
-        <div class="text-4xl font-semibold text-yellow-400 mb-2">{{ price }}</div>
-        <div class="text-gray-300 text-base font-medium">per person</div>
-      </div>
-
-      <div class="mb-8">
-        <ul class="space-y-4">
-          <li v-for="(highlight, index) in highlights.slice(0, 4)" :key="index" class="flex items-start text-base">
-            <span class="text-yellow-400 mr-3 mt-1 text-lg">•</span>
-            <span class="text-gray-200 font-medium leading-relaxed">{{ highlight }}</span>
+      <div class="mb-6 flex-grow">
+        <ul class="space-y-2 text-left">
+          <li v-for="(highlight, index) in highlights.slice(0, 3)" :key="index" class="flex items-start text-sm">
+            <span class="text-yellow-400 mr-2 text-base">•</span>
+            <span class="text-gray-200 font-medium leading-tight">{{ highlight }}</span>
           </li>
         </ul>
       </div>
 
-      <button
-        @click="onBookNow"
-        class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-4 font-semibold tracking-wider transition-all duration-300 uppercase text-base"
-      >
-        Book Now
-      </button>
+      <div class="mt-auto space-y-3">
+        <button
+          @click="onViewDetailsClick"
+          class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
+        >
+          View Details
+        </button>
+        <button
+          @click="onBookNowClick"
+          class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
+        >
+          Book Now
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
+import * as icons from "lucide-vue-next";
 
 interface PackageCardProps {
   title: string;
@@ -59,10 +59,14 @@ interface PackageCardProps {
   image: string;
   highlights: string[];
   isPopular?: boolean;
-  onBookNow: () => void;
+  onBookNowClick: () => void;
+  onViewDetailsClick: () => void;
+  icon: string;
 }
 
-withDefaults(defineProps<PackageCardProps>(), {
+const props = withDefaults(defineProps<PackageCardProps>(), {
   isPopular: false,
 });
+
+const LucideIcon = computed(() => icons[props.icon]);
 </script>
