@@ -11,6 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@monaco-editor/loader": "^1.5.0",
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/vue-query": "^5.85.9",
     "@types/uuid": "^10.0.0",
@@ -28,6 +32,7 @@
     "uuid": "^11.1.0",
     "vee-validate": "^4.13.0",
     "vue": "^3.4.0",
+    "vue-draggable-plus": "^0.6.0",
     "vue-router": "^4.4.0",
     "vue-tel-input": "^9.5.0",
     "zod": "^3.23.8"
