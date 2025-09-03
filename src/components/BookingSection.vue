@@ -76,7 +76,7 @@
 
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <Label for="phone" class="text-white">Phone</Label>
+                <Label for="phone" class="text-white">Phone *</Label>
                 <VueTelInput
                   id="phone"
                   v-model="formData.phone"
@@ -87,7 +87,7 @@
               </div>
 
               <div class="space-y-2">
-                <Label for="participants" class="text-white">Number of Guests</Label>
+                <Label for="participants" class="text-white">Number of Guests *</Label>
                 <select
                   v-model="formData.participants"
                   class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
@@ -295,8 +295,13 @@ const handleSubmit = async () => {
     return
   }
 
-  if (!formData.email.trim()) {
-    alert('Please enter your email address.')
+  if (!formData.phone.trim()) {
+    alert('Please enter your phone number.')
+    return
+  }
+
+  if (!formData.participants || parseInt(formData.participants) <= 0) {
+    alert('Please enter the number of guests.')
     return
   }
 
@@ -370,7 +375,7 @@ ${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlot
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `
 
-    const whatsappUrl = `https://wa.me/+971585923054?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=971585923054&text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
 
     // Refresh available weeks (only relevant for VIP package)
