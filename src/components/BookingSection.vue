@@ -106,12 +106,13 @@
             </div>
 
             <div class="space-y-2">
-              <Label for="date" class="text-white">Select Date *</Label>
-              <div v-if="formData.selectedPackage === 'oneday'">
-                <input
-                  v-model="oneDayDateString"
-                  type="date"
-                  class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
+              <Label class="text-white">Select Date *</Label>
+              <div v-if="formData.selectedPackage === 'oneday'" class="relative">
+                <LuxuryDatePicker
+                  v-model="selectedOneDayDate"
+                  placeholder="Choose your exclusive day"
+                  :min-date="new Date()"
+                  class="w-full"
                 />
               </div>
               <div v-else>
@@ -151,7 +152,7 @@
 
             <Button
               type="submit"
-              :disabled="!formData.name || (formData.selectedPackage === 'vip' && !formData.selectedWeek) || (formData.selectedPackage === 'oneday' && !formData.oneDayDate) || submitting"
+              :disabled="!isFormValid || submitting"
               class="w-full h-14 text-lg bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 font-semibold"
             >
               <MessageCircle class="mr-2 h-5 w-5" />
@@ -165,7 +166,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted, computed } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed, watch } from 'vue'
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
@@ -177,6 +178,7 @@ import CardContent from '@/components/ui/card-content.vue'
 import Button from '@/components/ui/button.vue'
 import Input from '@/components/ui/input.vue'
 import Label from '@/components/ui/label.vue'
+import LuxuryDatePicker from '@/components/LuxuryDatePicker.vue'
 
 interface WeeklyBooking {
   id: number
@@ -186,17 +188,20 @@ interface WeeklyBooking {
 
 const MAX_CAPACITY = 50
 
-// Reactive form data
+// Reactive form data - simplified structure
 const formData = reactive({
   name: '',
   phone: '',
   email: '',
   selectedWeek: '',
-  participants: '1', // Default to 1, will be updated based on package selection
-  selectedPackage: 'vip', // Default to Royal VIP package
+  participants: '1',
+  selectedPackage: 'vip',
   specialRequests: '',
-  oneDayDate: undefined as Date | undefined
+  oneDayDate: '' // Store as string directly for date input
 })
+
+// Separate reactive for the luxury date picker
+const selectedOneDayDate = ref<Date | null>(null)
 
 // State
 const availableWeeks = ref<WeeklyBooking[]>([])
@@ -204,12 +209,31 @@ const loading = ref(true)
 const submitting = ref(false)
 let channel: any = null
 
-// Computed for one day date string
-const oneDayDateString = computed({
-  get: () => formData.oneDayDate ? format(formData.oneDayDate, 'yyyy-MM-dd') : '',
-  set: (value: string) => {
-    formData.oneDayDate = value ? new Date(value) : undefined
+// Watch for date picker changes
+watch(selectedOneDayDate, (newDate) => {
+  if (newDate) {
+    formData.oneDayDate = format(newDate, 'yyyy-MM-dd')
+  } else {
+    formData.oneDayDate = ''
   }
+})
+
+// Computed for form validation
+const isFormValid = computed(() => {
+  const hasName = formData.name && formData.name.trim().length > 0
+  const hasEmail = formData.email && formData.email.trim().length > 0
+  
+  if (!hasName || !hasEmail) return false
+  
+  if (formData.selectedPackage === 'vip') {
+    return formData.selectedWeek && formData.selectedWeek.length > 0
+  }
+  
+  if (formData.selectedPackage === 'oneday') {
+    return selectedOneDayDate.value !== null
+  }
+  
+  return false
 })
 
 // Methods
@@ -256,6 +280,16 @@ const selectPackage = (packageType: 'vip' | 'oneday') => {
 }
 
 const handleSubmit = async () => {
+  if (!formData.name.trim()) {
+    alert('Please enter your full name.')
+    return
+  }
+
+  if (!formData.email.trim()) {
+    alert('Please enter your email address.')
+    return
+  }
+
   if (formData.selectedPackage === 'vip' && !formData.selectedWeek) {
     alert('Please select a week for the Royal VIP package.')
     return
@@ -303,7 +337,7 @@ const handleSubmit = async () => {
     } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
       // For one-day package, no slot booking needed on backend for now
       // Just format the date for display
-      bookingDateDisplay = format(formData.oneDayDate, 'EEEE dd, MMMM yyyy') // e.g., 'Monday 25, October 2024'
+      bookingDateDisplay = format(new Date(formData.oneDayDate), 'EEEE dd, MMMM yyyy') // e.g., 'Monday 25, October 2024'
       newBookingCount = 0 // Not applicable for one-day
       remainingSlots = 0 // Not applicable for one-day
     }
@@ -343,8 +377,9 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
       participants: '1',
       selectedPackage: 'vip',
       specialRequests: '',
-      oneDayDate: undefined
+      oneDayDate: ''
     })
+    selectedOneDayDate.value = null
   } catch (error) {
     console.error('Booking error:', error)
     alert('Booking failed. Please try again.')
