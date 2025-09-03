@@ -66,7 +66,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Cormorant Garamond', 'serif'],
+        sans: ['"Cormorant Garamond"', 'serif'],
         serif: ['Cormorant Garamond', 'serif'],
         mono: ['Cormorant Garamond', 'serif'],
         royal: ['Cormorant Garamond', 'serif'],
