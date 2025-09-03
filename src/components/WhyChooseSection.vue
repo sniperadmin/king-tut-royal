@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-gray-950">
+  <section id="why-us" class="py-20 bg-gray-950">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl font-bold text-white mb-4">Why Choose Egypt in Style?</h2>
