@@ -21,6 +21,14 @@ CREATE INDEX IF NOT EXISTS idx_media_assets_section ON media_assets(section);
 CREATE INDEX IF NOT EXISTS idx_media_assets_mime_type ON media_assets(mime_type);
 CREATE INDEX IF NOT EXISTS idx_media_assets_uploaded_at ON media_assets(uploaded_at DESC);
 
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Create an updated_at trigger
 CREATE TRIGGER update_media_assets_updated_at 
     BEFORE UPDATE ON media_assets 

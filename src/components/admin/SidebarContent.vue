@@ -1,15 +1,15 @@
 <template>
-  <div class="flex-1 flex flex-col min-h-0 bg-white border-r border-gray-200">
+  <div class="flex-1 flex flex-col min-h-0 bg-sidebar border-r border-border">
     <!-- Logo/Brand -->
     <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
       <div class="flex items-center flex-shrink-0 px-4">
         <div class="flex items-center">
-          <div class="h-8 w-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-            <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <div class="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+            <svg class="h-5 w-5 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
               <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
             </svg>
           </div>
-          <h2 class="ml-3 text-lg font-semibold text-gray-900">King Tut Admin</h2>
+          <h2 class="ml-3 text-lg font-semibold text-foreground">King Tut Admin</h2>
         </div>
       </div>
 
@@ -21,14 +21,14 @@
           :to="item.href"
           :class="[
             isCurrentRoute(item.href)
-              ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              ? 'bg-primary border-primary text-primary-foreground'
+              : 'border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground',
             'group flex items-center pl-3 pr-2 py-2 border-l-4 text-sm font-medium transition-colors duration-150'
           ]"
         >
           <svg
             :class="[
-              isCurrentRoute(item.href) ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+              isCurrentRoute(item.href) ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-accent-foreground',
               'mr-3 h-5 w-5 transition-colors duration-150'
             ]"
             fill="none"
@@ -70,16 +70,16 @@
     </div>
 
     <!-- Footer -->
-    <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+    <div class="flex-shrink-0 flex border-t border-border p-4">
       <div class="flex items-center w-full">
         <div class="flex-shrink-0">
-          <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-            <span class="text-xs font-medium text-gray-700">{{ userInitials }}</span>
+          <div class="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+            <span class="text-xs font-medium text-muted-foreground">{{ userInitials }}</span>
           </div>
         </div>
         <div class="ml-3 flex-1 min-w-0">
-          <p class="text-sm font-medium text-gray-900 truncate">{{ adminUser?.name || 'Admin' }}</p>
-          <p class="text-xs text-gray-500 truncate">{{ adminUser?.email }}</p>
+          <p class="text-sm font-medium text-foreground truncate">{{ adminUser?.name || 'Admin' }}</p>
+          <p class="text-xs text-muted-foreground truncate">{{ adminUser?.email }}</p>
         </div>
       </div>
     </div>

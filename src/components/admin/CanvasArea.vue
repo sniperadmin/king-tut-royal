@@ -1,24 +1,24 @@
 <template>
   <div class="h-full flex flex-col">
     <!-- Canvas Header -->
-    <div class="bg-white border-b border-gray-200 px-4 py-3">
+    <div class="bg-background border-b border-border px-4 py-3">
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-medium text-gray-900">Page Canvas</h3>
+        <h3 class="text-lg font-medium text-foreground">Page Canvas</h3>
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-gray-500">{{ sections.length }} sections</span>
+          <span class="text-sm text-muted-foreground">{{ sections.length }} sections</span>
           <div class="flex items-center space-x-1">
             <button
               @click="zoomLevel = Math.max(0.5, zoomLevel - 0.1)"
-              class="p-1 text-gray-400 hover:text-gray-600"
+              class="p-1 text-muted-foreground hover:text-foreground"
             >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
               </svg>
             </button>
-            <span class="text-xs text-gray-500 min-w-[3rem] text-center">{{ Math.round(zoomLevel * 100) }}%</span>
+            <span class="text-xs text-muted-foreground min-w-[3rem] text-center">{{ Math.round(zoomLevel * 100) }}%</span>
             <button
               @click="zoomLevel = Math.min(1.5, zoomLevel + 0.1)"
-              class="p-1 text-gray-400 hover:text-gray-600"
+              class="p-1 text-muted-foreground hover:text-foreground"
             >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -30,24 +30,24 @@
     </div>
 
     <!-- Canvas Content -->
-    <div class="flex-1 overflow-auto bg-gray-100 p-4">
+    <div class="flex-1 overflow-auto bg-muted p-4">
       <div
-        class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden"
+        class="max-w-4xl mx-auto bg-card shadow-lg rounded-lg overflow-hidden"
         :style="{ transform: `scale(${zoomLevel})`, transformOrigin: 'top center' }"
       >
         <!-- Empty State -->
         <div
           v-if="sections.length === 0"
-          class="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg m-4"
+          class="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-border rounded-lg m-4"
           @drop="handleDrop($event, 0)"
           @dragover.prevent
           @dragenter.prevent
         >
-          <svg class="h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="h-12 w-12 text-muted-foreground mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">Start Building Your Page</h3>
-          <p class="text-gray-500 text-center max-w-sm">
+          <h3 class="text-lg font-medium text-foreground mb-2">Start Building Your Page</h3>
+          <p class="text-muted-foreground text-center max-w-sm">
             Drag sections from the library on the left to start building your page layout.
           </p>
         </div>
@@ -68,7 +68,7 @@
             <!-- Drop Zone Above Section -->
             <div
               v-if="showDropZones"
-              class="h-2 bg-indigo-100 border-2 border-dashed border-indigo-300 mx-4 rounded opacity-0 transition-opacity duration-200"
+              class="h-2 bg-accent border-2 border-dashed border-primary mx-4 rounded opacity-0 transition-opacity duration-200"
               :class="{ 'opacity-100': isDragOver === index }"
               @drop="handleDrop($event, index)"
               @dragover.prevent="isDragOver = index"
@@ -80,13 +80,13 @@
             <div
               class="relative group"
               :class="{
-                'ring-2 ring-indigo-500 ring-opacity-50': selectedSection?.id === section.id,
+                'ring-2 ring-primary ring-opacity-50': selectedSection?.id === section.id,
                 'opacity-50': !section.visible
               }"
               @click="$emit('select-section', section)"
             >
               <!-- Section Content Preview -->
-              <div class="relative bg-white border-l-4 border-transparent group-hover:border-indigo-300 transition-colors duration-150">
+              <div class="relative bg-card border-l-4 border-transparent group-hover:border-primary transition-colors duration-150">
                 <SectionPreview :section="section" />
                 
                 <!-- Section Overlay Controls -->
@@ -95,14 +95,14 @@
                   <div class="absolute top-2 left-2 right-2 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                     <div class="flex items-center space-x-2">
                       <!-- Drag Handle -->
-                      <div class="drag-handle cursor-move bg-white rounded p-1 shadow-sm">
-                        <svg class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <div class="drag-handle cursor-move bg-background rounded p-1 shadow-sm">
+                        <svg class="h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
                         </svg>
                       </div>
                       
                       <!-- Section Type Badge -->
-                      <span class="bg-white text-gray-700 text-xs px-2 py-1 rounded shadow-sm">
+                      <span class="bg-background text-foreground text-xs px-2 py-1 rounded shadow-sm">
                         {{ formatSectionType(section.type) }}
                       </span>
                     </div>
@@ -111,12 +111,12 @@
                       <!-- Visibility Toggle -->
                       <button
                         @click.stop="$emit('toggle-visibility', section.id)"
-                        class="bg-white rounded p-1 shadow-sm hover:bg-gray-50"
+                        class="bg-background rounded p-1 shadow-sm hover:bg-accent"
                         :title="section.visible ? 'Hide section' : 'Show section'"
                       >
                         <svg
                           v-if="section.visible"
-                          class="h-4 w-4 text-gray-600"
+                          class="h-4 w-4 text-muted-foreground"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -126,7 +126,7 @@
                         </svg>
                         <svg
                           v-else
-                          class="h-4 w-4 text-gray-400"
+                          class="h-4 w-4 text-muted-foreground"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -138,7 +138,7 @@
                       <!-- Delete Button -->
                       <button
                         @click.stop="handleDeleteSection(section.id)"
-                        class="bg-white rounded p-1 shadow-sm hover:bg-red-50 text-red-600"
+                        class="bg-background rounded p-1 shadow-sm hover:bg-destructive text-destructive-foreground"
                         title="Delete section"
                       >
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,11 +153,11 @@
               <!-- Add Section Button (Between Sections) -->
               <div
                 v-if="index < sections.length - 1"
-                class="relative h-8 flex items-center justify-center group-hover:bg-gray-50"
+                class="relative h-8 flex items-center justify-center group-hover:bg-muted"
               >
                 <button
                   @click="showAddSectionModal(index + 1)"
-                  class="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white rounded-full p-1 hover:bg-indigo-700 transition-all duration-150 shadow-sm"
+                  class="opacity-0 group-hover:opacity-100 bg-primary text-primary-foreground rounded-full p-1 hover:bg-primary-hover transition-all duration-150 shadow-sm"
                   title="Add section here"
                 >
                   <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -171,7 +171,7 @@
           <!-- Final Drop Zone -->
           <div
             v-if="showDropZones && sections.length > 0"
-            class="h-2 bg-indigo-100 border-2 border-dashed border-indigo-300 mx-4 rounded opacity-0 transition-opacity duration-200"
+            class="h-2 bg-accent border-2 border-dashed border-primary mx-4 rounded opacity-0 transition-opacity duration-200"
             :class="{ 'opacity-100': isDragOver === sections.length }"
             @drop="handleDrop($event, sections.length)"
             @dragover.prevent="isDragOver = sections.length"
@@ -181,10 +181,10 @@
         </VueDraggable>
 
         <!-- Add Section at End -->
-        <div v-if="sections.length > 0" class="p-4 text-center border-t border-gray-200">
+        <div v-if="sections.length > 0" class="p-4 text-center border-t border-border">
           <button
             @click="showAddSectionModal(sections.length)"
-            class="inline-flex items-center px-4 py-2 border border-dashed border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="inline-flex items-center px-4 py-2 border border-dashed border-border rounded-md text-sm font-medium text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           >
             <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -198,32 +198,32 @@
     <!-- Delete Confirmation Modal -->
     <div
       v-if="showDeleteModal"
-      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+      class="fixed inset-0 bg-background bg-opacity-50 overflow-y-auto h-full w-full z-50"
       @click="showDeleteModal = false"
     >
-      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white" @click.stop>
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-card" @click.stop>
         <div class="mt-3 text-center">
-          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-destructive-background">
+            <svg class="h-6 w-6 text-destructive-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-gray-900 mt-2">Delete Section</h3>
+          <h3 class="text-lg font-medium text-foreground mt-2">Delete Section</h3>
           <div class="mt-2 px-7 py-3">
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-muted-foreground">
               Are you sure you want to delete this section? This action cannot be undone.
             </p>
           </div>
           <div class="flex justify-center space-x-3 mt-4">
             <button
               @click="showDeleteModal = false"
-              class="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+              class="px-4 py-2 bg-muted text-foreground text-base font-medium rounded-md shadow-sm hover:bg-accent focus:outline-none focus:ring-2 focus:ring-border"
             >
               Cancel
             </button>
             <button
               @click="confirmDelete"
-              class="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+              class="px-4 py-2 bg-destructive text-destructive-foreground text-base font-medium rounded-md shadow-sm hover:bg-destructive-hover focus:outline-none focus:ring-2 focus:ring-destructive"
             >
               Delete
             </button>

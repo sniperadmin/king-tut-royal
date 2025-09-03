@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS theme_config CASCADE;
+
 -- Create theme_config table for storing theme customization settings
 CREATE TABLE IF NOT EXISTS theme_config (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
