@@ -32,6 +32,7 @@ export default function BookingSection() {
   const [availableWeeks, setAvailableWeeks] = useState<WeeklyBooking[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   useEffect(() => {
     fetchAvailableWeeks();
@@ -308,21 +309,32 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
               <div className="space-y-2">
                 <Label htmlFor="date" className="text-white">Select Date *</Label>
                 {formData.selectedPackage === 'oneday' ? (
-                  <Popover>
+                  <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
-                        className={`w-full justify-start text-left font-normal h-12 bg-gray-800 border-gray-600 text-white ${!formData.oneDayDate && "text-muted-foreground"}`}
+                        className={`w-full justify-start text-left font-normal h-12 bg-gray-800 border-gray-600 text-white hover:bg-gray-700 hover:border-amber-400 transition-colors ${!formData.oneDayDate && "text-gray-400"}`}
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('Date picker button clicked, current state:', datePickerOpen);
+                          setDatePickerOpen(!datePickerOpen);
+                        }}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {formData.oneDayDate ? format(formData.oneDayDate, "PPP") : <span>Pick a date</span>}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-gray-800 border-gray-600 text-white">
+                    <PopoverContent className="w-auto p-0 bg-gray-800 border-gray-600 text-white" style={{ zIndex: 9999 }}>
                       <Calendar
                         mode="single"
                         selected={formData.oneDayDate}
-                        onSelect={(date) => setFormData(prev => ({ ...prev, oneDayDate: date }))}
+                        onSelect={(date) => {
+                          console.log('Date selected:', date);
+                          setFormData(prev => ({ ...prev, oneDayDate: date }));
+                          setDatePickerOpen(false);
+                        }}
                         initialFocus
                         month={new Date(new Date().getFullYear(), 10)} // Set initial month to November (month index 10)
                       />
