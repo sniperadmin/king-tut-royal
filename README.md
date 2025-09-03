@@ -1,3 +1,3 @@
-# React + TypeScript + Vite
+# Luxury Travel Exclusive - Vue 3 + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium travel booking platform built with Vue 3, TypeScript, and Vite, featuring an elegant luxury design.

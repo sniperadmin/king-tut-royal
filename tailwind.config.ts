@@ -5,10 +5,10 @@ import typography from "@tailwindcss/typography";
 export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,vue}",
+    "./components/**/*.{ts,vue}",
+    "./app/**/*.{ts,vue}",
+    "./src/**/*.{ts,vue}",
   ],
   prefix: "",
   theme: {
@@ -66,7 +66,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Cormorant Garamond', 'serif'],
+        sans: ['"Cormorant Garamond"', 'serif'],
         serif: ['Cormorant Garamond', 'serif'],
         mono: ['Cormorant Garamond', 'serif'],
         royal: ['Cormorant Garamond', 'serif'],
