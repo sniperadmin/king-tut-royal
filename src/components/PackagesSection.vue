@@ -103,7 +103,7 @@ const packages = [
   },
   {
     title: "King Tut VIP One Day Package",
-    price: "€1,200",
+    price: "€900",
     duration: "1 Day (Any Day)",
     image: "/images/vip.jpeg",
     highlights: [
