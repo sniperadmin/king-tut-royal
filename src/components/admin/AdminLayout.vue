@@ -45,10 +45,65 @@
       <div class="hidden md:block bg-white shadow-sm border-b border-gray-200">
         <div class="px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
-            <div class="flex items-center">
+            <div class="flex items-center space-x-4">
               <h1 class="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+              <!-- Breadcrumbs -->
+              <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2">
+                  <li>
+                    <div class="flex items-center">
+                      <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      <span class="ml-2 text-sm text-gray-500">{{ currentPageName }}</span>
+                    </div>
+                  </li>
+                </ol>
+              </nav>
             </div>
             <div class="flex items-center space-x-4">
+              <!-- Notifications -->
+              <div class="relative">
+                <button
+                  @click="showNotifications = !showNotifications"
+                  class="p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full"
+                >
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM11 19H6a2 2 0 01-2-2V7a2 2 0 012-2h5m5 0v5" />
+                  </svg>
+                  <span v-if="notifications.length > 0" class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                    {{ notifications.length }}
+                  </span>
+                </button>
+                
+                <!-- Notifications dropdown -->
+                <div
+                  v-if="showNotifications"
+                  class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+                >
+                  <div class="p-4">
+                    <h3 class="text-sm font-medium text-gray-900 mb-2">Notifications</h3>
+                    <div v-if="notifications.length === 0" class="text-sm text-gray-500">
+                      No new notifications
+                    </div>
+                    <div v-else class="space-y-2">
+                      <div
+                        v-for="notification in notifications"
+                        :key="notification.id"
+                        class="p-2 bg-gray-50 rounded text-sm"
+                        :class="{
+                          'bg-green-50 text-green-800': notification.type === 'success',
+                          'bg-red-50 text-red-800': notification.type === 'error',
+                          'bg-yellow-50 text-yellow-800': notification.type === 'warning'
+                        }"
+                      >
+                        {{ notification.message }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="flex items-center space-x-2">
                 <div class="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center">
                   <span class="text-sm font-medium text-white">{{ userInitials }}</span>
@@ -86,10 +141,19 @@ import { useRoute } from 'vue-router'
 import { useAdminAuth } from '@/composables/admin/useAdminAuth'
 import SidebarContent from './SidebarContent.vue'
 
+interface Notification {
+  id: string
+  type: 'success' | 'error' | 'warning' | 'info'
+  message: string
+  timestamp: Date
+}
+
 const { adminUser, logout } = useAdminAuth()
 const route = useRoute()
 
 const sidebarOpen = ref(false)
+const showNotifications = ref(false)
+const notifications = ref<Notification[]>([])
 
 const userInitials = computed(() => {
   if (!adminUser.value?.name) return 'A'
@@ -101,7 +165,46 @@ const userInitials = computed(() => {
     .slice(0, 2)
 })
 
+const currentPageName = computed(() => {
+  const path = route.path
+  if (path === '/admin') return 'Dashboard'
+  if (path === '/admin/builder') return 'Page Builder'
+  if (path === '/admin/media') return 'Media Manager'
+  if (path === '/admin/theme') return 'Theme Customizer'
+  return 'Admin'
+})
+
 const handleLogout = () => {
   logout()
 }
+
+// Notification system
+const addNotification = (notification: Omit<Notification, 'id' | 'timestamp'>) => {
+  const newNotification: Notification = {
+    ...notification,
+    id: Date.now().toString(),
+    timestamp: new Date()
+  }
+  notifications.value.unshift(newNotification)
+  
+  // Auto-remove after 5 seconds for success notifications
+  if (notification.type === 'success') {
+    setTimeout(() => {
+      removeNotification(newNotification.id)
+    }, 5000)
+  }
+}
+
+const removeNotification = (id: string) => {
+  const index = notifications.value.findIndex(n => n.id === id)
+  if (index > -1) {
+    notifications.value.splice(index, 1)
+  }
+}
+
+// Expose notification methods for child components
+defineExpose({
+  addNotification,
+  removeNotification
+})
 </script>
