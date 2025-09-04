@@ -1,16 +1,18 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, onUnmounted } from 'vue';
 import 'vidstack/bundle';
 import 'vidstack/icons';
 
 const videos = ref([
-  { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.48.mp4', title: 'Grand Museum Tour', muted: true },
-  { id: 2, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.50%20(1).mp4', title: 'Nile Dinning', muted: true },
-  { id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-29%20at%2018.34.25.mp4', title: 'King Tut Package', muted: true },
+  // { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.48.mp4', title: 'Grand Museum Tour', muted: true },
+  // { id: 2, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.50%20(1).mp4', title: 'Nile Dinning', muted: true },
+  // { id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-29%20at%2018.34.25.mp4', title: 'King Tut Package', muted: true },
+  { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-09-04%20at%2011.33.22.mp4', title: 'King Tut Package', muted: true },
 ]);
 
 const currentVideoIndex = ref(0);
 const videoPlayer = ref(null);
+const windowWidth = ref(window.innerWidth);
 
 const handleReady = () => {
   if (videoPlayer.value && videoPlayer.value.player) {
@@ -58,10 +60,19 @@ const goToVideo = async (index) => {
   }
 };
 
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
 onMounted(() => {
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.play();
   }
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
 });
 </script>
 
@@ -77,6 +88,8 @@ onMounted(() => {
           autoplay
           controls
           muted
+          :volume="0"
+          fullscreenOrientation="portrait"
           @ready="handleReady"
           @ended="nextVideo"
         >
