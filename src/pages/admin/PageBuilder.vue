@@ -75,7 +75,7 @@
           <!-- Canvas area -->
           <div class="flex-1 bg-gray-900 overflow-y-auto p-4 relative">
             <div class="max-w-4xl mx-auto border border-gray-700 bg-gray-800 min-h-full p-6 rounded-lg shadow-inner">
-              <draggable
+              <VueDraggable
                 class="min-h-full space-y-4"
                 :list="pageLayout"
                 group="components"
@@ -105,7 +105,7 @@
                     </div>
                   </div>
                 </template>
-              </draggable>
+              </VueDraggable>
               <div v-if="pageLayout.length === 0" class="text-center text-gray-400 py-20">
                 Drag components here to build your page
               </div>

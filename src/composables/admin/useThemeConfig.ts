@@ -81,6 +81,7 @@ export function useThemeConfig() {
 
   // Load current theme configuration
   const loadThemeConfig = async () => {
+    console.log('loadThemeConfig: Starting...')
     isLoading.value = true
     error.value = null
 
@@ -92,23 +93,30 @@ export function useThemeConfig() {
         .limit(1)
         .single()
 
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        throw fetchError
+      if (fetchError) {
+        console.error('loadThemeConfig: Supabase fetch error', fetchError)
+        if (fetchError.code !== 'PGRST116') {
+          throw fetchError
+        }
       }
 
       if (data) {
+        console.log('loadThemeConfig: Data fetched', data)
         currentTheme.value = data
       } else {
+        console.log('loadThemeConfig: No theme config found, using default')
         // No theme config exists, use default
         currentTheme.value = { ...defaultTheme }
       }
       
       hasUnsavedChanges.value = false
+      console.log('loadThemeConfig: Completed successfully')
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to load theme configuration'
-      console.error('Error loading theme config:', err)
+      console.error('loadThemeConfig: Error in try block', err)
     } finally {
       isLoading.value = false
+      console.log('loadThemeConfig: Finally block executed, isLoading set to false')
     }
   }
 
@@ -187,7 +195,7 @@ export function useThemeConfig() {
       '--color-background': theme.background_color,
       '--font-family': theme.font_family,
       '--font-size-base': `${theme.font_size_base}px`,
-      '--line-height': theme.line_height.toString(),
+      '--line-height': (theme.line_height ?? 1.5).toString(),
       '--spacing-unit': `${theme.spacing_unit}px`,
       '--border-radius': `${theme.border_radius}px`,
       ...(theme.background_image && {

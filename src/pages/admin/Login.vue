@@ -91,19 +91,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuth } from '@/composables/useAuth';
+import { useAdminAuth } from "@/composables/admin/useAdminAuth";
 
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
 const router = useRouter();
-const { login } = useAuth();
+const { login } = useAdminAuth();
 
 const handleLogin = async () => {
   error.value = null;
   try {
     await login(email.value, password.value);
-    router.push('/admin/dashboard');
+    router.push('/admin/');
   } catch (err: any) {
     error.value = err.message || 'An unexpected error occurred.';
   }

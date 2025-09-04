@@ -122,7 +122,12 @@ CREATE TABLE IF NOT EXISTS content_history (
 
 -- Insert default homepage layout
 INSERT INTO page_layouts (page_name, layout) 
-VALUES ('homepage', '[]')
+VALUES ('homepage', '[
+  {"id": "hero", "type": "hero", "visible": true, "layout": {"background": {"type": "image", "value": "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756568030709_0f9cfae8.jpeg"}}, "content": {}, "styling": {}},
+  {"id": "media", "type": "media", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}},
+  {"id": "packages", "type": "packages", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}},
+  {"id": "why-choose", "type": "why-choose", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}}
+]')
 ON CONFLICT (page_name) DO NOTHING;
 
 -- Insert default theme configuration

@@ -1,19 +1,19 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-background">
     <AdminLayout>
       <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <!-- Header -->
           <div class="md:flex md:items-center md:justify-between">
             <div class="flex-1 min-w-0">
-              <h1 class="text-2xl font-semibold text-gray-900">Media Manager</h1>
-              <p class="mt-2 text-gray-600">Manage your images, videos, and other media files.</p>
+              <h1 class="text-2xl font-semibold text-foreground">Media Manager</h1>
+              <p class="mt-2 text-muted-foreground">Manage your images, videos, and other media files.</p>
             </div>
             <div class="mt-4 flex md:mt-0 md:ml-4">
               <button
                 @click="triggerFileUpload"
                 :disabled="isUploading"
-                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
               >
                 <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -31,43 +31,43 @@
               @dragenter.prevent
               :class="[
                 'border-2 border-dashed rounded-lg p-6 text-center transition-colors',
-                isDragOver ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 hover:border-gray-400'
+                isDragOver ? 'border-primary bg-accent' : 'border-border hover:border-primary'
               ]"
               @dragenter="isDragOver = true"
               @dragleave="isDragOver = false"
             >
-              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="mx-auto h-12 w-12 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
               <div class="mt-4">
-                <p class="text-sm text-gray-600">
+                <p class="text-sm text-muted-foreground">
                   <button
                     @click="triggerFileUpload"
-                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                    class="font-medium text-primary hover:text-primary-hover"
                   >
                     Click to upload
                   </button>
                   or drag and drop
                 </p>
-                <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF, WebP, MP4, WebM up to 10MB</p>
+                <p class="text-xs text-muted-foreground mt-1">PNG, JPG, GIF, WebP, MP4, WebM up to 10MB</p>
               </div>
             </div>
 
             <!-- Upload Progress -->
             <div v-if="isUploading" class="mt-4">
-              <div class="bg-white rounded-lg shadow p-4">
+              <div class="bg-background rounded-lg shadow p-4">
                 <div class="flex items-center">
                   <div class="flex-shrink-0">
-                    <svg class="animate-spin h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24">
+                    <svg class="animate-spin h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24">
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                   </div>
                   <div class="ml-3 flex-1">
-                    <p class="text-sm font-medium text-gray-900">Uploading files...</p>
-                    <div class="mt-1 bg-gray-200 rounded-full h-2">
+                    <p class="text-sm font-medium text-foreground">Uploading files...</p>
+                    <div class="mt-1 bg-muted rounded-full h-2">
                       <div
-                        class="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+                        class="bg-primary h-2 rounded-full transition-all duration-300"
                         :style="{ width: `${uploadProgress}%` }"
                       ></div>
                     </div>
@@ -78,14 +78,14 @@
           </div>
 
           <!-- Filters and Search -->
-          <div class="mt-8 bg-white shadow rounded-lg">
-            <div class="px-6 py-4 border-b border-gray-200">
+          <div class="mt-8 bg-background shadow rounded-lg">
+            <div class="px-6 py-4 border-b border-border">
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
                 <!-- Search -->
                 <div class="flex-1 max-w-lg">
                   <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
@@ -93,7 +93,7 @@
                       v-model="searchQuery"
                       type="text"
                       placeholder="Search files..."
-                      class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                      class="block w-full pl-10 pr-3 py-2 border border-border rounded-md leading-5 bg-background placeholder-muted-foreground focus:outline-none focus:placeholder-foreground focus:ring-1 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                   <!-- Folder Filter -->
                   <select
                     v-model="selectedFolder"
-                    class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    class="block w-full pl-3 pr-10 py-2 text-base border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                   >
                     <option value="">All Folders</option>
                     <option v-for="folder in folders" :key="folder" :value="folder">
@@ -114,7 +114,7 @@
                   <!-- File Type Filter -->
                   <select
                     v-model="selectedFileType"
-                    class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    class="block w-full pl-3 pr-10 py-2 text-base border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                   >
                     <option value="">All Types</option>
                     <option value="image">Images</option>
@@ -126,10 +126,10 @@
                     <button
                       @click="viewMode = 'grid'"
                       :class="[
-                        'relative inline-flex items-center px-3 py-2 rounded-l-md border text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500',
+                        'relative inline-flex items-center px-3 py-2 rounded-l-md border text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary',
                         viewMode === 'grid'
-                          ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-                          : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                          ? 'bg-accent border-primary text-primary'
+                          : 'bg-background border-border text-muted-foreground hover:bg-muted'
                       ]"
                     >
                       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -139,10 +139,10 @@
                     <button
                       @click="viewMode = 'list'"
                       :class="[
-                        'relative inline-flex items-center px-3 py-2 rounded-r-md border text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500',
+                        'relative inline-flex items-center px-3 py-2 rounded-r-md border text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary',
                         viewMode === 'list'
-                          ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-                          : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                          ? 'bg-accent border-primary text-primary'
+                          : 'bg-background border-border text-muted-foreground hover:bg-muted'
                       ]"
                     >
                       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,18 +157,18 @@
             <!-- Media Grid/List -->
             <div class="p-6">
               <div v-if="isLoading" class="flex justify-center py-12">
-                <svg class="animate-spin h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24">
+                <svg class="animate-spin h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               </div>
 
               <div v-else-if="filteredAssets.length === 0" class="text-center py-12">
-                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mx-auto h-12 w-12 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No media files</h3>
-                <p class="mt-1 text-sm text-gray-500">Get started by uploading your first file.</p>
+                <h3 class="mt-2 text-sm font-medium text-foreground">No media files</h3>
+                <p class="mt-1 text-sm text-muted-foreground">Get started by uploading your first file.</p>
               </div>
 
               <!-- Grid View -->
@@ -179,11 +179,11 @@
                 <div
                   v-for="asset in filteredAssets"
                   :key="asset.id"
-                  class="group relative bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                  class="group relative bg-background border border-border rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
                   @click="selectAsset(asset)"
                 >
                   <!-- Thumbnail -->
-                  <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                  <div class="aspect-square bg-muted flex items-center justify-center">
                     <img
                       v-if="asset.mime_type.startsWith('image/')"
                       :src="asset.thumbnail_url || asset.url"
@@ -191,7 +191,7 @@
                       class="w-full h-full object-cover"
                       loading="lazy"
                     />
-                    <div v-else class="flex flex-col items-center justify-center text-gray-400">
+                    <div v-else class="flex flex-col items-center justify-center text-muted-foreground">
                       <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                       </svg>
@@ -201,17 +201,17 @@
 
                   <!-- File Info -->
                   <div class="p-2">
-                    <p class="text-xs font-medium text-gray-900 truncate" :title="asset.filename">
+                    <p class="text-xs font-medium text-foreground truncate" :title="asset.filename">
                       {{ asset.filename }}
                     </p>
-                    <p class="text-xs text-gray-500">{{ formatFileSize(asset.file_size) }}</p>
+                    <p class="text-xs text-muted-foreground">{{ formatFileSize(asset.file_size) }}</p>
                   </div>
 
                   <!-- Actions -->
                   <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       @click.stop="deleteAssetWithConfirmation(asset)"
-                      class="p-1 bg-red-600 text-white rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      class="p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive-hover focus:outline-none focus:ring-2 focus:ring-destructive"
                     >
                       <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -222,23 +222,23 @@
               </div>
 
               <!-- List View -->
-              <div v-else class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead class="bg-gray-50">
+              <div v-else class="overflow-hidden shadow ring-1 ring-border md:rounded-lg">
+                <table class="min-w-full divide-y divide-border">
+                  <thead class="bg-muted">
                     <tr>
-                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">File</th>
-                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Folder</th>
-                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uploaded</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">File</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Type</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Size</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Folder</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Uploaded</th>
                       <th class="relative px-6 py-3"><span class="sr-only">Actions</span></th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-background divide-y divide-border">
                     <tr
                       v-for="asset in filteredAssets"
                       :key="asset.id"
-                      class="hover:bg-gray-50 cursor-pointer"
+                      class="hover:bg-muted cursor-pointer"
                       @click="selectAsset(asset)"
                     >
                       <td class="px-6 py-4 whitespace-nowrap">

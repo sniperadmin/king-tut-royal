@@ -1,19 +1,19 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-background">
     <AdminLayout>
       <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <!-- Header -->
           <div class="md:flex md:items-center md:justify-between">
             <div class="flex-1 min-w-0">
-              <h1 class="text-2xl font-semibold text-gray-900">Theme Customizer</h1>
-              <p class="mt-2 text-gray-600">Customize colors, fonts, and styling for your website.</p>
+              <h1 class="text-2xl font-semibold text-foreground">Theme Customizer</h1>
+              <p class="mt-2 text-muted-foreground">Customize colors, fonts, and styling for your website.</p>
             </div>
             <div class="mt-4 flex space-x-3 md:mt-0 md:ml-4">
               <button
                 @click="resetToDefault"
                 :disabled="isSaving"
-                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                class="inline-flex items-center px-4 py-2 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
               >
                 <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -23,9 +23,9 @@
               <button
                 @click="saveThemeConfig"
                 :disabled="!hasUnsavedChanges || isSaving"
-                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
               >
-                <svg v-if="isSaving" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                <svg v-if="isSaving" class="animate-spin -ml-1 mr-2 h-4 w-4 text-primary-foreground" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -39,7 +39,7 @@
 
           <!-- Loading State -->
           <div v-if="isLoading" class="mt-8 flex justify-center py-12">
-            <svg class="animate-spin h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24">
+            <svg class="animate-spin h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
@@ -50,15 +50,15 @@
             <!-- Theme Controls -->
             <div class="lg:col-span-2 space-y-6">
               <!-- Theme Presets -->
-              <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Theme Presets</h3>
+              <div class="bg-background shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-foreground mb-4">Theme Presets</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <button
                     v-for="preset in themePresets"
                     :key="preset.name"
                     @click="applyPreset(preset)"
-                    class="relative p-4 border-2 rounded-lg hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
-                    :class="isCurrentPreset(preset) ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200'"
+                    class="relative p-4 border-2 rounded-lg hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                    :class="isCurrentPreset(preset) ? 'border-primary bg-accent' : 'border-border'"
                   >
                     <div class="flex items-center space-x-2 mb-2">
                       <div
@@ -74,86 +74,86 @@
                         :style="{ backgroundColor: preset.config.accent_color }"
                       ></div>
                     </div>
-                    <p class="text-sm font-medium text-gray-900">{{ preset.name }}</p>
+                    <p class="text-sm font-medium text-foreground">{{ preset.name }}</p>
                   </button>
                 </div>
               </div>
 
               <!-- Color Settings -->
-              <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Colors</h3>
+              <div class="bg-background shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-foreground mb-4">Colors</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Primary Color</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Primary Color</label>
                     <div class="flex items-center space-x-3">
                       <input
                         :value="currentTheme.primary_color"
                         @input="updateThemeProperty('primary_color', ($event.target as HTMLInputElement).value)"
                         type="color"
-                        class="h-10 w-16 border border-gray-300 rounded-md cursor-pointer"
+                        class="h-10 w-16 border border-border rounded-md cursor-pointer"
                       />
                       <input
                         :value="currentTheme.primary_color"
                         @input="updateThemeProperty('primary_color', ($event.target as HTMLInputElement).value)"
                         type="text"
-                        class="flex-1 block border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        class="flex-1 block border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                         placeholder="#3b82f6"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Secondary Color</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Secondary Color</label>
                     <div class="flex items-center space-x-3">
                       <input
                         :value="currentTheme.secondary_color"
                         @input="updateThemeProperty('secondary_color', ($event.target as HTMLInputElement).value)"
                         type="color"
-                        class="h-10 w-16 border border-gray-300 rounded-md cursor-pointer"
+                        class="h-10 w-16 border border-border rounded-md cursor-pointer"
                       />
                       <input
                         :value="currentTheme.secondary_color"
                         @input="updateThemeProperty('secondary_color', ($event.target as HTMLInputElement).value)"
                         type="text"
-                        class="flex-1 block border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        class="flex-1 block border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                         placeholder="#64748b"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Accent Color</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Accent Color</label>
                     <div class="flex items-center space-x-3">
                       <input
                         :value="currentTheme.accent_color"
                         @input="updateThemeProperty('accent_color', ($event.target as HTMLInputElement).value)"
                         type="color"
-                        class="h-10 w-16 border border-gray-300 rounded-md cursor-pointer"
+                        class="h-10 w-16 border border-border rounded-md cursor-pointer"
                       />
                       <input
                         :value="currentTheme.accent_color"
                         @input="updateThemeProperty('accent_color', ($event.target as HTMLInputElement).value)"
                         type="text"
-                        class="flex-1 block border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        class="flex-1 block border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                         placeholder="#f59e0b"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Background Color</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Background Color</label>
                     <div class="flex items-center space-x-3">
                       <input
                         :value="currentTheme.background_color"
                         @input="updateThemeProperty('background_color', ($event.target as HTMLInputElement).value)"
                         type="color"
-                        class="h-10 w-16 border border-gray-300 rounded-md cursor-pointer"
+                        class="h-10 w-16 border border-border rounded-md cursor-pointer"
                       />
                       <input
                         :value="currentTheme.background_color"
                         @input="updateThemeProperty('background_color', ($event.target as HTMLInputElement).value)"
                         type="text"
-                        class="flex-1 block border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        class="flex-1 block border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                         placeholder="#ffffff"
                       />
                     </div>
@@ -162,15 +162,15 @@
               </div>
 
               <!-- Typography Settings -->
-              <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Typography</h3>
+              <div class="bg-background shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-foreground mb-4">Typography</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Font Family</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Font Family</label>
                     <select
                       :value="currentTheme.font_family"
                       @change="updateThemeProperty('font_family', ($event.target as HTMLSelectElement).value)"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                     >
                       <option v-for="font in fontOptions" :key="font.value" :value="font.value">
                         {{ font.label }}
@@ -179,7 +179,7 @@
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <label class="block text-sm font-medium text-foreground mb-2">
                       Base Font Size: {{ currentTheme.font_size_base }}px
                     </label>
                     <input
@@ -189,12 +189,12 @@
                       min="12"
                       max="24"
                       step="1"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                      class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <label class="block text-sm font-medium text-foreground mb-2">
                       Line Height: {{ currentTheme.line_height }}
                     </label>
                     <input
@@ -204,12 +204,12 @@
                       min="1.2"
                       max="2.0"
                       step="0.1"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                      class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <label class="block text-sm font-medium text-foreground mb-2">
                       Border Radius: {{ currentTheme.border_radius }}px
                     </label>
                     <input
@@ -219,19 +219,19 @@
                       min="0"
                       max="20"
                       step="1"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                      class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
                 </div>
 
                 <!-- Font Preview -->
-                <div class="mt-6 p-4 border border-gray-200 rounded-lg">
-                  <h4 class="text-sm font-medium text-gray-700 mb-2">Font Preview</h4>
+                <div class="mt-6 p-4 border border-border rounded-lg">
+                  <h4 class="text-sm font-medium text-foreground mb-2">Font Preview</h4>
                   <div
                     :style="{
-                      fontFamily: currentTheme.font_family,
-                      fontSize: `${currentTheme.font_size_base}px`,
-                      lineHeight: currentTheme.line_height.toString()
+                      fontFamily: currentTheme.font_family ?? 'Cormorant Garamond',
+                      fontSize: `${currentTheme.font_size_base ?? 16}px`,
+                      lineHeight: (currentTheme.line_height ?? 1.5).toString()
                     }"
                     class="space-y-2"
                   >
@@ -247,11 +247,11 @@
               </div>
 
               <!-- Spacing Settings -->
-              <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Layout & Spacing</h3>
+              <div class="bg-background shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-foreground mb-4">Layout & Spacing</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <label class="block text-sm font-medium text-foreground mb-2">
                       Spacing Unit: {{ currentTheme.spacing_unit }}px
                     </label>
                     <input
@@ -261,23 +261,23 @@
                       min="2"
                       max="12"
                       step="1"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                      class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                     />
-                    <p class="text-xs text-gray-500 mt-1">
+                    <p class="text-xs text-muted-foreground mt-1">
                       Base unit for margins and padding throughout the site
                     </p>
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Background Image URL</label>
+                    <label class="block text-sm font-medium text-foreground mb-2">Background Image URL</label>
                     <input
                       :value="currentTheme.background_image || ''"
                       @input="updateThemeProperty('background_image', ($event.target as HTMLInputElement).value)"
                       type="url"
                       placeholder="https://example.com/background.jpg"
-                      class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      class="block w-full border-border rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                     />
-                    <p class="text-xs text-gray-500 mt-1">
+                    <p class="text-xs text-muted-foreground mt-1">
                       Optional background image for the site
                     </p>
                   </div>
@@ -285,12 +285,12 @@
               </div>
 
               <!-- Export/Import -->
-              <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Export/Import Theme</h3>
+              <div class="bg-background shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-foreground mb-4">Export/Import Theme</h3>
                 <div class="flex flex-col sm:flex-row gap-4">
                   <button
                     @click="exportTheme"
-                    class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="inline-flex items-center px-4 py-2 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -307,7 +307,7 @@
                     />
                     <button
                       @click="$refs.importInput?.click()"
-                      class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      class="inline-flex items-center px-4 py-2 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     >
                       <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 12l3 3m0 0l3-3m-3 3V9" />
@@ -322,7 +322,7 @@
             <!-- Live Preview -->
             <div class="lg:col-span-1">
               <div class="sticky top-6">
-                <div class="bg-white shadow rounded-lg p-6">
+                <div class="bg-background shadow rounded-lg p-6">
                   <h3 class="text-lg font-medium text-gray-900 mb-4">Live Preview</h3>
                   
                   <!-- Preview Container -->
@@ -353,7 +353,7 @@
                         backgroundColor: currentTheme.background_color,
                         fontFamily: currentTheme.font_family,
                         fontSize: `${currentTheme.font_size_base}px`,
-                        lineHeight: currentTheme.line_height.toString(),
+                        lineHeight: (currentTheme.line_height ?? 1.5).toString(),
                         ...(currentTheme.background_image && {
                           backgroundImage: `url(${currentTheme.background_image})`,
                           backgroundSize: 'cover',
@@ -544,6 +544,7 @@ const importTheme = (event: Event) => {
 
 // Lifecycle
 onMounted(() => {
+  console.log('ThemeCustomizer: onMounted, isLoading:', isLoading.value)
   loadThemeConfig()
 })
 </script>

@@ -165,7 +165,73 @@ export function usePageBuilder() {
     error: computed(() => error.value),
 
     // Actions
-    loadPageLayout,
+    loadPageLayout: async (pageName: string) => {
+      try {
+        const { data: pageLayout, error } = await supabase.functions.invoke(
+          'get-page-layout',
+          { body: { page: pageName } }
+        )
+    
+        if (error) {
+          throw new Error(error.message)
+        }
+    
+        // Add a null check for pageLayout.data.layout
+        if (!pageLayout || !pageLayout.data || !Array.isArray(pageLayout.data.layout)) {
+          console.warn('Page layout not found or is not an array. Initializing with empty layout.')
+          sections.value = []
+          return
+        }
+
+        // Filter out any invalid sections and ensure required properties exist
+        const validSections: Section[] = pageLayout.data.layout.filter((section: any) => {
+          if (!section || typeof section !== 'object') {
+            console.warn('Invalid section found (not an object), skipping:', section);
+            return false;
+          }
+          if (typeof section.id !== 'string' || section.id.length === 0) {
+            console.warn('Invalid section ID, skipping:', section);
+            return false;
+          }
+          if (typeof section.type !== 'string' || section.type.length === 0) {
+            console.warn('Invalid section type, skipping:', section);
+            return false;
+          }
+          if (typeof section.visible !== 'boolean') {
+            console.warn('Invalid section visibility, skipping', section);
+            return false;
+          }
+          if (!section.layout || typeof section.layout !== 'object') {
+            console.warn('Invalid section layout, skipping:', section);
+            return false;
+          }
+          if (!section.content || typeof section.content !== 'object') {
+            console.warn('Invalid section content, skipping:', section);
+            return false;
+          }
+          if (!section.styling || typeof section.styling !== 'object') {
+            console.warn('Invalid section styling, skipping:', section);
+            return false;
+          }
+          // Check nested properties for background
+          if (!section.layout.background || typeof section.layout.background !== 'object') {
+            console.warn('Invalid section background object, skipping:', section);
+            return false;
+          }
+          if (typeof section.layout.background.value !== 'string') {
+            console.warn('Invalid section background value, skipping:', section);
+            return false;
+          }
+
+          return true;
+        });
+
+        sections.value = validSections;
+      } catch (error) {
+        console.error('Error loading page layout:', error)
+        throw error
+      }
+    },
     savePageLayout,
     addSection,
     removeSection,
