@@ -25,7 +25,7 @@ Deno.serve(async (req) => {
     // Get page layout
     const { data: pageLayout, error } = await supabaseClient
       .from('page_layouts')
-      .select('layout')
+      .select('sections, meta, is_published')
       .eq('page_name', pageName)
       .single()
 
@@ -39,7 +39,8 @@ Deno.serve(async (req) => {
         .from('page_layouts')
         .insert({
           page_name: pageName,
-          layout: [],
+          sections: [],
+          meta: {},
           is_published: false
         })
         .select()

@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
       .from('page_layouts')
       .upsert({
         page_name: pageName,
-        layout: sections,
+        sections: sections,
         meta: meta || {},
         is_published: isPublished || false,
         updated_at: new Date().toISOString()

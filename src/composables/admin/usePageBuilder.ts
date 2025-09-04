@@ -176,15 +176,15 @@ export function usePageBuilder() {
           throw new Error(error.message)
         }
     
-        // Add a null check for pageLayout.data.layout
-        if (!pageLayout || !pageLayout.data || !Array.isArray(pageLayout.data.layout)) {
-          console.warn('Page layout not found or is not an array. Initializing with empty layout.')
+        // Add a null check for pageLayout.data.sections
+        if (!pageLayout || !pageLayout.data || !Array.isArray(pageLayout.data.sections)) {
+          console.warn('Page layout not found or sections is not an array. Initializing with empty layout.')
           sections.value = []
           return
         }
 
         // Filter out any invalid sections and ensure required properties exist
-        const validSections: Section[] = pageLayout.data.layout.filter((section: any) => {
+        const validSections: Section[] = pageLayout.data.sections.filter((section: any) => {
           if (!section || typeof section !== 'object') {
             console.warn('Invalid section found (not an object), skipping:', section);
             return false;
