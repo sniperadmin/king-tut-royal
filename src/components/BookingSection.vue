@@ -69,8 +69,12 @@
                   v-model="formData.email"
                   type="email"
                   required
-                  class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
+                  :class="`h-12 bg-gray-800 text-white focus:border-amber-400 ${
+                    emailError ? 'border-red-500' : 'border-gray-600'
+                  }`"
+                  @blur="validateEmail"
                 />
+                <p v-if="emailError" class="text-red-400 text-sm">{{ emailError }}</p>
               </div>
             </div>
 
@@ -204,6 +208,25 @@ interface WeeklyBooking {
 
 const MAX_CAPACITY = 50
 
+// List of temporary/disposable email domains to block
+const TEMP_EMAIL_DOMAINS = [
+  '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 'tempmail.org',
+  'throwaway.email', 'yopmail.com', 'temp-mail.org', 'getairmail.com',
+  'sharklasers.com', 'grr.la', 'guerrillamailblock.com', 'pokemail.net',
+  'spam4.me', 'bccto.me', 'chacuo.net', 'dispostable.com', 'emailondeck.com',
+  'fakeinbox.com', 'hide.biz.st', 'mytrashmail.com', 'no-spam.ws',
+  'noclickemail.com', 'objectmail.com', 'pookmail.com', 'protonmail.com',
+  'sogetthis.com', 'spambog.com', 'spambog.de', 'spambog.ru', 'spamgourmet.com',
+  'suremail.info', 'tagyourself.com', 'tempemail.biz', 'tempemail.com',
+  'trashmail.at', 'trashmail.com', 'trashmail.de', 'trashmail.me',
+  'trashmail.net', 'trashmail.org', 'trash-mail.at', 'trashmail.ws',
+  'wegwerfmail.de', 'wegwerfmail.net', 'wegwerfmail.org', 'wh4f.org',
+  'discardmail.com', 'discardmail.de', 'spamfree24.com', 'spamfree24.de',
+  'spamfree24.eu', 'spamfree24.net', 'spamfree24.org', 'kurzepost.de',
+  'objectmail.com', 'protonmail.ch', 'vomoto.com', '20minutemail.it',
+  'anonaddy.me', 'simplelogin.io'
+]
+
 // Reactive form data - simplified structure
 const formData = reactive({
   name: '',
@@ -215,6 +238,9 @@ const formData = reactive({
   specialRequests: '',
   oneDayDate: '' // Store as string directly for date input
 })
+
+// Email validation state
+const emailError = ref('')
 
 // Separate reactive for the luxury date picker
 const selectedOneDayDate = ref<Date | null>(null)
@@ -237,9 +263,9 @@ watch(selectedOneDayDate, (newDate) => {
 // Computed for form validation
 const isFormValid = computed(() => {
   const hasName = formData.name && formData.name.trim().length > 0
-  const hasEmail = formData.email && formData.email.trim().length > 0
+  const hasValidEmail = formData.email && formData.email.trim().length > 0 && !emailError.value
   
-  if (!hasName || !hasEmail) return false
+  if (!hasName || !hasValidEmail) return false
   
   if (formData.selectedPackage === 'vip') {
     return formData.selectedWeek && formData.selectedWeek.length > 0
@@ -253,6 +279,38 @@ const isFormValid = computed(() => {
 })
 
 // Methods
+const validateEmail = () => {
+  emailError.value = ''
+  
+  if (!formData.email) {
+    return
+  }
+  
+  const email = formData.email.trim().toLowerCase()
+  
+  // Basic email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email)) {
+    emailError.value = 'Please enter a valid email address'
+    return
+  }
+  
+  // Extract domain from email
+  const domain = email.split('@')[1]
+  
+  // Check against temporary email domains
+  if (TEMP_EMAIL_DOMAINS.includes(domain)) {
+    emailError.value = 'Temporary or disposable email addresses are not allowed'
+    return
+  }
+  
+  // Additional checks for common temporary email patterns
+  if (domain.includes('temp') || domain.includes('disposable') || domain.includes('trash')) {
+    emailError.value = 'Temporary or disposable email addresses are not allowed'
+    return
+  }
+}
+
 const fetchAvailableWeeks = async () => {
   try {
     const { data, error } = await supabase.functions.invoke('get-weekly-bookings')
@@ -292,6 +350,13 @@ const selectPackage = (packageType: 'vip' | 'oneday') => {
 const handleSubmit = async () => {
   if (!formData.name.trim()) {
     alert('Please enter your full name.')
+    return
+  }
+
+  // Validate email before submitting
+  validateEmail()
+  if (emailError.value) {
+    alert(`Email validation failed: ${emailError.value}`)
     return
   }
 
@@ -395,6 +460,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
       oneDayDate: ''
     })
     selectedOneDayDate.value = null
+    emailError.value = ''
   } catch (error) {
     console.error('Booking error:', error)
     alert('Booking failed. Please try again.')
