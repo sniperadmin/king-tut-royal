@@ -5,11 +5,11 @@
       <section id="home">
         <HeroSection />
       </section>
-      <MediaSliderSection />
+      <VideoSection />
       <section id="packages">
         <PackagesSection />
       </section>
-      <VideoSection />
+      <MediaSliderSection />
       <WhyChooseSection />
       <BookingSection />
     </main>
