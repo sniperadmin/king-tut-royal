@@ -19,34 +19,36 @@
           <!-- Package Selection -->
           <div class="space-y-4 mb-8">
             <Label class="text-white text-lg">Select Package *</Label>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  values.selectedPackage === 'vip' 
-                    ? 'bg-amber-400/20 border-amber-400' 
-                    : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
-                }`"
-                @click="selectPackage('vip')"
-              >
-                <h3 class="text-lg font-semibold text-amber-400 mb-2">King Tut Royal VIP</h3>
-                <p class="text-white text-2xl font-bold">€2,900</p>
-                <p class="text-gray-300 text-sm">5 Days / 4 Nights</p>
-                <p class="text-gray-300 text-sm">per person</p>
+            <Field name="selectedPackage" v-slot="{ field, errorMessage }">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div 
+                  :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
+                    field.value === 'vip' 
+                      ? 'bg-amber-400/20 border-amber-400' 
+                      : errorMessage ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
+                  }`"
+                  @click="selectPackage('vip')"
+                >
+                  <h3 class="text-lg font-semibold text-amber-400 mb-2">King Tut Royal VIP</h3>
+                  <p class="text-white text-2xl font-bold">€2,900</p>
+                  <p class="text-gray-300 text-sm">5 Days / 4 Nights</p>
+                  <p class="text-gray-300 text-sm">per person</p>
+                </div>
+                <div 
+                  :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
+                    field.value === 'oneday' 
+                      ? 'bg-amber-400/20 border-amber-400' 
+                      : errorMessage ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
+                  }`"
+                  @click="selectPackage('oneday')"
+                >
+                  <h3 class="text-lg font-semibold text-white mb-2">King Tut VIP One Day</h3>
+                  <p class="text-white text-2xl font-bold">€900</p>
+                  <p class="text-gray-300 text-sm">Full Day Experience</p>
+                  <p class="text-gray-300 text-sm">per person</p>
+                </div>
               </div>
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  values.selectedPackage === 'oneday' 
-                    ? 'bg-amber-400/20 border-amber-400' 
-                    : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
-                }`"
-                @click="selectPackage('oneday')"
-              >
-                <h3 class="text-lg font-semibold text-white mb-2">King Tut VIP One Day</h3>
-                <p class="text-white text-2xl font-bold">€900</p>
-                <p class="text-gray-300 text-sm">Full Day Experience</p>
-                <p class="text-gray-300 text-sm">per person</p>
-              </div>
-            </div>
+            </Field>
             <ErrorMessage name="selectedPackage" class="text-red-400 text-sm mt-2" />
           </div>
           
@@ -252,7 +254,6 @@ const bookingSchema = z.object({
   }),
   selectedWeek: z
     .string()
-    .optional()
     .refine((val, ctx) => {
       const packageType = ctx.parent.selectedPackage
       if (packageType === 'vip') {
@@ -262,7 +263,6 @@ const bookingSchema = z.object({
     }, 'Please select a week for VIP package'),
   oneDayDate: z
     .string()
-    .optional()
     .refine((val, ctx) => {
       const packageType = ctx.parent.selectedPackage
       if (packageType === 'oneday') {
@@ -286,7 +286,7 @@ const bookingSchema = z.object({
 type BookingFormData = z.infer<typeof bookingSchema>
 
 // Initialize form with vee-validate
-const { handleSubmit, errors, values, setFieldValue, resetForm } = useForm<BookingFormData>({
+const { handleSubmit, errors, values, setFieldValue, resetForm, meta } = useForm<BookingFormData>({
   validationSchema: toTypedSchema(bookingSchema),
   initialValues: {
     name: '',
@@ -320,24 +320,25 @@ watch(selectedOneDayDate, (newDate) => {
 
 // Computed for form validation
 const isFormValid = computed(() => {
-  // Check if there are any validation errors
-  const hasErrors = Object.keys(errors.value).length > 0
-  
-  // Check required fields based on package type
+  // Check if all required fields are filled and valid
   const hasRequiredFields = values.name && 
     values.email && 
     values.phone && 
     values.participants &&
     values.selectedPackage
   
-  if (!hasRequiredFields || hasErrors) return false
+  // Check if there are any validation errors
+  const hasNoErrors = Object.keys(errors.value).length === 0
   
+  if (!hasRequiredFields || !hasNoErrors) return false
+  
+  // Check package-specific requirements
   if (values.selectedPackage === 'vip') {
-    return values.selectedWeek && values.selectedWeek.length > 0
+    return !!(values.selectedWeek && values.selectedWeek.length > 0)
   }
   
   if (values.selectedPackage === 'oneday') {
-    return values.oneDayDate && values.oneDayDate.length > 0
+    return !!(values.oneDayDate && values.oneDayDate.length > 0)
   }
   
   return false
@@ -375,8 +376,15 @@ const calculateTotalPrice = (packageType: string, guests: number) => {
 
 const selectPackage = (packageType: 'vip' | 'oneday') => {
   setFieldValue('selectedPackage', packageType)
+  
+  // Clear other package-specific fields
   if (packageType === 'oneday') {
     setFieldValue('participants', '4') // Set minimum for one day package
+    setFieldValue('selectedWeek', '') // Clear VIP week selection
+  } else {
+    setFieldValue('participants', '1') // Reset to default for VIP
+    setFieldValue('oneDayDate', '') // Clear one day date selection
+    selectedOneDayDate.value = null
   }
 }
 
