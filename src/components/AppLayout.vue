@@ -5,10 +5,11 @@
       <section id="home">
         <HeroSection />
       </section>
-      <MediaSliderSection />
+      <VideoSection />
       <section id="packages">
         <PackagesSection />
       </section>
+      <MediaSliderSection />
       <WhyChooseSection />
       <BookingSection />
     </main>
@@ -21,6 +22,7 @@ import Navigation from './Navigation.vue'
 import HeroSection from './HeroSection.vue'
 import MediaSliderSection from './MediaSliderSection.vue'
 import PackagesSection from './PackagesSection.vue'
+import VideoSection from './sections/VideoSection.vue'
 import WhyChooseSection from './WhyChooseSection.vue'
 import BookingSection from './BookingSection.vue'
 import Footer from './Footer.vue'
