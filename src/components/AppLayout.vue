@@ -44,7 +44,7 @@ onMounted(async () => {
     // Check if dynamic content is available by trying to fetch the homepage layout
     const response = await fetch(`https://mhwjdkzpnhzmduolfgmy.supabase.co/functions/v1/get-page-layout?page=homepage`, {
       headers: {
-        'Authorization': `Bearer sb_publishable_LGovYeBhQtpuj3ixRv9DBw_CfP3iT4X`,
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_LGovYeBhQtpuj3ixRv9DBw_CfP3iT4X'}`,
         'Content-Type': 'application/json'
       }
     })
