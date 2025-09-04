@@ -83,12 +83,11 @@ onUnmounted(() => {
       <div class="relative w-full mx-auto rounded-lg overflow-hidden object-cover">
         <media-player
           ref="videoPlayer"
-          class="w-full"
+          class="aspect-video w-full"
           :src="videos[currentVideoIndex].url"
           :muted="true"
           :volume="0"
-          :height="600"
-          :width="300"
+          playsinline
           fullscreenOrientation="portrait"
           @ready="handleReady"
           @ended="nextVideo"
@@ -155,4 +154,17 @@ onUnmounted(() => {
 
 <style scoped>
 /* Add any custom styles here if needed */
+.aspect-video {
+  aspect-ratio: 9/16 !important;
+}
+
+@media (min-width: 1024px) {
+  .aspect-video {
+    aspect-ratio: 16/9 !important;
+  }
+}
+
+.aspect-video video {
+  object-fit: cover;
+}
 </style>
