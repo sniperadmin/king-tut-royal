@@ -22,7 +22,7 @@
             <div class="grid md:grid-cols-2 gap-4">
               <div 
                 :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'vip' 
+                  values.selectedPackage === 'vip' 
                     ? 'bg-amber-400/20 border-amber-400' 
                     : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
                 }`"
@@ -35,7 +35,7 @@
               </div>
               <div 
                 :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'oneday' 
+                  values.selectedPackage === 'oneday' 
                     ? 'bg-amber-400/20 border-amber-400' 
                     : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
                 }`"
@@ -47,120 +47,139 @@
                 <p class="text-gray-300 text-sm">per person</p>
               </div>
             </div>
+            <ErrorMessage name="selectedPackage" class="text-red-400 text-sm mt-2" />
           </div>
           
-          <form @submit.prevent="handleSubmit" class="space-y-6">
+          <form @submit.prevent="onSubmit" class="space-y-6">
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="name" class="text-white">Full Name *</Label>
-                <Input
-                  id="name"
-                  v-model="formData.name"
-                  type="text"
-                  required
-                  class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
-                />
+                <Field name="name" v-slot="{ field, errorMessage }">
+                  <Input
+                    id="name"
+                    v-bind="field"
+                    type="text"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                  />
+                </Field>
+                <ErrorMessage name="name" class="text-red-400 text-sm" />
               </div>
               
               <div class="space-y-2">
                 <Label for="email" class="text-white">Email *</Label>
-                <Input
-                  id="email"
-                  v-model="formData.email"
-                  type="email"
-                  required
-                  class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
-                />
+                <Field name="email" v-slot="{ field, errorMessage }">
+                  <Input
+                    id="email"
+                    v-bind="field"
+                    type="email"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                  />
+                </Field>
+                <ErrorMessage name="email" class="text-red-400 text-sm" />
               </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="phone" class="text-white">Phone *</Label>
-                <VueTelInput
-                  id="phone"
-                  v-model="formData.phone"
-                  mode="international"
-                  :inputOptions="{ placeholder: 'Enter your phone number' }"
-                  class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
-                />
+                <Field name="phone" v-slot="{ field, errorMessage }">
+                  <VueTelInput
+                    id="phone"
+                    :model-value="field.value"
+                    @update:model-value="field.onChange"
+                    @blur="field.onBlur"
+                    mode="international"
+                    :inputOptions="{ placeholder: 'Enter your phone number' }"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                  />
+                </Field>
+                <ErrorMessage name="phone" class="text-red-400 text-sm" />
               </div>
 
               <div class="space-y-2">
                 <Label for="participants" class="text-white">Number of Guests *</Label>
-                <select
-                  v-model="formData.participants"
-                  class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
-                  style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
-                >
-                  <option value="" disabled selected>Select number of guests</option>
-                  <template v-if="formData.selectedPackage === 'oneday'">
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-                  </template>
-                  
-                  <template v-if="formData.selectedPackage === 'vip'">
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-                  </template>
-                </select>
+                <Field name="participants" v-slot="{ field, errorMessage }">
+                  <select
+                    v-bind="field"
+                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                    style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
+                  >
+                    <option value="" disabled>Select number of guests</option>
+                    <template v-if="values.selectedPackage === 'oneday'">
+                      <option value="4">4 Guests</option>
+                      <option value="5">5 Guests</option>
+                      <option value="6">6 Guests</option>
+                    </template>
+                    
+                    <template v-if="values.selectedPackage === 'vip'">
+                      <option value="1">1 Guest</option>
+                      <option value="2">2 Guests</option>
+                      <option value="3">3 Guests</option>
+                      <option value="4">4 Guests</option>
+                      <option value="5">5 Guests</option>
+                      <option value="6">6 Guests</option>
+                    </template>
+                  </select>
+                </Field>
+                <ErrorMessage name="participants" class="text-red-400 text-sm" />
               </div>
             </div>
 
             <div class="space-y-2">
               <Label class="text-white">Select Date *</Label>
-              <div v-if="formData.selectedPackage === 'oneday'" class="relative">
+              <div v-if="values.selectedPackage === 'oneday'" class="relative">
                 <LuxuryDatePicker
                   v-model="selectedOneDayDate"
                   placeholder="Choose your exclusive day"
                   :min-date="new Date()"
                   class="w-full"
                 />
+                <ErrorMessage name="oneDayDate" class="text-red-400 text-sm mt-2" />
               </div>
               <div v-else>
-                <select
-                  v-model="formData.selectedWeek"
-                  required
-                  class="h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none"
-                >
-                  <option value="">{{ loading ? "Loading dates..." : "Choose your Thursday" }}</option>
-                  <template v-for="week in availableWeeks" :key="week.id">
-                    <template v-if="new Date(week.week_start_date) >= new Date()">
-                      <option 
-                        :value="week.week_start_date"
-                        :class="{
-                          'text-green-400': getAvailableSlots(week) > 25,
-                          'text-yellow-400': getAvailableSlots(week) > 12 && getAvailableSlots(week) <= 25,
-                          'text-orange-400': getAvailableSlots(week) <= 12
-                        }"
-                      >
-                        {{ getThursdayDate(week.week_start_date) }} - {{ getAvailableSlots(week) }} slots available
-                      </option>
+                <Field name="selectedWeek" v-slot="{ field, errorMessage }">
+                  <select
+                    v-bind="field"
+                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                  >
+                    <option value="">{{ loading ? "Loading dates..." : "Choose your Thursday" }}</option>
+                    <template v-for="week in availableWeeks" :key="week.id">
+                      <template v-if="new Date(week.week_start_date) >= new Date()">
+                        <option 
+                          :value="week.week_start_date"
+                          :class="{
+                            'text-green-400': getAvailableSlots(week) > 25,
+                            'text-yellow-400': getAvailableSlots(week) > 12 && getAvailableSlots(week) <= 25,
+                            'text-orange-400': getAvailableSlots(week) <= 12
+                          }"
+                        >
+                          {{ getThursdayDate(week.week_start_date) }} - {{ getAvailableSlots(week) }} slots available
+                        </option>
+                      </template>
                     </template>
-                  </template>
-                </select>
+                  </select>
+                </Field>
+                <ErrorMessage name="selectedWeek" class="text-red-400 text-sm mt-2" />
               </div>
             </div>
 
             <div class="space-y-2">
               <Label for="requests" class="text-white">Special requests</Label>
-              <textarea
-                id="requests"
-                v-model="formData.specialRequests"
-                rows="4"
-                class="w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none"
-                placeholder="Any special requests or requirements..."
-              />
+              <Field name="specialRequests" v-slot="{ field, errorMessage }">
+                <textarea
+                  id="requests"
+                  v-bind="field"
+                  rows="4"
+                  :class="`w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                  placeholder="Any special requests or requirements..."
+                />
+              </Field>
+              <ErrorMessage name="specialRequests" class="text-red-400 text-sm" />
             </div>
 
             <div class="mt-8 text-center">
               <p class="text-primary text-2xl font-bold">
-                Total Price: €{{ calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)).toLocaleString() }}
+                Total Price: €{{ calculateTotalPrice(values.selectedPackage, parseInt(values.participants || '1')).toLocaleString() }}
               </p>
             </div>
 
@@ -195,6 +214,9 @@ import Label from '@/components/ui/label.vue'
 import LuxuryDatePicker from '@/components/LuxuryDatePicker.vue'
 import { VueTelInput } from 'vue-tel-input'
 import 'vue-tel-input/vue-tel-input.css'
+import { useForm, Field, ErrorMessage } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { z } from 'zod'
 
 interface WeeklyBooking {
   id: number
@@ -204,16 +226,78 @@ interface WeeklyBooking {
 
 const MAX_CAPACITY = 50
 
-// Reactive form data - simplified structure
-const formData = reactive({
-  name: '',
-  phone: '',
-  email: '',
-  selectedWeek: '',
-  participants: '1',
-  selectedPackage: 'vip',
-  specialRequests: '',
-  oneDayDate: '' // Store as string directly for date input
+// Zod validation schema
+const bookingSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must not exceed 100 characters')
+    .regex(/^[a-zA-Z\s]+$/, 'Name must contain only letters and spaces'),
+  email: z
+    .string()
+    .email('Please enter a valid email address')
+    .min(1, 'Email is required'),
+  phone: z
+    .string()
+    .min(1, 'Phone number is required')
+    .regex(/^\+?[1-9]\d{1,14}$/, 'Please enter a valid phone number'),
+  participants: z
+    .string()
+    .refine((val) => {
+      const num = parseInt(val)
+      return num >= 1 && num <= 6
+    }, 'Number of guests must be between 1 and 6'),
+  selectedPackage: z.enum(['vip', 'oneday'], {
+    errorMap: () => ({ message: 'Please select a package' })
+  }),
+  selectedWeek: z
+    .string()
+    .optional()
+    .refine((val, ctx) => {
+      const packageType = ctx.parent.selectedPackage
+      if (packageType === 'vip') {
+        return val && val.trim().length > 0
+      }
+      return true
+    }, 'Please select a week for VIP package'),
+  oneDayDate: z
+    .string()
+    .optional()
+    .refine((val, ctx) => {
+      const packageType = ctx.parent.selectedPackage
+      if (packageType === 'oneday') {
+        if (!val || val.trim().length === 0) {
+          return false
+        }
+        // Check if the date is in the future
+        const selectedDate = new Date(val)
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+        return selectedDate >= today
+      }
+      return true
+    }, 'Please select a future date for One Day package'),
+  specialRequests: z
+    .string()
+    .max(500, 'Special requests must not exceed 500 characters')
+    .optional()
+})
+
+type BookingFormData = z.infer<typeof bookingSchema>
+
+// Initialize form with vee-validate
+const { handleSubmit, errors, values, setFieldValue, resetForm } = useForm<BookingFormData>({
+  validationSchema: toTypedSchema(bookingSchema),
+  initialValues: {
+    name: '',
+    phone: '',
+    email: '',
+    selectedWeek: '',
+    participants: '1',
+    selectedPackage: 'vip',
+    specialRequests: '',
+    oneDayDate: ''
+  }
 })
 
 // Separate reactive for the luxury date picker
@@ -228,25 +312,32 @@ let channel: any = null
 // Watch for date picker changes
 watch(selectedOneDayDate, (newDate) => {
   if (newDate) {
-    formData.oneDayDate = format(newDate, 'yyyy-MM-dd')
+    setFieldValue('oneDayDate', format(newDate, 'yyyy-MM-dd'))
   } else {
-    formData.oneDayDate = ''
+    setFieldValue('oneDayDate', '')
   }
 })
 
 // Computed for form validation
 const isFormValid = computed(() => {
-  const hasName = formData.name && formData.name.trim().length > 0
-  const hasEmail = formData.email && formData.email.trim().length > 0
+  // Check if there are any validation errors
+  const hasErrors = Object.keys(errors.value).length > 0
   
-  if (!hasName || !hasEmail) return false
+  // Check required fields based on package type
+  const hasRequiredFields = values.name && 
+    values.email && 
+    values.phone && 
+    values.participants &&
+    values.selectedPackage
   
-  if (formData.selectedPackage === 'vip') {
-    return formData.selectedWeek && formData.selectedWeek.length > 0
+  if (!hasRequiredFields || hasErrors) return false
+  
+  if (values.selectedPackage === 'vip') {
+    return values.selectedWeek && values.selectedWeek.length > 0
   }
   
-  if (formData.selectedPackage === 'oneday') {
-    return selectedOneDayDate.value !== null
+  if (values.selectedPackage === 'oneday') {
+    return values.oneDayDate && values.oneDayDate.length > 0
   }
   
   return false
@@ -283,38 +374,13 @@ const calculateTotalPrice = (packageType: string, guests: number) => {
 }
 
 const selectPackage = (packageType: 'vip' | 'oneday') => {
-  formData.selectedPackage = packageType
+  setFieldValue('selectedPackage', packageType)
   if (packageType === 'oneday') {
-    formData.participants = '4' // Set minimum for one day package
+    setFieldValue('participants', '4') // Set minimum for one day package
   }
 }
 
-const handleSubmit = async () => {
-  if (!formData.name.trim()) {
-    alert('Please enter your full name.')
-    return
-  }
-
-  if (!formData.phone.trim()) {
-    alert('Please enter your phone number.')
-    return
-  }
-
-  if (!formData.participants || parseInt(formData.participants) <= 0) {
-    alert('Please enter the number of guests.')
-    return
-  }
-
-  if (formData.selectedPackage === 'vip' && !formData.selectedWeek) {
-    alert('Please select a week for the Royal VIP package.')
-    return
-  }
-
-  if (formData.selectedPackage === 'oneday' && !formData.oneDayDate) {
-    alert('Please select a date for the One Day package.')
-    return
-  }
-
+const onSubmit = handleSubmit(async (formData: BookingFormData) => {
   submitting.value = true
 
   let bookingDateDisplay = ''
@@ -347,7 +413,7 @@ const handleSubmit = async () => {
       if (!data.success) throw new Error(data.message)
 
       newBookingCount = data.newCount
-      bookingDateDisplay = getThursdayDate(formData.selectedWeek)
+      bookingDateDisplay = getThursdayDate(formData.selectedWeek!)
       remainingSlots = MAX_CAPACITY - newBookingCount
     } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
       // For one-day package, no slot booking needed on backend for now
@@ -384,16 +450,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
     }
 
     // Reset form
-    Object.assign(formData, {
-      name: '',
-      phone: '',
-      email: '',
-      selectedWeek: '',
-      participants: '1',
-      selectedPackage: 'vip',
-      specialRequests: '',
-      oneDayDate: ''
-    })
+    resetForm()
     selectedOneDayDate.value = null
   } catch (error) {
     console.error('Booking error:', error)
@@ -401,7 +458,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
   } finally {
     submitting.value = false
   }
-}
+})
 
 // Lifecycle
 onMounted(async () => {
