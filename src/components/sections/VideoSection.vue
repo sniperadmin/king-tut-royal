@@ -7,7 +7,7 @@ const videos = ref([
   // { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.48.mp4', title: 'Grand Museum Tour', muted: true },
   // { id: 2, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.50%20(1).mp4', title: 'Nile Dinning', muted: true },
   // { id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-29%20at%2018.34.25.mp4', title: 'King Tut Package', muted: true },
-  { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king.m3u8', title: 'King Tut Package', muted: true },
+  { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king/king.m3u8', title: 'King Tut Package', muted: true },
 ]);
 
 const currentVideoIndex = ref(0);
