@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
+import { vite as vidstack } from 'vidstack/plugins';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -9,7 +10,14 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    vue()
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('media-'),
+        },
+      },
+    }),
+    vidstack()
   ].filter(Boolean),
   resolve: {
     alias: {
