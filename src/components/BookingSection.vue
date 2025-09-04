@@ -19,13 +19,13 @@
           <!-- Package Selection -->
           <div class="space-y-4 mb-8">
             <Label class="text-white text-lg">Select Package *</Label>
-            <Field name="selectedPackage" v-slot="{ field, errorMessage }">
+            <Field name="selectedPackage" v-slot="{ field, errorMessage, meta }">
               <div class="grid md:grid-cols-2 gap-4">
                 <div 
                   :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
                     field.value === 'vip' 
                       ? 'bg-amber-400/20 border-amber-400' 
-                      : errorMessage ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
+                      : (errorMessage && meta.touched) ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
                   }`"
                   @click="selectPackage('vip')"
                 >
@@ -38,7 +38,7 @@
                   :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
                     field.value === 'oneday' 
                       ? 'bg-amber-400/20 border-amber-400' 
-                      : errorMessage ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
+                      : (errorMessage && meta.touched) ? 'bg-gray-800 border-red-400 hover:border-amber-400/50' : 'bg-gray-800 border-gray-600 hover:border-amber-400/50'
                   }`"
                   @click="selectPackage('oneday')"
                 >
@@ -56,12 +56,12 @@
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="name" class="text-white">Full Name *</Label>
-                <Field name="name" v-slot="{ field, errorMessage }">
+                <Field name="name" v-slot="{ field, errorMessage, meta }">
                   <Input
                     id="name"
                     v-bind="field"
                     type="text"
-                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                   />
                 </Field>
                 <ErrorMessage name="name" class="text-red-400 text-sm" />
@@ -69,12 +69,12 @@
               
               <div class="space-y-2">
                 <Label for="email" class="text-white">Email *</Label>
-                <Field name="email" v-slot="{ field, errorMessage }">
+                <Field name="email" v-slot="{ field, errorMessage, meta }">
                   <Input
                     id="email"
                     v-bind="field"
                     type="email"
-                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                   />
                 </Field>
                 <ErrorMessage name="email" class="text-red-400 text-sm" />
@@ -84,7 +84,7 @@
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="phone" class="text-white">Phone *</Label>
-                <Field name="phone" v-slot="{ field, errorMessage }">
+                <Field name="phone" v-slot="{ field, errorMessage, meta }">
                   <VueTelInput
                     id="phone"
                     :model-value="field.value"
@@ -92,7 +92,7 @@
                     @blur="field.onBlur"
                     mode="international"
                     :inputOptions="{ placeholder: 'Enter your phone number' }"
-                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage ? 'border-red-400' : ''}`"
+                    :class="`h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400 ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                   />
                 </Field>
                 <ErrorMessage name="phone" class="text-red-400 text-sm" />
@@ -100,10 +100,10 @@
 
               <div class="space-y-2">
                 <Label for="participants" class="text-white">Number of Guests *</Label>
-                <Field name="participants" v-slot="{ field, errorMessage }">
+                <Field name="participants" v-slot="{ field, errorMessage, meta }">
                   <select
                     v-bind="field"
-                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                     style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
                   >
                     <option value="" disabled>Select number of guests</option>
@@ -139,10 +139,10 @@
                 <ErrorMessage name="oneDayDate" class="text-red-400 text-sm mt-2" />
               </div>
               <div v-else>
-                <Field name="selectedWeek" v-slot="{ field, errorMessage }">
+                <Field name="selectedWeek" v-slot="{ field, errorMessage, meta }">
                   <select
                     v-bind="field"
-                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                    :class="`h-12 w-full bg-gray-800 border border-gray-600 text-white rounded-md px-3 focus:border-amber-400 focus:outline-none ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                   >
                     <option value="">{{ loading ? "Loading dates..." : "Choose your Thursday" }}</option>
                     <template v-for="week in availableWeeks" :key="week.id">
@@ -167,12 +167,12 @@
 
             <div class="space-y-2">
               <Label for="requests" class="text-white">Special requests</Label>
-              <Field name="specialRequests" v-slot="{ field, errorMessage }">
+              <Field name="specialRequests" v-slot="{ field, errorMessage, meta }">
                 <textarea
                   id="requests"
                   v-bind="field"
                   rows="4"
-                  :class="`w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none ${errorMessage ? 'border-red-400' : ''}`"
+                  :class="`w-full p-3 bg-gray-800 border border-gray-600 rounded-md text-white focus:border-amber-400 focus:outline-none ${errorMessage && meta.touched ? 'border-red-400' : ''}`"
                   placeholder="Any special requests or requirements..."
                 />
               </Field>
@@ -297,7 +297,11 @@ const { handleSubmit, errors, values, setFieldValue, resetForm, meta } = useForm
     selectedPackage: 'vip',
     specialRequests: '',
     oneDayDate: ''
-  }
+  },
+  validateOnMount: false,
+  validateOnBlur: true,
+  validateOnChange: true,
+  validateOnInput: true
 })
 
 // Separate reactive for the luxury date picker
