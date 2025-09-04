@@ -1,5 +1,5 @@
 <template>
-  <ThemeProvider default-theme="light">
+  <ThemeProvider default-theme="dark">
     <TooltipProvider>
       <router-view />
       <ToastContainer />
