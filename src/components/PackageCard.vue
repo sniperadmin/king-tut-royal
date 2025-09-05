@@ -1,6 +1,7 @@
 <template>
-  <h3 class="text-2xl font-semibold text-white my-2">{{ title }}</h3>
-  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg flex flex-col text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
+<div class="flex flex-col">
+  <h3 class="text-2xl font-semibold text-white my-5">{{ title }}</h3>
+  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
     <div class="relative w-full h-48 overflow-hidden bg-gray-600">
       <img
         :src="image"
@@ -47,6 +48,8 @@
       </div>
     </div>
   </div>
+
+</div>
 </template>
 
 <script setup lang="ts">
