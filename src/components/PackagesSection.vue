@@ -54,7 +54,7 @@ const closeModal = () => {
 
 const packages = [
   {
-    title: "King Tut Royal VIP Package",
+    title: "King Tut Royal VIP",
     price: "€2,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
     image: "/images/royal-vip.jpeg",
@@ -102,7 +102,7 @@ const packages = [
     }
   },
   {
-    title: "King Tut VIP One Day Package",
+    title: "King Tut VIP One Day",
     price: "€900",
     duration: "1 Day (Any Day)",
     image: "/images/vip.jpeg",

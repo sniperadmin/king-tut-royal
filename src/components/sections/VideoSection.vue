@@ -77,14 +77,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-10 bg-gray-900 text-white">
+  <section class="pt-10 pb-0 bg-gray-900 text-white">
     <div class="container mx-auto px-4">
       <p class="text-lg text-center mb-8 font-light leading-relaxed">Step into timeless elegance with King's Tut Royal Luxury Experiences.</p>
       <h3 class="text-2xl font-semibold text-white mb-3">Video</h3>
       <div class="relative w-full mx-auto rounded-lg overflow-hidden object-cover">
         <media-player
           ref="videoPlayer"
-          class="aspect-video w-full"
+          class="aspect-video w-full h-full"
           :src="videos[currentVideoIndex].url"
           :muted="true"
           :volume="0"
@@ -140,14 +140,14 @@ onUnmounted(() => {
           </button>
         </div> -->
 
-        <div class="flex justify-center mt-4 space-x-2">
+        <!-- <div class="flex justify-center space-x-2">
           <button
             v-for="(video, index) in videos"
             :key="video.id"
             @click="goToVideo(index)"
             :class="['w-3 h-3 rounded-full', currentVideoIndex === index ? 'bg-gold-500' : 'bg-gray-600 hover:bg-gray-400']"
           ></button>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
