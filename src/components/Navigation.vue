@@ -16,7 +16,7 @@
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold transition-all duration-300"
           >
-            Book Now
+            Inquiry
           </button>
         </div>
 
@@ -43,7 +43,7 @@
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold w-full"
           >
-            Book Now
+            Inquiry
           </button>
         </div>
       </div>

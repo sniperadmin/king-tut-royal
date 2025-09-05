@@ -77,9 +77,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-12 bg-gray-900 text-white">
+  <section class="py-10 bg-gray-900 text-white">
     <div class="container mx-auto px-4">
-      <p class="text-xl text-center mb-8">Step into timeless elegance with King's Tut royal luxury experiences.</p>
+      <p class="text-lg text-center mb-8 font-light leading-relaxed">Step into timeless elegance with King's Tut Royal Luxury Experiences.</p>
+      <h3 class="text-2xl font-semibold text-white mb-3">Video</h3>
       <div class="relative w-full mx-auto rounded-lg overflow-hidden object-cover">
         <media-player
           ref="videoPlayer"
@@ -94,19 +95,19 @@ onUnmounted(() => {
         >
           <media-provider></media-provider>
           <media-controls
-            class="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity data-[visible]:opacity-100"
+            class="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity data-[visible]:opacity-100"
           >
             <media-controls-group class="pointer-events-auto flex w-full h-full items-center justify-center">
               <div class="flex gap-2">
                 <media-play-button
-                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 hover:bg-white/20 data-[focus]:ring-4"
+                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 bg-white/10 hover:bg-white/20 data-[focus]:ring-4"
                 >
                   <!-- See "Icons" component page for setup before using the following: -->
                   <media-icon type="play" class="hidden h-8 w-8 group-data-[paused]:block"></media-icon>
                   <media-icon type="pause" class="h-8 w-8 group-data-[paused]:hidden"></media-icon>
                 </media-play-button>
                 <media-mute-button
-                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 hover:bg-white/20 data-[focus]:ring-4"
+                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 bg-white/10 hover:bg-white/20 data-[focus]:ring-4"
                 >
                   <!-- See "Icons" component page for setup before using the following: -->
                   <media-icon type="mute" class="hidden h-8 w-8 group-data-[state='muted']:block"></media-icon>
@@ -117,7 +118,7 @@ onUnmounted(() => {
                   ></media-icon>
                 </media-mute-button>
                 <media-fullscreen-button
-                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 hover:bg-white/20 aria-hidden:hidden data-[focus]:ring-4"
+                  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 bg-white/10 hover:bg-white/20 aria-hidden:hidden data-[focus]:ring-4"
                 >
                   <!-- See "Icons" component page for setup before using the following: -->
                   <media-icon type="fullscreen" class="h-8 w-8 group-data-[active]:hidden"></media-icon>

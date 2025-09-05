@@ -1,8 +1,8 @@
 <template>
-  <section id="packages" class="py-20 bg-black">
+  <section id="packages" class="py-10 bg-black">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-white mb-4">Choose Your Royal Experience</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">Choose Your Royal Experience</h2>
         <p class="text-xl text-amber-400 max-w-2xl mx-auto">
           Exclusive packages designed for the discerning traveler
         </p>

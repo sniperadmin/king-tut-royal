@@ -46,7 +46,7 @@
 
       <div class="text-center mt-8 space-y-4">
         <button @click="bookNowAndClose" class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
-          Book Now
+          Inquiry
         </button>
         <button @click="closeModal" class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
           Close

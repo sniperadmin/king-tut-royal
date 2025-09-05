@@ -41,7 +41,7 @@
           @click="onBookNowClick"
           class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
         >
-          Book Now
+          INQUIRY
         </button>
       </div>
     </div>

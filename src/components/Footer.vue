@@ -28,7 +28,7 @@
           <ul class="space-y-2">
             <li><button @click="smoothScroll('packages')" class="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Packages</button></li>
             <li><button @click="smoothScroll('why-us')" class="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Why Us</button></li>
-            <li><button @click="smoothScroll('booking')" class="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Book Now</button></li>
+            <li><button @click="smoothScroll('booking')" class="text-gray-300 hover:text-amber-400 transition-colors bg-transparent border-none p-0">Inquiry</button></li>
           </ul>
         </div>
 
