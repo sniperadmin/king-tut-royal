@@ -50,6 +50,16 @@
                 </svg>
                 Save
               </button>
+              <button
+                @click="handlePublish"
+                :disabled="isLoading"
+                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50"
+              >
+                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Publish
+              </button>
             </div>
           </div>
         </div>
@@ -163,6 +173,8 @@ import DynamicRenderer from '@/components/DynamicRenderer.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import { useToast } from '@/composables/useToast';
 import { supabase } from '@/lib/supabase';
+import type { Section } from '@/composables/admin/usePageBuilder';
+import { getRegistryItem } from '@/registry/sections';
 
 interface Component {
   id: string;
@@ -180,22 +192,49 @@ const selectedComponent = ref<Component | null>(null);
 const isLoading = ref<boolean>(false);
 const saveStatus = ref<string>('Saved');
 
+// Mapping between storage Section[] and builder Component[]
+const mapSectionToComponent = (section: Section): Component => ({
+  id: section.id,
+  name: section.type,
+  props: section.content || {}
+});
+
+const mapComponentToSection = (component: Component): Section => {
+  const reg = getRegistryItem(component.name);
+  const base = reg?.defaults();
+  const fallback: Section = {
+    id: component.id,
+    type: component.name,
+    visible: true,
+    layout: { columns: 1, grid: 'full', background: { type: 'color', value: '#000000' } as any },
+    content: {},
+    styling: {}
+  } as Section;
+  const merged: Section = {
+    ...(base as any || fallback),
+    id: component.id,
+    type: component.name,
+    content: { ...(base?.content || {}), ...(component.props || {}) },
+  } as Section;
+  return merged;
+};
+
 const fetchPageLayout = async (pageName: string) => {
   isLoading.value = true;
   saveStatus.value = 'Loading...';
   try {
-    const { data, error } = await supabase
-      .from('page_layouts')
-      .select('layout')
-      .eq('page_name', pageName)
-      .single();
-
-    if (error && error.code !== 'PGRST116') {
-      // PGRST116 means no rows found, which is fine for new pages
-      throw error;
-    }
-
-    pageLayout.value = data ? data.layout : [];
+    const url = `${supabase.supabaseUrl}/functions/v1/get-page-layout?page=${encodeURIComponent(pageName)}`;
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${supabase.supabaseKey}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) throw new Error('Failed to load page layout');
+    const result = await res.json();
+    const data = result.data;
+    const draft: Section[] = (data?.layout_draft ?? data?.layout ?? []) as Section[];
+    pageLayout.value = Array.isArray(draft) ? draft.map(mapSectionToComponent) : [];
     saveStatus.value = 'Loaded';
   } catch (err: any) {
     showToast('error', 'Error loading page layout', err.message);
@@ -207,16 +246,39 @@ const fetchPageLayout = async (pageName: string) => {
 
 const fetchAvailableComponents = async () => {
   try {
+    // Try DB templates first
     const { data, error } = await supabase
       .from('component_templates')
       .select('*');
 
-    if (error) throw error;
-    availableComponents.value = data.map(item => ({
-      id: item.id,
-      name: item.name,
-      props: item.default_props || {},
-    }));
+    const list: Component[] = [];
+    if (!error && Array.isArray(data)) {
+      list.push(
+        ...data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          props: item.default_props || {},
+        }))
+      );
+    }
+
+    // Fallback to registry-based defaults if DB is empty
+    if (list.length === 0) {
+      const { sectionsRegistry } = await import('@/registry/sections');
+      list.push(
+        ...sectionsRegistry.map((r) => {
+          const def = r.defaults();
+          return {
+            id: def.id,
+            name: r.type,
+            // Map to current PageBuilder shape
+            props: def.content as Record<string, any>,
+          } as Component;
+        })
+      );
+    }
+
+    availableComponents.value = list;
   } catch (err: any) {
     showToast('error', 'Error loading components', err.message);
   }
@@ -252,17 +314,19 @@ const handleSave = async () => {
   isLoading.value = true;
   saveStatus.value = 'Saving...';
   try {
-    const { error } = await supabase
-      .from('page_layouts')
-      .upsert(
-        {
-          page_name: selectedPage.value,
-          layout: pageLayout.value,
-        },
-        { onConflict: 'page_name' }
-      );
-
-    if (error) throw error;
+    const sections = pageLayout.value.map(mapComponentToSection);
+    const res = await fetch(`${supabase.supabaseUrl}/functions/v1/save-page-layout`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${supabase.supabaseKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        pageName: selectedPage.value,
+        sections,
+      })
+    });
+    if (!res.ok) throw new Error('Failed to save page');
     showToast('success', 'Page saved successfully!');
     saveStatus.value = 'Saved';
   } catch (err: any) {
@@ -276,17 +340,19 @@ const handleSave = async () => {
 const savePageLayout = async () => {
   saveStatus.value = 'Saving...';
   try {
-    const { error } = await supabase
-      .from('page_layouts')
-      .upsert(
-        {
-          page_name: selectedPage.value,
-          layout: pageLayout.value,
-        },
-        { onConflict: 'page_name' }
-      );
-
-    if (error) throw error;
+    const sections = pageLayout.value.map(mapComponentToSection);
+    const res = await fetch(`${supabase.supabaseUrl}/functions/v1/save-page-layout`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${supabase.supabaseKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        pageName: selectedPage.value,
+        sections,
+      })
+    });
+    if (!res.ok) throw new Error('Failed to save page layout');
     saveStatus.value = 'Saved';
   } catch (err: any) {
     showToast('error', 'Error saving page layout', err.message);
@@ -297,6 +363,31 @@ const savePageLayout = async () => {
 const handlePreview = () => {
   const previewUrl = `${window.location.origin}/?preview=true&page=${selectedPage.value}`;
   window.open(previewUrl, '_blank');
+};
+
+const handlePublish = async () => {
+  isLoading.value = true;
+  saveStatus.value = 'Publishing...';
+  try {
+    // Ensure draft is saved before publishing
+    await handleSave();
+    const res = await fetch(`${supabase.supabaseUrl}/functions/v1/publish-page-layout`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${supabase.supabaseKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ pageName: selectedPage.value })
+    });
+    if (!res.ok) throw new Error('Failed to publish page');
+    showToast('success', 'Page published successfully!');
+    saveStatus.value = 'Published';
+  } catch (err: any) {
+    showToast('error', 'Error publishing page', err.message);
+    saveStatus.value = 'Error';
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 watch(pageLayout, () => {

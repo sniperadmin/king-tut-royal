@@ -26,7 +26,7 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    const { pageName, sections, meta, isPublished } = await req.json()
+    const { pageName, sections, meta } = await req.json()
 
     if (!pageName || !sections) {
       return new Response(
@@ -38,19 +38,19 @@ Deno.serve(async (req) => {
       )
     }
 
-    // Save page layout with upsert
+    // Save page layout draft with upsert
     const { data: pageLayout, error } = await supabaseClient
       .from('page_layouts')
       .upsert({
         page_name: pageName,
-        layout: sections,
+        layout_draft: sections,
         meta: meta || {},
-        is_published: isPublished || false,
+        status: 'draft',
         updated_at: new Date().toISOString()
       }, {
         onConflict: 'page_name'
       })
-      .select()
+      .select('id, page_name, layout_draft, meta, status, is_published')
       .single()
 
     if (error) throw error
@@ -61,7 +61,7 @@ Deno.serve(async (req) => {
       .insert({
         page_layout_id: pageLayout.id,
         sections_snapshot: sections,
-        change_description: 'Layout updated via admin dashboard'
+        change_description: 'Layout draft updated via admin dashboard'
       })
 
     return new Response(

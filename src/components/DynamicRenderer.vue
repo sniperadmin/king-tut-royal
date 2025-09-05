@@ -71,16 +71,12 @@ const getSectionComponent = (type: string) => {
 
 // Get visible sections (either from props or loaded layout)
 const visibleSections = computed(() => {
-  console.log('DynamicRenderer: currentLayout.value', currentLayout.value)
-  console.log('DynamicRenderer: props.sections', props.sections)
   if (props.sections) {
     return props.sections.filter(section => section.visible !== false)
   }
-  
   if (currentLayout.value?.sections) {
     return currentLayout.value.sections.filter(section => section.visible !== false)
   }
-  
   return []
 })
 
