@@ -78,7 +78,9 @@ CREATE POLICY "Allow all operations for authenticated users on theme_config" ON 
 CREATE TABLE IF NOT EXISTS page_layouts (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     page_name VARCHAR(255) NOT NULL UNIQUE,
-    layout JSONB NOT NULL DEFAULT '[]',
+    sections JSONB NOT NULL DEFAULT '[]',
+    meta JSONB DEFAULT '{}',
+    is_published BOOLEAN DEFAULT false,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -120,14 +122,14 @@ CREATE TABLE IF NOT EXISTS content_history (
   created_at TIMESTAMP DEFAULT NOW()
 );
 
--- Insert default homepage layout
-INSERT INTO page_layouts (page_name, layout) 
-VALUES ('homepage', '[
-  {"id": "hero", "type": "hero", "visible": true, "layout": {"background": {"type": "image", "value": "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756568030709_0f9cfae8.jpeg"}}, "content": {}, "styling": {}},
-  {"id": "media", "type": "media", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}},
-  {"id": "packages", "type": "packages", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}},
-  {"id": "why-choose", "type": "why-choose", "visible": true, "layout": {"background": {"type": "color", "value": "#000000"}}, "content": {}, "styling": {}}
-]')
+-- Insert default homepage layout (placeholder - will be populated via admin)
+INSERT INTO page_layouts (page_name, sections, meta, is_published) 
+VALUES (
+  'homepage', 
+  '[]'::jsonb,
+  '{"title": "King Tut Royal - Exclusive Egyptian Tours", "description": "Experience ancient Egypt with our exclusive VIP tours"}'::jsonb,
+  false
+)
 ON CONFLICT (page_name) DO NOTHING;
 
 -- Insert default theme configuration

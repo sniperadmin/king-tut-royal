@@ -1,24 +1,24 @@
 <template>
   <div class="h-full flex flex-col">
     <!-- Canvas Header -->
-    <div class="bg-background border-b border-border px-4 py-3">
+    <div class="bg-gray-800 border-b border-gray-700 px-4 py-3">
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-medium text-foreground">Page Canvas</h3>
+        <h3 class="text-lg font-medium text-gray-100">Page Canvas</h3>
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-muted-foreground">{{ sections.length }} sections</span>
+          <span class="text-sm text-gray-400">{{ sections.length }} sections</span>
           <div class="flex items-center space-x-1">
             <button
               @click="zoomLevel = Math.max(0.5, zoomLevel - 0.1)"
-              class="p-1 text-muted-foreground hover:text-foreground"
+              class="p-1 text-gray-400 hover:text-gray-200"
             >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
               </svg>
             </button>
-            <span class="text-xs text-muted-foreground min-w-[3rem] text-center">{{ Math.round(zoomLevel * 100) }}%</span>
+            <span class="text-xs text-gray-400 min-w-[3rem] text-center">{{ Math.round(zoomLevel * 100) }}%</span>
             <button
               @click="zoomLevel = Math.min(1.5, zoomLevel + 0.1)"
-              class="p-1 text-muted-foreground hover:text-foreground"
+              class="p-1 text-gray-400 hover:text-gray-200"
             >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -83,7 +83,7 @@
                 'ring-2 ring-primary ring-opacity-50': selectedSection?.id === section.id,
                 'opacity-50': !section.visible
               }"
-              @click="$emit('select-section', section)"
+              @click="selectSection(section)"
             >
               <!-- Section Content Preview -->
               <div class="relative bg-card border-l-4 border-transparent group-hover:border-primary transition-colors duration-150">
@@ -110,7 +110,7 @@
                     <div class="flex items-center space-x-1">
                       <!-- Visibility Toggle -->
                       <button
-                        @click.stop="$emit('toggle-visibility', section.id)"
+                        @click.stop="toggleSectionVisibility(section.id)"
                         class="bg-background rounded p-1 shadow-sm hover:bg-accent"
                         :title="section.visible ? 'Hide section' : 'Show section'"
                       >
@@ -237,24 +237,20 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import type { Section } from '@/composables/admin/usePageBuilder'
 import type { SectionTemplate } from '@/composables/admin/useSectionTemplates'
+import { usePageBuilder } from '@/composables/admin/usePageBuilder'
 import SectionPreview from './SectionPreview.vue'
 
-interface Props {
-  sections: Section[]
-  selectedSection: Section | null
-}
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<{
-  'select-section': [section: Section | null]
-  'move-section': [fromIndex: number, toIndex: number]
-  'remove-section': [sectionId: string]
-  'toggle-visibility': [sectionId: string]
-  'add-section-at': [template: SectionTemplate, index: number]
-}>()
+// Use the page builder composable directly
+const {
+  sections,
+  selectedSection,
+  selectSection,
+  moveSection,
+  removeSection,
+  toggleSectionVisibility,
+  addSection
+} = usePageBuilder()
 
 const zoomLevel = ref(1)
 const showDropZones = ref(false)
@@ -263,15 +259,15 @@ const showDeleteModal = ref(false)
 const sectionToDelete = ref<string | null>(null)
 
 const sectionsModel = computed({
-  get: () => props.sections,
-  set: (newSections: Section[]) => {
-    // Handle reordering
-    const oldSections = props.sections
+  get: () => sections.value,
+  set: (newSections) => {
+    // Handle reordering - find which section moved
+    const oldSections = sections.value
     for (let i = 0; i < newSections.length; i++) {
       const newSection = newSections[i]
       const oldIndex = oldSections.findIndex(s => s.id === newSection.id)
-      if (oldIndex !== i) {
-        emit('move-section', oldIndex, i)
+      if (oldIndex !== i && oldIndex !== -1) {
+        moveSection(oldIndex, i)
         break
       }
     }
@@ -304,7 +300,7 @@ const handleDrop = (event: DragEvent, index: number) => {
       const templateData = event.dataTransfer.getData('application/json')
       if (templateData) {
         const template: SectionTemplate = JSON.parse(templateData)
-        emit('add-section-at', template, index)
+        addSection(template, index)
       }
     } catch (error) {
       console.error('Error parsing dropped template:', error)
@@ -319,7 +315,7 @@ const handleDeleteSection = (sectionId: string) => {
 
 const confirmDelete = () => {
   if (sectionToDelete.value) {
-    emit('remove-section', sectionToDelete.value)
+    removeSection(sectionToDelete.value)
   }
   showDeleteModal.value = false
   sectionToDelete.value = null

@@ -40,6 +40,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/admin/debug',
+      name: 'AdminDebug',
+      component: () => import('@/pages/admin/Debug.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: NotFound
