@@ -1,8 +1,8 @@
 <template>
-  <section id="packages" class="py-20 bg-black">
+  <section id="packages" class="py-10 bg-black">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-white mb-4">Choose Your Royal Experience</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">Choose Your Royal Experience</h2>
         <p class="text-xl text-amber-400 max-w-2xl mx-auto">
           Exclusive packages designed for the discerning traveler
         </p>
@@ -54,7 +54,7 @@ const closeModal = () => {
 
 const packages = [
   {
-    title: "King Tut Royal VIP Package",
+    title: "King Tut Royal VIP",
     price: "€2,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
     image: "/images/royal-vip.jpeg",
@@ -102,7 +102,7 @@ const packages = [
     }
   },
   {
-    title: "King Tut VIP One Day Package",
+    title: "King Tut VIP One Day",
     price: "€900",
     duration: "1 Day (Any Day)",
     image: "/images/vip.jpeg",
@@ -131,7 +131,7 @@ const packages = [
         }
       ],
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
-      booking: "Price: €1,200 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
+      booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
         "/images/vip.jpeg",
         "/images/luxury.jpeg",

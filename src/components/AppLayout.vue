@@ -2,24 +2,16 @@
   <div class="min-h-screen bg-black text-white">
     <Navigation />
     <main>
-      <!-- Dynamic content renderer -->
-      <DynamicRenderer 
-        v-if="useDynamicContent" 
-        page-name="homepage" 
-      />
-      
-      <!-- Fallback to static content if dynamic content is not available -->
-      <template v-else>
-        <section id="home">
-          <HeroSection />
-        </section>
-        <MediaSliderSection />
-        <section id="packages">
-          <PackagesSection />
-        </section>
-        <WhyChooseSection />
-        <BookingSection />
-      </template>
+      <section id="home">
+        <HeroSection />
+      </section>
+      <VideoSection />
+      <section id="packages">
+        <PackagesSection />
+      </section>
+      <MediaSliderSection />
+      <WhyChooseSection />
+      <BookingSection />
     </main>
     <Footer />
   </div>
@@ -31,6 +23,7 @@ import Navigation from './Navigation.vue'
 import HeroSection from './HeroSection.vue'
 import MediaSliderSection from './MediaSliderSection.vue'
 import PackagesSection from './PackagesSection.vue'
+import VideoSection from './sections/VideoSection.vue'
 import WhyChooseSection from './WhyChooseSection.vue'
 import BookingSection from './BookingSection.vue'
 import Footer from './Footer.vue'

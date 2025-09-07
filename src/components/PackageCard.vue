@@ -1,5 +1,7 @@
 <template>
-  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg flex flex-col text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
+<div class="flex flex-col">
+  <h3 class="text-2xl font-semibold text-white my-5">{{ title }}</h3>
+  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
     <div class="relative w-full h-48 overflow-hidden bg-gray-600">
       <img
         :src="image"
@@ -16,7 +18,7 @@
         <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
           <component :is="LucideIcon" :size="20" class="text-black" />
         </div>
-        <h3 class="text-xl font-semibold text-white">{{ title }}</h3>
+        <h3 class="text-xl font-semibold text-white">{{ title }} Package</h3>
       </div>
       <p class="text-gray-300 text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
       <div class="text-2xl font-semibold text-yellow-400 mb-4">{{ price }} <span class="text-gray-300 text-sm font-medium">per person</span></div>
@@ -41,11 +43,13 @@
           @click="onBookNowClick"
           class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
         >
-          Book Now
+          INQUIRY
         </button>
       </div>
     </div>
   </div>
+
+</div>
 </template>
 
 <script setup lang="ts">

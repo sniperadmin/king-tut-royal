@@ -19,8 +19,8 @@
     >
       <div 
         v-if="isOpen"
-        class="absolute top-full left-0 mt-2 w-full bg-gray-900 border border-amber-400/30 rounded-lg shadow-2xl z-[9999] overflow-hidden"
-        style="position: absolute; z-index: 9999; min-width: 300px;"
+        class="absolute top-full left-0 mt-2 w-full bg-gray-900 border border-amber-400/30 rounded-lg shadow-2xl z-[9999] overflow-hidden md:max-w-sm"
+        style="position: absolute; z-index: 9999;"
         @click.stop
       >
         <!-- Calendar Header -->
@@ -77,7 +77,7 @@
               :key="day.toISOString()"
               @click.stop.prevent="selectDate(day)"
               :class="getDayClasses(day)"
-              class="h-10 flex items-center justify-center text-sm rounded-lg transition-all duration-200"
+              class="h-5 flex items-center justify-center text-sm rounded-lg transition-all duration-200"
               type="button"
             >
               <span class="relative">

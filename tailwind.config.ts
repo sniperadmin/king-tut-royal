@@ -116,5 +116,6 @@ export default {
   plugins: [
     animate,
     typography,
+    require('vidstack/tailwind.cjs')
   ],
 } satisfies Config;
