@@ -9,21 +9,20 @@ type Theme = 'dark' | 'light' | 'system'
 
 interface ThemeProviderProps {
   defaultTheme?: Theme
+  customTheme?: Record<string, string>
 }
 
 const props = withDefaults(defineProps<ThemeProviderProps>(), {
-  defaultTheme: 'system'
+  defaultTheme: 'dark'
 })
 
-const theme = ref<Theme>(props.defaultTheme)
+const theme = ref<Theme>('dark')
 
-// Initialize theme from localStorage
+// Force dark theme on mount
 onMounted(() => {
+  theme.value = 'dark'
   if (typeof window !== 'undefined') {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light' || savedTheme === 'system')) {
-      theme.value = savedTheme as Theme
-    }
+    localStorage.setItem('theme', 'dark')
   }
   applyTheme()
 })
@@ -35,21 +34,21 @@ const applyTheme = () => {
   const root = window.document.documentElement
   root.classList.remove('light', 'dark')
 
-  if (theme.value === 'system') {
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-    root.classList.add(systemTheme)
+  if (props.customTheme) {
+    for (const key in props.customTheme) {
+      root.style.setProperty(key, props.customTheme[key])
+    }
     return
   }
 
-  root.classList.add(theme.value)
+  // Always use dark theme
+  root.classList.add('dark')
 }
 
 // Set theme function
-const setTheme = (newTheme: Theme) => {
-  theme.value = newTheme
-  localStorage.setItem('theme', newTheme)
+const setTheme = (_newTheme: Theme) => {
+  theme.value = 'dark'
+  localStorage.setItem('theme', 'dark')
   applyTheme()
 }
 
@@ -60,5 +59,5 @@ watch(theme, applyTheme)
 provide('theme', {
   theme,
   setTheme
-})
+}) // setTheme now always sets dark
 </script>

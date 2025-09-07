@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background text-foreground">
-    <!-- Mobile sidebar overlay -->
+  <div class="min-h-screen">
     <div v-if="sidebarOpen" class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-background bg-opacity-75" aria-hidden="true" @click="sidebarOpen = false"></div>
       <div class="relative flex-1 flex flex-col max-w-xs w-full bg-card">

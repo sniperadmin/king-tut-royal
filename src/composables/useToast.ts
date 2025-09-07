@@ -24,29 +24,27 @@ const generateId = () => {
 }
 
 const addToast = (props: ToastProps) => {
-  const id = props.id || generateId()
   const toast: Toast = {
-    id,
+    id: generateId(),
+    open: true,
     title: props.title,
     description: props.description,
     variant: props.variant || 'default',
-    duration: props.duration || 5000,
-    open: true
-  }
+    duration: props.duration || 3000,
+  };
+  console.log('Adding toast:', toast); // Add this line
+  toasts.value.push(toast);
 
-  toasts.value.push(toast)
-
-  // Auto dismiss after duration
   if (toast.duration > 0) {
     setTimeout(() => {
-      dismissToast(id)
-    }, toast.duration)
+      dismissToast(toast.id);
+    }, toast.duration);
   }
 
   return {
-    id,
-    dismiss: () => dismissToast(id),
-    update: (newProps: Partial<ToastProps>) => updateToast(id, newProps)
+    id: toast.id,
+    dismiss: () => dismissToast(toast.id),
+    update: (newProps: Partial<ToastProps>) => updateToast(toast.id, newProps)
   }
 }
 

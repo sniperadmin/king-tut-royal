@@ -1,5 +1,5 @@
 <template>
-  <ThemeProvider default-theme="dark">
+  <ThemeProvider :default-theme="'dark'">
     <TooltipProvider>
       <router-view />
       <ToastContainer />
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import ThemeProvider from '@/components/theme-provider.vue'
 import TooltipProvider from '@/components/TooltipProvider.vue'
 import ToastContainer from '@/components/ToastContainer.vue'
+import ThemeProvider from '@/components/theme-provider.vue'
 </script>

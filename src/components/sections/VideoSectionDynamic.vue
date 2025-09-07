@@ -76,7 +76,7 @@
             'inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md transition-colors',
             section.content.cta.style === 'outline' 
               ? 'border-current text-current hover:bg-current hover:text-black' 
-              : 'bg-white text-black hover:bg-gray-100'
+              : 'bg-neutral-900 text-white hover:bg-neutral-800'
           ]"
         >
           {{ section.content.cta.text || 'Watch More' }}

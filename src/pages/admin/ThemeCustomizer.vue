@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background">
+  <div :class="['min-h-screen', themeClass]">
     <AdminLayout>
       <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -454,7 +454,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/components/admin/AdminLayout.vue'
+import { useTheme } from '@/composables/useTheme'
 import { useThemeConfig, type ThemePreset } from '@/composables/admin/useThemeConfig'
+
+const { theme } = useTheme()
+const themeClass = computed(() => (theme.value === 'dark' ? 'dark-theme' : ''))
 
 const {
   currentTheme,
