@@ -31,4 +31,6 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           urls: ${{ needs.build_and_preview.outputs.details_url }}
-          accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
