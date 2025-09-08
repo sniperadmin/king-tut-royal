@@ -27,16 +27,25 @@ export default defineConfig(({ mode }) => ({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     }
   },
-  // build: {
-  //   rollupOptions: {
-  //     output: {
-  //       manualChunks: {
-  //         packageCard: [
-  //           './src/components/PackageCard.vue',
-  //           './src/components/PackageDetailsModal.vue'
-  //         ]
-  //       }
-  //     }
-  //   }
-  // }
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          heroSection: [
+            './src/components/HeroSection.vue'
+          ],
+          packageCard: [
+            './src/components/PackageCard.vue',
+            './src/components/PackageDetailsModal.vue'
+          ],
+          bookingSection: [
+            './src/components/BookingSection.vue'
+          ],
+          videoSection: [
+            './src/components/sections/VideoSection.vue'
+          ]
+        }
+      }
+    }
+  }
 }));

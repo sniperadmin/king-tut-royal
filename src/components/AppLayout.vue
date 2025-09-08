@@ -3,7 +3,7 @@
     <Navigation />
     <main>
       <section id="home">
-        <Suspense><HeroSection /></Suspense>
+        <HeroSection />
       </section>
       <Suspense>
         <VideoSection />
@@ -13,9 +13,17 @@
           <PackagesSection />
         </Suspense>
       </section>
-      <Suspense><MediaSliderSection /></Suspense>
-      <Suspense><WhyChooseSection /></Suspense>
-      <Suspense><BookingSection /></Suspense>
+
+      <Suspense>
+        <MediaSliderSection />
+      </Suspense>
+
+      <Suspense>
+        <WhyChooseSection />
+      </Suspense>
+      <Suspense>
+        <BookingSection />
+      </Suspense>
     </main>
     <Footer />
   </div>
@@ -24,9 +32,8 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 import Navigation from './Navigation.vue'
-
+import HeroSection from './HeroSection.vue'
 const VideoSection = defineAsyncComponent(() => import('./sections/VideoSection.vue'))
-const HeroSection = defineAsyncComponent(() => import('./HeroSection.vue'))
 const MediaSliderSection = defineAsyncComponent(() => import('./MediaSliderSection.vue'))
 const PackagesSection = defineAsyncComponent(() => import('./PackagesSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('./WhyChooseSection.vue'))

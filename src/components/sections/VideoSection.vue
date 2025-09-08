@@ -1,16 +1,12 @@
 <script setup>
-import { ref, onMounted, nextTick, onUnmounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const videos = ref([
-  // { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.48.mp4', title: 'Grand Museum Tour', muted: true },
-  // { id: 2, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.50%20(1).mp4', title: 'Nile Dinning', muted: true },
-  // { id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-29%20at%2018.34.25.mp4', title: 'King Tut Package', muted: true },
   { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king/king.m3u8', title: 'King Tut Package', muted: true },
 ]);
 
 const currentVideoIndex = ref(0);
 const videoPlayer = ref(null);
-const windowWidth = ref(window.innerWidth);
 
 const handleReady = () => {
   if (videoPlayer.value && videoPlayer.value.player) {
@@ -25,46 +21,43 @@ const handleReady = () => {
   }
 };
 
-const nextVideo = () => {
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.pause();
-  }
-  currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.value.length;
-  // No need to await nextTick; allow browser to schedule play
-  setTimeout(() => {
-    if (videoPlayer.value && videoPlayer.value.player) {
-      videoPlayer.value.player.play();
-    }
-  }, 0);
-};
+// NOTE: Never uncomment the following until we verify the business need
+// const nextVideo = () => {
+//   if (videoPlayer.value && videoPlayer.value.player) {
+//     videoPlayer.value.player.pause();
+//   }
+//   currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.value.length;
+//   // No need to await nextTick; allow browser to schedule play
+//   setTimeout(() => {
+//     if (videoPlayer.value && videoPlayer.value.player) {
+//       videoPlayer.value.player.play();
+//     }
+//   }, 0);
+// };
 
-const prevVideo = () => {
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.pause();
-  }
-  currentVideoIndex.value = (currentVideoIndex.value - 1 + videos.value.length) % videos.value.length;
-  setTimeout(() => {
-    if (videoPlayer.value && videoPlayer.value.player) {
-      videoPlayer.value.player.play();
-    }
-  }, 0);
-};
+// const prevVideo = () => {
+//   if (videoPlayer.value && videoPlayer.value.player) {
+//     videoPlayer.value.player.pause();
+//   }
+//   currentVideoIndex.value = (currentVideoIndex.value - 1 + videos.value.length) % videos.value.length;
+//   setTimeout(() => {
+//     if (videoPlayer.value && videoPlayer.value.player) {
+//       videoPlayer.value.player.play();
+//     }
+//   }, 0);
+// };
 
-const goToVideo = (index) => {
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.pause();
-  }
-  currentVideoIndex.value = index;
-  setTimeout(() => {
-    if (videoPlayer.value && videoPlayer.value.player) {
-      videoPlayer.value.player.play();
-    }
-  }, 0);
-};
-
-const handleResize = () => {
-  windowWidth.value = window.innerWidth;
-};
+// const goToVideo = (index) => {
+//   if (videoPlayer.value && videoPlayer.value.player) {
+//     videoPlayer.value.player.pause();
+//   }
+//   currentVideoIndex.value = index;
+//   setTimeout(() => {
+//     if (videoPlayer.value && videoPlayer.value.player) {
+//       videoPlayer.value.player.play();
+//     }
+//   }, 0);
+// };
 
 onMounted(() => {
   import('vidstack/bundle');
@@ -72,11 +65,6 @@ onMounted(() => {
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.play();
   }
-  window.addEventListener('resize', handleResize);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize);
 });
 </script>
 
@@ -94,9 +82,7 @@ onUnmounted(() => {
           :volume="0"
           playsinline
           fullscreenOrientation="portrait"
-          poster="/images/cover.webp"
           @ready="handleReady"
-          @ended="nextVideo"
           loading="lazy"
         >
           <media-provider></media-provider>
