@@ -30,5 +30,4 @@ jobs:
       - name: Process preview URL with foo.software
         uses: foo-software/lighthouse-check-action@master
         with:
-          urls:
-            - ${{ needs.build_and_preview.outputs.details_url }}
+          urls: ${{ needs.build_and_preview.outputs.details_url }}
