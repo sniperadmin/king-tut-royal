@@ -28,6 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Process preview URL with foo.software
-        uses: software/lighthouse-check-action@master
+        uses: foo-software/lighthouse-check-action@master
         with:
           url: ${{ needs.build_and_preview.outputs.details_url }}
