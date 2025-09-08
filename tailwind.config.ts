@@ -8,8 +8,7 @@ export default {
     "./pages/**/*.{ts,vue}",
     "./components/**/*.{ts,vue}",
     "./app/**/*.{ts,vue}",
-    "./src/**/*.{ts,vue}",
-    "./node_modules/vue-tel-input/dist/vue-tel-input.css",
+    "./src/**/*.{ts,vue}"
   ],
   prefix: "",
   theme: {

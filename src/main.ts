@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query'
 import App from './App.vue'
 import router from './router'
+import 'vue-tel-input/vue-tel-input.css'
 import './index.css'
 
 // Create Vue Query client

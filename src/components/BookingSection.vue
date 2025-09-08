@@ -180,21 +180,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted, computed, watch } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComponent } from 'vue'
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
-import Card from '@/components/ui/card.vue'
-import CardHeader from '@/components/ui/card-header.vue'
-import CardTitle from '@/components/ui/card-title.vue'
-import CardDescription from '@/components/ui/card-description.vue'
-import CardContent from '@/components/ui/card-content.vue'
-import Button from '@/components/ui/button.vue'
-import Input from '@/components/ui/input.vue'
-import Label from '@/components/ui/label.vue'
-import LuxuryDatePicker from '@/components/LuxuryDatePicker.vue'
-import { VueTelInput } from 'vue-tel-input'
-import 'vue-tel-input/vue-tel-input.css'
+const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
+const CardHeader = defineAsyncComponent(() => import('@/components/ui/card-header.vue'))
+const CardTitle = defineAsyncComponent(() => import('@/components/ui/card-title.vue'))
+const CardDescription = defineAsyncComponent(() => import('@/components/ui/card-description.vue'))
+const CardContent = defineAsyncComponent(() => import('@/components/ui/card-content.vue'))
+const Button = defineAsyncComponent(() => import('@/components/ui/button.vue'))
+const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
+const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
+const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryDatePicker.vue'))
+
+let VueTelInput = null
 
 interface WeeklyBooking {
   id: number
@@ -405,6 +405,11 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
 
 // Lifecycle
 onMounted(async () => {
+  if (!VueTelInput) {
+    const vueTel = await import('vue-tel-input');
+    VueTelInput = vueTel.VueTelInput;
+  }
+
   await fetchAvailableWeeks()
   
   // Subscribe to realtime changes

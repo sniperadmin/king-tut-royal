@@ -1,7 +1,5 @@
 <script setup>
 import { ref, onMounted, nextTick, onUnmounted } from 'vue';
-import 'vidstack/bundle';
-import 'vidstack/icons';
 
 const videos = ref([
   // { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202025-08-27%20at%2017.11.48.mp4', title: 'Grand Museum Tour', muted: true },
@@ -69,6 +67,8 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+  import('vidstack/bundle');
+  import('vidstack/icons');
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.play();
   }
@@ -94,8 +94,10 @@ onUnmounted(() => {
           :volume="0"
           playsinline
           fullscreenOrientation="portrait"
+          poster="/images/cover.webp"
           @ready="handleReady"
           @ended="nextVideo"
+          loading="lazy"
         >
           <media-provider></media-provider>
           <media-controls

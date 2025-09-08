@@ -2,15 +2,17 @@
 <div class="flex flex-col">
   <h3 class="text-2xl font-semibold text-white my-5">{{ title }}</h3>
   <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
-    <div class="relative h-[220px] overflow-hidden bg-gray-600">
+    <div class="relative overflow-hidden bg-gray-600">
       <img
         :src="image"
+        :srcset="imageSrcset"
+        sizes="(max-width: 600px) 600px, 400px"
         :alt="title + ' thumbnail'"
         loading="lazy"
         decoding="async"
-        class="mx-auto rounded-lg object-contain w-[400px] h-[220px] drop-shadow"
-        width="400"
-        height="220"
+        class="mx-auto rounded-t-lg object-contain w-full h-auto drop-shadow"
+        width="800"
+        height="294"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full">
         Popular
@@ -58,7 +60,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CircleAlert } from 'lucide-vue-next';
+import { Crown, Star, CircleAlert } from 'lucide-vue-next';
 // Add here any other icons passed as props.icon, e.g., import { Star, Heart } from 'lucide-vue-next'
 
 interface PackageCardProps {
@@ -80,9 +82,17 @@ const props = withDefaults(defineProps<PackageCardProps>(), {
 const LucideIcon = computed(() => {
   // Map possible icon strings to components
   const iconMap = {
-    CircleAlert
+    Crown,
+    Star,
+    CircleAlert,
     // Add other mappings, e.g., Star, Heart, etc. as needed.
   };
   return iconMap[props.icon] || CircleAlert;
+});
+
+const imageSrcset = computed(() => {
+  const baseName = props.image.replace(/\.(webp|jpeg)$/, '');
+  const jpegPath = `${baseName}.jpeg`;
+  return `${jpegPath} 400w, ${props.image} 800w`;
 });
 </script>

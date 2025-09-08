@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-900 text-white py-8 min-h-[320px] flex flex-col justify-between" role="contentinfo" aria-label="Site Footer">
+  <footer class="bg-gray-900 text-white py-8 flex flex-col justify-between" role="contentinfo" aria-label="Site Footer">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <!-- Company Info -->

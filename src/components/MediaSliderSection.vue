@@ -15,6 +15,8 @@
           <img
             :src="mediaItems[currentSlide].src"
             :alt="mediaItems[currentSlide].title"
+            :srcset="`${mediaItems[currentSlide].src} 412w, ${mediaItems[currentSlide].src} 853w`"
+            sizes="(max-width: 640px) 412px, 853px"
             class="w-full h-full object-contain transition-all duration-500"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
