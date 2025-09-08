@@ -9,6 +9,7 @@ export default {
     "./components/**/*.{ts,vue}",
     "./app/**/*.{ts,vue}",
     "./src/**/*.{ts,vue}",
+    "./node_modules/vue-tel-input/dist/vue-tel-input.css",
   ],
   prefix: "",
   theme: {

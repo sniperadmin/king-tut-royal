@@ -31,10 +31,10 @@
 
 <script setup lang="ts">
 import { smoothScroll } from '../utils/smoothScroll'
-import PackageCard from './PackageCard.vue'
-import PackageDetailsModal from './PackageDetailsModal.vue'
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 
+const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
+const PackageDetailsModal = defineAsyncComponent(() => import('./PackageDetailsModal.vue'))
 const scrollToBooking = () => {
   smoothScroll('booking')
 }
@@ -57,7 +57,7 @@ const packages = [
     title: "King Tut Royal VIP",
     price: "€2,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
-    image: "/images/royal-vip.jpeg",
+    image: "/images/royal-vip.webp",
     icon: 'Crown',
 
     highlights: [
@@ -95,9 +95,9 @@ const packages = [
       benefits: "Private archaeologist-led museum experience\nHand-crafted King Tut perfume souvenir\nLuxury transport & guided services throughout\nCurated cultural experiences blending heritage with modern luxury",
       booking: "Price: €2,900 per person\nSecure your journey with a 30% deposit\nBalance payable before arrival\nExtremely limited availability — reserve early",
       images: [
-        "/images/royal-vip.jpeg",
-        "/images/pyramids.jpeg",
-        "/images/chills.jpeg"
+        "/images/royal-vip.webp",
+        "/images/pyramids.webp",
+        "/images/chills.webp"
       ]
     }
   },
@@ -105,7 +105,7 @@ const packages = [
     title: "King Tut VIP One Day",
     price: "€900",
     duration: "1 Day (Any Day)",
-    image: "/images/vip.jpeg",
+    image: "/images/vip.webp",
     highlights: [
       'Private guided tour of Giza Pyramids & Sphinx',
       'Entry to the Grand Egyptian Museum',
@@ -133,9 +133,9 @@ const packages = [
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
       booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
-        "/images/vip.jpeg",
-        "/images/luxury.jpeg",
-        "/images/pack.jpeg"
+        "/images/vip.webp",
+        "/images/luxury.webp",
+        "/images/pack.webp"
       ]
     }
   }

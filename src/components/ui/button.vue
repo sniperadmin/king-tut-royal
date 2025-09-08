@@ -6,7 +6,7 @@
         'bg-primary text-primary-foreground hover:bg-primary/90': variant === 'default',
         'bg-destructive text-destructive-foreground hover:bg-destructive/90': variant === 'destructive',
         'border border-input bg-background hover:bg-accent hover:text-accent-foreground': variant === 'outline',
-        'hover:bg-accent hover:text-accent-foreground': variant === 'secondary',
+        'bg-secondary text-secondary-foreground hover:bg-secondary/80': variant === 'secondary',
         'hover:bg-accent hover:text-accent-foreground': variant === 'ghost',
         'underline-offset-4 hover:underline': variant === 'link',
       },

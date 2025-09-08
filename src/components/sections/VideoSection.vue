@@ -27,37 +27,41 @@ const handleReady = () => {
   }
 };
 
-const nextVideo = async () => {
+const nextVideo = () => {
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.pause();
   }
   currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.value.length;
-  await nextTick();
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.play();
-  }
+  // No need to await nextTick; allow browser to schedule play
+  setTimeout(() => {
+    if (videoPlayer.value && videoPlayer.value.player) {
+      videoPlayer.value.player.play();
+    }
+  }, 0);
 };
 
-const prevVideo = async () => {
+const prevVideo = () => {
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.pause();
   }
   currentVideoIndex.value = (currentVideoIndex.value - 1 + videos.value.length) % videos.value.length;
-  await nextTick();
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.play();
-  }
+  setTimeout(() => {
+    if (videoPlayer.value && videoPlayer.value.player) {
+      videoPlayer.value.player.play();
+    }
+  }, 0);
 };
 
-const goToVideo = async (index) => {
+const goToVideo = (index) => {
   if (videoPlayer.value && videoPlayer.value.player) {
     videoPlayer.value.player.pause();
   }
   currentVideoIndex.value = index;
-  await nextTick();
-  if (videoPlayer.value && videoPlayer.value.player) {
-    videoPlayer.value.player.play();
-  }
+  setTimeout(() => {
+    if (videoPlayer.value && videoPlayer.value.player) {
+      videoPlayer.value.player.play();
+    }
+  }, 0);
 };
 
 const handleResize = () => {
@@ -128,26 +132,6 @@ onUnmounted(() => {
             </media-controls-group>
           </media-controls>
         </media-player>
-
-        <!-- <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
-          <button @click="prevVideo" class="bg-black bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75 transition-all duration-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-        </div>
-        <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
-          <button @click="nextVideo" class="bg-black bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75 transition-all duration-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
-        </div> -->
-
-        <!-- <div class="flex justify-center space-x-2">
-          <button
-            v-for="(video, index) in videos"
-            :key="video.id"
-            @click="goToVideo(index)"
-            :class="['w-3 h-3 rounded-full', currentVideoIndex === index ? 'bg-gold-500' : 'bg-gray-600 hover:bg-gray-400']"
-          ></button>
-        </div> -->
       </div>
     </div>
   </section>

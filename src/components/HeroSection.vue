@@ -3,9 +3,15 @@
     <!-- Background Image - Full Width, Contained -->
     <div class="w-full">
       <img 
-        src="https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756568030709_0f9cfae8.jpeg"
+        src="/images/king-tut.webp"
+        srcset="/images/king-tut.webp 853w, /images/king-tut.jpeg 412w, /images/king-tut.webp 618w"
+        sizes="(max-width: 640px) 412px, (max-width: 1024px) 618px, 853px"
         alt="Egyptian Pharaoh"
-        class="w-full h-auto object-contain"
+        class="w-full h-auto object-cover sm:object-fill object-center"
+        fetchpriority="high"
+        width="853"
+        height="1280"
+        decoding="async"
       />
     </div>
   </section>

@@ -428,41 +428,41 @@ onUnmounted(() => {
 
 <style>
 .vue-tel-input {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
-  border-radius: 0.375rem !important; /* rounded-md */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  border-radius: 0.375rem !important;
 }
 
 .vue-tel-input:focus-within {
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5) !important; /* focus:border-amber-400 with shadow */
-  border-color: #fbbf24 !important; /* focus:border-amber-400 */
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5) !important;
+  border-color: #fbbf24 !important;
 }
 
 .vue-tel-input .vti__dropdown {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
 }
 
 .vue-tel-input .vti__dropdown.open {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
 }
 
 .vue-tel-input .vti__dropdown-item {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  color: #ffffff !important; /* text-white */
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
 .vue-tel-input .vti__dropdown-item.highlighted {
-  background-color: #2d3748 !important; /* A slightly lighter gray for hover/focus */
+  background-color: #2d3748 !important;
 }
 
 .vue-tel-input .vti__input {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
-  border-radius: 0.375rem !important; /* rounded-md */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  border-radius: 0.375rem !important;
 }
 </style>

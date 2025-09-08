@@ -108,60 +108,83 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next';
 import Button from './ui/button.vue';
 
 const currentSlide = ref(0);
 const isModalOpen = ref(false);
 const modalImageIndex = ref(0);
+const autoSlideInterval = ref(null);
+
+const goToSlide = (index) => {
+  stopAutoSlide();
+  // Only update if slide changes
+  if (currentSlide.value !== index) {
+    currentSlide.value = index;
+  }
+  startAutoSlide();
+};
+
+const nextModalImage = () => {
+  // Only update if next image is different
+  if (mediaItems.length > 1) {
+    modalImageIndex.value = (modalImageIndex.value + 1) % mediaItems.length;
+  }
+};
+
+const prevModalImage = () => {
+  if (mediaItems.length > 1) {
+    modalImageIndex.value = (modalImageIndex.value - 1 + mediaItems.length) % mediaItems.length;
+  }
+};
 
 const mediaItems = [
   {
     id: 0,
-    src: "/images/vip.jpeg",
+    src: "/images/vip.webp",
     title: "VIP Experience",
     description: "Exclusive access and personalized service"
   },
   {
     id: 1,
-    src: "/images/luxury.jpeg",
+    src: "/images/luxury.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 2,
-    src: "/images/chills.jpeg",
+    src: "/images/chills.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 3,
-    src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756563690287_c291debe.jpeg",
+    src: "/images/mobile.webp",
     title: "Core Services",
     description: "Luxury accommodations and premium experiences"
   },
   {
     id: 4,
-    src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756563690822_f6641d5a.jpeg",
+    src: "/images/services.webp",
     title: "Digital Experience",
     description: "AR-enhanced tours and mobile concierge"
   },
   {
     id: 5,
-    src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569116369_624ffd5b.jpeg",
+    src: "/images/dinner.webp",
     title: "Royal Dinner on the Nile",
     description: "Exclusive dining experiences with ancient Egyptian ambiance"
   },
   {
     id: 6,
-    src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569118036_1d19752f.jpeg",
+    src: "/images/perfume.webp",
     title: "King Tut Royal Collection",
     description: "Limited edition luxury items inspired by pharaonic treasures"
   },
   {
     id: 7,
-    src: "https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756569118786_e66e165b.jpeg",
+    src: "/images/wao.webp",
     title: "VIP Experience Package",
     description: "Premium access and personalized Egyptian adventure"
   }
@@ -170,8 +193,12 @@ const mediaItems = [
 let intervalId: number | undefined;
 
 const startAutoSlide = () => {
+  stopAutoSlide(); // Ensure any existing interval is cleared
   intervalId = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % mediaItems.length;
+    // Optimize: only update if not modal open and slides > 1
+    if (!isModalOpen.value && mediaItems.length > 1) {
+      currentSlide.value = (currentSlide.value + 1) % mediaItems.length;
+    }
   }, 4000);
 };
 
@@ -183,7 +210,8 @@ const stopAutoSlide = () => {
 };
 
 onMounted(() => {
-  startAutoSlide();
+  // Only start auto slide if more than one item
+  if (mediaItems.length > 1) startAutoSlide();
 });
 
 onUnmounted(() => {
@@ -193,43 +221,39 @@ onUnmounted(() => {
 watch(isModalOpen, (newValue) => {
   if (newValue) {
     stopAutoSlide();
-  } else {
+  } else if (mediaItems.length > 1) {
     startAutoSlide();
   }
 });
+const currentMedia = computed(() => mediaItems[currentSlide.value]);
+// Removed active, isOpen, and duplicate autoSlideInterval
+// const active = ref(0);
+// const isOpen = ref(false);
+// const autoSlideInterval = ref<number | null>(null);
 
-const nextSlide = () => {
-  stopAutoSlide();
-  currentSlide.value = (currentSlide.value + 1) % mediaItems.length;
-  startAutoSlide();
-};
+const totalSlides = computed(() => mediaItems.length);
 
-const prevSlide = () => {
-  stopAutoSlide();
-  currentSlide.value = (currentSlide.value - 1 + mediaItems.length) % mediaItems.length;
-  startAutoSlide();
-};
+function nextSlide() {
+  if (totalSlides.value > 1) {
+    currentSlide.value = (currentSlide.value + 1) % totalSlides.value;
+  }
+}
+function prevSlide() {
+  if (totalSlides.value > 1) {
+    currentSlide.value = (currentSlide.value - 1 + totalSlides.value) % totalSlides.value;
+  }
+}
 
-const goToSlide = (index: number) => {
-  stopAutoSlide();
-  currentSlide.value = index;
-  startAutoSlide();
-};
-
-const openModal = (index: number) => {
-  modalImageIndex.value = index;
-  isModalOpen.value = true;
-};
-
-const closeModal = () => {
+function openModal(index: number) {
+  if (!isModalOpen.value) {
+    isModalOpen.value = true;
+    modalImageIndex.value = index;
+  }
+}
+function closeModal() {
   isModalOpen.value = false;
-};
+}
 
-const nextModalImage = () => {
-  modalImageIndex.value = (modalImageIndex.value + 1) % mediaItems.length;
-};
+// Removed handleAutoSlide as its functionality is now integrated into startAutoSlide and watch
 
-const prevModalImage = () => {
-  modalImageIndex.value = (modalImageIndex.value - 1 + mediaItems.length) % mediaItems.length;
-};
 </script>

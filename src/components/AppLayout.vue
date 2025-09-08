@@ -3,27 +3,33 @@
     <Navigation />
     <main>
       <section id="home">
-        <HeroSection />
+        <Suspense><HeroSection /></Suspense>
       </section>
-      <VideoSection />
+      <Suspense>
+        <VideoSection />
+      </Suspense>
       <section id="packages">
-        <PackagesSection />
+        <Suspense>
+          <PackagesSection />
+        </Suspense>
       </section>
-      <MediaSliderSection />
-      <WhyChooseSection />
-      <BookingSection />
+      <Suspense><MediaSliderSection /></Suspense>
+      <Suspense><WhyChooseSection /></Suspense>
+      <Suspense><BookingSection /></Suspense>
     </main>
     <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import Navigation from './Navigation.vue'
-import HeroSection from './HeroSection.vue'
-import MediaSliderSection from './MediaSliderSection.vue'
-import PackagesSection from './PackagesSection.vue'
-import VideoSection from './sections/VideoSection.vue'
-import WhyChooseSection from './WhyChooseSection.vue'
-import BookingSection from './BookingSection.vue'
+
+const VideoSection = defineAsyncComponent(() => import('./sections/VideoSection.vue'))
+const HeroSection = defineAsyncComponent(() => import('./HeroSection.vue'))
+const MediaSliderSection = defineAsyncComponent(() => import('./MediaSliderSection.vue'))
+const PackagesSection = defineAsyncComponent(() => import('./PackagesSection.vue'))
+const WhyChooseSection = defineAsyncComponent(() => import('./WhyChooseSection.vue'))
+const BookingSection = defineAsyncComponent(() => import('./BookingSection.vue'))
 import Footer from './Footer.vue'
 </script>
