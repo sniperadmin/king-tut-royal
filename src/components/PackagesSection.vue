@@ -55,7 +55,7 @@ const closeModal = () => {
 const packages = [
   {
     title: "King Tut Royal VIP",
-    price: "€2,900",
+    price: "€3,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
     image: "/images/royal-vip.webp",
     icon: 'Crown',
@@ -93,7 +93,7 @@ const packages = [
         }
       ],
       benefits: "Private archaeologist-led museum experience\nHand-crafted King Tut perfume souvenir\nLuxury transport & guided services throughout\nCurated cultural experiences blending heritage with modern luxury",
-      booking: "Price: €2,900 per person\nSecure your journey with a 30% deposit\nBalance payable before arrival\nExtremely limited availability — reserve early",
+      booking: "Price: €3,900 per person\nSecure your journey with a 30% deposit\nBalance payable before arrival\nExtremely limited availability — reserve early",
       images: [
         "/images/royal-vip.webp",
         "/images/pyramids.webp",

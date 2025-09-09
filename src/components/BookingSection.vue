@@ -29,7 +29,7 @@
                 @click="selectPackage('vip')"
               >
                 <h3 class="text-lg font-semibold text-amber-400 mb-2">King Tut Royal VIP</h3>
-                <p class="text-white text-2xl font-bold">€2,900</p>
+                <p class="text-white text-2xl font-bold">€3,900</p>
                 <p class="text-gray-300 text-sm">5 Days / 4 Nights</p>
                 <p class="text-gray-300 text-sm">per person</p>
               </div>
@@ -286,7 +286,7 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
 }
 
 const calculateTotalPrice = (packageType: string, guests: number) => {
-  const pricePerPerson = packageType === 'vip' ? 2900 : 900
+  const pricePerPerson = packageType === 'vip' ? 3900 : 900
   return pricePerPerson * guests
 }
 
