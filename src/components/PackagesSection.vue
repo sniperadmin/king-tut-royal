@@ -105,7 +105,7 @@ const packages = [
     title: "King Tut VIP One Day",
     price: "€900",
     duration: "1 Day (Any Day)",
-    image: "/images/vip.jpeg",
+    image: "/images/vip-h.jpeg",
     highlights: [
       'Private guided tour of Giza Pyramids & Sphinx',
       'Entry to the Grand Egyptian Museum',

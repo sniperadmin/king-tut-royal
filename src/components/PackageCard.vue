@@ -2,11 +2,11 @@
 <div class="flex flex-col">
   <h3 class="text-2xl font-semibold text-white my-5">{{ title }}</h3>
   <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
-    <div class="relative w-full h-48 overflow-hidden bg-gray-600">
+    <div class="relative w-full bg-gray-600">
       <img
         :src="image"
         :alt="title"
-        class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+        class="w-full object-contain group-hover:scale-105 transition-transform duration-500"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full">
         Popular
