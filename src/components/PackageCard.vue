@@ -10,7 +10,7 @@
         :alt="title + ' thumbnail'"
         loading="lazy"
         decoding="async"
-        class="mx-auto rounded-t-lg object-contain w-full h-auto drop-shadow"
+        class="mx-auto rounded-t-lg drop-shadow"
         width="800"
         height="294"
       />
@@ -91,8 +91,6 @@ const LucideIcon = computed(() => {
 });
 
 const imageSrcset = computed(() => {
-  const baseName = props.image.replace(/\.(webp|jpeg)$/, '');
-  const jpegPath = `${baseName}.jpeg`;
-  return `${jpegPath} 400w, ${props.image} 800w`;
+  return `${props.image} 400w, ${props.image} 800w`;
 });
 </script>

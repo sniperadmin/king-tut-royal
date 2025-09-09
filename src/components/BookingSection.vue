@@ -185,6 +185,9 @@ import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComp
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
+import { PACKAGE_PRICING } from '@/composables/packagesData'
+import 'vue-tel-input/vue-tel-input.css'
+
 const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
 const CardHeader = defineAsyncComponent(() => import('@/components/ui/card-header.vue'))
 const CardTitle = defineAsyncComponent(() => import('@/components/ui/card-title.vue'))
@@ -286,7 +289,7 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
 }
 
 const calculateTotalPrice = (packageType: string, guests: number) => {
-  const pricePerPerson = packageType === 'vip' ? 3900 : 900
+  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0
   return pricePerPerson * guests
 }
 

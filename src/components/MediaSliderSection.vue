@@ -144,49 +144,49 @@ const prevModalImage = () => {
 const mediaItems = [
   {
     id: 0,
-    src: "/images/vip.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip.webp",
     title: "VIP Experience",
     description: "Exclusive access and personalized service"
   },
   {
     id: 1,
-    src: "/images/luxury.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 2,
-    src: "/images/chills.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 3,
-    src: "/images/mobile.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile.webp",
     title: "Core Services",
     description: "Luxury accommodations and premium experiences"
   },
   {
     id: 4,
-    src: "/images/services.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services.webp",
     title: "Digital Experience",
     description: "AR-enhanced tours and mobile concierge"
   },
   {
     id: 5,
-    src: "/images/dinner.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner.webp",
     title: "Royal Dinner on the Nile",
     description: "Exclusive dining experiences with ancient Egyptian ambiance"
   },
   {
     id: 6,
-    src: "/images/perfume.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume.webp",
     title: "King Tut Royal Collection",
     description: "Limited edition luxury items inspired by pharaonic treasures"
   },
   {
     id: 7,
-    src: "/images/wao.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao.webp",
     title: "VIP Experience Package",
     description: "Premium access and personalized Egyptian adventure"
   }

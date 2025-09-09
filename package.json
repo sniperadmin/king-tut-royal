@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "ls": "npx --yes lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html --no-open"
+    "lh": "npx --yes lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html --no-open"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "country-list-json": "^1.1.0",
     "date-fns": "^3.6.0",
     "highlight.js": "^11.9.0",
     "hls.js": "^1.6.11",
@@ -34,6 +35,7 @@
     "vue": "^3.4.0",
     "vue-router": "^4.4.0",
     "vue-tel-input": "^9.5.0",
+    "vue3-q-tel-input": "^2.0.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
