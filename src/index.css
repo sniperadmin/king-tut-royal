@@ -35,6 +35,9 @@
     --ring: 45 100% 50%;
 
     --radius: 0.5rem;
+
+    --gold-start: 45 100% 50%; /* #ffd700 */
+    --gold-end: 52 100% 65%;   /* #ffed4e */
   }
 
   .dark {
@@ -65,6 +68,9 @@
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 45 100% 50%;
+
+    --gold-start: 45 100% 50%;
+    --gold-end: 52 100% 65%;
   }
 }
 
