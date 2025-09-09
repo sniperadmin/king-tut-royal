@@ -84,6 +84,7 @@
                   :inputOptions="{ placeholder: 'Enter your phone number' }"
                   class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
                 />
+                <p v-if="!isPhoneValid" class="text-muted text-sm mt-1">Please enter a valid phone number, including country code.</p>
               </div>
 
               <div class="space-y-2">
@@ -231,6 +232,13 @@ watch(selectedOneDayDate, (newDate) => {
     formData.oneDayDate = format(newDate, 'yyyy-MM-dd')
   } else {
     formData.oneDayDate = ''
+  }
+})
+
+// Watch for phone input changes to sanitize
+watch(() => formData.phone, (newValue) => {
+  if (newValue) {
+    formData.phone = newValue.replace(/[^0-9+]/g, '')
   }
 })
 
