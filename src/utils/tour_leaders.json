@@ -1,191 +1,596 @@
 [
-    {
-        "Phone Number": "+20 109 128 9496",
-        "Name": "Mohamed Ghoneim",
-        "Languages": "German",
-        "Age": 51.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_2.jpg"
+  {
+    "name": "Mohamed Ghoneim",
+    "age": 51,
+    "phone": "+20 109 128 9496",
+    "languages": ["German"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_2.jpg",
+    "portfolio": {
+      "experience": "25+ years guiding German-speaking travelers across Egypt with deep focus on Pharaonic history and Nile itineraries.",
+      "specialties": ["Cultural tours", "Archaeological sites", "Nile cruises", "Museum curation", "Private VIP itineraries"],
+      "bio": "Mohamed blends academic rigor with a storyteller’s instinct. He began as a museum docent and grew into a sought-after guide for German embassies and cultural institutes. Guests praise his ability to decode inscriptions and place each monument in its broader historical arc. Between temples he threads in contemporary life—coffee rituals, artisan workshops, and neighborhood anecdotes—so travelers leave with a layered sense of Egypt.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "German C2 Proficiency", "First Aid & Field Safety"],
+      "video_persona": "https://videos.example.com/persona/mohamed_ghoneim.mp4"
     },
-    {
-        "Phone Number": "+20 102 819 4450",
-        "Name": "Hassan Abdelhalim",
-        "Languages": "Spanish, English, French",
-        "Age": 0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_3.jpg"
-    },
-    {
-        "Phone Number": "+20 103 028 0937",
-        "Name": "Hassan Magdy",
-        "Languages": "German",
-        "Age": 25.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_4.jpg"
-    },
-    {
-        "Phone Number": "+20 106 768 7390",
-        "Name": "Youssef El Sayed",
-        "Languages": "English",
-        "Age": 25.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_5.jpg"
-    },
-    {
-        "Phone Number": "+20 128 320 5920",
-        "Name": "Adel Samir",
-        "Languages": "English",
-        "Age": 44.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_8.jpg"
-    },
-    {
-        "Phone Number": "+20 122 377 2553",
-        "Name": "Tamer Hamdy",
-        "Languages": "English",
-        "Age": 35.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_9.jpg"
-    },
-    {
-        "Phone Number": "+20 100 319 5491",
-        "Name": "Sara Atef",
-        "Languages": "English",
-        "Age": 24.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_1.jpg"
-    },
-    {
-        "Phone Number": "+20 101 832 5332",
-        "Name": "Mona Mohamed",
-        "Languages": "Chinese",
-        "Age": 23.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_6.jpg"
-    },
-    {
-        "Phone Number": "+20 112 351 0409",
-        "Name": "Omar Essam",
-        "Languages": "English",
-        "Age": 24.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_10.jpg"
-    },
-    {
-        "Phone Number": "+20 109 593 5324",
-        "Name": "Fatma Abdelmonem",
-        "Languages": "Spanish",
-        "Age": 31.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_7.jpg"
-    },
-    {
-        "Phone Number": "+20 150 001 1321",
-        "Name": "Ehab Khaled",
-        "Languages": "Spanish",
-        "Age": 22.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_13.jpg"
-    },
-    {
-        "Phone Number": "+20 121 039 0906",
-        "Name": "Mary Labib",
-        "Languages": "English",
-        "Age": 24.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_12.jpg"
-    },
-    {
-        "Phone Number": "+20 114 521 4177",
-        "Name": "Engy Omar",
-        "Languages": "Spanish",
-        "Age": 23.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_14.jpg"
-    },
-    {
-        "Phone Number": "+20 114 922 5059",
-        "Name": "Mohamed Alaa",
-        "Languages": "Spanish",
-        "Age": 25.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_15.jpg"
-    },
-    {
-        "Phone Number": "+20 100 381 3802",
-        "Name": "Mai Mohamed",
-        "Languages": "French",
-        "Age": 43.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_16.jpg"
-    },
-    {
-        "Phone Number": "+20 109 661 9210",
-        "Name": "Mostafa Hassan",
-        "Languages": "Chinese",
-        "Age": 45.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_17.jpg"
-    },
-    {
-        "Phone Number": "+20 111 299 5329",
-        "Name": "Saeed Abou El Dahab",
-        "Languages": "German",
-        "Age": 0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg"
-    },
-    {
-        "Phone Number": "+20 128 447 0427",
-        "Name": "Ebtihal Ashraf",
-        "Languages": "Chinese",
-        "Age": 21.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_18.jpg"
-    },
-    {
-        "Phone Number": "+20 114 242 5655",
-        "Name": "Omar Khalifa",
-        "Languages": "German",
-        "Age": 21.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg"
-    },
-    {
-        "Phone Number": "+20 115 106 9968",
-        "Name": "Sherif Mohy Eldin",
-        "Languages": "Spanish",
-        "Age": 0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_21.jpg"
-    },
-    {
-        "Phone Number": "+20 127 135 7912",
-        "Name": "David Ayman",
-        "Languages": "English",
-        "Age": 24.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_23.jpg"
-    },
-    {
-        "Phone Number": "+20 121 120 2868",
-        "Name": "Rowan Tarek",
-        "Languages": "Turkish",
-        "Age": 24.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_20.jpg"
-    },
-    {
-        "Phone Number": "+20 112 185 9166",
-        "Name": "Ahmed Mimi",
-        "Languages": "English, Spanish",
-        "Age": 23.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_25.jpg"
-    },
-    {
-        "Phone Number": "+20 103 067 7411",
-        "Name": "Fatma Nader",
-        "Languages": "Chinese",
-        "Age": 21.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_26.jpg"
-    },
-    {
-        "Phone Number": "+20 128 822 7789",
-        "Name": "Noha Mohamed",
-        "Languages": "Chinese",
-        "Age": 26.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_28.jpg"
-    },
-    {
-        "Phone Number": "+20 106 588 8220",
-        "Name": "Ahmed Nabawy",
-        "Languages": "Italian",
-        "Age": 35.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_30.jpg"
-    },
-    {
-        "Phone Number": "+20 101 755 1746",
-        "Name": "Nancy Mohamed",
-        "Languages": "Czech",
-        "Age": 22.0,
-        "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_32.jpg"
+    "engagement": {
+      "reviews": [
+        "His Luxor explanations were like attending a masterclass—clear, vivid, unforgettable.",
+        "Flawless logistics and a warm presence; we felt like honored guests everywhere."
+      ],
+      "highlight_tours": ["Nile Cruise: Aswan → Luxor (4D/3N)", "Giza Plateau & Saqqara Expert Walk", "Egyptian Museum Deep Dive"],
+      "availability": "Available on request"
     }
+  },
+  {
+    "name": "Hassan Abdelhalim",
+    "age": null,
+    "phone": "+20 102 819 4450",
+    "languages": ["Spanish", "English", "French"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_3.jpg",
+    "portfolio": {
+      "experience": "Multilingual guide specializing in Mediterranean cultures and cross-cultural groups.",
+      "specialties": ["City orientation walks", "Family-friendly itineraries", "Religious heritage", "Street food safaris", "Photography spots"],
+      "bio": "Hassan’s tours are choreographed like a great conversation—curious, dynamic, and inclusive. Having studied comparative literature, he maps myths and language roots to sites and neighborhoods. He is equally at home negotiating with market vendors or interpreting medieval manuscripts. His guests consistently highlight his ease in three languages and his knack for keeping groups engaged across generations.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE C1 (Spanish)", "DALF C1 (French)"],
+      "video_persona": "https://videos.example.com/persona/hassan_abdelhalim.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Our teens and grandparents were equally captivated—no small feat!",
+        "Seamless in Spanish, charming in English, and superb recommendations for food."
+      ],
+      "highlight_tours": ["Old Cairo Interfaith Heritage Walk", "Khan El-Khalili Night Markets", "Alexandria Day Trip: Mediterranean Lens"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Hassan Magdy",
+    "age": 25,
+    "phone": "+20 103 028 0937",
+    "languages": ["German"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_4.jpg",
+    "portfolio": {
+      "experience": "Early-career German guide with strong grounding in modern Egyptology and youth groups.",
+      "specialties": ["Museum interpretation", "University groups", "Cycling tours", "Contemporary art", "Street photography"],
+      "bio": "Hassan brings a fresh lens to classics: he pairs Old Kingdom context with modern design, music, and media. He studied Egyptology and public history, which shows in his crisp narratives and interactive prompts. Expect QR-code mini-activities, map overlays, and playful debates on conservation vs. access. He’s especially popular with student and young professional groups.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "German C1 Proficiency", "Youth Safety & Group Management"],
+      "video_persona": "https://videos.example.com/persona/hassan_magdy.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "He turned the museum into a living puzzle—smart and fun.",
+        "Great pacing and fresh insights; our students learned a ton."
+      ],
+      "highlight_tours": ["Tahrir Museum Interactive Walk", "Giza at Golden Hour Photo Circuit", "Downtown Cairo Architecture Ride"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Youssef El Sayed",
+    "age": 25,
+    "phone": "+20 106 768 7390",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_5.jpg",
+    "portfolio": {
+      "experience": "Energetic English-speaking guide focused on city culture and ancient-modern bridges.",
+      "specialties": ["City highlights", "Street food", "Local markets", "Student trips", "Evening experiences"],
+      "bio": "Youssef designs days that feel like time-travel with snacks. He’s a connector—between neighborhoods, eras, and people—linking pharaohs to pop culture with easy humor. He keeps logistics light, so small groups glide from metro rides to rooftop views. Guests value his safety mindset and his knack for reading group energy.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Food Safety & Hygiene", "First Aid (Red Crescent)"],
+      "video_persona": "https://videos.example.com/persona/youssef_el_sayed.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "We tasted, laughed, and learned—perfect balance.",
+        "Felt like touring with a savvy local friend."
+      ],
+      "highlight_tours": ["Cairo Street Food Crawl", "Islamic Cairo Sunset Stroll", "Giza Classics Express"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Adel Samir",
+    "age": 44,
+    "phone": "+20 128 320 5920",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_8.jpg",
+    "portfolio": {
+      "experience": "20+ years creating tailored journeys for families and corporate travelers.",
+      "specialties": ["Private family trips", "Corporate incentives", "Coptic & Islamic heritage", "Desert add-ons", "Nile logistics"],
+      "bio": "Adel is a calm hand on complex itineraries. He reads the hidden schedule of cities—when crowds thin, when light is best, when a quiet tea house can reset the day. His approach is meticulous without being rigid, and he’s known for looking after details guests didn’t know they needed taken care of. Under his guidance, Egypt feels both grand and effortless.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Child Safeguarding", "Executive Transport & Protocol"],
+      "video_persona": "https://videos.example.com/persona/adel_samir.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Everything worked like clockwork without feeling rushed.",
+        "Our kids adored him and learned so much on site."
+      ],
+      "highlight_tours": ["Family-First Cairo & Giza (2D)", "Old Cairo Interfaith Circuit", "Nile Cruise with Abu Simbel Extension"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Tamer Hamdy",
+    "age": 35,
+    "phone": "+20 122 377 2553",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_9.jpg",
+    "portfolio": {
+      "experience": "Adventure-leaning English guide with desert expertise and off-the-beaten-path flair.",
+      "specialties": ["Desert excursions", "Oases & stargazing", "Hiking & dunes", "Bedouin culture", "4x4 logistics"],
+      "bio": "Tamer designs journeys that breathe—long horizons, starlit dinners, and sober respect for desert safety. He partners with local Bedouin teams to keep experiences authentic and equitable. When he’s not plotting dune lines, he’s pointing out desert flora and the archaeology of ‘empty’ spaces. His city days are crisp; his desert nights are unforgettable.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Wilderness First Responder", "Off-Road Driving & Recovery"],
+      "video_persona": "https://videos.example.com/persona/tamer_hamdy.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "We saw the Milky Way like a ribbon—safe and magical.",
+        "Expert driver and a great storyteller around the campfire."
+      ],
+      "highlight_tours": ["White Desert Overnight", "Fayoum Day Adventure", "Sinai Stargazing & Culture"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Sara Atef",
+    "age": 24,
+    "phone": "+20 100 319 5491",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_1.jpg",
+    "portfolio": {
+      "experience": "Young English-speaking guide focused on design, crafts, and women-led entrepreneurship.",
+      "specialties": ["Contemporary Cairo", "Design studios", "Women-led businesses", "Cafés & galleries", "Market navigation"],
+      "bio": "Sara curates Cairo through its creative subcultures—makers, illustrators, textile revivals, and café labs. She threads historic districts with new creative hubs, explaining how craft lineages survive and adapt. Her tours feel like a residency: you meet people behind the storefronts and leave with favorite addresses. She’s pragmatic about safety and transport for solo travelers.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Cultural Mediation & Ethics", "First Aid (Red Crescent)"],
+      "video_persona": "https://videos.example.com/persona/sara_atef.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Introduced us to artisans we’d never find alone.",
+        "Balanced history with living culture—loved it."
+      ],
+      "highlight_tours": ["Downtown Art & Coffee Circuit", "Coptic Cairo & Crafts", "Giza Essentials + Local Lunch"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Mona Mohamed",
+    "age": 23,
+    "phone": "+20 101 832 5332",
+    "languages": ["Chinese"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_6.jpg",
+    "portfolio": {
+      "experience": "Mandarin-speaking guide building bridges for first-time visitors from East Asia.",
+      "specialties": ["Mandarin interpretation", "Museum narration in CN", "Shopping assistance", "Family itineraries", "Cuisine discovery"],
+      "bio": "Mona studied Chinese linguistics and uses clear, friendly Mandarin that puts guests at ease. She explains ticketing and tipping culture transparently and shares food tips that respect dietary preferences. Her routes emphasize comfort—rest stops, shaded viewpoints, and smart pacing—without compromising on signature sites. She’s patient, upbeat, and detail-oriented.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "HSK 6", "Intercultural Facilitation"],
+      "video_persona": "https://videos.example.com/persona/mona_mohamed.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Professional and thoughtful; my parents felt very comfortable.",
+        "Clear Mandarin explanations and great photo spots."
+      ],
+      "highlight_tours": ["Giza & Sphinx (CN narration)", "Egyptian Museum Highlights (CN)", "Khan El-Khalili Shopping Assist"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Omar Essam",
+    "age": 24,
+    "phone": "+20 112 351 0409",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_10.jpg",
+    "portfolio": {
+      "experience": "English guide focused on first-timers, smart pacing, and iconic photo setups.",
+      "specialties": ["First-timer essentials", "Photography guidance", "Evening Cairo", "Market navigation", "Museum basics"],
+      "bio": "Omar’s tours prioritize clarity and comfort. He front-loads context so sites ‘click’ upon arrival, then leaves space for awe and photos. He keeps a library of vantage points for crowd-free shots and knows when to pivot if lines swell. Guests describe him as organized, good-humored, and unflappable.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "First Aid & CPR", "Tour Risk Assessment"],
+      "video_persona": "https://videos.example.com/persona/omar_essam.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "He anticipated every question before we asked.",
+        "Best trip photos of our vacation, hands down."
+      ],
+      "highlight_tours": ["Giza Sunrise & Museum Express", "Islamic Cairo by Night", "Cairo Markets 101"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Fatma Abdelmonem",
+    "age": 31,
+    "phone": "+20 109 593 5324",
+    "languages": ["Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_7.jpg",
+    "portfolio": {
+      "experience": "Spanish-speaking guide with a literature background and love for storytelling.",
+      "specialties": ["Narrative history", "Culinary discovery", "Women’s history", "Bazaar etiquette", "Museum interpretation"],
+      "bio": "Fatma tells Egypt’s story through voices often missing from the canon—craftswomen, travelers, and chroniclers. Her tours are anchored by sensory details: spices, music, textiles. She adjusts tempo for multi-generational groups and coaches guests on bargaining that respects artisans. People remember her for turning plazas into open-air libraries.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE C1 (Spanish)", "Cultural Heritage Interpretation"],
+      "video_persona": "https://videos.example.com/persona/fatma_abdelmonem.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Her stories made every stone feel alive.",
+        "Learned how to shop respectfully and confidently."
+      ],
+      "highlight_tours": ["Giza & Sphinx en Español", "Barrio Copto & Mezquitas", "Sabores de El Cairo – Ruta Gastronómica"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Ehab Khaled",
+    "age": 22,
+    "phone": "+20 150 001 1321",
+    "languages": ["Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_13.jpg",
+    "portfolio": {
+      "experience": "Early-career Spanish guide focusing on student and backpacker segments.",
+      "specialties": ["Budget smart-routing", "Transit & metro", "Youth groups", "Street food", "Historic highlights"],
+      "bio": "Ehab designs nimble itineraries for travelers who value value—yes, double value. He keeps transit intuitive, using metro and ride-hails to stretch budgets without sacrificing must-see sites. He’s upbeat, pragmatic, and quick with safety pointers and local hacks. Great for first-time Spanish-speaking visitors.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE B2 (Spanish)", "Youth Safety & Group Management"],
+      "video_persona": "https://videos.example.com/persona/ehab_khaled.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Packed so much into one day without stress.",
+        "Super helpful tips for using public transport."
+      ],
+      "highlight_tours": ["Cairo Highlights en Español", "Mercados & Comida Callejera", "Giza Rápido y Fotogénico"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Mary Labib",
+    "age": 24,
+    "phone": "+20 121 039 0906",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_12.jpg",
+    "portfolio": {
+      "experience": "English guide with interest in sacred sites and music culture.",
+      "specialties": ["Coptic & Islamic heritage", "Choir & liturgy", "Hidden chapels", "Museum highlights", "Family groups"],
+      "bio": "Mary’s routes are contemplative without being solemn. She balances theological context with human stories—pilgrims, scholars, and everyday worshippers. Between churches and mosques, she weaves in music history and contemporary practice. Her groups appreciate her grace under pressure and her talent for making silence part of the itinerary.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Cultural Sensitivity & Mediation", "First Aid (Red Crescent)"],
+      "video_persona": "https://videos.example.com/persona/mary_labib.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Thoughtful, respectful, and deeply knowledgeable.",
+        "She found quiet corners I’d never have noticed."
+      ],
+      "highlight_tours": ["Old Cairo Sacred Path", "Museum of Coptic Art Focus", "City of a Thousand Minarets Walk"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Engy Omar",
+    "age": 23,
+    "phone": "+20 114 521 4177",
+    "languages": ["Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_14.jpg",
+    "portfolio": {
+      "experience": "Spanish-speaking guide passionate about contemporary neighborhoods and markets.",
+      "specialties": ["Neighborhood walks", "Women-led initiatives", "Local cafés", "Hidden viewpoints", "Museum intro tours"],
+      "bio": "Engy brings a gentle, curious energy to every group. She uses markets as living classrooms—for language, customs, and micro-economies. Her itineraries are perfect for travelers who want equal parts headline sites and neighborhood texture. Expect good coffee, good company, and great pacing.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE C1 (Spanish)", "Safeguarding & Ethics"],
+      "video_persona": "https://videos.example.com/persona/engy_omar.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Felt like walking with a friend who knows everyone.",
+        "Balanced big sites with cozy local stops."
+      ],
+      "highlight_tours": ["Paseo por El Cairo Vecinal", "Giza & Saqqara Esenciales", "Museo Egipcio Express"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Mohamed Alaa",
+    "age": 25,
+    "phone": "+20 114 922 5059",
+    "languages": ["Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_15.jpg",
+    "portfolio": {
+      "experience": "Spanish guide focused on classic archaeology with crisp, visual storytelling.",
+      "specialties": ["Pyramids & necropolises", "Museum mapping", "Archaeological context", "Evening city walks", "Logistics optimization"],
+      "bio": "Mohamed loves diagrams and ground plans, and it shows. He simplifies complex time periods into memory-friendly narratives, then ties artifacts to architectural moments on site. His groups appreciate the clarity, the pacing, and the neatly planned break stops.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE C1 (Spanish)", "Emergency Response Basics"],
+      "video_persona": "https://videos.example.com/persona/mohamed_alaa.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Crystal-clear explanations and perfect timing at viewpoints.",
+        "We finally understood Old, Middle, and New Kingdoms!"
+      ],
+      "highlight_tours": ["Giza + Saqqara Arqueología Viva", "Museo Egipcio Estructurado", "Cairo Nocturno a Pie"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Mai Mohamed",
+    "age": 43,
+    "phone": "+20 100 381 3802",
+    "languages": ["French"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_16.jpg",
+    "portfolio": {
+      "experience": "French-language expert with premium small-group curation.",
+      "specialties": ["Boutique itineraries", "Art & antiques", "Gastronomy", "Historical salons", "Museum salons privés"],
+      "bio": "Mai tailors refined experiences for Francophone travelers who appreciate nuance. She balances grand monuments with ateliers, salons, and chef-led tastings. Her commentary moves gracefully between archaeology and aesthetics, always attentive to guest comfort and rhythm. Think quiet courtyards, great coffee, and doors that seem to open just for you.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DALF C2 (French)", "Hospitality & Protocol"],
+      "video_persona": "https://videos.example.com/persona/mai_mohamed.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "D’une élégance rare, et d’une précision impeccable.",
+        "Des adresses confidentielles et des rencontres mémorables."
+      ],
+      "highlight_tours": ["Caire Intimiste en Français", "Musée & Antiques Curated", "Giza Prestige & Sunset"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Mostafa Hassan",
+    "age": 45,
+    "phone": "+20 109 661 9210",
+    "languages": ["Chinese"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_17.jpg",
+    "portfolio": {
+      "experience": "Veteran Mandarin guide with deep partner network for groups and MICE.",
+      "specialties": ["Large group coordination", "MICE logistics", "Museum interpretation (CN)", "Shopping & VAT guidance", "Airport VIP handling"],
+      "bio": "Mostafa has shepherded thousands of guests through Egypt with calm precision. He knows when to split groups, where to stage buses, and how to keep timing predictable without losing spontaneity. His Mandarin is clear and confident, and he preps guests with cultural tips that smooth every interaction. Ideal for agencies and multi-coach tours.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "HSK 6", "Event Safety & Crowd Management"],
+      "video_persona": "https://videos.example.com/persona/mostafa_hassan.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "组织有序，讲解到位，体验顺畅。",
+        "处理大团队非常专业，沟通顺利。"
+      ],
+      "highlight_tours": ["开罗金字塔经典线路（中文）", "埃及博物馆深度讲解（中文）", "卢克索阿斯旺行程协调"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Saeed Abou El Dahab",
+    "age": null,
+    "phone": "+20 111 299 5329",
+    "languages": ["German"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg",
+    "portfolio": {
+      "experience": "German-speaking guide with focus on inscriptions and desert monastery routes.",
+      "specialties": ["Epigraphy basics", "Monastic heritage", "Oases routes", "Archaeological context", "Slow travel"],
+      "bio": "Saeed favors fewer sites, deeper dives. He teaches guests to ‘read’ walls, tracing royal propaganda and daily life across reliefs. His itineraries make space for silence, shade, and reflection—particularly around monasteries and desert hermitages. Travelers who enjoy scholarly curiosity love his pace.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "German C1 Proficiency", "Field Safety & Heat Awareness"],
+      "video_persona": "https://videos.example.com/persona/saeed_abou_el_dahab.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "We finally understood why iconography matters.",
+        "Measured, insightful, and quietly funny."
+      ],
+      "highlight_tours": ["Saqqara Reliefs & Inscriptions", "Wadi Natrun Monasteries", "Fayoum Slow Day"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Ebtihal Ashraf",
+    "age": 21,
+    "phone": "+20 128 447 0427",
+    "languages": ["Chinese"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_18.jpg",
+    "portfolio": {
+      "experience": "Up-and-coming Mandarin guide for small groups and first-time visitors.",
+      "specialties": ["CN narration", "Student groups", "Photo spots", "Café culture", "Market shopping help"],
+      "bio": "Ebtihal’s tours are friendly, structured, and photogenic. She sets clear expectations in Mandarin, offers gentle bargaining guidance, and keeps rest stops thoughtful. She’s great for families, exchange students, and travelers who want guidance without pressure.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "HSK 5", "First Aid (Red Crescent)"],
+      "video_persona": "https://videos.example.com/persona/ebtihal_ashraf.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "中文沟通无障碍，服务细致。",
+        "她推荐的小店很有特色。"
+      ],
+      "highlight_tours": ["金字塔与狮身人面像（中文）", "老开罗步行线路（中文）", "汗·哈利利市场体验"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Omar Khalifa",
+    "age": 21,
+    "phone": "+20 114 242 5655",
+    "languages": ["German"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg",
+    "portfolio": {
+      "experience": "German guide with focus on photography and active sightseeing.",
+      "specialties": ["Photo walks", "Bike tours", "Street scenes", "Museum intros", "Youth groups"],
+      "bio": "Omar keeps tours kinetic and creative. He scouts angles ahead of time and helps guests think like photographers—light, leading lines, and story. His museum introductions are succinct so visitors feel empowered to explore deeper on their own timeline.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "German B2/C1 Proficiency", "Cycle Safety & First Aid"],
+      "video_persona": "https://videos.example.com/persona/omar_khalifa.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "My best Cairo photos came from his route.",
+        "Great energy and thoughtful safety briefings."
+      ],
+      "highlight_tours": ["Downtown Photo Walk (DE)", "Giza Golden Hour (DE)", "Museum Highlights Sprint (DE)"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Sherif Mohy Eldin",
+    "age": null,
+    "phone": "+20 115 106 9968",
+    "languages": ["Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_21.jpg",
+    "portfolio": {
+      "experience": "Spanish-language guide with interest in film, architecture, and urban history.",
+      "specialties": ["Cinematic Cairo", "Architecture timelines", "Historic cafés", "Museum narratives", "Evening strolls"],
+      "bio": "Sherif frames the city like a director—establishing shots, character arcs, and surprise reveals. He links Art Deco facades to political currents and cinema landmarks. Groups appreciate his clear Spanish and his knack for opening doors to old cafés with long memories.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE C1 (Spanish)", "Heritage Interpretation"],
+      "video_persona": "https://videos.example.com/persona/sherif_mohy_eldin.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Una mirada cinematográfica de la ciudad—preciosa.",
+        "Rutas bien pensadas y conversaciones inteligentes."
+      ],
+      "highlight_tours": ["El Cairo Cinematográfico", "Arquitectura del Centro", "Giza Clásico al Atardecer"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "David Ayman",
+    "age": 24,
+    "phone": "+20 127 135 7912",
+    "languages": ["English"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_23.jpg",
+    "portfolio": {
+      "experience": "English guide for small groups, faith sites, and people-centric storytelling.",
+      "specialties": ["Sacred sites", "Neighborhood stories", "Food & faith", "Museum intros", "Market etiquette"],
+      "bio": "David focuses on the human texture of place—pilgrims’ routes, shopkeepers’ lineages, and the quiet corners locals love. He balances must-see monuments with serendipity: a bakery with ancient techniques, a courtyard with perfect acoustics. Guests describe his style as warm, attentive, and quietly witty.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Cultural Sensitivity & Mediation", "First Aid (Red Crescent)"],
+      "video_persona": "https://videos.example.com/persona/david_ayman.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Felt cared for and seen as individuals.",
+        "He made room for reflection without losing momentum."
+      ],
+      "highlight_tours": ["Old Cairo Faith & Food", "Giza Essentials + Camel Farm Visit", "Museum Highlights for First-Timers"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Rowan Tarek",
+    "age": 24,
+    "phone": "+20 121 120 2868",
+    "languages": ["Turkish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_20.jpg",
+    "portfolio": {
+      "experience": "Turkish-language guide building Egypt–Anatolia cultural bridges.",
+      "specialties": ["Ottoman heritage", "Bazaar navigation", "Family groups", "Museum highlights", "Cuisine crossovers"],
+      "bio": "Rowan crafts intuitive itineraries for Turkish guests, leaning into shared culinary and artistic threads. She’s transparent about pricing and etiquette, which lowers stress around shopping and tipping. Her commentary keeps the big picture in view without losing charming details.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Turkish C1 Proficiency", "First Aid & Group Care"],
+      "video_persona": "https://videos.example.com/persona/rowan_tarek.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Türkçe anlatımı akıcı ve çok netti.",
+        "Ailece çok rahat ettik, planlama harikaydı."
+      ],
+      "highlight_tours": ["Kahire Özet Türkçe", "Giza & Sfenks Türkçe", "Pazarlar ve Lezzetler Rotası"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Ahmed Mimi",
+    "age": 23,
+    "phone": "+20 112 185 9166",
+    "languages": ["English", "Spanish"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_25.jpg",
+    "portfolio": {
+      "experience": "Bilingual guide for active travelers and quick-turn highlights.",
+      "specialties": ["Speed itineraries", "Photo spots", "Market hops", "Street food", "Transit smart-routing"],
+      "bio": "Ahmed is a logistics whisperer. He strings together headline sites with minimal wait time and maximum wow. He handles bilingual groups smoothly and keeps energy high without sacrificing safety. Perfect for short layovers and weekenders.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "DELE B2 (Spanish)", "First Aid & CPR"],
+      "video_persona": "https://videos.example.com/persona/ahmed_mimi.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Two days, zero stress, all the icons.",
+        "Balanced English and Spanish effortlessly."
+      ],
+      "highlight_tours": ["48-Hour Cairo Power Tour", "Giza Golden Hour + Bazaar", "Downtown Bites & Sights"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Fatma Nader",
+    "age": 21,
+    "phone": "+20 103 067 7411",
+    "languages": ["Chinese"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_26.jpg",
+    "portfolio": {
+      "experience": "Mandarin guide focused on museum clarity and shopping assistance.",
+      "specialties": ["CN narration", "Museum routes", "Market etiquette", "Tea & sweets", "Family groups"],
+      "bio": "Fatma delivers concise, well-structured Mandarin commentary, ideal for first-time museum visitors. She pilots guests through ticketing, rest stops, and photo timing with care. Her gentle manner makes families and seniors feel secure and unhurried.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "HSK 5", "Guest Care & Accessibility"],
+      "video_persona": "https://videos.example.com/persona/fatma_nader.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "讲解清晰，行程舒适。",
+        "贴心安排，购物建议很实用。"
+      ],
+      "highlight_tours": ["博物馆中文精华游", "金字塔中文经典线", "开罗老城与市场（中文）"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Noha Mohamed",
+    "age": 26,
+    "phone": "+20 128 822 7789",
+    "languages": ["Chinese"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_28.jpg",
+    "portfolio": {
+      "experience": "Mandarin-speaking guide with foodie focus and curated shopping.",
+      "specialties": ["Culinary tours", "Tea houses", "Artisanal crafts", "Museum intros", "Photo routes"],
+      "bio": "Noha treats the city as a tasting menu. From sesame halva to mint tea on breezy rooftops, she pairs bites with stories and historical context. She keeps groups small to protect quality and ensures vendors are fairly compensated.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "HSK 6", "Food Safety & Hygiene"],
+      "video_persona": "https://videos.example.com/persona/noha_mohamed.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "吃得好，学得多，拍得美。",
+        "她的美食和购物路线非常靠谱。"
+      ],
+      "highlight_tours": ["开罗美食步行（中文）", "金字塔与博物馆精华（中文）", "手工艺与茶文化体验"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Ahmed Nabawy",
+    "age": 35,
+    "phone": "+20 106 588 8220",
+    "languages": ["Italian"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_30.jpg",
+    "portfolio": {
+      "experience": "Italian-language specialist with archaeology and gastronomy angles.",
+      "specialties": ["Archeologia classica", "Cucina locale", "Mercati storici", "Musei strutturati", "Tour privati"],
+      "bio": "Ahmed parla un italiano limpido e ama collegare siti e sapori. I suoi percorsi intrecciano piramidi e botteghe, tombe e tazzine di caffè, offrendo un ritmo elegante e rilassato. Ottimo per coppie e piccoli gruppi esigenti.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "CILS C1 (Italiano)", "Hospitality & Protocol"],
+      "video_persona": "https://videos.example.com/persona/ahmed_nabawy.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Spiegazioni chiare e puntuali, ottimi consigli gastronomici.",
+        "Itinerario ben calibrato e senza code."
+      ],
+      "highlight_tours": ["Giza & Saqqara in Italiano", "Museo Egizio Percorso Guidato", "Cairo Gourmet Passeggiata"],
+      "availability": "Available on request"
+    }
+  },
+  {
+    "name": "Nancy Mohamed",
+    "age": 22,
+    "phone": "+20 101 755 1746",
+    "languages": ["Czech"],
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_32.jpg",
+    "portfolio": {
+      "experience": "Czech-language guide supporting first-time visitors and student groups.",
+      "specialties": ["Česky výklad", "Studentské zájezdy", "Trhy & jídlo", "Muzejní okruhy", "Fotopointy"],
+      "bio": "Nancy překládá Egypt do češtiny s lehkostí a úsměvem. Šikovně vysvětluje praktika—spropitné, smlouvání, vstupy—aby se hosté cítili jistě. Má smysl pro tempo a krátké pauzy, takže i horký den je příjemný a přehledný.",
+      "certifications": ["Licensed Tour Guide – Ministry of Tourism", "Czech C1 Proficiency", "First Aid & Group Safety"],
+      "video_persona": "https://videos.example.com/persona/nancy_mohamed.mp4"
+    },
+    "engagement": {
+      "reviews": [
+        "Skvělé tempo a jasné informace.",
+        "Dostali jsme tipy, které nám ušetřily čas i peníze."
+      ],
+      "highlight_tours": ["Káhira Základní okruh (CZ)", "Gíza & Sfinga (CZ)", "Trhy a chutě Káhiry (CZ)"],
+      "availability": "Available on request"
+    }
+  }
 ]

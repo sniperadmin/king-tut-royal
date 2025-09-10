@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('@/pages/TourLeaders.vue')
     },
     {
+      path: '/tour-leaders/:slug',
+      name: 'TourLeaderDetails',
+      component: () => import('@/pages/TourLeaderPortfolio.vue')
+    },
+    {
       path: '/packages/:packageName',
       name: 'PackageDetails',
       component: () => import('@/pages/PackageDetails.vue')
