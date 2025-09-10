@@ -27,7 +27,7 @@ export const PACKAGES: PackageData[] = [
     title: "King Tut Royal VIP",
     price: "€3,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
-    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/royal-vip.webp",
+    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
     icon: 'Crown',
 
     highlights: [
@@ -65,9 +65,9 @@ export const PACKAGES: PackageData[] = [
       benefits: "Private archaeologist-led museum experience\nHand-crafted King Tut perfume souvenir\nLuxury transport & guided services throughout\nCurated cultural experiences blending heritage with modern luxury",
       booking: "Price: €3,900 per person\nSecure your journey with a 30% deposit\nBalance payable before arrival\nExtremely limited availability — reserve early",
       images: [
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/royal-vip.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pyramids.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/cover.webp"
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/cover.webp"
       ]
     }
   },
@@ -75,7 +75,7 @@ export const PACKAGES: PackageData[] = [
     title: "King Tut VIP One Day",
     price: "€900",
     duration: "1 Day (Any Day)",
-    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/vip-h.webp",
+    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
     highlights: [
       'Private guided tour of Giza Pyramids & Sphinx',
       'Entry to the Grand Egyptian Museum',
@@ -103,9 +103,9 @@ export const PACKAGES: PackageData[] = [
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
       booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/vip-h.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pyramids.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pack.webp"
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pack.webp"
       ]
     }
   }

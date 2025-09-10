@@ -7,13 +7,41 @@
       <div v-if="packageDetails" class="space-y-8">
         <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-white mb-3">Gallery</h3>
-          <div class="relative w-full h-80 overflow-hidden rounded-lg mb-4 bg-gray-600">
-            <img :src="packageDetails.details.images[currentImageIndex]" alt="Package Image" class="w-full h-full object-contain transition-opacity duration-300" fetchpriority="high" loading="eager" decoding="async" width="800" height="600" />
+          <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
+            <img
+              :src="packageDetails.details.images[currentImageIndex]"
+              :srcset="`
+                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-412w.webp')} 412w,
+                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-853w.webp')} 853w
+              `"
+              sizes="(max-width: 768px) 412px, 853px"
+              alt="Package Image"
+              class="w-full h-full object-contain transition-opacity duration-300 max-h-52 sm:max-h-60 md:max-h-80"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="600"
+            />
             <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full ml-2">&lt;</button>
             <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full mr-2">&gt;</button>
           </div>
-          <div class="flex justify-center space-x-2">
-            <img v-for="(img, idx) in packageDetails.details.images" :key="idx" :src="img" @click="setCurrentImage(idx)" :class="{'border-2 border-yellow-400': idx === currentImageIndex}" class="w-20 h-16 object-cover rounded-lg cursor-pointer" width="80" height="64" />
+          <div class="flex justify-center space-x-2 overflow-x-auto p-1 max-w-full">
+            <img
+              v-for="(img, idx) in packageDetails.details.images"
+              :key="idx"
+              :src="img"
+              :srcset="`
+                ${img.replace('.webp', '-412w.webp')} 412w,
+                ${img.replace('.webp', '-853w.webp')} 853w
+              `"
+              sizes="(max-width: 768px) 412px, 853px"
+              @click="setCurrentImage(idx)"
+              :class="{'border-2 border-yellow-400': idx === currentImageIndex}"
+              class="w-20 h-16 object-contain rounded-lg cursor-pointer flex-shrink-0"
+              width="80"
+              height="64"
+            />
           </div>
         </div>
 

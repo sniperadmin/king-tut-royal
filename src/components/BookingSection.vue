@@ -77,7 +77,7 @@
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="phone" class="text-white">Phone *</Label>
-                <VueTelInput
+                <PhoneInput
                   id="phone"
                   v-model="formData.phone"
                   mode="international"
@@ -186,8 +186,8 @@ import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
 import { PACKAGE_PRICING } from '@/composables/packagesData'
-import {VueTelInput} from 'vue-tel-input'
-import 'vue-tel-input/vue-tel-input.css'
+
+const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
 
 const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
 const CardHeader = defineAsyncComponent(() => import('@/components/ui/card-header.vue'))

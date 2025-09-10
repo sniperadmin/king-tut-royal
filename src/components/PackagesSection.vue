@@ -16,6 +16,8 @@
           :price="pkg.price"
           :duration="pkg.duration"
           :image="pkg.image"
+          :image_412w="pkg.image_412w"
+          :image_853w="pkg.image_853w"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
           :onBookNowClick="scrollToBooking"

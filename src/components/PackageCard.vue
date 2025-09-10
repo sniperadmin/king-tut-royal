@@ -6,13 +6,11 @@
       <img
         :src="image"
         :srcset="imageSrcset"
-        sizes="(max-width: 600px) 600px, 400px"
+        :sizes="imageSizes"
         :alt="title + ' thumbnail'"
         loading="lazy"
         decoding="async"
         class="mx-auto rounded-t-lg drop-shadow"
-        width="800"
-        height="294"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full">
         Popular
@@ -68,6 +66,8 @@ interface PackageCardProps {
   price: string;
   duration: string;
   image: string;
+  imageSrcset: string;
+  imageSizes: string;
   highlights: string[];
   isPopular?: boolean;
   onBookNowClick: () => void;
@@ -90,7 +90,8 @@ const LucideIcon = computed(() => {
   return iconMap[props.icon] || CircleAlert;
 });
 
-const imageSrcset = computed(() => {
-  return `${props.image} 400w, ${props.image} 800w`;
-});
+// No longer needed as imageSrcset is passed directly via props
+// const imageSrcset = computed(() => {
+//   return `${props.image_412w} 412w, ${props.image_853w} 853w`;
+// });
 </script>

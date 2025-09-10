@@ -15,7 +15,7 @@
           <img
             :src="mediaItems[currentSlide].src"
             :alt="mediaItems[currentSlide].title"
-            :srcset="`${mediaItems[currentSlide].src} 412w, ${mediaItems[currentSlide].src} 853w`"
+            :srcset="`${mediaItems[currentSlide].src_412w} 412w, ${mediaItems[currentSlide].src_853w} 853w`"
             sizes="(max-width: 640px) 412px, 853px"
             class="w-full h-full object-contain transition-all duration-500"
           />
@@ -145,48 +145,64 @@ const mediaItems = [
   {
     id: 0,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip-853w.webp",
     title: "VIP Experience",
     description: "Exclusive access and personalized service"
   },
   {
     id: 1,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury-853w.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 2,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills-853w.webp",
     title: "Luxury Travel",
     description: "Unforgettable journeys with unparalleled comfort"
   },
   {
     id: 3,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile-853w.webp",
     title: "Core Services",
     description: "Luxury accommodations and premium experiences"
   },
   {
     id: 4,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services-853w.webp",
     title: "Digital Experience",
     description: "AR-enhanced tours and mobile concierge"
   },
   {
     id: 5,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner-853w.webp",
     title: "Royal Dinner on the Nile",
     description: "Exclusive dining experiences with ancient Egyptian ambiance"
   },
   {
     id: 6,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-853w.webp",
     title: "King Tut Royal Collection",
     description: "Limited edition luxury items inspired by pharaonic treasures"
   },
   {
     id: 7,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao-853w.webp",
     title: "VIP Experience Package",
     description: "Premium access and personalized Egyptian adventure"
   }
