@@ -16,6 +16,8 @@
             :src="mediaItems[currentSlide].src"
             :alt="mediaItems[currentSlide].title"
             class="w-full h-full object-contain transition-all duration-500"
+            loading="lazy"
+            decoding="async"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
 
@@ -75,6 +77,8 @@
         :src="mediaItems[modalImageIndex].src"
         :alt="mediaItems[modalImageIndex].title"
         class="max-w-full max-h-full object-contain rounded-lg"
+        loading="lazy"
+        decoding="async"
       />
 
       <Button

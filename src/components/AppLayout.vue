@@ -18,12 +18,14 @@
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import Navigation from './Navigation.vue'
 import HeroSection from './HeroSection.vue'
-import MediaSliderSection from './MediaSliderSection.vue'
-import PackagesSection from './PackagesSection.vue'
-import VideoSection from './sections/VideoSection.vue'
-import WhyChooseSection from './WhyChooseSection.vue'
-import BookingSection from './BookingSection.vue'
-import Footer from './Footer.vue'
+
+const MediaSliderSection = defineAsyncComponent(() => import('./MediaSliderSection.vue'))
+const PackagesSection = defineAsyncComponent(() => import('./PackagesSection.vue'))
+const VideoSection = defineAsyncComponent(() => import('./sections/VideoSectionOptimized.vue'))
+const WhyChooseSection = defineAsyncComponent(() => import('./WhyChooseSection.vue'))
+const BookingSection = defineAsyncComponent(() => import('./BookingSection.vue'))
+const Footer = defineAsyncComponent(() => import('./Footer.vue'))
 </script>

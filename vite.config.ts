@@ -24,4 +24,21 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          ui: ['@tanstack/vue-query', 'radix-vue', 'lucide-vue-next'],
+          video: ['vidstack', 'hls.js'],
+          forms: ['vee-validate', 'zod', 'vue-tel-input']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
+    sourcemap: false
+  },
+  optimizeDeps: {
+    include: ['vue', 'vue-router', '@supabase/supabase-js']
+  }
 }));

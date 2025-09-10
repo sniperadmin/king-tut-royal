@@ -6,6 +6,9 @@
         src="https://d64gsuwffb70l.cloudfront.net/68b1c96bae343289de113d06_1756568030709_0f9cfae8.jpeg"
         alt="Egyptian Pharaoh"
         class="w-full h-auto object-contain"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
       />
     </div>
   </section>

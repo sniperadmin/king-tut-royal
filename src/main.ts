@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router'
 import './index.css'
 
-// Create Vue Query client
+// Create Vue Query client with optimized settings
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -12,7 +12,12 @@ const queryClient = new QueryClient({
       gcTime: 1000 * 60 * 10, // 10 minutes
       retry: 1,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      networkMode: 'online',
     },
+    mutations: {
+      networkMode: 'online',
+    }
   },
 })
 
@@ -22,4 +27,9 @@ const app = createApp(App)
 app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 
-app.mount('#root')
+// Mount when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => app.mount('#root'))
+} else {
+  app.mount('#root')
+}
