@@ -34,6 +34,10 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          ui: ['@tanstack/vue-query', 'lucide-vue-next'],
+          video: ['vidstack', 'hls.js'],
+          forms: ['vee-validate', 'zod', 'vue-tel-input'],
           heroSection: [
             './src/components/HeroSection.vue'
           ],

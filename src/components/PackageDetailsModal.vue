@@ -7,12 +7,12 @@
       <div v-if="package.details.images && package.details.images.length > 0" class="mb-8">
         <h3 class="text-2xl font-semibold text-white mb-3">Gallery</h3>
         <div class="relative w-full h-80 overflow-hidden rounded-lg mb-4 bg-gray-600">
-          <img :src="package.details.images[currentImageIndex]" alt="Package Image" class="w-full h-full object-contain transition-opacity duration-300" fetchpriority="high" loading="eager" decoding="async" width="800" height="600" />
+          <img :src="package.details.images[currentImageIndex]" alt="Package Image" class="w-full h-full object-contain transition-opacity duration-300" loading="lazy" decoding="async" width="800" height="600" />
           <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full ml-2">&lt;</button>
           <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full mr-2">&gt;</button>
         </div>
         <div class="flex justify-center space-x-2">
-          <img v-for="(img, idx) in package.details.images" :key="idx" :src="img" @click="setCurrentImage(idx)" :class="{'border-2 border-yellow-400': idx === currentImageIndex}" class="w-20 h-16 object-cover rounded-lg cursor-pointer" width="80" height="64" />
+          <img v-for="(img, idx) in package.details.images" :key="idx" :src="img" @click="setCurrentImage(idx)" :class="{'border-2 border-yellow-400': idx === currentImageIndex}" class="w-20 h-16 object-cover rounded-lg cursor-pointer" loading="lazy" width="80" height="64" />
         </div>
       </div>
 

@@ -26,9 +26,9 @@
         <div>
           <h4 class="text-lg font-semibold text-amber-400 mb-4">Quick Links</h4>
           <ul class="space-y-2" aria-label="Quick Links">
-            <li><button @click="smoothScroll('packages')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Packages section link">Packages</button></li>
-            <li><button @click="smoothScroll('why-us')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</button></li>
-            <li><button @click="smoothScroll('booking')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Inquiry section link">Inquiry</button></li>
+            <li><button @click="scrollToSection('packages')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Packages section link">Packages</button></li>
+            <li><button @click="scrollToSection('why-us')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</button></li>
+            <li><button @click="scrollToSection('booking')" class="text-gray-300 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-transparent border-none p-0 transition-colors" aria-label="Inquiry section link">Inquiry</button></li>
           </ul>
         </div>
 
@@ -88,10 +88,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 import { Facebook, Instagram, Youtube } from 'lucide-vue-next';
 import PrivacyPolicy from './PrivacyPolicy.vue';
 import { smoothScroll } from '../utils/smoothScroll';
+import { useRouter } from 'vue-router';
 
 const showPrivacyPolicy = ref(false);
+
+const router = useRouter();
+
+const headerHeight = () => {
+  const nav = typeof document !== 'undefined' ? document.querySelector('nav') : null;
+  return nav ? (nav as HTMLElement).offsetHeight : 64;
+};
+
+const scrollToSection = (id: string) => {
+  const pushToHomeWithQuery = (scrollId: string) => router.push({ path: '/', query: { scroll: scrollId } })
+  if (router.currentRoute.value.path !== '/') {
+    // When navigating from another route, include the scroll target in the query so the destination can handle lazy-mounted sections.
+    if (id === 'booking') {
+      pushToHomeWithQuery(id).then(() => {
+        // booking handled via query on the home page; no immediate scroll from footer
+      })
+    } else {
+      pushToHomeWithQuery(id).then(() => {
+        nextTick(() => {
+          smoothScroll(id, { offset: headerHeight() });
+        });
+      });
+    }
+  } else {
+    nextTick(() => {
+      smoothScroll(id, { offset: headerHeight() });
+    });
+  }
+};
 </script>

@@ -18,6 +18,7 @@
           :image="pkg.image"
           :image_412w="pkg.image_412w"
           :image_853w="pkg.image_853w"
+          :image-srcset="pkg.imageSrcset ?? (pkg.image_412w && pkg.image_853w ? `${pkg.image_412w} 412w, ${pkg.image_853w} 853w` : '')"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
           :onBookNowClick="scrollToBooking"

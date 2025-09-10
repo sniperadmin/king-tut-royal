@@ -5,7 +5,7 @@
     <div class="relative overflow-hidden bg-gray-600">
       <img
         :src="image"
-        :srcset="imageSrcset"
+        :srcset="computedImageSrcset"
         :sizes="imageSizes"
         :alt="title + ' thumbnail'"
         loading="lazy"
@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { Crown, Star, CircleAlert } from 'lucide-vue-next';
 // Add here any other icons passed as props.icon, e.g., import { Star, Heart } from 'lucide-vue-next'
 
@@ -66,18 +66,30 @@ interface PackageCardProps {
   price: string;
   duration: string;
   image: string;
-  imageSrcset: string;
-  imageSizes: string;
+  imageSrcset?: string;
+  imageSizes?: string;
   highlights: string[];
   isPopular?: boolean;
   onBookNowClick: () => void;
   packageTitleForDetails: string;
-  icon: string;
+  icon?: string;
 }
 
-const props = withDefaults(defineProps<PackageCardProps>(), {
-  isPopular: false,
-});
+const props = defineProps({
+  title: { type: String, required: true },
+  price: { type: String, required: true },
+  duration: { type: String, required: true },
+  image: { type: String, required: true },
+  imageSrcset: { type: String, required: false, default: '' },
+  image_412w: { type: String, required: false, default: '' },
+  image_853w: { type: String, required: false, default: '' },
+  imageSizes: { type: String, default: '100vw' },
+  highlights: { type: Array as PropType<string[]>, required: true },
+  isPopular: { type: Boolean, default: false },
+  onBookNowClick: { type: Function as PropType<() => void>, required: true },
+  packageTitleForDetails: { type: String, required: true },
+  icon: { type: String, default: 'CircleAlert' },
+} as const);
 
 const LucideIcon = computed(() => {
   // Map possible icon strings to components
@@ -90,8 +102,11 @@ const LucideIcon = computed(() => {
   return iconMap[props.icon] || CircleAlert;
 });
 
-// No longer needed as imageSrcset is passed directly via props
-// const imageSrcset = computed(() => {
-//   return `${props.image_412w} 412w, ${props.image_853w} 853w`;
-// });
+const computedImageSrcset = computed(() => {
+  if (props.imageSrcset) return props.imageSrcset;
+  if (props.image_412w && props.image_853w) {
+    return `${props.image_412w} 412w, ${props.image_853w} 853w`;
+  }
+  return '';
+});
 </script>

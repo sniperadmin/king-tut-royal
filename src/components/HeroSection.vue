@@ -12,9 +12,10 @@
           class="w-full h-auto object-cover object-center bg-gray-200"
           fetchpriority="high"
           decoding="async"
-          loading="lazy"
+          loading="eager"
           width="853"
           height="1280"
+          crossorigin="anonymous"
         />
       </picture>
     </div>
