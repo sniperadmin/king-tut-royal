@@ -39,12 +39,12 @@
       </div>
 
       <div class="mt-auto space-y-3">
-        <button
-          @click="onViewDetailsClick"
-          class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
+        <router-link
+          :to="`/packages/${packageTitleForDetails.toLowerCase().replace(/ /g, '-')}`"
+          class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm block text-center"
         >
           View Details
-        </button>
+        </router-link>
         <button
           @click="onBookNowClick"
           class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
@@ -71,7 +71,7 @@ interface PackageCardProps {
   highlights: string[];
   isPopular?: boolean;
   onBookNowClick: () => void;
-  onViewDetailsClick: () => void;
+  packageTitleForDetails: string;
   icon: string;
 }
 

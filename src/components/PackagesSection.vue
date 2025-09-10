@@ -19,12 +19,10 @@
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
           :onBookNowClick="scrollToBooking"
-          :onViewDetailsClick="() => openModal(pkg)"
+          :packageTitleForDetails="pkg.title"
           :icon="pkg.icon"
         />
       </div>
-
-      <PackageDetailsModal :isOpen="isModalOpen" :package="selectedPackage" @close="closeModal" />
     </div>
   </section>
 </template>
@@ -35,23 +33,9 @@ import { ref, defineAsyncComponent } from 'vue'
 import { PACKAGES } from '@/composables/packagesData';
 
 const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
-const PackageDetailsModal = defineAsyncComponent(() => import('./PackageDetailsModal.vue'))
 const scrollToBooking = () => {
   smoothScroll('booking')
 }
-
-const selectedPackage = ref(null);
-const isModalOpen = ref(false);
-
-const openModal = (pkg) => {
-  selectedPackage.value = pkg;
-  isModalOpen.value = true;
-};
-
-const closeModal = () => {
-  isModalOpen.value = false;
-  selectedPackage.value = null;
-};
 
 const packages = PACKAGES;
 </script>

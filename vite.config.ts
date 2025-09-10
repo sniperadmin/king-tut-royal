@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { vite as vidstack } from 'vidstack/plugins';
 import { visualizer } from 'rollup-plugin-visualizer'
+import json5Plugin from 'vite-plugin-json5'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -20,7 +21,8 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     visualizer({ filename: 'dist/bundle-stats.html', open: true }),
-    vidstack()
+    vidstack(),
+    json5Plugin()
   ],
   resolve: {
     alias: {

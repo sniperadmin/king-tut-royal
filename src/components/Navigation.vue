@@ -12,6 +12,7 @@
           <button @click="scrollToSection('home')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Home</button>
           <button @click="scrollToSection('packages')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Packages</button>
           <button @click="scrollToSection('why-us')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
+          <router-link to="/tour-leaders" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold transition-all duration-300"
@@ -39,6 +40,7 @@
           <button @click="scrollToSection('home')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
           <button @click="scrollToSection('packages')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</button>
           <button @click="scrollToSection('experiences')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Experiences</button>
+          <router-link to="/tour-leaders" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold w-full"
@@ -54,11 +56,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { smoothScroll } from '../utils/smoothScroll'
+import { RouterLink, useRouter } from 'vue-router'
 
 const isMenuOpen = ref(false)
 
+const router = useRouter()
+
 const scrollToSection = (id: string) => {
-  smoothScroll(id)
-  isMenuOpen.value = false // Close mobile menu if open
+  if (router.currentRoute.value.path !== '/') {
+    router.push('/').then(() => {
+      smoothScroll(id)
+      isMenuOpen.value = false // Close mobile menu if open
+    })
+  } else {
+    smoothScroll(id)
+    isMenuOpen.value = false // Close mobile menu if open
+  }
 }
 </script>

@@ -67,7 +67,7 @@ export const PACKAGES: PackageData[] = [
       images: [
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/royal-vip.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pyramids.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/chills.webp"
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/cover.webp"
       ]
     }
   },
@@ -104,7 +104,7 @@ export const PACKAGES: PackageData[] = [
       booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/vip-h.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/luxury.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pyramids.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/pack.webp"
       ]
     }

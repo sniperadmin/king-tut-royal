@@ -9,6 +9,16 @@ const router = createRouter({
       component: () => import('@/pages/Index.vue')
     },
     {
+      path: '/tour-leaders',
+      name: 'TourLeaders',
+      component: () => import('@/pages/TourLeaders.vue')
+    },
+    {
+      path: '/packages/:packageName',
+      name: 'PackageDetails',
+      component: () => import('@/pages/PackageDetails.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('@/pages/NotFound.vue')

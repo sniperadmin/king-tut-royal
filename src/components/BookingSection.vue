@@ -84,7 +84,7 @@
                   :inputOptions="{ placeholder: 'Enter your phone number' }"
                   class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
                 />
-                <p v-if="!isPhoneValid" class="text-muted text-sm mt-1">Please enter a valid phone number, including country code.</p>
+                <p class="text-yellow-500 text-sm mt-1">Please enter a valid phone number, including country code.</p>
               </div>
 
               <div class="space-y-2">
@@ -186,6 +186,7 @@ import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
 import { PACKAGE_PRICING } from '@/composables/packagesData'
+import {VueTelInput} from 'vue-tel-input'
 import 'vue-tel-input/vue-tel-input.css'
 
 const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
@@ -198,7 +199,22 @@ const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
 const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
 const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryDatePicker.vue'))
 
-let VueTelInput = null
+
+const props = defineProps({
+  preselectedPackageId: {
+    type: String,
+    default: null
+  }
+});
+
+const emit = defineEmits(['loaded']);
+
+onMounted(() => {
+  emit('loaded');
+  if (props.preselectedPackageId) {
+    selectPackage(props.preselectedPackageId as 'vip' | 'oneday');
+  }
+});
 
 interface WeeklyBooking {
   id: number
@@ -416,11 +432,6 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
 
 // Lifecycle
 onMounted(async () => {
-  if (!VueTelInput) {
-    const vueTel = await import('vue-tel-input');
-    VueTelInput = vueTel.VueTelInput;
-  }
-
   await fetchAvailableWeeks()
   
   // Subscribe to realtime changes
@@ -440,6 +451,18 @@ onUnmounted(() => {
     supabase.removeChannel(channel)
   }
 })
+
+watch(
+  () => props.preselectedPackageId,
+  (newValue, oldValue) => {
+    console.log('preselectedPackageId changed:', oldValue, '->', newValue);
+    if (newValue) {
+      selectPackage(newValue as 'vip' | 'oneday');
+      console.log('formData.selectedPackage updated via watch:', formData.selectedPackage);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style>
