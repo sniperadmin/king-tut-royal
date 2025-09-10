@@ -1,42 +1,50 @@
-<!-- your-component.vue-->
+<!-- PhoneInput.vue -->
 <template>
-  <vue-tel-input
+  <VueTelInput
     v-model="internalValue"
     :mode="mode"
     :inputOptions="inputOptions"
-  ></vue-tel-input>
+  />
 </template>
-<script>
-  import { defineAsyncComponent } from 'vue';
 
-  const VueTelInput = defineAsyncComponent(() =>
-    Promise.all([
-      import('vue-tel-input'),
-      import('vue-tel-input/vue-tel-input.css'),
-    ]).then(([{ VueTelInput }]) => VueTelInput)
-  );
+<script setup>
+import { ref, watch, defineAsyncComponent } from 'vue';
 
-  export default {
-    components: {
-      VueTelInput,
-    },
-    props: {
-      modelValue: String,
-      mode: { type: String, default: 'international' },
-      inputOptions: { type: Object, default: () => ({}) }
-    },
-    data() {
-      return {
-        internalValue: this.modelValue
-      }
-    },
-    watch: {
-      modelValue(newValue) {
-        this.internalValue = newValue;
-      },
-      internalValue(newValue) {
-        this.$emit('update:modelValue', newValue);
-      }
-    }
-  };
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  mode: {
+    type: String,
+    default: 'international'
+  },
+  inputOptions: {
+    type: Object,
+    default: () => ({})
+  }
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const internalValue = ref(props.modelValue);
+
+watch(() => props.modelValue, val => {
+  if (val !== internalValue.value) {
+    internalValue.value = val;
+  }
+});
+
+watch(internalValue, val => {
+  if (val !== props.modelValue) {
+    emit('update:modelValue', val);
+  }
+});
+
+const VueTelInput = defineAsyncComponent(() =>
+  Promise.all([
+    import('vue-tel-input'),
+    import('vue-tel-input/vue-tel-input.css'),
+  ]).then(([{ VueTelInput }]) => VueTelInput)
+);
 </script>

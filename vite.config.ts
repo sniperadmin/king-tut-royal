@@ -5,6 +5,8 @@ import { fileURLToPath } from "url";
 import { vite as vidstack } from 'vidstack/plugins';
 import { visualizer } from 'rollup-plugin-visualizer'
 import json5Plugin from 'vite-plugin-json5'
+import compression from 'vite-plugin-compression'
+import viteImagemin from 'vite-plugin-imagemin'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -20,19 +22,35 @@ export default defineConfig(({ mode }) => ({
         },
       },
     }),
-    visualizer({ filename: 'dist/bundle-stats.html', open: true }),
+    mode === 'report' && visualizer({ filename: 'dist/bundle-stats.html', open: true }),
     vidstack(),
-    json5Plugin()
-  ],
+    json5Plugin(),
+    compression({ algorithm: 'brotliCompress' }),
+    viteImagemin({
+      mozjpeg: { quality: 80 },
+      pngquant: { quality: [0.7, 0.9] },
+      webp: { quality: 80 }
+    })
+  ].filter(Boolean),
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     }
   },
+  optimizeDeps: {
+    include: ['@tanstack/vue-query', 'vee-validate', 'hls.js']
+  },
+  define: {
+    __VUE_OPTIONS_API__: false,
+    'process.env.NODE_ENV': JSON.stringify(mode)
+  },
   build: {
     target: 'esnext',
+    sourcemap: false,
     rollupOptions: {
       output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
         manualChunks: {
           vendor: ['vue', 'vue-router'],
           ui: ['@tanstack/vue-query', 'lucide-vue-next'],

@@ -254,10 +254,14 @@ watch(selectedOneDayDate, (newDate) => {
   }
 })
 
-// Watch for phone input changes to sanitize
+// Watch for phone input changes to sanitize and ensure single leading plus is preserved
 watch(() => formData.phone, (newValue) => {
   if (newValue) {
-    formData.phone = newValue.replace(/[^0-9+]/g, '')
+    let cleaned = newValue.replace(/[^0-9+]/g, '')
+    const hasPlus = cleaned.includes('+')
+    // Remove all plus signs then, if any were present, prefix a single plus
+    const numeric = cleaned.replace(/\+/g, '')
+    formData.phone = hasPlus ? `+${numeric}` : numeric
   }
 })
 
@@ -324,6 +328,13 @@ const handleSubmit = async () => {
 
   if (!formData.phone.trim()) {
     alert('Please enter your phone number.')
+    return
+  }
+
+  // Require international code (must start with + and country code)
+  const phoneIntlRegex = /^\+\d{6,15}$/
+  if (!phoneIntlRegex.test(formData.phone.trim())) {
+    alert('Please provide your phone number with the international country code (e.g. +971589123456) and do not remove the + sign.')
     return
   }
 
