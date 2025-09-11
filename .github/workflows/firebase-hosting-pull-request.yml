@@ -11,11 +11,26 @@ jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
+    outputs:
+      details_url: ${{ steps.firebase_hosting_deploy.outputs.details_url }}
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - id: firebase_hosting_deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINGTUTROYAL_696EA }}
           projectId: kingtutroyal-696ea
+
+  process_preview_url:
+    needs: build_and_preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process preview URL with foo.software
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          urls: ${{ needs.build_and_preview.outputs.details_url }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}

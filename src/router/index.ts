@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/pages/Index.vue'
-import NotFound from '@/pages/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -8,12 +6,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: () => import('@/pages/Index.vue')
+    },
+    {
+      path: '/tour-leaders',
+      name: 'TourLeaders',
+      component: () => import('@/pages/TourLeaders.vue')
+    },
+    {
+      path: '/tour-leaders/:slug',
+      name: 'TourLeaderDetails',
+      component: () => import('@/pages/TourLeaderPortfolio.vue')
+    },
+    {
+      path: '/packages/:packageName',
+      name: 'PackageDetails',
+      component: () => import('@/pages/PackageDetails.vue')
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: NotFound
+      component: () => import('@/pages/NotFound.vue')
     }
   ]
 })

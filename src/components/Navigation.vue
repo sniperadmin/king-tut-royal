@@ -12,6 +12,7 @@
           <button @click="scrollToSection('home')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Home</button>
           <button @click="scrollToSection('packages')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Packages</button>
           <button @click="scrollToSection('why-us')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
+          <router-link to="/tour-leaders" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold transition-all duration-300"
@@ -38,7 +39,8 @@
         <div class="flex flex-col space-y-4">
           <button @click="scrollToSection('home')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
           <button @click="scrollToSection('packages')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</button>
-          <button @click="scrollToSection('experiences')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Experiences</button>
+          <button @click="scrollToSection('why-us')" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</button>
+          <router-link to="/tour-leaders" class="text-white hover:text-yellow-400 transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"
             class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-semibold w-full"
@@ -52,13 +54,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { smoothScroll } from '../utils/smoothScroll'
+import { RouterLink, useRouter } from 'vue-router'
 
 const isMenuOpen = ref(false)
 
+const router = useRouter()
+
+const headerHeight = () => {
+  const nav = typeof document !== 'undefined' ? document.querySelector('nav') : null
+  return nav ? (nav as HTMLElement).offsetHeight : 64
+}
+
 const scrollToSection = (id: string) => {
-  smoothScroll(id)
-  isMenuOpen.value = false // Close mobile menu if open
+  const pushToHomeWithQuery = (scrollId: string) => router.push({ path: '/', query: { scroll: scrollId } })
+  if (router.currentRoute.value.path !== '/') {
+    // When navigating from another route, include the scroll target in the query so the destination can handle lazy-mounted sections.
+    if (id === 'booking') {
+      pushToHomeWithQuery(id).then(() => {
+        isMenuOpen.value = false
+      })
+    } else {
+      pushToHomeWithQuery(id).then(() => {
+        nextTick(() => {
+          smoothScroll(id, { offset: headerHeight() })
+          isMenuOpen.value = false
+        })
+      })
+    }
+  } else {
+    nextTick(() => {
+      smoothScroll(id, { offset: headerHeight() })
+      isMenuOpen.value = false
+    })
+  }
 }
 </script>

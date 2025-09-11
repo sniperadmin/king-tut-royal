@@ -77,14 +77,14 @@
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="phone" class="text-white">Phone *</Label>
-                <VueTelInput
+                <PhoneInput
                   id="phone"
                   v-model="formData.phone"
                   mode="international"
                   :inputOptions="{ placeholder: 'Enter your phone number' }"
                   class="h-12 bg-gray-800 border-gray-600 text-white focus:border-amber-400"
                 />
-                <p v-if="!isPhoneValid" class="text-muted text-sm mt-1">Please enter a valid phone number, including country code.</p>
+                <p class="text-yellow-500 text-sm mt-1">Please enter a valid phone number, including country code.</p>
               </div>
 
               <div class="space-y-2">
@@ -181,21 +181,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted, computed, watch } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComponent } from 'vue'
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
-import Card from '@/components/ui/card.vue'
-import CardHeader from '@/components/ui/card-header.vue'
-import CardTitle from '@/components/ui/card-title.vue'
-import CardDescription from '@/components/ui/card-description.vue'
-import CardContent from '@/components/ui/card-content.vue'
-import Button from '@/components/ui/button.vue'
-import Input from '@/components/ui/input.vue'
-import Label from '@/components/ui/label.vue'
-import LuxuryDatePicker from '@/components/LuxuryDatePicker.vue'
-import { VueTelInput } from 'vue-tel-input'
-import 'vue-tel-input/vue-tel-input.css'
+import { PACKAGE_PRICING } from '@/composables/packagesData'
+
+const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
+
+const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
+const CardHeader = defineAsyncComponent(() => import('@/components/ui/card-header.vue'))
+const CardTitle = defineAsyncComponent(() => import('@/components/ui/card-title.vue'))
+const CardDescription = defineAsyncComponent(() => import('@/components/ui/card-description.vue'))
+const CardContent = defineAsyncComponent(() => import('@/components/ui/card-content.vue'))
+const Button = defineAsyncComponent(() => import('@/components/ui/button.vue'))
+const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
+const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
+const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryDatePicker.vue'))
+
+
+const props = defineProps({
+  preselectedPackageId: {
+    type: String,
+    default: null
+  }
+});
+
+const emit = defineEmits(['loaded']);
+
+onMounted(() => {
+  emit('loaded');
+  if (props.preselectedPackageId) {
+    selectPackage(props.preselectedPackageId as 'vip' | 'oneday');
+  }
+});
 
 interface WeeklyBooking {
   id: number
@@ -235,10 +254,14 @@ watch(selectedOneDayDate, (newDate) => {
   }
 })
 
-// Watch for phone input changes to sanitize
+// Watch for phone input changes to sanitize and ensure single leading plus is preserved
 watch(() => formData.phone, (newValue) => {
   if (newValue) {
-    formData.phone = newValue.replace(/[^0-9+]/g, '')
+    let cleaned = newValue.replace(/[^0-9+]/g, '')
+    const hasPlus = cleaned.includes('+')
+    // Remove all plus signs then, if any were present, prefix a single plus
+    const numeric = cleaned.replace(/\+/g, '')
+    formData.phone = hasPlus ? `+${numeric}` : numeric
   }
 })
 
@@ -286,7 +309,7 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
 }
 
 const calculateTotalPrice = (packageType: string, guests: number) => {
-  const pricePerPerson = packageType === 'vip' ? 3900 : 900
+  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0
   return pricePerPerson * guests
 }
 
@@ -305,6 +328,13 @@ const handleSubmit = async () => {
 
   if (!formData.phone.trim()) {
     alert('Please enter your phone number.')
+    return
+  }
+
+  // Require international code (must start with + and country code)
+  const phoneIntlRegex = /^\+\d{6,15}$/
+  if (!phoneIntlRegex.test(formData.phone.trim())) {
+    alert('Please provide your phone number with the international country code (e.g. +971589123456) and do not remove the + sign.')
     return
   }
 
@@ -432,45 +462,57 @@ onUnmounted(() => {
     supabase.removeChannel(channel)
   }
 })
+
+watch(
+  () => props.preselectedPackageId,
+  (newValue, oldValue) => {
+    console.log('preselectedPackageId changed:', oldValue, '->', newValue);
+    if (newValue) {
+      selectPackage(newValue as 'vip' | 'oneday');
+      console.log('formData.selectedPackage updated via watch:', formData.selectedPackage);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style>
 .vue-tel-input {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
-  border-radius: 0.375rem !important; /* rounded-md */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  border-radius: 0.375rem !important;
 }
 
 .vue-tel-input:focus-within {
-  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5) !important; /* focus:border-amber-400 with shadow */
-  border-color: #fbbf24 !important; /* focus:border-amber-400 */
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5) !important;
+  border-color: #fbbf24 !important;
 }
 
 .vue-tel-input .vti__dropdown {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
 }
 
 .vue-tel-input .vti__dropdown.open {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
 }
 
 .vue-tel-input .vti__dropdown-item {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  color: #ffffff !important; /* text-white */
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
 .vue-tel-input .vti__dropdown-item.highlighted {
-  background-color: #2d3748 !important; /* A slightly lighter gray for hover/focus */
+  background-color: #2d3748 !important;
 }
 
 .vue-tel-input .vti__input {
-  background-color: #1f2937 !important; /* bg-gray-800 */
-  border-color: #4b5563 !important; /* border-gray-600 */
-  color: #ffffff !important; /* text-white */
-  border-radius: 0.375rem !important; /* rounded-md */
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  border-radius: 0.375rem !important;
 }
 </style>
