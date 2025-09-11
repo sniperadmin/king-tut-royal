@@ -26,7 +26,7 @@
     "age": 23,
     "phone": "+20 101 832 5332",
     "languages": ["Chinese"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_6.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_2.jpg",
     "portfolio": {
       "experience": "Mandarin-speaking guide building bridges for first-time visitors from East Asia.",
       "specialties": ["Mandarin interpretation", "Museum narration in CN", "Shopping assistance", "Family itineraries", "Cuisine discovery"],
@@ -48,7 +48,7 @@
     "age": 31,
     "phone": "+20 109 593 5324",
     "languages": ["Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_7.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_3.jpg",
     "portfolio": {
       "experience": "Spanish-speaking guide with a literature background and love for storytelling.",
       "specialties": ["Narrative history", "Culinary discovery", "Women’s history", "Bazaar etiquette", "Museum interpretation"],
@@ -70,7 +70,7 @@
     "age": 24,
     "phone": "+20 121 039 0906",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_12.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_4.jpg",
     "portfolio": {
       "experience": "English guide with interest in sacred sites and music culture.",
       "specialties": ["Coptic & Islamic heritage", "Choir & liturgy", "Hidden chapels", "Museum highlights", "Family groups"],
@@ -92,7 +92,7 @@
     "age": 23,
     "phone": "+20 114 521 4177",
     "languages": ["Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_14.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_5.jpg",
     "portfolio": {
       "experience": "Spanish-speaking guide passionate about contemporary neighborhoods and markets.",
       "specialties": ["Neighborhood walks", "Women-led initiatives", "Local cafés", "Hidden viewpoints", "Museum intro tours"],
@@ -114,7 +114,7 @@
     "age": 43,
     "phone": "+20 100 381 3802",
     "languages": ["French"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_16.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_6.jpg",
     "portfolio": {
       "experience": "French-language expert with premium small-group curation.",
       "specialties": ["Boutique itineraries", "Art & antiques", "Gastronomy", "Historical salons", "Museum salons privés"],
@@ -136,7 +136,7 @@
     "age": 21,
     "phone": "+20 128 447 0427",
     "languages": ["Chinese"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_18.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_7.jpg",
     "portfolio": {
       "experience": "Up-and-coming Mandarin guide for small groups and first-time visitors.",
       "specialties": ["CN narration", "Student groups", "Photo spots", "Café culture", "Market shopping help"],
@@ -158,7 +158,7 @@
     "age": 24,
     "phone": "+20 121 120 2868",
     "languages": ["Turkish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_20.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_8.jpg",
     "portfolio": {
       "experience": "Turkish-language guide building Egypt–Anatolia cultural bridges.",
       "specialties": ["Ottoman heritage", "Bazaar navigation", "Family groups", "Museum highlights", "Cuisine crossovers"],
@@ -180,7 +180,7 @@
     "age": 21,
     "phone": "+20 103 067 7411",
     "languages": ["Chinese"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_26.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_9.jpg",
     "portfolio": {
       "experience": "Mandarin guide focused on museum clarity and shopping assistance.",
       "specialties": ["CN narration", "Museum routes", "Market etiquette", "Tea & sweets", "Family groups"],
@@ -202,7 +202,7 @@
     "age": 26,
     "phone": "+20 128 822 7789",
     "languages": ["Chinese"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_28.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_10.jpg",
     "portfolio": {
       "experience": "Mandarin-speaking guide with foodie focus and curated shopping.",
       "specialties": ["Culinary tours", "Tea houses", "Artisanal crafts", "Museum intros", "Photo routes"],
@@ -224,7 +224,7 @@
     "age": 22,
     "phone": "+20 101 755 1746",
     "languages": ["Czech"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_32.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_11.jpg",
     "portfolio": {
       "experience": "Czech-language guide supporting first-time visitors and student groups.",
       "specialties": ["Česky výklad", "Studentské zájezdy", "Trhy & jídlo", "Muzejní okruhy", "Fotopointy"],
@@ -246,7 +246,7 @@
     "age": 51,
     "phone": "+20 109 128 9496",
     "languages": ["German"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_2.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_12_a.jpg",
     "portfolio": {
       "experience": "25+ years guiding German-speaking travelers across Egypt with deep focus on Pharaonic history and Nile itineraries.",
       "specialties": ["Cultural tours", "Archaeological sites", "Nile cruises", "Museum curation", "Private VIP itineraries"],
@@ -268,7 +268,7 @@
     "age": null,
     "phone": "+20 102 819 4450",
     "languages": ["Spanish", "English", "French"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_3.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_13.jpg",
     "portfolio": {
       "experience": "Multilingual guide specializing in Mediterranean cultures and cross-cultural groups.",
       "specialties": ["City orientation walks", "Family-friendly itineraries", "Religious heritage", "Street food safaris", "Photography spots"],
@@ -290,7 +290,7 @@
     "age": 25,
     "phone": "+20 103 028 0937",
     "languages": ["German"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_4.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_14.jpg",
     "portfolio": {
       "experience": "Early-career German guide with strong grounding in modern Egyptology and youth groups.",
       "specialties": ["Museum interpretation", "University groups", "Cycling tours", "Contemporary art", "Street photography"],
@@ -312,7 +312,7 @@
     "age": 25,
     "phone": "+20 106 768 7390",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_5.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_15.jpg",
     "portfolio": {
       "experience": "Energetic English-speaking guide focused on city culture and ancient-modern bridges.",
       "specialties": ["City highlights", "Street food", "Local markets", "Student trips", "Evening experiences"],
@@ -334,7 +334,7 @@
     "age": 44,
     "phone": "+20 128 320 5920",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_8.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_16.jpg",
     "portfolio": {
       "experience": "20+ years creating tailored journeys for families and corporate travelers.",
       "specialties": ["Private family trips", "Corporate incentives", "Coptic & Islamic heritage", "Desert add-ons", "Nile logistics"],
@@ -356,7 +356,7 @@
     "age": 35,
     "phone": "+20 122 377 2553",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_9.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_17.jpg",
     "portfolio": {
       "experience": "Adventure-leaning English guide with desert expertise and off-the-beaten-path flair.",
       "specialties": ["Desert excursions", "Oases & stargazing", "Hiking & dunes", "Bedouin culture", "4x4 logistics"],
@@ -378,7 +378,7 @@
     "age": 24,
     "phone": "+20 112 351 0409",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_10.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_18.jpg",
     "portfolio": {
       "experience": "English guide focused on first-timers, smart pacing, and iconic photo setups.",
       "specialties": ["First-timer essentials", "Photography guidance", "Evening Cairo", "Market navigation", "Museum basics"],
@@ -401,7 +401,7 @@
     "age": 22,
     "phone": "+20 150 001 1321",
     "languages": ["Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_13.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg",
     "portfolio": {
       "experience": "Early-career Spanish guide focusing on student and backpacker segments.",
       "specialties": ["Budget smart-routing", "Transit & metro", "Youth groups", "Street food", "Historic highlights"],
@@ -423,7 +423,7 @@
     "age": 25,
     "phone": "+20 114 922 5059",
     "languages": ["Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_15.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_20.jpg",
     "portfolio": {
       "experience": "Spanish guide focused on classic archaeology with crisp, visual storytelling.",
       "specialties": ["Pyramids & necropolises", "Museum mapping", "Archaeological context", "Evening city walks", "Logistics optimization"],
@@ -445,7 +445,7 @@
     "age": 45,
     "phone": "+20 109 661 9210",
     "languages": ["Chinese"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_17.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_21.jpg",
     "portfolio": {
       "experience": "Veteran Mandarin guide with deep partner network for groups and MICE.",
       "specialties": ["Large group coordination", "MICE logistics", "Museum interpretation (CN)", "Shopping & VAT guidance", "Airport VIP handling"],
@@ -467,7 +467,7 @@
     "age": null,
     "phone": "+20 111 299 5329",
     "languages": ["German"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_22.jpg",
     "portfolio": {
       "experience": "German-speaking guide with focus on inscriptions and desert monastery routes.",
       "specialties": ["Epigraphy basics", "Monastic heritage", "Oases routes", "Archaeological context", "Slow travel"],
@@ -489,7 +489,7 @@
     "age": 21,
     "phone": "+20 114 242 5655",
     "languages": ["German"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_19.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_23.jpg",
     "portfolio": {
       "experience": "German guide with focus on photography and active sightseeing.",
       "specialties": ["Photo walks", "Bike tours", "Street scenes", "Museum intros", "Youth groups"],
@@ -511,7 +511,7 @@
     "age": null,
     "phone": "+20 115 106 9968",
     "languages": ["Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_21.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_24.jpg",
     "portfolio": {
       "experience": "Spanish-language guide with interest in film, architecture, and urban history.",
       "specialties": ["Cinematic Cairo", "Architecture timelines", "Historic cafés", "Museum narratives", "Evening strolls"],
@@ -533,7 +533,7 @@
     "age": 24,
     "phone": "+20 127 135 7912",
     "languages": ["English"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_23.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_25.jpg",
     "portfolio": {
       "experience": "English guide for small groups, faith sites, and people-centric storytelling.",
       "specialties": ["Sacred sites", "Neighborhood stories", "Food & faith", "Museum intros", "Market etiquette"],
@@ -555,7 +555,7 @@
     "age": 23,
     "phone": "+20 112 185 9166",
     "languages": ["English", "Spanish"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_25.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_26.jpg",
     "portfolio": {
       "experience": "Bilingual guide for active travelers and quick-turn highlights.",
       "specialties": ["Speed itineraries", "Photo spots", "Market hops", "Street food", "Transit smart-routing"],
@@ -577,7 +577,7 @@
     "age": 35,
     "phone": "+20 106 588 8220",
     "languages": ["Italian"],
-    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_30.jpg",
+    "avatar": "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/tour-guides/portrait_27.jpg",
     "portfolio": {
       "experience": "Italian-language specialist with archaeology and gastronomy angles.",
       "specialties": ["Archeologia classica", "Cucina locale", "Mercati storici", "Musei strutturati", "Tour privati"],
