@@ -10,9 +10,9 @@
             <h1 id="leader-name" class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-1 leading-tight">{{ leader.name }}</h1>
             <p class="text-amber-300 font-semibold mb-2" aria-hidden="true">{{ leader.portfolio.experience }}</p>
             <p class="text-gray-300 text-sm">{{ leader.age ? `Age: ${leader.age}` : '' }} <span v-if="leader.languages"> • <span class="sr-only">Languages: </span><span aria-hidden="true">{{ Array.isArray(leader.languages) ? leader.languages.join(', ') : leader.languages }}</span></span></p>
-            <div class="mt-4">
+            <!-- <div class="mt-4">
               <a class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 bg-amber-400 text-gray-900 font-semibold rounded-full shadow focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2" :href="`tel:${leader.phone.replace(/\\s+/g,'')}`" :aria-label="`Call ${leader.name} at ${leader.phone}`">Call: <span class="font-mono">{{ leader.phone }}</span></a>
-            </div>
+            </div> -->
           </div>
         </header>
 
