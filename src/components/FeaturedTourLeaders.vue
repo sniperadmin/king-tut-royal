@@ -33,9 +33,9 @@
       </transition-group>
 
       <div class="flex justify-center mt-6">
-        <button @click="toggleExpanded" class="px-6 py-3 rounded-full bg-transparent border border-yellow-500 text-yellow-400 font-semibold hover:bg-yellow-500/10 transition shadow-lg">
-          {{ expanded ? 'View Less Tour Leaders' : 'View All Tour Leaders' }}
-        </button>
+        <router-link to="/tour-leaders" class="px-6 py-3 rounded-full bg-transparent border border-yellow-500 text-yellow-400 font-semibold hover:bg-yellow-500/10 transition shadow-lg">
+          View All Tour Leaders
+        </router-link>
       </div>
     </div>
   </section>

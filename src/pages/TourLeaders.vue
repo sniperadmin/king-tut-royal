@@ -1,7 +1,7 @@
 <template>
   <AppLayout>
     <div class="container mx-auto p-4 pt-20">
-      <h1 class="text-3xl font-bold mb-6 text-center">Our Tour Leaders</h1>
+      <h1 class="text-3xl font-bold mb-6 text-center">Our Tour Leaders <span class="text-yellow-300">({{ tourLeaders.length }} total)</span></h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div v-for="leader in tourLeaders" :key="leader.phone" class="bg-gray-900 border border-gray-800 group hover:border-yellow-400/50 transition-all duration-300 rounded-lg shadow-md p-6 flex flex-col items-center text-center text-white justify-between">
           <div class="flex flex-col items-center text-center">
