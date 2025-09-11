@@ -19,6 +19,11 @@
       <Suspense>
         <WhyChooseSection />
       </Suspense>
+
+      <Suspense>
+        <featured-tour-leaders />
+      </Suspense>
+
       <Suspense>
         <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
       </Suspense>
@@ -33,6 +38,7 @@ import { useRoute } from 'vue-router'
 import { smoothScroll } from '../utils/smoothScroll'
 import HeroSection from '../components/HeroSection.vue'
 const VideoSection = defineAsyncComponent(() => import('../components/sections/VideoSection.vue'))
+const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))
 const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
 const PackagesSection = defineAsyncComponent(() => import('../components/PackagesSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('../components/WhyChooseSection.vue'))

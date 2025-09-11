@@ -3,7 +3,7 @@
     <div id="main-content" class="container mx-auto p-4 pt-24 sm:pt-28" role="main">
     <!-- <a href="#main-content" class="sr-only focus:not-sr-only inline-block p-2 bg-amber-400 text-gray-900 rounded" aria-label="Skip to main content">Skip to main content</a> -->
       <div v-if="leader" class="w-full mx-auto bg-gray-900 border border-gray-700 rounded-lg shadow-lg p-4 sm:p-6 md:p-8 text-white max-w-full sm:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <router-link to="/tour-leaders" class="text-amber-400 hover:text-amber-300 font-semibold mb-4 inline-flex items-center"><span class="mr-2">&larr;</span>Back</router-link>
+        <a href="#" @click.prevent="router.back()" class="text-amber-400 hover:text-amber-300 font-semibold mb-4 inline-flex items-center"><span class="mr-2">&larr;</span>Back</a>
         <header class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
           <img v-if="leader.avatar" :src="leader.avatar" :alt="leader.name" loading="lazy" class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full object-cover border-4 border-gray-700 shadow-lg" />
           <div>
@@ -51,18 +51,19 @@
         </main>
 
         <div class="mt-8 space-y-3">
-          <router-link
-            to="/tour-leaders"
+          <button
+            type="button"
+            @click="router.back()"
             class="w-full rounded-sm border-yellow-600 hover:bg-yellow-500 hover:text-black text-yellow-600 py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm block text-center"
           >
             Back to Tour Leaders
-          </router-link>
+          </button>
         </div>
       </div>
 
       <div v-else class="text-center text-gray-300">
         <h2 class="text-2xl font-semibold">Tour leader not found</h2>
-        <p class="mt-2">Please return to the <router-link to="/tour-leaders" class="text-yellow-400 underline">tour leaders list</router-link>.</p>
+        <p class="mt-2">Please return to the <a href="#" @click.prevent="router.back()" class="text-yellow-400 underline">tour leaders list</a>.</p>
       </div>
     </div>
   </AppLayout>
@@ -70,11 +71,12 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import AppLayout from '../components/AppLayout.vue'
 import tourLeadersData from '../utils/tour_leaders.json'
 
 const route = useRoute()
+const router = useRouter()
 const slugParam = String(route.params.slug || '')
 
 const getSlug = (name: string): string => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
