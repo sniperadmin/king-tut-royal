@@ -12,7 +12,6 @@
           </div>
           <h2 class="text-2xl font-semibold mb-2 text-white">{{ leader.name }}</h2>
           <div class="space-y-2 text-left w-full">
-            <p class="flex items-center text-gray-300"><Phone class="w-5 h-5 mr-2 text-yellow-400" /> Phone: {{ leader.phone }}</p>
             <p class="flex items-center text-gray-300"><Globe class="w-5 h-5 mr-2 text-yellow-400" /> Languages: {{ Array.isArray(leader.languages) ? leader.languages.join(', ') : leader.languages }}</p>
             <p v-if="leader.age" class="flex items-center text-gray-300"><CalendarDays class="w-5 h-5 mr-2 text-yellow-400" /> Age: {{ leader.age }}</p>
           </div>
@@ -29,7 +28,7 @@
 import { ref, onMounted } from 'vue'
 import AppLayout from '../components/AppLayout.vue'
 import tourLeadersData from '../utils/tour_leaders.json'
-import { Phone, Globe, CalendarDays } from 'lucide-vue-next'
+import { Globe, CalendarDays } from 'lucide-vue-next'
 
 interface TourLeader {
   phone: string;
