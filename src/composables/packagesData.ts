@@ -32,18 +32,18 @@ export const PACKAGES: PackageData[] = [
 
     highlights: [
       'Meet & Greet at Cairo International Airport',
-      '5-star luxury accommodation',
+      'Intercontinental Cairo Semiramis 5 Star Hotel',
       'Gourmet dinner cruise with live entertainment',
       // 'Authentic perfume gift',
     ],
     isPopular: true,
     details: {
       overview: "Experience Egypt like never before with the King Tut Royal VIP Package — an exclusive 5-day, 4-night journey in Cairo combining luxury hospitality, private access to history, and unforgettable cultural encounters. Designed for discerning travelers, this package blends 5-star accommodations, VIP treatment, and unique experiences only available through World In Style.",
-      accommodation: "4 nights in a hand-picked 5-star Cairo hotel\nDaily breakfast included\n24/7 concierge assistance",
+      accommodation: "- 4 nights at Intercontinental Cairo Semiramis 5 Star Hotel (DDL)\n - Daily breakfast included\n - 24/7 concierge assistance",
       itinerary: [
         {
           day: "Day 1 – Thursday",
-          description: "Meet & Greet upon arrival at Cairo International Airport\nVIP transport to your luxury hotel"
+          description: "Meet & Greet upon arrival at Cairo International Airport\nVIP transport to Intercontinental Cairo Semiramis 5 Star Hotel"
         },
         {
           day: "Day 2 – Friday",
