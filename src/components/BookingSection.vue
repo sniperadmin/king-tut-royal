@@ -42,7 +42,7 @@
                 @click="selectPackage('oneday')"
               >
                 <h3 class="text-lg font-semibold text-white mb-2">King Tut VIP One Day</h3>
-                <p class="text-white text-2xl font-bold">€900</p>
+                <p class="text-white text-2xl font-bold">€1200</p>
                 <p class="text-gray-300 text-sm">Full Day Experience</p>
                 <p class="text-gray-300 text-sm">per person</p>
               </div>

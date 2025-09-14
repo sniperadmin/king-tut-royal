@@ -19,7 +19,7 @@ export interface PackageData {
 
 export const PACKAGE_PRICING: Record<string, number> = {
   vip: 3900,
-  oneday: 900
+  oneday: 1200
 };
 
 export const PACKAGES: PackageData[] = [
@@ -73,7 +73,7 @@ export const PACKAGES: PackageData[] = [
   },
   {
     title: "King Tut VIP One Day",
-    price: "€900",
+    price: "€1200",
     duration: "1 Day (Any Day)",
     image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
     highlights: [
@@ -101,7 +101,7 @@ export const PACKAGES: PackageData[] = [
         }
       ],
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
-      booking: "Price: €900 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
+      booking: "Price: €1200 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
       images: [
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
