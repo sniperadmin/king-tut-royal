@@ -1,12 +1,12 @@
 <template>
   <AppLayout>
     <div class="container mx-auto p-4 pt-20">
-      <h1 class="text-3xl font-bold mb-2 text-center text-white">{{ packageDetails?.title }}</h1>
-      <p v-if="packageDetails?.price" class="text-xl text-center text-yellow-400 mb-6">{{ packageDetails?.price }} per person</p>
+      <h1 class="text-3xl font-bold mb-2 text-center text-foreground">{{ packageDetails?.title }}</h1>
+      <p v-if="packageDetails?.price" class="text-xl text-center text-primary mb-6">{{ packageDetails?.price }} per person</p>
       
       <div v-if="packageDetails" class="space-y-8">
-        <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-3">Gallery</h3>
+        <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Gallery</h3>
           <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
             <img
               :src="packageDetails.details.images[currentImageIndex]"
@@ -23,8 +23,8 @@
               width="800"
               height="600"
             />
-            <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full ml-2">&lt;</button>
-            <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full mr-2">&gt;</button>
+            <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full ml-2">&lt;</button>
+            <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full mr-2">&gt;</button>
           </div>
           <div class="flex justify-center space-x-2 overflow-x-auto p-1 max-w-full">
             <img
@@ -37,7 +37,7 @@
               `"
               sizes="(max-width: 768px) 412px, 853px"
               @click="setCurrentImage(idx)"
-              :class="{'border-2 border-yellow-400': idx === currentImageIndex}"
+              :class="{'border-2 border-primary': idx === currentImageIndex}"
               class="w-20 h-16 object-contain rounded-lg cursor-pointer flex-shrink-0"
               width="80"
               height="64"
@@ -45,18 +45,18 @@
           </div>
         </div>
 
-        <div class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-3">Overview</h3>
-          <p class="text-gray-300 text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.overview }}</p>
+        <div class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Overview</h3>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.overview }}</p>
         </div>
 
-        <div class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-3">Accommodation</h3>
-          <p class="text-gray-300 text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.accommodation }}</p>
+        <div class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Accommodation</h3>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.accommodation }}</p>
         </div>
 
-        <div class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-4">Itinerary Highlights</h3>
+        <div class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-4">Itinerary Highlights</h3>
           <div class="stepper">
             <div v-for="(day, index) in packageDetails.details.itinerary" :key="index" class="stepper-item">
               <div class="stepper-item-content">
@@ -64,30 +64,30 @@
                 <div class="stepper-item-line"></div>
               </div>
               <div class="stepper-item-details">
-                <h3 class="text-xl font-medium text-white">{{ day.day }}</h3>
-                <p class="text-gray-300">{{ day.description }}</p>
+                <h3 class="text-xl font-medium text-foreground">{{ day.day }}</h3>
+                <p class="text-muted-foreground">{{ day.description }}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-3">Exclusive Benefits</h3>
-          <p class="text-gray-300 text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.benefits }}</p>
+        <div class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Exclusive Benefits</h3>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.benefits }}</p>
         </div>
 
-        <div class="mb-8 bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-white mb-3">Booking Information</h3>
-          <p class="text-gray-300 text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.booking }}</p>
+        <div class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Booking Information</h3>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.booking }}</p>
         </div>
 
         <div class="text-center mt-8 space-y-4">
-          <button @click="bookNow" class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
+          <button @click="bookNow" class="w-full bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
             Inquiry
           </button>
         </div>
       </div>
-      <div v-else class="text-white text-center">
+      <div v-else class="text-foreground text-center">
         <p>Package not found.</p>
       </div>
     </div>
@@ -150,11 +150,11 @@ const bookNow = () => {
 }
 
 .stepper-item-circle {
-  @apply w-8 h-8 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold;
+  @apply w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold;
 }
 
 .stepper-item-line {
-  @apply w-0.5 h-full bg-gray-700 mt-2;
+  @apply w-0.5 h-full bg-border mt-2;
 }
 
 .stepper-item-details {

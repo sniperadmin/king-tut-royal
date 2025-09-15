@@ -1,8 +1,8 @@
 <template>
 <div class="flex flex-col">
-  <h3 class="text-2xl font-semibold text-white my-5">{{ title }}</h3>
-  <div :class="['bg-gray-900 border group hover:border-yellow-400/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-yellow-400' : 'border-gray-800']">
-    <div class="relative overflow-hidden bg-gray-600">
+  <h3 class="text-2xl font-semibold text-foreground my-5">{{ title }}</h3>
+  <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-primary' : 'border-border']">
+    <div class="relative overflow-hidden bg-muted">
       <img
         :src="image"
         :srcset="computedImageSrcset"
@@ -12,26 +12,26 @@
         decoding="async"
         class="mx-auto rounded-t-lg drop-shadow"
       />
-      <div v-if="isPopular" class="absolute top-2 right-2 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full">
+      <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
         Popular
       </div>
     </div>
 
     <div class="p-6 flex flex-col flex-grow">
       <div class="flex items-center justify-center mb-3">
-        <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
-          <component :is="LucideIcon" :size="20" class="text-black" />
+        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-2">
+          <component :is="LucideIcon" :size="20" class="text-primary-foreground" />
         </div>
-        <h3 class="text-xl font-semibold text-white">{{ title }} Package</h3>
+        <h3 class="text-xl font-semibold text-foreground">{{ title }} Package</h3>
       </div>
-      <p class="text-gray-300 text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
-      <div class="text-2xl font-semibold text-yellow-400 mb-4">{{ price }} <span class="text-gray-300 text-sm font-medium">per person</span></div>
+      <p class="text-muted-foreground text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
+      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-sm font-medium">per person</span></div>
 
       <div class="mb-6 flex-grow">
         <ul class="space-y-2 text-left">
           <li v-for="(highlight, index) in highlights.slice(0, 3)" :key="index" class="flex items-start text-sm">
-            <span class="text-yellow-400 mr-2 text-base">•</span>
-            <span class="text-gray-200 font-medium leading-tight">{{ highlight }}</span>
+            <span class="text-primary mr-2 text-base">•</span>
+            <span class="text-foreground font-medium leading-tight">{{ highlight }}</span>
           </li>
         </ul>
       </div>
@@ -39,13 +39,13 @@
       <div class="mt-auto space-y-3">
         <router-link
           :to="`/packages/${packageTitleForDetails.toLowerCase().replace(/ /g, '-')}`"
-          class="w-full bg-yellow-400 hover:bg-yellow-300 text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm block text-center"
+          class="w-full bg-primary hover:bg-primary/80 text-primary-foreground py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm block text-center"
         >
           View Details
         </router-link>
         <button
           @click="onBookNowClick"
-          class="w-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
+          class="w-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
         >
           INQUIRY
         </button>

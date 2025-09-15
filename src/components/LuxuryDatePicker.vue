@@ -1,13 +1,13 @@
 <template>
   <div class="relative luxury-date-picker">
     <div 
-      class="luxury-date-input h-12 w-full bg-gray-800 border border-gray-600 rounded-md px-3 flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors select-none"
+      class="luxury-date-input h-12 w-full bg-card border border-border rounded-md px-3 flex items-center justify-between cursor-pointer hover:border-primary transition-colors select-none"
       @click="toggleCalendar"
     >
-      <span :class="selectedDate ? 'text-white' : 'text-gray-400'">
+      <span :class="selectedDate ? 'text-foreground' : 'text-muted-foreground'">
         {{ selectedDate ? formatSelectedDate(selectedDate) : placeholder }}
       </span>
-      <CalendarIcon class="h-5 w-5 text-amber-400" />
+      <CalendarIcon class="h-5 w-5 text-primary" />
     </div>
 
     <!-- Calendar dropdown -->
@@ -19,29 +19,29 @@
     >
       <div 
         v-if="isOpen"
-        class="absolute top-full left-0 mt-2 w-full bg-gray-900 border border-amber-400/30 rounded-lg shadow-2xl z-[9999] overflow-hidden md:max-w-sm"
+        class="absolute top-full left-0 mt-2 w-full bg-card border border-primary/30 rounded-lg shadow-lg z-[9999] overflow-hidden md:max-w-sm"
         style="position: absolute; z-index: 9999;"
         @click.stop
       >
         <!-- Calendar Header -->
-        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-amber-400/10 to-amber-600/10">
+        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-primary/10">
           <button
             @click.stop.prevent="previousMonth"
-            class="p-2 text-amber-400 hover:text-amber-300 hover:bg-amber-400/10 rounded-full transition-all focus:outline-none"
+            class="p-2 text-primary hover:text-primary-foreground hover:bg-primary/10 rounded-full transition-all focus:outline-none"
             type="button"
           >
             <ChevronLeft class="h-5 w-5" />
           </button>
 
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-white">
+            <h3 class="text-lg font-semibold text-foreground">
               {{ format(currentMonth, 'MMMM yyyy') }}
             </h3>
           </div>
           
           <button
             @click.stop.prevent="nextMonth"
-            class="p-2 text-amber-400 hover:text-amber-300 hover:bg-amber-400/10 rounded-full transition-all focus:outline-none"
+            class="p-2 text-primary hover:text-primary-foreground hover:bg-primary/10 rounded-full transition-all focus:outline-none"
             type="button"
             aria-label="Next month"
           >
@@ -56,7 +56,7 @@
             <div 
               v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
               :key="day"
-              class="text-center text-xs font-medium text-gray-400 py-2"
+              class="text-center text-xs font-medium text-muted-foreground py-2"
             >
               {{ day }}
             </div>
@@ -84,7 +84,7 @@
                 {{ format(day, 'd') }}
                 <span 
                   v-if="hasEvent(day)"
-                  class="absolute -top-1 -right-1 h-2 w-2 bg-amber-400 rounded-full"
+                  class="absolute -top-1 -right-1 h-2 w-2 bg-primary rounded-full"
                 />
               </span>
             </button>
@@ -92,17 +92,17 @@
         </div>
 
         <!-- Calendar Footer -->
-        <div class="border-t border-amber-400/20 p-4 bg-gray-800/50">
+        <div class="border-t border-primary/20 p-4 bg-card/50">
           <div class="flex items-center justify-between">
             <button
               @click.stop="selectToday"
-              class="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+              class="text-sm text-primary hover:text-primary-foreground transition-colors"
             >
               Today
             </button>
             <button
               @click.stop="closeCalendar"
-              class="text-sm text-gray-400 hover:text-white transition-colors"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Close
             </button>
@@ -209,13 +209,13 @@ const getDayClasses = (date: Date) => {
   const classes = []
   
   if (isDateDisabled(date)) {
-    classes.push('text-gray-600 cursor-not-allowed')
+    classes.push('text-muted-foreground cursor-not-allowed')
   } else if (isSameDay(date, selectedDate.value || new Date())) {
-    classes.push('bg-amber-400 text-black font-bold hover:bg-amber-500')
+    classes.push('bg-primary text-primary-foreground font-bold hover:bg-primary/80')
   } else if (isToday(date)) {
-    classes.push('text-amber-400 font-semibold hover:bg-amber-400/20')
+    classes.push('text-primary font-semibold hover:bg-primary/20')
   } else {
-    classes.push('text-white hover:bg-amber-400/10')
+    classes.push('text-foreground hover:bg-primary/10')
   }
   
   return classes.join(' ')
@@ -251,21 +251,17 @@ watch(() => props.modelValue, (newValue) => {
 
 <style scoped>
 .luxury-date-input {
-  background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(55, 65, 81, 0.8));
+  background: transparent;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(156, 163, 175, 0.3);
   transition: all 0.3s ease;
 }
 
 .luxury-date-input:hover {
-  border-color: #fbbf24;
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+  box-shadow: 0 0 20px var(--primary-shadow);
 }
 
 .calendar-dropdown {
-  background: rgba(17, 24, 39, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(251, 191, 36, 0.2);
 }
 
 .day-button {
@@ -280,7 +276,7 @@ watch(() => props.modelValue, (newValue) => {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, var(--primary-hover-bg), transparent);
   transition: left 0.5s;
 }
 

@@ -1,8 +1,8 @@
 <template>
-  <section class="py-12 bg-gray-950">
+  <section class="py-12 bg-light-yellow">
     <div class="container mx-auto px-4">
       <div class="text-center mb-8">
-        <h4 class="text-lg text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
+        <h4 class="text-lg max-w-3xl mx-auto font-semibold leading-relaxed">
           Immerse yourself in luxury Egyptian experiences
         </h4>
       </div>
@@ -19,7 +19,7 @@
             sizes="(max-width: 640px) 412px, 853px"
             class="w-full h-full object-contain transition-all duration-500"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent"></div>
 
           <!-- Maximize button -->
           <div
@@ -28,7 +28,7 @@
             <Button
               variant="ghost"
               size="icon"
-              class="bg-black/50 hover:bg-black/70 text-white border-0 h-10 w-10 rounded-full"
+              class="bg-card/50 hover:bg-card/70 text-foreground border-0 h-10 w-10 rounded-full"
             >
               <Maximize2 class="h-5 w-5" />
             </Button>
@@ -39,7 +39,7 @@
           @click="prevSlide"
           variant="ghost"
           size="icon"
-          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-0 h-12 w-12 rounded-full"
+          class="absolute left-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
         >
           <ChevronLeft class="h-6 w-6" />
         </Button>
@@ -48,7 +48,7 @@
           @click="nextSlide"
           variant="ghost"
           size="icon"
-          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-0 h-12 w-12 rounded-full"
+          class="absolute right-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
         >
           <ChevronRight class="h-6 w-6" />
         </Button>
@@ -59,7 +59,7 @@
             :key="index"
             @click="goToSlide(index)"
             :class="`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-yellow-400 scale-125' : 'bg-gray-600 hover:bg-gray-400'
+              index === currentSlide ? 'bg-primary scale-125' : 'bg-muted-foreground hover:bg-foreground'
             }`"
           />
         </div>
@@ -70,7 +70,7 @@
   <!-- Modal -->
   <div
     v-if="isModalOpen"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4"
   >
     <div class="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
       <img
@@ -83,7 +83,7 @@
         @click="closeModal"
         variant="ghost"
         size="icon"
-        class="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white border-0 h-12 w-12 rounded-full"
+        class="absolute top-4 right-4 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
       >
         <X class="h-6 w-6" />
       </Button>
@@ -92,7 +92,7 @@
         @click="prevModalImage"
         variant="ghost"
         size="icon"
-        class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-0 h-12 w-12 rounded-full"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
       >
         <ChevronLeft class="h-6 w-6" />
       </Button>
@@ -101,7 +101,7 @@
         @click="nextModalImage"
         variant="ghost"
         size="icon"
-        class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-0 h-12 w-12 rounded-full"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
       >
         <ChevronRight class="h-6 w-6" />
       </Button>
