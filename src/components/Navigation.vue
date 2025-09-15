@@ -11,6 +11,7 @@
         <div class="hidden md:flex items-center space-x-8">
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
           <button @click="scrollToSection('packages')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</button>
+          <button @click="scrollToSection('partners')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</button>
           <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
           <button 
@@ -39,6 +40,7 @@
         <div class="flex flex-col space-y-4">
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
           <button @click="scrollToSection('packages')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</button>
+          <button @click="scrollToSection('partners')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</button>
           <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</button>
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
           <button 
