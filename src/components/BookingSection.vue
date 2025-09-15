@@ -3,7 +3,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
-        <p class="text-xl text-primary max-w-2xl mx-auto">
+        <p class="text-xl text-brownish font-bold max-w-2xl mx-auto">
           Limited to 50 bookings per week - Secure your spot now!
         </p>
       </div>

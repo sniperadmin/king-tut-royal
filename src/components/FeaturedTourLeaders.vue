@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between mb-6">
         <div class="mx-auto text-center">
           <h2 class="text-3xl font-bold text-foreground">Featured Tour Leaders</h2>
-          <p class="text-primary mt-1">Hand-picked experts to guide your next luxury experience.</p>
+          <p class="text-brownish font-bold mt-1">Hand-picked experts to guide your next luxury experience.</p>
         </div>
       </div>
 

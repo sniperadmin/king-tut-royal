@@ -12,6 +12,12 @@
         </Suspense>
       </section>
 
+      <section id="partners">
+        <Suspense>
+          <PartnersSection />
+        </Suspense>
+      </section>
+
       <Suspense>
         <MediaSliderSection />
       </Suspense>
@@ -41,6 +47,7 @@ const VideoSection = defineAsyncComponent(() => import('../components/sections/V
 const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))
 const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
 const PackagesSection = defineAsyncComponent(() => import('../components/PackagesSection.vue'))
+const PartnersSection = defineAsyncComponent(() => import('../components/PartnersSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('../components/WhyChooseSection.vue'))
 const BookingSection = defineAsyncComponent(() => import('../components/BookingSection.vue'))
 

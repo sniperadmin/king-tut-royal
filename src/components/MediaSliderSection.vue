@@ -2,7 +2,7 @@
   <section class="py-12 bg-light-yellow">
     <div class="container mx-auto px-4">
       <div class="text-center mb-8">
-        <h4 class="text-lg max-w-3xl mx-auto font-semibold leading-relaxed">
+        <h4 class="text-lg text-brownish max-w-3xl mx-auto font-bold leading-relaxed">
           Immerse yourself in luxury Egyptian experiences
         </h4>
       </div>

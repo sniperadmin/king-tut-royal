@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full pt-16 bg-light-gray text-foreground">
+  <section class="relative w-full pt-16 bg-background text-foreground">
     <!-- Background Image - Full Width, Contained -->
     <div class="w-full">
       <picture>
