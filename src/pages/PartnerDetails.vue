@@ -176,23 +176,7 @@ import { ref, onMounted, computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AppLayout from '@/components/AppLayout.vue'
 import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next'
-
-interface MediaItem {
-  type: 'image' | 'video';
-  src: string;
-  thumbnail?: string; // Optional thumbnail for videos
-}
-
-interface Partner {
-  id: string;
-  name: string;
-  logo: string;
-  description: string;
-  website?: string;
-  about?: string;
-  services?: string[];
-  media?: MediaItem[]; // Changed from images to media
-}
+import { ALL_PARTNERS, Partner, MediaItem } from '../composables/partnersData'
 
 const route = useRoute()
 const partner = ref<Partner | null>(null)
@@ -202,59 +186,20 @@ const isModalOpen = ref(false)
 const modalImageIndex = ref(0)
 let autoSlideInterval: number | undefined = undefined
 
-const allPartners: Partner[] = [
-  {
-    id: 'semiramis-intercontinental',
-    name: 'Semiramis Intercontinental Hotels & Resorts',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png',
-    description: 'Luxury 5-star hotel located in the heart of Cairo with breathtaking views of the Nile River.',
-    website: 'https://www.ihg.com/intercontinental/hotels/us/en/cairo/caica/hoteldetail',
-    about: 'The InterContinental Cairo Semiramis is a landmark hotel in Egypt\'s capital, offering unparalleled luxury and service.\n\nWith its prime location on the Nile Corniche, the hotel provides easy access to Cairo\'s most famous attractions including the Egyptian Museum, Khan el-Khalili bazaar, and the Giza Pyramids.\n\nThe hotel features 432 elegantly appointed rooms and suites, multiple dining options, a spa, and extensive meeting facilities.',
-    services: [
-      'Luxury accommodations',
-      'Fine dining restaurants',
-      'Spa and wellness center',
-      'Business facilities',
-      'Concierge services'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/ICSemiramis%20lobby.jpg' },
-      { type: 'video', src: 'https://www.youtube.com/embed/your-video-id', thumbnail: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/semiramis%20ic%20exterior.JPG' }
-    ]
-  },
-  {
-    id: '1001-luxury',
-    name: '1001 Luxury',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001logo-1-1_2.png',
-    description: '1001 Luxury offers exclusive, tailor-made luxury travel experiences.',
-    website: 'https://www.1001luxury.com/',
-    about: '1001 Luxury specializes in crafting bespoke journeys for discerning travelers. We provide unparalleled access to unique destinations and experiences, ensuring every detail is meticulously planned and executed.\n\nOur services range from private jet charters and luxury yacht rentals to personalized cultural tours and exclusive event access. We pride ourselves on delivering exceptional service and unforgettable memories.',
-    services: [
-      'Bespoke travel planning',
-      'Private jet and yacht charters',
-      'Luxury accommodations',
-      'Exclusive cultural experiences',
-      '24/7 concierge service'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder1.jpg' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder2.jpg' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder3.jpg' }
-    ]
-  }
-]
-
 const totalSlides = computed(() => partner.value?.media?.length || 0)
 
-const currentMedia = computed<MediaItem>(() => {
-  const media = partner.value?.media || []
-  return media[currentSlide.value] || { type: 'image', src: '' }
+const currentMedia = computed(() => {
+  if (!partner.value || !partner.value.media || partner.value.media.length === 0) {
+    return null
+  }
+  return partner.value.media[currentSlide.value]
 })
 
-const currentModalMedia = computed<MediaItem>(() => {
-  const media = partner.value?.media || []
-  return media[modalImageIndex.value] || { type: 'image', src: '' }
+const currentModalMedia = computed(() => {
+  if (!partner.value || !partner.value.media || partner.value.media.length === 0) {
+    return null
+  }
+  return partner.value.media[modalImageIndex.value]
 })
 
 const goToSlide = (index: number) => {
@@ -283,7 +228,9 @@ const openModal = (index: number) => {
 
 const closeModal = () => {
   isModalOpen.value = false
-  startAutoSlide()
+  if (partner.value && partner.value.media && partner.value.media.length > 0) {
+    startAutoSlide()
+  }
 }
 
 const nextModalImage = () => {
@@ -319,10 +266,12 @@ watch(isModalOpen, (newVal) => {
 onMounted(() => {
   window.scrollTo(0, 0);
   const partnerId = route.params.id as string
-  console.log('Route partnerId:', partnerId);
-  partner.value = allPartners.find(p => p.id === partnerId) || null
-  console.log('Found partner:', partner.value);
-  startAutoSlide()
+  console.log('Route partnerId:', partnerId)
+  partner.value = ALL_PARTNERS.find(p => p.id === partnerId) || null
+  console.log('Found partner:', partner.value)
+  if (partner.value && partner.value.media && partner.value.media.length > 0) {
+    startAutoSlide()
+  }
 })
 
 onUnmounted(() => {

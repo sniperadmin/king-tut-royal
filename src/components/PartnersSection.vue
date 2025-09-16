@@ -9,7 +9,7 @@
             :to="{ name: 'PartnerDetails', params: { id: partner.id } }"
             class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs mx-auto"
           >
-            <img v-if="partner.logo" :src="partner.logo" :alt="partner.name + ' Logo'" class="max-h-28 object-contain mb-6" />
+            <img v-if="partner.logo" :src="partner.logo" :alt="partner.name + ' Logo'" class="w-full h-auto mb-6" />
             <!-- <h3 class="text-xl font-semibold text-center text-brownish">{{ partner.name }}</h3>
             <button v-if="partner.id === 'semiramis-intercontinental'" class="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary-dark transition-colors duration-300">
               Show More
@@ -33,25 +33,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { ALL_PARTNERS, Partner } from '../composables/partnersData'
 
-type Partner = { id: string; name: string; logo?: string; link?: string; comingSoon?: boolean }
-const props = withDefaults(defineProps<{ partners?: Partner[] }>(), {
-  partners: () => [
-    {
-      id: 'semiramis-intercontinental',
-      name: 'Semiramis Intercontinental Hotels & Resorts',
-      logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png',
-      link: 'https://www.ihg.com/intercontinental/hotels/us/en/cairo/caica/hoteldetail'
-    },
-    {
-      id: '1001-luxury',
-      name: '1001 Luxury',
-      logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001logo-1-1_2.png',
-      link: 'https://www.1001luxury.com/'
-    }
-  ]
-})
-const partners = ref<Partner[]>(props.partners)
+const partners = ref<Partner[]>(ALL_PARTNERS)
 </script>
 
 <style scoped>
