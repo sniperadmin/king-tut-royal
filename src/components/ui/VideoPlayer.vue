@@ -124,7 +124,20 @@ onUnmounted(() => {
       </media-player>
     </template>
     <div v-else class="aspect-video w-full h-full bg-card flex items-center justify-center">
-      <div class="text-foreground">Loading video...</div>
+      <div class="flex flex-col items-center gap-4">
+        <div class="relative flex items-center justify-center">
+          <div class="h-16 w-16 rounded-full bg-gradient-to-r from-brownish to-primary animate-pulse" aria-hidden="true"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+        <div class="text-foreground text-sm">Loading video...</div>
+        <div class="mt-2 w-40 h-2 rounded-full bg-foreground/10 overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-foreground/30 via-foreground/60 to-foreground/30 animate-loading-bar" style="width:60%"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -143,5 +156,14 @@ onUnmounted(() => {
 
 .aspect-video video {
   object-fit: cover;
+}
+
+/* Loading animation for VideoPlayer */
+@keyframes loading-bar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-loading-bar {
+  animation: loading-bar 1.2s linear infinite;
 }
 </style>
