@@ -45,6 +45,15 @@
           </div>
         </div>
 
+        <div v-if="packageDetails.partners && packageDetails.partners.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Our Partners</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <div v-for="partner in packageDetails.partners" :key="partner.name" class="flex flex-col items-center p-4 bg-muted rounded-lg shadow-sm">
+              <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain mb-2" />
+            </div>
+          </div>
+        </div>
+
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Overview</h3>
           <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.overview }}</p>
@@ -65,7 +74,9 @@
               </div>
               <div class="stepper-item-details">
                 <h3 class="text-xl font-medium text-foreground">{{ day.day }}</h3>
-                <p class="text-muted-foreground">{{ day.description }}</p>
+                <ul class="list-disc pl-5 text-muted-foreground">
+                  <li v-for="(item, itemIndex) in day.description" :key="itemIndex">{{ item }}</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -78,7 +89,13 @@
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Booking Information</h3>
-          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.booking }}</p>
+          <div class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
+            <p><strong>Company:</strong> {{ packageDetails.details.booking.companyName }}</p>
+            <p><strong>Address:</strong> {{ packageDetails.details.booking.address }}</p>
+            <p><strong>Website:</strong> <a :href="`https://${packageDetails.details.booking.website}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageDetails.details.booking.website }}</a></p>
+            <p><strong>WhatsApp:</strong> <a :href="`https://wa.me/${packageDetails.details.booking.whatsapp.replace(/\s/g, '')}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageDetails.details.booking.whatsapp }}</a></p>
+            <p><strong>Price:</strong> {{ packageDetails.details.booking.price }}</p>
+          </div>
         </div>
 
         <div class="text-center mt-8 space-y-4">
@@ -110,6 +127,7 @@ onMounted(() => {
   window.scrollTo(0, 0);
   const packageName = route.params.packageName;
   packageDetails.value = PACKAGES.find(pkg => pkg.title.toLowerCase().replace(/ /g, '-') === packageName);
+  console.log('Package Details:', packageDetails.value);
 });
 
 const prevImage = () => {
