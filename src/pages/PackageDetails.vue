@@ -5,44 +5,9 @@
       <p v-if="packageDetails?.price" class="text-xl text-center text-primary mb-6">{{ packageDetails?.price }} per person</p>
       
       <div v-if="packageDetails" class="space-y-8">
-        <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
-          <h3 class="text-2xl font-semibold text-foreground mb-3">Gallery</h3>
-          <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
-            <img
-              :src="packageDetails.details.images[currentImageIndex]"
-              :srcset="`
-                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-412w.webp')} 412w,
-                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-853w.webp')} 853w
-              `"
-              sizes="(max-width: 768px) 412px, 853px"
-              alt="Package Image"
-              class="w-full h-full object-contain transition-opacity duration-300 max-h-52 sm:max-h-60 md:max-h-80"
-              fetchpriority="high"
-              loading="eager"
-              decoding="async"
-              width="800"
-              height="600"
-            />
-            <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full ml-2">&lt;</button>
-            <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full mr-2">&gt;</button>
-          </div>
-          <div class="flex justify-center space-x-2 overflow-x-auto p-1 max-w-full">
-            <img
-              v-for="(img, idx) in packageDetails.details.images"
-              :key="idx"
-              :src="img"
-              :srcset="`
-                ${img.replace('.webp', '-412w.webp')} 412w,
-                ${img.replace('.webp', '-853w.webp')} 853w
-              `"
-              sizes="(max-width: 768px) 412px, 853px"
-              @click="setCurrentImage(idx)"
-              :class="{'border-2 border-primary': idx === currentImageIndex}"
-              class="w-20 h-16 object-contain rounded-lg cursor-pointer flex-shrink-0"
-              width="80"
-              height="64"
-            />
-          </div>
+        <div v-if="videos?.length" class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Video</h3>
+          <VideoPlayer :videos="videos" />
         </div>
 
         <div v-if="packageDetails.partners && packageDetails.partners.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
@@ -98,11 +63,52 @@
           </div>
         </div>
 
+        <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
+          <h3 class="text-2xl font-semibold text-foreground mb-3">Gallery</h3>
+          <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
+            <img
+              :src="packageDetails.details.images[currentImageIndex]"
+              :srcset="`
+                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-412w.webp')} 412w,
+                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-853w.webp')} 853w
+              `"
+              sizes="(max-width: 768px) 412px, 853px"
+              alt="Package Image"
+              class="w-full h-full object-contain transition-opacity duration-300 max-h-52 sm:max-h-60 md:max-h-80"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="600"
+            />
+            <button @click="prevImage" class="absolute left-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full ml-2">&lt;</button>
+            <button @click="nextImage" class="absolute right-0 top-1/2 -translate-y-1/2 bg-card/50 text-foreground p-2 rounded-full mr-2">&gt;</button>
+          </div>
+          <div class="flex justify-center space-x-2 overflow-x-auto p-1 max-w-full">
+            <img
+              v-for="(img, idx) in packageDetails.details.images"
+              :key="idx"
+              :src="img"
+              :srcset="`
+                ${img.replace('.webp', '-412w.webp')} 412w,
+                ${img.replace('.webp', '-853w.webp')} 853w
+              `"
+              sizes="(max-width: 768px) 412px, 853px"
+              @click="setCurrentImage(idx)"
+              :class="{'border-2 border-primary': idx === currentImageIndex}"
+              class="w-20 h-16 object-contain rounded-lg cursor-pointer flex-shrink-0"
+              width="80"
+              height="64"
+            />
+          </div>
+        </div>
+
         <div class="text-center mt-8 space-y-4">
           <button @click="bookNow" class="w-full bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
             Inquiry
           </button>
         </div>
+
       </div>
       <div v-else class="text-foreground text-center">
         <p>Package not found.</p>
@@ -112,9 +118,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppLayout from '../components/AppLayout.vue'
+import VideoPlayer from '../components/ui/VideoPlayer.vue'
 import { PACKAGES } from '../composables/packagesData'
 import { smoothScroll } from '../utils/smoothScroll'
 
@@ -122,6 +129,8 @@ const route = useRoute()
 const router = useRouter()
 const packageDetails = ref(null)
 const currentImageIndex = ref(0)
+
+const videos = computed(() => packageDetails.value?.videos || []);
 
 onMounted(() => {
   window.scrollTo(0, 0);

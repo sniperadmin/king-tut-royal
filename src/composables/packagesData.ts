@@ -19,6 +19,7 @@ export interface PackageData {
   highlights: string[];
   isPopular?: boolean;
   partners?: Partner[];
+  videos?: Array<{ id: number; url: string; title: string; muted: boolean }>;
   details: {
     overview: string;
     accommodation: string;
@@ -50,6 +51,9 @@ export const PACKAGES: PackageData[] = [
       'Beginning on Thursday, November 6, 2025, this luxurious 5-day, 4-night program blends Egypt’s royal heritage with modern comfort, world-class hospitality, and curated cultural encounters'
     ],
     isPopular: true,
+    videos: [
+      { id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/king-highlight.m3u8', title: 'King Tut Royal VIP Package', muted: true }
+    ],
     details: {
       overview: "Step into the world of the Pharaohs with the King Tut Royal Package, a once-in-a-lifetime experience limited to just 50 privileged travelers each week. Beginning on Thursday, November 6, 2025, this luxurious 5-day, 4-night program blends Egypt’s royal heritage with modern comfort, world-class hospitality, and curated cultural encounters. With handpicked 5★ partners, seamless private transport, multilingual tour leaders, and exclusive dining experiences facing the Pyramids and on the Nile, this package ensures every moment is exceptional.",
       accommodation: "- 4 nights at Semiramis InterContinental Cairo (5★, Superior Double Room) including daily breakfast",
@@ -140,6 +144,9 @@ export const PACKAGES: PackageData[] = [
     isPopular: false,
     icon: 'Star',
     partners: [].filter(Boolean) as Partner[],
+    videos: [
+      { id: 2, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/king-music.m3u8', title: 'King Tut VIP One Day Package', muted: true }
+    ],
     details: {
       overview: "Discover the wonders of ancient Egypt in a single day with the King Tut VIP One Day Package. This exclusive tour offers a private, guided experience to the iconic Giza Pyramids, the Sphinx, and the Grand Egyptian Museum, complete with luxury transport and a gourmet lunch.",
       accommodation: "N/A",
