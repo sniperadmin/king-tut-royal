@@ -1,8 +1,8 @@
 <template>
-  <section class="relative w-full pt-16 bg-background text-foreground">
+  <section class="relative w-full pt-16 bg-foreground text-foreground">
     <!-- Background Video - Full Width, Contained -->
     <div class="w-full">
-      <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-intro.m3u8' }]" />
+      <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-hero.m3u8' }]" />
     </div>
   </section>
 </template>

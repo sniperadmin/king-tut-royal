@@ -2,7 +2,7 @@
   <section class="py-10 bg-light-gray text-foreground">
     <div class="container mx-auto px-4">
       <h2 class="text-center text-2xl font-bold mb-8">Our Official Partners</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+      <div class="flex flex-wrap justify-center gap-8">
         <template v-for="partner in partners" :key="partner.id">
           <router-link
             v-if="!partner.comingSoon"
