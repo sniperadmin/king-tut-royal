@@ -1,9 +1,9 @@
 <template>
-  <section class="py-10 bg-light-gray text-foreground">
-    <div class="container mx-auto px-4">
-      <h2 class="text-center text-2xl font-bold mb-8">Our Official Partners</h2>
-      <div class="flex flex-wrap justify-center gap-8">
-        <template v-for="partner in partners.slice(0, 2)" :key="partner.id">
+  <AppLayout>
+    <div class="container mx-auto px-4 py-20">
+      <h1 class="text-4xl font-bold text-center mb-10">Our Esteemed Partners</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <template v-for="partner in partners" :key="partner.id">
           <router-link
             v-if="!partner.comingSoon"
             :to="{ name: 'PartnerDetails', params: { id: partner.id } }"
@@ -28,23 +28,19 @@
             <p class="text-sm text-muted-foreground">Coming Soon...</p>
           </div>
         </template>
-        <div class="w-full flex justify-center mt-8">
-          <router-link to="/partners" class="bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-lg hover:bg-primary-dark transition-colors duration-300 text-lg font-semibold">
-            View All Partners
-          </router-link>
-        </div>
       </div>
     </div>
-  </section>
+  </AppLayout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ALL_PARTNERS, Partner } from '../composables/partnersData'
+import { ALL_PARTNERS, Partner } from '@/composables/partnersData'
+import AppLayout from '@/components/AppLayout.vue';
 
 const partners = ref<Partner[]>(ALL_PARTNERS)
 </script>
 
 <style scoped>
-/* Add any section-specific styles here */
+/* Styles for the partners page */
 </style>

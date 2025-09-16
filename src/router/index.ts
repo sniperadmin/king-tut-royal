@@ -29,6 +29,16 @@ const router = createRouter({
       component: () => import('../pages/PartnerDetails.vue')
     },
     {
+      path: '/packages',
+      name: 'Packages',
+      component: () => import('@/pages/Packages.vue')
+    },
+    {
+      path: '/partners',
+      name: 'Partners',
+      component: () => import('@/pages/Partners.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('../pages/NotFound.vue')

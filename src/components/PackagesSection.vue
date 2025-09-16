@@ -10,7 +10,7 @@
       
       <div class="grid md:grid-cols-2 gap-8">
         <PackageCard
-          v-for="pkg in packages"
+          v-for="pkg in packages.slice(0, 2)" 
           :key="pkg.title"
           :title="pkg.title"
           :price="pkg.price"
@@ -24,7 +24,12 @@
           :onBookNowClick="scrollToBooking"
           :packageTitleForDetails="pkg.title"
           :icon="pkg.icon"
-        />
+        /> <!-- Display only first two packages -->
+      </div>
+      <div class="text-center mt-10">
+        <router-link to="/packages" class="inline-block bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-full font-semibold tracking-wider transition-all duration-300 uppercase text-sm">
+          View All Packages
+        </router-link>
       </div>
     </div>
   </section>
