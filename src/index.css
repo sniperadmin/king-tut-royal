@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --background: 0 0% 98%; /* Lighter Background */
+    --foreground: 0 0% 20%; /* Adjusted for WCAG AA contrast against primary color */
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 5%;
@@ -15,14 +15,14 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    --primary: 40 49% 52%; /* Updated to #C09A49 */
-    --primary-foreground: 0 0% 5%;
+    --primary: 40 49% 52%; /* Gold #C09A49 */
+    --primary-foreground: 0 0% 5%; /* Very Dark Foreground */
 
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 5%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 98%; /* Lighter Muted */
+    --muted-foreground: 0 0% 20%; /* Adjusted for WCAG AA contrast against light gray */
 
     --accent: 40 49% 52%; /* Updated to #C09A49 */
     --accent-foreground: 0 0% 5%;
@@ -35,7 +35,7 @@
     --ring: 40 49% 52%; /* Updated to #C09A49 */
 
     --light-gray: 0 0% 90%;
-    --light-blue: 210 20% 90%;
+    --light-blue: 210 20% 98%; /* Lighter Light Blue */
     --light-yellow: 40 20% 90%;
     --brownish: 358 18% 30%;
   }
@@ -50,17 +50,17 @@
     --popover: 0 0% 5%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 5%;
+    --primary: 40 60% 15%; /* Further adjusted for WCAG AA contrast against light backgrounds */
+    --primary-foreground: 0 0% 98%; /* Adjusted for WCAG AA contrast against primary */
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 96%; /* Reverted to original light theme value */
+    --muted-foreground: 0 0% 30%; /* Adjusted for WCAG AA contrast against light gray */
 
-    --accent: 45 100% 50%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
@@ -80,7 +80,6 @@
     @apply bg-background text-foreground;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    font-size: 18px;
     line-height: 1.6;
   }
 

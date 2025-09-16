@@ -31,10 +31,8 @@ export const PACKAGES: PackageData[] = [
     icon: 'Crown',
 
     highlights: [
-      'Meet & Greet at Cairo International Airport',
-      'Intercontinental Cairo Semiramis 5 Star Hotel',
-      'Gourmet dinner cruise with live entertainment',
-      // 'Authentic perfume gift',
+      'Step into the world of the Pharaohs with the King Tut Royal Package, a once-in-a-lifetime experience limited to just 50 privileged travelers each week.',
+      'Beginning on Thursday, November 6, 2025, this luxurious 5-day, 4-night program blends Egypt’s royal heritage with modern comfort, world-class hospitality, and curated cultural encounters'
     ],
     isPopular: true,
     details: {
@@ -63,8 +61,13 @@ export const PACKAGES: PackageData[] = [
         }
       ],
       benefits: "Private archaeologist-led museum experience\nHand-crafted King Tut perfume souvenir\nLuxury transport & guided services throughout\nCurated cultural experiences blending heritage with modern luxury",
-      booking: "Price: €3,900 per person\nSecure your journey with a 30% deposit\nBalance payable before arrival\nExtremely limited availability — reserve early",
+      booking: "Price: €3,900 per person\nBook over whatsapp: +971 58 592 3054\nBalance payable before arrival\nExtremely limited availability — reserve early",
       images: [
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/bus.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-black.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/dinner.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-focus.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/cover.webp"
@@ -80,6 +83,8 @@ export const PACKAGES: PackageData[] = [
       'Private guided tour of Giza Pyramids & Sphinx',
       'Entry to the Grand Egyptian Museum',
       'Luxury lunch with Pyramid views',
+      'Available daily',
+      'Book at least 48 hours in advance'
     ],
     isPopular: false,
     icon: 'Star',
@@ -101,10 +106,11 @@ export const PACKAGES: PackageData[] = [
         }
       ],
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
-      booking: "Price: €1200 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance",
+      booking: "Price: €1200 per person\nFull payment required upon booking\nAvailable daily\nBook at least 48 hours in advance\nBook over whatsapp: +971 58 592 3054",
       images: [
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-focus.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/dinner.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pack.webp"
       ]
     }

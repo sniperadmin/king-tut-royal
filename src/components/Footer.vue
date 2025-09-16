@@ -30,6 +30,8 @@
             <li><button @click="scrollToSection('packages')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Packages section link">Packages</button></li>
             <li><button @click="scrollToSection('partners')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Partners section link">Partners</button></li>
             <li><button @click="scrollToSection('why-us')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</button></li>
+            <li><button @click="scrollToSection('newsletter')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Newsletter section link">Newsletter</button></li>
+            <li><button @click="scrollToSection('tour-leaders')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Tour Leaders section link">Tour Leaders</button></li>
             <li><button @click="scrollToSection('booking')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Inquiry section link">Inquiry</button></li>
           </ul>
         </div>

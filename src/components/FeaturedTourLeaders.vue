@@ -60,7 +60,7 @@ const leaders = ref<TourLeader[]>(tourLeadersData as TourLeader[] || [])
 const expanded = ref(false)
 
 const visibleLeaders = computed(() => {
-  return expanded.value ? leaders.value : leaders.value.slice(0, 6)
+  return expanded.value ? leaders.value : leaders.value.slice(0, 3)
 })
 
 function toggleExpanded() {

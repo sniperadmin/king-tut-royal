@@ -13,9 +13,13 @@
       </section>
 
       <section id="partners">
-        <Suspense>
-          <PartnersSection />
-        </Suspense>
+        <section class="py-12">
+          <Suspense>
+            <PartnersSection />
+          </Suspense>
+        </section>
+        <NewsletterSection id="newsletter" />
+        <FeaturedTourLeaders id="tour-leaders" />
       </section>
 
       <Suspense>
@@ -24,10 +28,6 @@
 
       <Suspense>
         <WhyChooseSection />
-      </Suspense>
-
-      <Suspense>
-        <featured-tour-leaders />
       </Suspense>
 
       <Suspense>
@@ -48,6 +48,7 @@ const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/Fea
 const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
 const PackagesSection = defineAsyncComponent(() => import('../components/PackagesSection.vue'))
 const PartnersSection = defineAsyncComponent(() => import('../components/PartnersSection.vue'))
+const NewsletterSection = defineAsyncComponent(() => import('../components/NewsletterSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('../components/WhyChooseSection.vue'))
 const BookingSection = defineAsyncComponent(() => import('../components/BookingSection.vue'))
 

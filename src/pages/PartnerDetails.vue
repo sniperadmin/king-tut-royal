@@ -218,104 +218,29 @@ const allPartners: Partner[] = [
       'Concierge services'
     ],
     media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png' },
+      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/ICSemiramis%20lobby.jpg' },
       { type: 'video', src: 'https://www.youtube.com/embed/your-video-id', thumbnail: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC.png' }
+      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/semiramis%20ic%20exterior.JPG' }
     ]
   },
   {
-    id: 'four-seasons',
-    name: 'Four Seasons Hotels & Resorts',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Four_Seasons_Hotels_and_Resorts_logo.png',
-    description: 'Experience luxury and personalized service at Four Seasons Hotels and Resorts worldwide.',
-    website: 'https://www.fourseasons.com/',
-    about: 'Four Seasons Hotels and Resorts is a Canadian international luxury hospitality company. It operates more than 100 hotels and resorts worldwide. The company was established in 1960 by Isadore Sharp.',
+    id: '1001-luxury',
+    name: '1001 Luxury',
+    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001logo-1-1_2.png',
+    description: '1001 Luxury offers exclusive, tailor-made luxury travel experiences.',
+    website: 'https://www.1001luxury.com/',
+    about: '1001 Luxury specializes in crafting bespoke journeys for discerning travelers. We provide unparalleled access to unique destinations and experiences, ensuring every detail is meticulously planned and executed.\n\nOur services range from private jet charters and luxury yacht rentals to personalized cultural tours and exclusive event access. We pride ourselves on delivering exceptional service and unforgettable memories.',
     services: [
-      'World-class dining',
-      'Exclusive spa treatments',
-      'Concierge services',
-      'Private residences'
+      'Bespoke travel planning',
+      'Private jet and yacht charters',
+      'Luxury accommodations',
+      'Exclusive cultural experiences',
+      '24/7 concierge service'
     ],
     media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Four_Seasons_Hotels_and_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Four_Seasons_Hotels_and_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Four_Seasons_Hotels_and_Resorts_logo.png' }
-    ]
-  },
-  {
-    id: 'hilton',
-    name: 'Hilton Hotels & Resorts',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Hilton_Hotels_and_Resorts_logo.png',
-    description: 'A global brand of full-service hotels and resorts and the flagship brand of Hilton Worldwide.',
-    website: 'https://www.hilton.com/en/',
-    about: 'Hilton Hotels & Resorts is a global brand of full-service hotels and resorts and the flagship brand of American multinational hospitality company Hilton Worldwide. The original company was founded by Conrad Hilton.',
-    services: [
-      'Comfortable accommodations',
-      'Dining options',
-      'Fitness centers',
-      'Meeting spaces'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Hilton_Hotels_and_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Hilton_Hotels_and_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Hilton_Hotels_and_Resorts_logo.png' }
-    ]
-  },
-  {
-    id: 'marriott',
-    name: 'Marriott International',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Marriott_International_logo.png',
-    description: 'Leading global lodging company with more than 7,000 properties across 131 countries and territories.',
-    website: 'https://www.marriott.com/',
-    about: 'Marriott International, Inc. is an American multinational diversified hospitality company that manages and franchises a broad portfolio of hotels and related lodging facilities. Founded by J. Willard Marriott and Alice Marriott.',
-    services: [
-      'Diverse hotel brands',
-      'Loyalty program',
-      'Event planning',
-      'Vacation rentals'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Marriott_International_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Marriott_International_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Marriott_International_logo.png' }
-    ]
-  },
-  {
-    id: 'ritz-carlton',
-    name: 'The Ritz-Carlton',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Ritz-Carlton_logo.png',
-    description: 'Luxury hotel company with a tradition of excellence and personalized service.',
-    website: 'https://www.ritzcarlton.com/',
-    about: 'The Ritz-Carlton Hotel Company, LLC is an American multinational company that operates the luxury hotel chain known as The Ritz-Carlton. The company has 108 hotels and resorts in 30 countries and territories worldwide.',
-    services: [
-      'Exceptional service',
-      'Gourmet dining',
-      'Spa and wellness',
-      'Unique experiences'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Ritz-Carlton_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Ritz-Carlton_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Ritz-Carlton_logo.png' }
-    ]
-  },
-  {
-    id: 'st-regis',
-    name: 'St. Regis Hotels & Resorts',
-    logo: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/St._Regis_Hotels_26_Resorts_logo.png',
-    description: 'A luxury hotel brand that is part of Marriott International.',
-    website: 'https://www.marriott.com/marriott-brands/st-regis.mi',
-    about: 'St. Regis Hotels & Resorts is a luxury hotel brand that is part of Marriott International. Founded by John Jacob Astor IV, with the opening of the St. Regis New York in 1904.',
-    services: [
-      'Bespoke service',
-      'Exquisite dining',
-      'Signature rituals',
-      'Elegant accommodations'
-    ],
-    media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/St._Regis_Hotels_26_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/St._Regis_Hotels_26_Resorts_logo.png' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/St._Regis_Hotels_26_Resorts_logo.png' }
+      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder1.jpg' },
+      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder2.jpg' },
+      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001luxury-placeholder3.jpg' }
     ]
   }
 ]
@@ -394,7 +319,9 @@ watch(isModalOpen, (newVal) => {
 onMounted(() => {
   window.scrollTo(0, 0);
   const partnerId = route.params.id as string
+  console.log('Route partnerId:', partnerId);
   partner.value = allPartners.find(p => p.id === partnerId) || null
+  console.log('Found partner:', partner.value);
   startAutoSlide()
 })
 

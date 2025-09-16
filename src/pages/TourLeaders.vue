@@ -17,7 +17,7 @@
               <p v-if="leader.age" class="flex items-center text-muted-foreground"><CalendarDays class="w-5 h-5 mr-2 text-primary" /> Age: {{ leader.age }}</p>
             </div>
           </div>
-          <router-link :to="`/tour-leaders/${getSlug(leader.name)}`" class="mt-4 inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-primary to-primary-foreground text-primary-foreground font-semibold rounded-full shadow-lg hover:scale-105 transform transition">
+          <router-link :to="`/tour-leaders/${getSlug(leader.name)}`" class="mt-4 inline-flex items-center justify-center px-5 py-2 text-primary-foreground bg-primary font-semibold rounded-full shadow-lg hover:scale-105 transform transition">
             View More
           </router-link>
         </div>

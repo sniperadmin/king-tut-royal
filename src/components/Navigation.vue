@@ -13,7 +13,9 @@
           <button @click="scrollToSection('packages')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</button>
           <button @click="scrollToSection('partners')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</button>
           <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
-          <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
+          <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Newsletter</button>
+          <button @click="scrollToSection('tour-leaders')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</button>
+          <!-- <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link> -->
           <button 
             @click="scrollToSection('booking')"
             class="bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-2 rounded-lg font-semibold transition-all duration-300"
@@ -42,6 +44,7 @@
           <button @click="scrollToSection('packages')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</button>
           <button @click="scrollToSection('partners')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</button>
           <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</button>
+          <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button>
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"

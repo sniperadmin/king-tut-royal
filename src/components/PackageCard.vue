@@ -29,7 +29,7 @@
 
       <div class="mb-6 flex-grow">
         <ul class="space-y-2 text-left">
-          <li v-for="(highlight, index) in highlights.slice(0, 3)" :key="index" class="flex items-start text-sm">
+          <li v-for="(highlight, index) in highlights" :key="index" class="flex items-start text-sm">
             <span class="text-primary mr-2 text-base">•</span>
             <span class="text-foreground font-medium leading-tight">{{ highlight }}</span>
           </li>
