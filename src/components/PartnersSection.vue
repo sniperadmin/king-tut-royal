@@ -9,7 +9,16 @@
             :to="{ name: 'PartnerDetails', params: { id: partner.id } }"
             class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs mx-auto"
           >
-            <img v-if="partner.logo" :src="partner.logo" :alt="partner.name + ' Logo'" class="w-full h-auto mb-6" />
+            <img
+              v-if="partner.logo"
+              :src="partner.logo.medium"
+              :srcset="`${partner.logo.small} 200w, ${partner.logo.medium} 600w, ${partner.logo.large} 1200w`"
+              sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
+              :alt="partner.name + ' Logo'"
+              class="w-full h-auto mb-6"
+              width="200"
+              height="80"
+            />
             <!-- <h3 class="text-xl font-semibold text-center text-brownish">{{ partner.name }}</h3>
             <button v-if="partner.id === 'semiramis-intercontinental'" class="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary-dark transition-colors duration-300">
               Show More

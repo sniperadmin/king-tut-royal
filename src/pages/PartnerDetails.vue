@@ -5,9 +5,11 @@
         <!-- Partner Header -->
         <div class="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div class="w-full md:w-1/3">
-            <img 
-              :src="partner.logo" 
-              :alt="partner.name + ' Logo'" 
+            <img
+              :src="partner.logo.medium"
+              :srcset="`${partner.logo.small} 200w, ${partner.logo.medium} 600w, ${partner.logo.large} 1200w`"
+              sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
+              :alt="partner.name + ' Logo'"
               class="w-full h-auto rounded-lg shadow-lg"
             />
           </div>
