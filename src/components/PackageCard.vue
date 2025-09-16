@@ -10,7 +10,7 @@
         :alt="title + ' thumbnail'"
         loading="lazy"
         decoding="async"
-        class="mx-auto rounded-t-lg drop-shadow"
+        class="mx-auto rounded-t-lg drop-shadow w-full h-48 object-contain"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
         Popular

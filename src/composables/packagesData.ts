@@ -40,7 +40,7 @@ export const PACKAGES: PackageData[] = [
     title: "King Tut Royal VIP",
     price: "€3,900",
     duration: "5 Days / 4 Nights (Thursday - Monday)",
-    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
+    image: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-black.webp",
     icon: 'Crown',
     partners: [
       ALL_PARTNERS.find(p => p.id === 'semiramis-intercontinental'),
@@ -118,12 +118,12 @@ export const PACKAGES: PackageData[] = [
         companyName: "SY Consulting FZ-LLC"
       },
       images: [
+        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/vip-h.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/bus.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-black.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/dinner.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/tut-focus.webp",
-        "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/royal-vip.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/pyramids.webp",
         "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/packages/cover.webp"
       ]
