@@ -3,13 +3,21 @@
     <section id="home">
         <HeroSection />
       </section>
-      <Suspense>
-        <VideoSection />
-      </Suspense>
+
       <section id="packages">
         <Suspense>
           <PackagesSection />
         </Suspense>
+      </section>
+
+      <section id="partners">
+        <section class="py-12">
+          <Suspense>
+            <PartnersSection />
+          </Suspense>
+        </section>
+        <NewsletterSection id="newsletter" />
+        <FeaturedTourLeaders id="tour-leaders" />
       </section>
 
       <Suspense>
@@ -21,11 +29,11 @@
       </Suspense>
 
       <Suspense>
-        <featured-tour-leaders />
+        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
       </Suspense>
 
       <Suspense>
-        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+        <VideoSection />
       </Suspense>
   </AppLayout>
 </template>
@@ -41,6 +49,8 @@ const VideoSection = defineAsyncComponent(() => import('../components/sections/V
 const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))
 const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
 const PackagesSection = defineAsyncComponent(() => import('../components/PackagesSection.vue'))
+const PartnersSection = defineAsyncComponent(() => import('../components/PartnersSection.vue'))
+const NewsletterSection = defineAsyncComponent(() => import('../components/NewsletterSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('../components/WhyChooseSection.vue'))
 const BookingSection = defineAsyncComponent(() => import('../components/BookingSection.vue'))
 

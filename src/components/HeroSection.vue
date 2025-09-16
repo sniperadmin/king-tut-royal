@@ -1,32 +1,16 @@
 <template>
-  <section class="relative w-full pt-16">
-    <!-- Background Image - Full Width, Contained -->
+  <section class="relative w-full pt-16 bg-foreground text-foreground">
+    <!-- Background Video - Full Width, Contained -->
     <div class="w-full">
-      <picture>
-        <source srcset="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-320x480.webp 320w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-480x720.webp 480w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-640x960.webp 640w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp 853w" type="image/webp" sizes="100vw">
-        <img
-          ref="heroImg"
-          :class="['w-full h-auto object-cover object-center bg-gray-200 transition-filter duration-700 ease-out', isLoaded ? 'blur-0 scale-100' : 'blur-lg scale-105']"
-          :src="mainSrc"
-          :srcset="mainSrcset"
-          sizes="100vw"
-          alt="Golden funerary mask of Pharaoh Tutankhamun, ancient Egypt, showcased with dramatic lighting."
-          decoding="async"
-          loading="eager"
-          fetchpriority="high"
-          width="853"
-          height="1280"
-          crossorigin="anonymous"
-          @load="onImgLoad"
-        />
-      </picture>
+      <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-hero.m3u8' }]" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { smoothScroll } from '../utils/smoothScroll'
+import VideoPlayer from './ui/VideoPlayer.vue'
 
 const isLoaded = ref(false)
 const heroImg = ref<HTMLImageElement | null>(null)
