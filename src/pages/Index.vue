@@ -3,9 +3,7 @@
     <section id="home">
         <HeroSection />
       </section>
-      <Suspense>
-        <VideoSection />
-      </Suspense>
+
       <section id="packages">
         <Suspense>
           <PackagesSection />
@@ -32,6 +30,10 @@
 
       <Suspense>
         <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+      </Suspense>
+
+      <Suspense>
+        <VideoSection />
       </Suspense>
   </AppLayout>
 </template>

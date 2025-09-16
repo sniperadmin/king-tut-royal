@@ -9,6 +9,10 @@ const props = defineProps({
   initialVideoIndex: {
     type: Number,
     default: 0
+  },
+  aspectRatio: {
+    type: String,
+    default: '16/9' // Default to 16:9 if not provided
   }
 });
 
@@ -75,7 +79,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="video-player-container" ref="rootElRef" class="relative w-full mx-auto rounded-lg overflow-hidden object-cover">
+  <div
+    id="video-player-container"
+    ref="rootElRef"
+    class="relative w-full mx-auto rounded-lg overflow-hidden object-cover"
+    :style="{ '--aspect-ratio': props.aspectRatio }"
+  >
     <template v-if="vidstackLoaded">
       <media-player
         ref="videoPlayer"
@@ -145,7 +154,7 @@ onUnmounted(() => {
 <style scoped>
 /* Add any custom styles here if needed */
 .aspect-video {
-  aspect-ratio: 9/16 !important;
+  aspect-ratio: v-bind(--aspect-ratio);
 }
 
 @media (min-width: 1024px) {
