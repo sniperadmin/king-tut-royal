@@ -18,6 +18,8 @@
             :srcset="`${mediaItems[currentSlide].src_412w} 412w, ${mediaItems[currentSlide].src_853w} 853w`"
             sizes="(max-width: 640px) 412px, 853px"
             class="w-full h-full object-contain transition-all duration-500"
+            width="853"
+            height="480"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent"></div>
 
@@ -77,6 +79,8 @@
         :src="mediaItems[modalImageIndex].src"
         :alt="mediaItems[modalImageIndex].title"
         class="max-w-full max-h-full object-contain rounded-lg"
+        width="853"
+        height="480"
       />
 
       <Button

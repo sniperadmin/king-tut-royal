@@ -1,7 +1,7 @@
 <template>
-<div class="flex flex-col">
+<div class="flex flex-col h-full w-full">
   <h3 class="text-2xl font-semibold text-foreground my-5">{{ title }}</h3>
-  <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden', isPopular ? 'border-primary' : 'border-border']">
+  <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden w-full', isPopular ? 'border-primary' : 'border-border']">
     <div class="relative overflow-hidden bg-muted">
       <img
         :src="image"
@@ -10,9 +10,9 @@
         :alt="title + ' thumbnail'"
         loading="lazy"
         decoding="async"
-        class="mx-auto rounded-t-lg drop-shadow w-full h-48 object-contain"
-        width="200"
-        height="120"
+        class="w-full rounded-t-lg drop-shadow h-48 object-contain"
+        width="412"
+        height="240"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
         Popular
@@ -85,7 +85,7 @@ const props = defineProps({
   imageSrcset: { type: String, required: false, default: '' },
   image_412w: { type: String, required: false, default: '' },
   image_853w: { type: String, required: false, default: '' },
-  imageSizes: { type: String, default: '100vw' },
+  imageSizes: { type: String, default: '(max-width: 768px) 100vw, 50vw' },
   highlights: { type: Array as PropType<string[]>, required: true },
   isPopular: { type: Boolean, default: false },
   onBookNowClick: { type: Function as PropType<() => void>, required: true },
