@@ -30,7 +30,7 @@
         </template>
       </div>
       <div class="w-full flex justify-center mt-8">
-        <router-link to="/partners" class="bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-lg hover:bg-primary-dark transition-colors duration-300 text-lg font-semibold">
+        <router-link to="/partners" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
           View All Partners
         </router-link>
       </div>

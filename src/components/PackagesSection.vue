@@ -27,7 +27,7 @@
         />
       </div>
       <div class="text-center mt-10">
-        <router-link to="/packages" class="inline-block bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-full font-semibold tracking-wider transition-all duration-300 uppercase text-sm">
+        <router-link to="/packages" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
           View All Packages
         </router-link>
       </div>

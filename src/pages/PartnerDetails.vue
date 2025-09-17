@@ -17,15 +17,6 @@
             <h1 class="text-4xl font-bold text-primary mb-4">{{ partner.name }}</h1>
             <p class="text-lg text-muted-foreground mb-6">{{ partner.description }}</p>
             <div class="flex flex-wrap gap-4">
-              <a 
-                v-if="partner.website" 
-                :href="partner.website" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
-              >
-                Visit Website
-              </a>
               <button 
                 @click="$router.push('/partners')"
                 class="border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors duration-300"

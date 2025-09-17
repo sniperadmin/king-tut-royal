@@ -33,7 +33,7 @@
       </transition-group>
 
       <div class="flex justify-center mt-6">
-        <router-link to="/tour-leaders" class="px-6 py-3 rounded-full bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
+        <router-link to="/tour-leaders" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
           View All Tour Leaders
         </router-link>
       </div>
