@@ -12,7 +12,7 @@
         <article v-for="leader in visibleLeaders" :key="leader.phone || leader.name" class="leader-card bg-card border border-border rounded-lg p-5 flex flex-col items-start text-foreground transition-shadow hover:shadow-xl" role="article">
           <div class="flex flex-col sm:flex-row items-center w-full gap-4">
             <div class="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden bg-muted flex items-center justify-center mb-2 sm:mb-0">
-              <img v-if="leader.avatar" :src="leader.avatar" :alt="leader.name" class="w-full h-full object-cover" loading="lazy" />
+              <img v-if="leader.avatar" :src="leader.avatar" :alt="leader.name" class="w-full h-full object-cover" loading="lazy" width="80" height="80" />
               <div v-else class="text-2xl font-semibold text-muted-foreground">{{ leader.name ? leader.name.charAt(0) : '?' }}</div>
             </div>
             <div class="flex-1 text-center sm:text-left">
@@ -33,7 +33,7 @@
       </transition-group>
 
       <div class="flex justify-center mt-6">
-        <router-link to="/tour-leaders" class="px-6 py-3 rounded-full bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
+        <router-link to="/tour-leaders" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
           View All Tour Leaders
         </router-link>
       </div>

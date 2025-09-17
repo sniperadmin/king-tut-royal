@@ -8,9 +8,9 @@
         </p>
       </div>
       
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="flex flex-wrap justify-center gap-8">
         <PackageCard
-          v-for="pkg in packages"
+          v-for="pkg in packages.slice(0, 1)"
           :key="pkg.title"
           :title="pkg.title"
           :price="pkg.price"
@@ -25,6 +25,11 @@
           :packageTitleForDetails="pkg.title"
           :icon="pkg.icon"
         />
+      </div>
+      <div class="text-center mt-10">
+        <router-link to="/packages" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
+          View All Packages
+        </router-link>
       </div>
     </div>
   </section>
@@ -42,3 +47,7 @@ const scrollToBooking = () => {
 
 const packages = PACKAGES;
 </script>
+
+<style scoped>
+/* Styles for the packages section */
+</style>

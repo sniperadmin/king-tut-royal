@@ -18,6 +18,8 @@
             :srcset="`${mediaItems[currentSlide].src_412w} 412w, ${mediaItems[currentSlide].src_853w} 853w`"
             sizes="(max-width: 640px) 412px, 853px"
             class="w-full h-full object-contain transition-all duration-500"
+            width="853"
+            height="480"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent"></div>
 
@@ -77,6 +79,8 @@
         :src="mediaItems[modalImageIndex].src"
         :alt="mediaItems[modalImageIndex].title"
         class="max-w-full max-h-full object-contain rounded-lg"
+        width="853"
+        height="480"
       />
 
       <Button
@@ -144,68 +148,100 @@ const prevModalImage = () => {
 const mediaItems = [
   {
     id: 0,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/vip-853w.webp",
-    title: "VIP Experience",
-    description: "Exclusive access and personalized service"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-853w.webp",
+    title: "Bus Experience",
+    description: "Luxury transportation"
   },
   {
     id: 1,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/luxury-853w.webp",
-    title: "Luxury Travel",
-    description: "Unforgettable journeys with unparalleled comfort"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-853w.webp",
+    title: "Perfume Experience",
+    description: "Unforgettable perfume package"
   },
   {
     id: 2,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/chills-853w.webp",
-    title: "Luxury Travel",
-    description: "Unforgettable journeys with unparalleled comfort"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-light.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-light-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-light-853w.webp",
+    title: "Pyramid",
+    description: "Unforgettable pyramid experience"
   },
   {
     id: 3,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/mobile-853w.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket-853w.webp",
     title: "Core Services",
     description: "Luxury accommodations and premium experiences"
   },
   {
     id: 4,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/services-853w.webp",
-    title: "Digital Experience",
-    description: "AR-enhanced tours and mobile concierge"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/tut.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/tut-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/tut-853w.webp",
+    title: "King Tut Monuments",
+    description: "Unforgettable King Tut experience"
   },
   {
     id: 5,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/dinner-853w.webp",
-    title: "Royal Dinner on the Nile",
-    description: "Exclusive dining experiences with ancient Egyptian ambiance"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-853w.webp",
+    title: "CROHA",
+    description: "Unforgettable CROHA experience"
   },
   {
     id: 6,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-853w.webp",
-    title: "King Tut Royal Collection",
-    description: "Limited edition luxury items inspired by pharaonic treasures"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-853w.webp",
+    title: "ICSemiramis",
+    description: "Unforgettable ICSemiramis experience"
   },
   {
     id: 7,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/wao-853w.webp",
-    title: "VIP Experience Package",
-    description: "Premium access and personalized Egyptian adventure"
-  }
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-853w.webp",
+    title: "ICSemiramis",
+    description: "ICSemiramis rooms experience"
+  },
+  {
+    id: 8,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-853w.webp",
+    title: "ICSemiramis",
+    description: "ICSemiramis rooms experience"
+  },
+  {
+    id: 9,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-853w.webp",
+    title: "Museum",
+    description: "Unforgettable museum experience"
+  },
+  {
+    id: 10,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-853w.webp",
+    title: "Museum",
+    description: "Unforgettable museum experience"
+  },
+  {
+    id: 11,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-853w.webp",
+    title: "Car",
+    description: "Unforgettable museum experience"
+  },
 ];
 
 let intervalId: number | undefined;

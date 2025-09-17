@@ -168,11 +168,12 @@
             <Button
               type="submit"
               :disabled="!isFormValid || submitting"
-              class="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary font-semibold"
+              class="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary font-semibold disabled:opacity-90"
             >
               <MessageCircle class="mr-2 h-5 w-5" />
-              {{ submitting ? 'Processing...' : 'Secure Your Booking' }}
+              {{ submitting ? 'Processing...' : 'Send us your inquiry' }}
             </Button>
+            <Label v-if="!isFormValid" class="text-red-500 font-bold">Fill in the required fields and we will get back to you.</Label>
           </form>
         </CardContent>
       </Card>
@@ -413,7 +414,7 @@ ${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlot
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `
 
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=971585923054&text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=201270389777&text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
 
     // Refresh available weeks (only relevant for VIP package)
