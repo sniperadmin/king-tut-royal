@@ -111,7 +111,7 @@ export const PACKAGES: PackageData[] = [
       benefits: "The King Tut Royal Package is strictly limited to 50 travelers per week, ensuring exclusivity, privacy, and unforgettable service.",
       booking: {
         price: `€${PACKAGE_PRICING.vip}`,
-        whatsapp: "+971 58 592 3054",
+        whatsapp: "+201270389777",
         email: "",
         website: "www.sherinyosry.com",
         address: "FOAM1604 Compass Building, Al Shohada Road, AL Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates",
@@ -177,7 +177,7 @@ export const PACKAGES: PackageData[] = [
       benefits: "Private Egyptologist guide\nAll entry fees included\nLuxury air-conditioned transport\nPersonalized experience",
       booking: {
         price: `€${PACKAGE_PRICING.oneday}`,
-        whatsapp: "+971 58 592 3054",
+        whatsapp: "+201270389777",
         email: "",
         website: "www.sherinyosry.com",
         address: "FOAM1604 Compass Building, Al Shohada Road, AL Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates",

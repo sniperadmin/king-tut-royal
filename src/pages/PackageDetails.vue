@@ -14,7 +14,13 @@
           <h3 class="text-2xl font-semibold text-foreground mb-3">Our Partners</h3>
           <div class="flex flex-wrap justify-center gap-4">
             <div v-for="partner in packageDetails.partners" :key="partner.name" class="flex flex-col items-center p-4 bg-muted rounded-lg shadow-sm">
-              <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain mb-2" />
+              <img
+                :src="partner.logo.large"
+                :srcset="`${partner.logo.small} 640w, ${partner.logo.medium} 1024w, ${partner.logo.large} 1920w`"
+                :sizes="`(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px`"
+                :alt="partner.name"
+                class="w-full h-auto object-contain mb-2"
+              />
             </div>
           </div>
         </div>
