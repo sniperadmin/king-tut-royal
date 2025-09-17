@@ -35,6 +35,8 @@
       <Suspense>
         <VideoSection />
       </Suspense>
+
+      <ContactSection />
   </AppLayout>
 </template>
 
@@ -53,6 +55,7 @@ const PartnersSection = defineAsyncComponent(() => import('../components/Partner
 const NewsletterSection = defineAsyncComponent(() => import('../components/NewsletterSection.vue'))
 const WhyChooseSection = defineAsyncComponent(() => import('../components/WhyChooseSection.vue'))
 const BookingSection = defineAsyncComponent(() => import('../components/BookingSection.vue'))
+const ContactSection = defineAsyncComponent(() => import('../components/ContactSection.vue'))
 
 // Provide app context for child components
 provideAppContext()

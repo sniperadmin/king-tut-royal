@@ -2,6 +2,8 @@ export interface MediaItem {
   type: 'image' | 'video';
   src: string;
   thumbnail?: string; // Optional thumbnail for videos
+  srcSet?: string; // Add srcSet for responsive images
+  sizes?: string; // Add sizes for responsive images
 }
 
 export interface Partner {
@@ -62,7 +64,30 @@ export const ALL_PARTNERS: Partner[] = [
       '24/7 concierge service'
     ],
     media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001logo.jpeg' }
+      { 
+        type: 'image', 
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding1_large.webp', 
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding1_small.webp 640w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding1_medium.webp 1024w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding1_large.webp 1920w',
+        sizes: '(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px'
+      },
+      { 
+        type: 'image', 
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding2_large.webp', 
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding2_small.webp 640w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding2_medium.webp 1024w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding2_large.webp 1920w',
+        sizes: '(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px'
+      },
+      { 
+        type: 'image', 
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding3_large.webp', 
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding3_small.webp 640w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding3_medium.webp 1024w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding3_large.webp 1920w',
+        sizes: '(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px'
+      },
+      { 
+        type: 'image', 
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding4_large.webp', 
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding4_small.webp 640w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding4_medium.webp 1024w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001/wedding4_large.webp 1920w',
+        sizes: '(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px'
+      }
     ]
   }
 ]

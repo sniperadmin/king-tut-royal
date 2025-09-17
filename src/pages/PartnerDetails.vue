@@ -55,6 +55,8 @@
                 <img
                   v-if="currentMedia.type === 'image'"
                   :src="currentMedia.src"
+                  :srcset="currentMedia.srcSet"
+                  :sizes="currentMedia.sizes"
                   :alt="partner.name + ' Media ' + (currentSlide + 1)"
                   class="max-h-full max-w-full object-contain"
                 />
@@ -97,6 +99,8 @@
                 v-for="(mediaItem, index) in partner.media"
                 :key="index"
                 :src="mediaItem.thumbnail || mediaItem.src"
+                :srcset="mediaItem.srcSet"
+                :sizes="mediaItem.sizes"
                 :alt="'Thumbnail ' + (index + 1)"
                 @click="goToSlide(index)"
                 :class="['w-20 h-20 object-cover rounded-md cursor-pointer transition-all duration-300', currentSlide === index ? 'ring-2 ring-primary ring-offset-2' : 'opacity-70 hover:opacity-100']"
@@ -131,6 +135,8 @@
           <img
             v-if="currentModalMedia.type === 'image'"
             :src="currentModalMedia.src"
+            :srcset="currentModalMedia.srcSet"
+            :sizes="currentModalMedia.sizes"
             :alt="partner.name + ' Media ' + (modalImageIndex + 1)"
             class="max-h-full max-w-full object-contain"
           />
