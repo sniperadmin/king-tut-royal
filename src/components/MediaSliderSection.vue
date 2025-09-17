@@ -220,14 +220,6 @@ const mediaItems = [
   },
   {
     id: 9,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9207.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9207-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9207-853w.webp",
-    title: "ICSemiramis",
-    description: "ICSemiramis rooms experience"
-  },
-  {
-    id: 10,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-853w.webp",
@@ -235,7 +227,7 @@ const mediaItems = [
     description: "Unforgettable museum experience"
   },
   {
-    id: 11,
+    id: 10,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-853w.webp",
@@ -243,7 +235,7 @@ const mediaItems = [
     description: "Unforgettable museum experience"
   },
   {
-    id: 12,
+    id: 11,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-853w.webp",

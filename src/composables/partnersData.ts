@@ -31,7 +31,7 @@ export const ALL_PARTNERS: Partner[] = [
       large: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/3D_logo1_RGB_LP_SC_large.png',
     },
     description: 'Luxury 5-star hotel located in the heart of Cairo with breathtaking views of the Nile River.',
-    website: 'https://www.ihg.com/intercontinental/hotels/us/en/cairo/caica/hoteldetail',
+    website: 'https://www.booking.com/hotel/eg/intercontinental-cairo-semiramis.html?msockid=281e045335e26e1b1208112b349e6f83',
     about: 'The InterContinental Cairo Semiramis is a landmark hotel in Egypt\'s capital, offering unparalleled luxury and service.\n\nWith its prime location on the Nile Corniche, the hotel provides easy access to Cairo\'s most famous attractions including the Egyptian Museum, Khan el-Khalili bazaar, and the Giza Pyramids.\n\nThe hotel features 432 elegantly appointed rooms and suites, multiple dining options, a spa, and extensive meeting facilities.',
     services: [
       'Luxury accommodations',
@@ -41,8 +41,36 @@ export const ALL_PARTNERS: Partner[] = [
       'Concierge services'
     ],
     media: [
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/ICSemiramis%20lobby.jpg' },
-      { type: 'image', src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/semiramis%20ic%20exterior.JPG' }
+      {
+        type: 'image',
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby.webp',
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-412w.webp 412w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-853w.webp 853w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby.webp 1920w',
+        sizes: '(max-width: 412px) 412px, (max-width: 853px) 853px, 1920px'
+      },
+      {
+        type: 'image',
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay.webp',
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-412w.webp 412w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-853w.webp 853w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay.webp 1920w',
+        sizes: '(max-width: 412px) 412px, (max-width: 853px) 853px, 1920px'
+      },
+      {
+        type: 'image',
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Intercontinental%20rooms9207.webp',
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Intercontinental%20rooms9207-412w.webp 412w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Intercontinental%20rooms9207-853w.webp 853w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/Intercontinental%20rooms9207.webp 1920w',
+        sizes: '(max-width: 412px) 412px, (max-width: 853px) 853px, 1920px'
+      },
+      {
+        type: 'image',
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166.webp',
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-412w.webp 412w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-853w.webp 853w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166.webp 1920w',
+        sizes: '(max-width: 412px) 412px, (max-width: 853px) 853px, 1920px'
+      },
+      {
+        type: 'image',
+        src: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196.webp',
+        srcSet: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-412w.webp 412w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-853w.webp 853w, https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196.webp 1920w',
+        sizes: '(max-width: 412px) 412px, (max-width: 853px) 853px, 1920px'
+      }
     ]
   },
   {
@@ -54,7 +82,7 @@ export const ALL_PARTNERS: Partner[] = [
       large: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/partners/1001logo_large.jpeg',
     },
     description: '1001 Luxury offers exclusive, tailor-made luxury travel experiences.',
-    website: 'https://www.1001luxury.com/',
+    website: 'https://www.sherinyosry.com/1001-luxury.html/',
     about: '1001 Luxury specializes in crafting bespoke journeys for discerning travelers. We provide unparalleled access to unique destinations and experiences, ensuring every detail is meticulously planned and executed.\n\nOur services range from private jet charters and luxury yacht rentals to personalized cultural tours and exclusive event access. We pride ourselves on delivering exceptional service and unforgettable memories.',
     services: [
       'Bespoke travel planning',

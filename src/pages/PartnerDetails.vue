@@ -27,7 +27,7 @@
                 Visit Website
               </a>
               <button 
-                @click="$router.go(-1)"
+                @click="$router.push('/partners')"
                 class="border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
               >
                 Back to Partners
