@@ -50,6 +50,10 @@ onMounted(() => {
           try {
             await import('vidstack/bundle');
             await import('vidstack/icons');
+            // Dynamically import hls.js only if the video URL is an .m3u8 file
+            if (props.videos[currentVideoIndex.value].url.includes('.m3u8')) {
+              await import('hls.js');
+            }
             vidstackLoaded.value = true;
             await nextTick();
             // Give the template a short moment to render the media-player before attempting play

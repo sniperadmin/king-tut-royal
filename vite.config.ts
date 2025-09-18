@@ -23,9 +23,13 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     mode === 'report' && visualizer({ filename: 'dist/bundle-stats.html', open: true }),
-    vidstack(),
     json5Plugin(),
-    compression({ algorithm: 'brotliCompress' }),
+    compression({
+      algorithm: 'brotliCompress',
+      deleteOriginalAssets: false,
+      skipIfLargerOrEqual: true
+    }),
+    vidstack(),
     viteImagemin({
       mozjpeg: { quality: 80 },
       pngquant: { quality: [0.7, 0.9] },
@@ -38,7 +42,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   optimizeDeps: {
-    include: ['@tanstack/vue-query', 'vee-validate', 'hls.js']
+    include: ['@tanstack/vue-query', 'vee-validate']
   },
   build: {
     target: 'esnext',
@@ -50,7 +54,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['vue', 'vue-router'],
           ui: ['@tanstack/vue-query', 'lucide-vue-next'],
-          video: ['hls.js'],
           forms: ['vee-validate', 'zod', 'vue-tel-input'],
           heroSection: [
             './src/components/HeroSection.vue'
