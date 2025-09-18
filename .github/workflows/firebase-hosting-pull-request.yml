@@ -34,3 +34,19 @@ jobs:
   #         gitAuthor: ${{ github.actor }}
   #         gitBranch: ${{ github.ref }}
   #         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+
+  perf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Generate Lighthouse Report
+        uses: justinribeiro/lighthouse-action@master
+        with:
+          secret: ${{ secrets.GITHUB_TOKEN }}
+          url:  ${{ needs.build_and_preview.outputs.details_url }}
+          wptConnectionSpeed: threegfast
+      - name: Saving Lighthouse Audit Artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: lighthouse-artifacts
+          path: './results'
