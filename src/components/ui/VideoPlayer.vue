@@ -86,6 +86,7 @@ onUnmounted(() => {
     :style="{ '--aspect-ratio': props.aspectRatio }"
   >
     <template v-if="vidstackLoaded">
+      <!-- NOTE: Never delete aspect-video class from media-player -->
       <media-player
         ref="videoPlayer"
         class="aspect-video w-full h-full"
@@ -132,19 +133,21 @@ onUnmounted(() => {
         </media-controls>
       </media-player>
     </template>
-    <div v-else class="aspect-video w-full h-full bg-card flex items-center justify-center">
-      <div class="flex flex-col items-center gap-4">
-        <div class="relative flex items-center justify-center">
-          <div class="h-16 w-16 rounded-full bg-gradient-to-r from-brownish to-primary animate-pulse" aria-hidden="true"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+    <div v-else class="w-full bg-card">
+      <div class="flex items-center justify-center h-screen">
+        <div class="flex flex-col items-center gap-4">
+          <div class="relative flex items-center justify-center">
+            <div class="h-16 w-16 rounded-full bg-gradient-to-r from-brownish to-primary animate-pulse" aria-hidden="true"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="text-foreground text-sm">Loading video...</div>
-        <div class="mt-2 w-40 h-2 rounded-full bg-foreground/10 overflow-hidden">
-          <div class="h-full bg-gradient-to-r from-foreground/30 via-foreground/60 to-foreground/30 animate-loading-bar" style="width:60%"></div>
+          <div class="text-foreground text-sm">Loading video...</div>
+          <div class="mt-2 w-40 h-2 rounded-full bg-foreground/10 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-foreground/30 via-foreground/60 to-foreground/30 animate-loading-bar" style="width:60%"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -153,8 +156,12 @@ onUnmounted(() => {
 
 <style scoped>
 /* Add any custom styles here if needed */
+/* NOTE: Don't delete aspect ratio */
 .aspect-video {
   aspect-ratio: v-bind(--aspect-ratio);
+  /* Reserve layout space matching the player to prevent layout shifts while JS loads */
+  /* display: block;
+  width: 100%; */
 }
 
 @media (min-width: 1024px) {

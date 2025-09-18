@@ -40,10 +40,6 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: ['@tanstack/vue-query', 'vee-validate', 'hls.js']
   },
-  define: {
-    __VUE_OPTIONS_API__: false,
-    'process.env.NODE_ENV': JSON.stringify(mode)
-  },
   build: {
     target: 'esnext',
     sourcemap: false,
@@ -54,7 +50,7 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['vue', 'vue-router'],
           ui: ['@tanstack/vue-query', 'lucide-vue-next'],
-          video: ['vidstack', 'hls.js'],
+          video: ['hls.js'],
           forms: ['vee-validate', 'zod', 'vue-tel-input'],
           heroSection: [
             './src/components/HeroSection.vue'

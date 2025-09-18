@@ -35,7 +35,9 @@ export const PACKAGE_PRICING: Record<string, number> = {
   oneday: 1200
 };
 
-export const PACKAGES: PackageData[] = [
+export const getPackages = async (): Promise<PackageData[]> => {
+  return [
+
   {
     title: "King Tut Royal VIP",
     price: "€3,900",
@@ -191,4 +193,4 @@ export const PACKAGES: PackageData[] = [
       ]
     }
   }
-];
+]}

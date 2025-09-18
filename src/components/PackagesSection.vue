@@ -1,5 +1,5 @@
 <template>
-  <section id="packages" class="py-20 bg-light-blue text-foreground">
+  <section class="py-20 bg-light-blue text-foreground">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2>
@@ -37,15 +37,20 @@
 
 <script setup lang="ts">
 import { smoothScroll } from '../utils/smoothScroll'
-import { ref, defineAsyncComponent } from 'vue'
-import { PACKAGES } from '@/composables/packagesData';
+import { ref, defineAsyncComponent, onMounted } from 'vue'
+import { getPackages, PackageData } from '../composables/packagesData';
 
 const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
 const scrollToBooking = () => {
   smoothScroll('booking')
 }
 
-const packages = PACKAGES;
+const packages = ref<PackageData[]>([]);
+
+onMounted(async () => {
+  packages.value = await getPackages();
+  console.log('Packages data:', packages.value);
+});
 </script>
 
 <style scoped>

@@ -1,23 +1,23 @@
 <template>
   <AppLayout>
     <div class="container mx-auto p-4 pt-20">
-      <h1 class="text-3xl font-bold mb-2 text-center text-foreground">{{ packageDetails?.title }}</h1>
-      <p v-if="packageDetails?.price" class="text-xl text-center text-primary mb-6">{{ packageDetails?.price }} per person</p>
+      <h1 class="text-3xl font-bold mb-2 text-center text-foreground">{{ packageItem?.title }}</h1>
+      <p v-if="packageItem?.price" class="text-xl text-center text-primary mb-6">{{ packageItem?.price }} per person</p>
       
-      <div v-if="packageDetails" class="space-y-8">
+      <div v-if="packageItem" class="space-y-8">
         <div v-if="videos?.length" class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Video</h3>
           <VideoPlayer :videos="videos" />
         </div>
 
-        <div v-if="packageDetails.partners && packageDetails.partners.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
+        <div v-if="packageItem.partners && packageItem.partners.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Our Partners</h3>
           <div class="flex flex-wrap justify-center gap-4">
-            <div v-for="partner in packageDetails.partners" :key="partner.name" class="flex flex-col items-center p-4 bg-muted rounded-lg shadow-sm">
+            <div v-for="partner in packageItem.partners" :key="partner.name" class="flex flex-col items-center p-4 bg-muted rounded-lg shadow-sm">
               <img
                 :src="partner.logo.large"
                 :srcset="`${partner.logo.small} 640w, ${partner.logo.medium} 1024w, ${partner.logo.large} 1920w`"
-                :sizes="`(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px`"
+                :sizes="`(max-width: 640px) 640px, (max-width: 1024px) 1024w, 1920px`"
                 :alt="partner.name"
                 class="w-full h-auto object-contain mb-2"
               />
@@ -27,18 +27,18 @@
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Overview</h3>
-          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.overview }}</p>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageItem.details.overview }}</p>
         </div>
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Accommodation</h3>
-          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.accommodation }}</p>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageItem.details.accommodation }}</p>
         </div>
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-4">Itinerary Highlights</h3>
           <div class="stepper">
-            <div v-for="(day, index) in packageDetails.details.itinerary" :key="index" class="stepper-item">
+            <div v-for="(day, index) in packageItem.details.itinerary" :key="index" class="stepper-item">
               <div class="stepper-item-content">
                 <div class="stepper-item-circle">{{ index + 1 }}</div>
                 <div class="stepper-item-line"></div>
@@ -55,28 +55,28 @@
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Exclusive Benefits</h3>
-          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageDetails.details.benefits }}</p>
+          <p class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{{ packageItem.details.benefits }}</p>
         </div>
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Booking Information</h3>
           <div class="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
-            <p><strong>Company:</strong> {{ packageDetails.details.booking.companyName }}</p>
-            <p><strong>Address:</strong> {{ packageDetails.details.booking.address }}</p>
-            <p><strong>Website:</strong> <a :href="`https://${packageDetails.details.booking.website}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageDetails.details.booking.website }}</a></p>
-            <p><strong>WhatsApp:</strong> <a :href="`https://wa.me/${packageDetails.details.booking.whatsapp.replace(/\s/g, '')}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageDetails.details.booking.whatsapp }}</a></p>
-            <p><strong>Price:</strong> {{ packageDetails.details.booking.price }}</p>
+            <p><strong>Company:</strong> {{ packageItem.details.booking.companyName }}</p>
+            <p><strong>Address:</strong> {{ packageItem.details.booking.address }}</p>
+            <p><strong>Website:</strong> <a :href="`https://${packageItem.details.booking.website}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageItem.details.booking.website }}</a></p>
+            <p><strong>WhatsApp:</strong> <a :href="`https://wa.me/${packageItem.details.booking.whatsapp.replace(/\s/g, '')}`" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ packageItem.details.booking.whatsapp }}</a></p>
+            <p><strong>Price:</strong> {{ packageItem.details.booking.price }}</p>
           </div>
         </div>
 
-        <div v-if="packageDetails.details.images && packageDetails.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
+        <div v-if="packageItem.details.images && packageItem.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Gallery</h3>
           <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
             <img
-              :src="packageDetails.details.images[currentImageIndex]"
+              :src="packageItem.details.images[currentImageIndex]"
               :srcset="`
-                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-412w.webp')} 412w,
-                ${packageDetails.details.images[currentImageIndex].replace('.webp', '-853w.webp')} 853w
+                ${packageItem.details.images[currentImageIndex].replace('.webp', '-412w.webp')} 412w,
+                ${packageItem.details.images[currentImageIndex].replace('.webp', '-853w.webp')} 853w
               `"
               sizes="(max-width: 768px) 412px, 853px"
               alt="Package Image"
@@ -92,7 +92,7 @@
           </div>
           <div class="flex justify-center space-x-2 overflow-x-auto p-1 max-w-full">
             <img
-              v-for="(img, idx) in packageDetails.details.images"
+              v-for="(img, idx) in packageItem.details.images"
               :key="idx"
               :src="img"
               :srcset="`
@@ -128,32 +128,32 @@ import { ref, onMounted, nextTick, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppLayout from '../components/AppLayout.vue'
 import VideoPlayer from '../components/ui/VideoPlayer.vue'
-import { PACKAGES } from '../composables/packagesData'
+import { getPackages, PackageData } from '../composables/packagesData'
 import { smoothScroll } from '../utils/smoothScroll'
 
 const route = useRoute()
 const router = useRouter()
-const packageDetails = ref(null)
-const currentImageIndex = ref(0)
+const packageItem = ref<PackageData | undefined>(undefined);
+const currentImageIndex = ref(0);
 
-const videos = computed(() => packageDetails.value?.videos || []);
+const videos = computed(() => packageItem.value?.videos || []);
 
-onMounted(() => {
+onMounted(async () => {
   window.scrollTo(0, 0);
-  const packageName = route.params.packageName;
-  packageDetails.value = PACKAGES.find(pkg => pkg.title.toLowerCase().replace(/ /g, '-') === packageName);
-  console.log('Package Details:', packageDetails.value);
+  const packages = await getPackages();
+  packageItem.value = packages.find((p) => p.title === route.params.title);
+  console.log('Package Details:', packageItem.value);
 });
 
 const prevImage = () => {
-  if (packageDetails.value && packageDetails.value.details.images) {
-    currentImageIndex.value = (currentImageIndex.value - 1 + packageDetails.value.details.images.length) % packageDetails.value.details.images.length;
+  if (packageItem.value && packageItem.value.details.images) {
+    currentImageIndex.value = (currentImageIndex.value - 1 + packageItem.value.details.images.length) % packageItem.value.details.images.length;
   }
 };
 
 const nextImage = () => {
-  if (packageDetails.value && packageDetails.value.details.images) {
-    currentImageIndex.value = (currentImageIndex.value + 1) % packageDetails.value.details.images.length;
+  if (packageItem.value && packageItem.value.details.images) {
+    currentImageIndex.value = (currentImageIndex.value + 1) % packageItem.value.details.images.length;
   }
 };
 
@@ -162,8 +162,8 @@ const setCurrentImage = (index: number) => {
 };
 
 const bookNow = () => {
-  console.log('packageDetails.value?.title:', packageDetails.value?.title);
-  const packageKey = packageDetails.value?.title === 'King Tut Royal VIP' ? 'vip' : 'oneday';
+  console.log('packageItem.value?.title:', packageItem.value?.title);
+  const packageKey = packageItem.value?.title === 'King Tut Royal VIP' ? 'vip' : 'oneday';
   console.log('packageKey:', packageKey);
   router.push({ path: '/', query: { scroll: 'booking', packageId: packageKey } });
 };

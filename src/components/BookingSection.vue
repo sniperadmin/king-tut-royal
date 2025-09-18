@@ -28,10 +28,9 @@
                 }`"
                 @click="selectPackage('vip')"
               >
-                <h3 class="text-lg font-semibold text-primary mb-2">King Tut Royal VIP</h3>
-                <p class="text-foreground text-2xl font-bold">€3,900</p>
-                <p class="text-muted-foreground text-sm">5 Days / 4 Nights</p>
-                <p class="text-muted-foreground text-sm">per person</p>
+                <h3 class="text-lg font-semibold text-primary mb-2">{{ packagesData[0]?.title }}</h3>
+                <p class="text-foreground text-2xl font-bold">{{ packagesData[0]?.price }}</p>
+                <p class="text-muted-foreground text-sm">{{ packagesData[0]?.itinerary?.length }} Days / {{ packagesData[0]?.itinerary?.length ? packagesData[0].itinerary.length - 1 : 0 }} Nights</p>
               </div>
               <div 
                 :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
@@ -41,8 +40,8 @@
                 }`"
                 @click="selectPackage('oneday')"
               >
-                <h3 class="text-lg font-semibold text-foreground mb-2">King Tut VIP One Day</h3>
-                <p class="text-foreground text-2xl font-bold">€1200</p>
+                <h3 class="text-lg font-semibold text-foreground mb-2">{{ packagesData[1]?.title }}</h3>
+                <p class="text-foreground text-2xl font-bold">{{ packagesData[1]?.price }}</p>
                 <p class="text-muted-foreground text-sm">Full Day Experience</p>
                 <p class="text-muted-foreground text-sm">per person</p>
               </div>
@@ -161,7 +160,7 @@
 
             <div class="mt-8 text-center">
               <p class="text-primary text-2xl font-bold">
-                Total Price: €{{ calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)).toLocaleString() }}
+                Total Price: €{{ calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)) }}
               </p>
             </div>
 
@@ -186,7 +185,9 @@ import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComp
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
-import { PACKAGE_PRICING } from '@/composables/packagesData'
+import { useRoute } from 'vue-router';
+import { useToast } from '@/composables/useToast';
+import { getPackages, PACKAGE_PRICING } from '@/composables/packagesData';
 
 const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
 
@@ -205,15 +206,35 @@ const props = defineProps({
   preselectedPackageId: {
     type: String,
     default: null
+  },
+  preselectedDate: {
+    type: String,
+    default: null
+  },
+  preselectedWeek: {
+    type: String,
+    default: null
   }
 });
 
 const emit = defineEmits(['loaded']);
 
-onMounted(() => {
+const packagesData = ref<PackageData[]>([]);
+
+onMounted(async () => {
+  packagesData.value = await getPackages();
   emit('loaded');
   if (props.preselectedPackageId) {
     selectPackage(props.preselectedPackageId as 'vip' | 'oneday');
+  } else {
+    // Set default package to 'vip' if no preselected package is provided
+    selectPackage('vip');
+  }
+  if (props.preselectedDate && props.preselectedPackageId === 'oneday') {
+    selectedOneDayDate.value = new Date(props.preselectedDate);
+  }
+  if (props.preselectedWeek && props.preselectedPackageId === 'vip') {
+    formData.selectedWeek = props.preselectedWeek;
   }
 });
 
@@ -309,17 +330,20 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
   return MAX_CAPACITY - weekData.booking_count
 }
 
-const calculateTotalPrice = (packageType: string, guests: number) => {
-  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0
-  return pricePerPerson * guests
+function calculateTotalPrice(packageType: string, guests: number) {
+  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0;
+  return pricePerPerson * guests;
 }
 
 const selectPackage = (packageType: 'vip' | 'oneday') => {
-  formData.selectedPackage = packageType
+  formData.selectedPackage = packageType;
+  // Set default participants based on package type
   if (packageType === 'oneday') {
-    formData.participants = '4' // Set minimum for one day package
+    formData.participants = '4'; // Minimum for one day package
+  } else if (packageType === 'vip') {
+    formData.participants = '1'; // Minimum for VIP package
   }
-}
+};
 
 const handleSubmit = async () => {
   if (!formData.name.trim()) {
@@ -464,13 +488,12 @@ onUnmounted(() => {
   }
 })
 
+// Watch for preselectedPackageId changes to update the selected package and participants
 watch(
   () => props.preselectedPackageId,
-  (newValue, oldValue) => {
-    console.log('preselectedPackageId changed:', oldValue, '->', newValue);
+  (newValue) => {
     if (newValue) {
       selectPackage(newValue as 'vip' | 'oneday');
-      console.log('formData.selectedPackage updated via watch:', formData.selectedPackage);
     }
   },
   { immediate: true }

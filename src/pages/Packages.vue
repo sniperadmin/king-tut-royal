@@ -36,13 +36,17 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { PACKAGES } from '@/composables/packagesData';
+import { getPackages, PackageData } from '@/composables/packagesData';
 import AppLayout from '@/components/AppLayout.vue';
 
 const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
 const router = useRouter()
 
-const packages = PACKAGES;
+const packages = ref<PackageData[]>([]);
+
+onMounted(async () => {
+  packages.value = await getPackages();
+});
 
 const gridColsClass = computed(() => {
   if (packages.length === 1) {

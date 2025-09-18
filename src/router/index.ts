@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getPackages } from '../composables/packagesData'
+import Index from '@/pages/Index.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -6,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Index',
-      component: () => import('@/pages/Index.vue')
+      component: Index
     },
     {
       path: '/tour-leaders',
@@ -21,7 +23,17 @@ const router = createRouter({
     {
       path: '/packages/:packageName',
       name: 'PackageDetails',
-      component: () => import('@/pages/PackageDetails.vue')
+      component: () => import('@/pages/PackageDetails.vue'),
+      beforeEnter: async (to, from, next) => {
+        const packages = await getPackages();
+        const packageName = to.params.packageName as string;
+        const packageExists = packages.some(pkg => pkg.title.toLowerCase().replace(/ /g, '-') === packageName);
+        if (packageExists) {
+          next();
+        } else {
+          next({ name: 'NotFound' });
+        }
+      }
     },
     {
       path: '/partner/:id',

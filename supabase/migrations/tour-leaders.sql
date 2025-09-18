@@ -1,4 +1,336 @@
-[
+-- =====================================
+-- Extensions (Supabase-friendly)
+-- =====================================
+create extension if not exists pgcrypto;  -- gen_random_uuid()
+create extension if not exists citext;    -- case-insensitive text
+create extension if not exists pg_trgm;   -- fuzzy search
+
+-- =====================
+-- Core entity: guides
+-- =====================
+create table if not exists guides (
+  id                  uuid primary key default gen_random_uuid(),
+  name                text not null,
+  age                 int  check (age is null or age between 18 and 80),
+  phone               citext unique,                         -- E.164-ish; allow spaces as provided
+  phone_digits        text generated always as (regexp_replace(coalesce(phone::text,''), '\D', '', 'g')) stored,
+  avatar_url          text,                                  -- keep full public URL (or store storage path separately if you prefer)
+  video_persona_url   text,
+  experience          text,                                  -- portfolio.experience
+  bio                 text,                                  -- portfolio.bio
+  availability        text,                                  -- engagement.availability
+  created_at          timestamptz not null default now(),
+  updated_at          timestamptz not null default now()
+);
+
+-- Touch updated_at automatically
+create or replace function set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at := now();
+  return new;
+end
+$$;
+
+drop trigger if exists guides_set_updated_at on guides;
+create trigger guides_set_updated_at
+before update on guides
+for each row execute function set_updated_at();
+
+-- ============================
+-- Lookups + many-to-many links
+-- ============================
+create table if not exists languages (
+  id   smallserial primary key,
+  name citext unique not null          -- e.g., English, Chinese, Spanish, ...
+);
+
+create table if not exists specialties (
+  id   serial primary key,
+  name citext unique not null          -- e.g., "Culinary discovery", "Museum narration in CN"
+);
+
+create table if not exists certifications (
+  id   serial primary key,
+  name citext unique not null          -- e.g., "HSK 6", "First Aid (Red Crescent)"
+);
+
+create table if not exists tours (
+  id   serial primary key,
+  name citext unique not null          -- guide-highlight tour names (shared canonical pool)
+);
+
+create table if not exists guide_language (
+  guide_id     uuid references guides(id) on delete cascade,
+  language_id  smallint references languages(id) on delete restrict,
+  primary key (guide_id, language_id)
+);
+
+create table if not exists guide_specialty (
+  guide_id      uuid references guides(id) on delete cascade,
+  specialty_id  int  references specialties(id) on delete restrict,
+  primary key (guide_id, specialty_id)
+);
+
+create table if not exists guide_certification (
+  guide_id         uuid references guides(id) on delete cascade,
+  certification_id int  references certifications(id) on delete restrict,
+  primary key (guide_id, certification_id)
+);
+
+-- Each guide's highlighted tours (<= handful per guide)
+create table if not exists guide_highlight_tour (
+  guide_id  uuid references guides(id) on delete cascade,
+  tour_id   int  references tours(id) on delete restrict,
+  primary key (guide_id, tour_id)
+);
+
+-- =====================
+-- Reviews (first-class)
+-- =====================
+create table if not exists reviews (
+  id         bigserial primary key,
+  guide_id   uuid references guides(id) on delete cascade,
+  body       text not null,
+  -- Optional: capture language hint (free text; your input contains Chinese/Czech/German/Spanish/English, etc.)
+  lang_hint  citext,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_reviews_guide_id on reviews(guide_id);
+create index if not exists idx_languages_name on languages using gin (name gin_trgm_ops);
+create index if not exists idx_specialties_name on specialties using gin (name gin_trgm_ops);
+create index if not exists idx_tours_name on tours using gin (name gin_trgm_ops);
+
+-- ======================================
+-- Public catalog view (array-style shape)
+-- (safe, duplication-free via LATERAL)
+-- ======================================
+drop view if exists guides_public cascade;
+create view guides_public as
+select
+  g.id,
+  g.name,
+  g.age,
+  g.phone,
+  g.avatar_url,
+  g.video_persona_url,
+  g.experience,
+  g.bio,
+  g.availability,
+  coalesce(langs.languages, '{}')         as languages,
+  coalesce(specs.specialties, '{}')       as specialties,
+  coalesce(certs.certifications, '{}')    as certifications,
+  coalesce(tours_v.highlight_tours, '{}') as highlight_tours,
+  coalesce(revs.reviews, '{}')            as reviews
+from guides g
+left join lateral (
+  select array_agg(l.name order by l.name) as languages
+  from guide_language gl
+  join languages l on l.id = gl.language_id
+  where gl.guide_id = g.id
+) langs on true
+left join lateral (
+  select array_agg(s.name order by s.name) as specialties
+  from guide_specialty gs
+  join specialties s on s.id = gs.specialty_id
+  where gs.guide_id = g.id
+) specs on true
+left join lateral (
+  select array_agg(c.name order by c.name) as certifications
+  from guide_certification gc
+  join certifications c on c.id = gc.certification_id
+  where gc.guide_id = g.id
+) certs on true
+left join lateral (
+  select array_agg(t.name order by t.name) as highlight_tours
+  from guide_highlight_tour gt
+  join tours t on t.id = gt.tour_id
+  where gt.guide_id = g.id
+) tours_v on true
+left join lateral (
+  select array_agg(r.body order by r.id) as reviews
+  from reviews r
+  where r.guide_id = g.id
+) revs on true;
+
+-- ====================================
+-- Lightweight full-text search support
+-- ====================================
+alter table guides
+  add column if not exists search tsvector
+  generated always as (
+    to_tsvector('simple',
+        coalesce(name,'') || ' ' ||
+        coalesce(experience,'') || ' ' ||
+        coalesce(bio,'') || ' ' ||
+        coalesce(availability,'')
+    )
+  ) stored;
+
+create index if not exists idx_guides_search on guides using gin (search);
+
+-- ===========================
+-- Row Level Security (RLS)
+-- ===========================
+alter table guides                enable row level security;
+alter table languages             enable row level security;
+alter table specialties           enable row level security;
+alter table certifications        enable row level security;
+alter table tours                 enable row level security;
+alter table guide_language        enable row level security;
+alter table guide_specialty       enable row level security;
+alter table guide_certification   enable row level security;
+alter table guide_highlight_tour  enable row level security;
+alter table reviews               enable row level security;
+
+-- Public SELECT policies (adjust to your app's auth model as needed)
+do $plpgsql$
+begin
+  if not exists (
+    select 1 from pg_policies
+    where schemaname = 'public'
+      and tablename  = 'guides'
+      and policyname = 'guides_select_all'
+  ) then
+    create policy guides_select_all               on guides               for select using (true);
+    create policy languages_select_all            on languages            for select using (true);
+    create policy specialties_select_all          on specialties          for select using (true);
+    create policy certifications_select_all       on certifications       for select using (true);
+    create policy tours_select_all                on tours                for select using (true);
+    create policy guide_language_select_all       on guide_language       for select using (true);
+    create policy guide_specialty_select_all      on guide_specialty      for select using (true);
+    create policy guide_certification_select_all  on guide_certification  for select using (true);
+    create policy guide_highlight_tour_select_all on guide_highlight_tour for select using (true);
+    create policy reviews_select_all              on reviews              for select using (true);
+  end if;
+end
+$plpgsql$;
+
+-- =====================================
+-- Import helpers (FIXED & WORKING)
+-- =====================================
+drop function if exists upsert_guide_from_json(jsonb);
+drop function if exists import_guides(jsonb);
+
+create or replace function upsert_guide_from_json(_g jsonb)
+returns uuid
+language plpgsql
+as $$
+declare
+  v_id uuid;
+  lang_txt   text;
+  spec_txt   text;
+  cert_txt   text;
+  tour_txt   text;
+  review_txt text;
+begin
+  -- Upsert guide core (phone = natural key)
+  insert into guides (name, age, phone, avatar_url, video_persona_url, experience, bio, availability)
+  values (
+    _g->>'name',
+    nullif(_g->>'age','')::int,
+    nullif(_g->>'phone',''),
+    _g->>'avatar',
+    _g#>>'{portfolio,video_persona}',
+    _g#>>'{portfolio,experience}',
+    _g#>>'{portfolio,bio}',
+    _g#>>'{engagement,availability}'
+  )
+  on conflict (phone) do update
+    set name               = excluded.name,
+        age                = excluded.age,
+        avatar_url         = excluded.avatar_url,
+        video_persona_url  = excluded.video_persona_url,
+        experience         = excluded.experience,
+        bio                = excluded.bio,
+        availability       = excluded.availability,
+        updated_at         = now()
+  returning id into v_id;
+
+  -- languages[]
+  for lang_txt in
+    select jsonb_array_elements_text(coalesce(_g->'languages','[]'::jsonb))
+  loop
+    insert into languages(name) values (lang_txt) on conflict (name) do nothing;
+    insert into guide_language(guide_id, language_id)
+    select v_id, id from languages where name = lang_txt
+    on conflict do nothing;
+  end loop;
+
+  -- portfolio.specialties[]
+  for spec_txt in
+    select jsonb_array_elements_text(coalesce(_g#>'{portfolio,specialties}','[]'::jsonb))
+  loop
+    insert into specialties(name) values (spec_txt) on conflict (name) do nothing;
+    insert into guide_specialty(guide_id, specialty_id)
+    select v_id, id from specialties where name = spec_txt
+    on conflict do nothing;
+  end loop;
+
+  -- portfolio.certifications[]
+  for cert_txt in
+    select jsonb_array_elements_text(coalesce(_g#>'{portfolio,certifications}','[]'::jsonb))
+  loop
+    insert into certifications(name) values (cert_txt) on conflict (name) do nothing;
+    insert into guide_certification(guide_id, certification_id)
+    select v_id, id from certifications where name = cert_txt
+    on conflict do nothing;
+  end loop;
+
+  -- engagement.highlight_tours[]
+  for tour_txt in
+    select jsonb_array_elements_text(coalesce(_g#>'{engagement,highlight_tours}','[]'::jsonb))
+  loop
+    insert into tours(name) values (tour_txt) on conflict (name) do nothing;
+    insert into guide_highlight_tour(guide_id, tour_id)
+    select v_id, id from tours where name = tour_txt
+    on conflict do nothing;
+  end loop;
+
+  -- engagement.reviews[]
+  for review_txt in
+    select jsonb_array_elements_text(coalesce(_g#>'{engagement,reviews}','[]'::jsonb))
+  loop
+    insert into reviews(guide_id, body) values (v_id, review_txt);
+  end loop;
+
+  return v_id;
+end
+$$;
+
+create or replace function import_guides(_arr jsonb)
+returns void
+language plpgsql
+as $$
+declare
+  it jsonb;
+begin
+  if jsonb_typeof(_arr) <> 'array' then
+    raise exception 'Expected JSON array';
+  end if;
+
+  foreach it in array (
+    select array_agg(value) from jsonb_array_elements(_arr)
+  )
+  loop
+    perform upsert_guide_from_json(it);
+  end loop;
+end
+$$;
+
+-- =====================================
+-- (Optional) One-shot import example
+-- =====================================
+-- select import_guides($$ [ ...your JSON array... ] $$::jsonb);
+
+
+
+
+select import_guides($$
+  [
   {
     "name": "Sara Atef",
     "age": 24,
@@ -595,3 +927,4 @@
     }
   }
 ]
+$$::jsonb);
