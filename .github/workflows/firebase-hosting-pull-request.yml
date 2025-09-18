@@ -23,14 +23,14 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KINGTUTROYAL_696EA }}
           projectId: kingtutroyal-696ea
 
-  process_preview_url:
-    needs: build_and_preview
-    runs-on: ubuntu-latest
-    steps:
-      - name: Process preview URL with foo.software
-        uses: foo-software/lighthouse-check-action@master
-        with:
-          urls: ${{ needs.build_and_preview.outputs.details_url }}
-          gitAuthor: ${{ github.actor }}
-          gitBranch: ${{ github.ref }}
-          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+  # process_preview_url:
+  #   needs: build_and_preview
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Process preview URL with foo.software
+  #       uses: foo-software/lighthouse-check-action@master
+  #       with:
+  #         urls: ${{ needs.build_and_preview.outputs.details_url }}
+  #         gitAuthor: ${{ github.actor }}
+  #         gitBranch: ${{ github.ref }}
+  #         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
