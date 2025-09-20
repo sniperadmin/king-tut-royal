@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     }),
-    mode === 'report' && visualizer({ filename: 'dist/bundle-stats.html', open: true }),
+    // mode === 'report' && visualizer({ filename: 'dist/bundle-stats.html', open: true }),
     json5Plugin(),
     compression({
       algorithm: 'brotliCompress',

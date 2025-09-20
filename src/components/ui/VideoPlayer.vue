@@ -13,6 +13,18 @@ const props = defineProps({
   aspectRatio: {
     type: String,
     default: '16/9' // Default to 16:9 if not provided
+  },
+  poster: {
+    type: String,
+    default: null
+  },
+  posterWidth: {
+    type: [String, Number],
+    default: null
+  },
+  posterHeight: {
+    type: [String, Number],
+    default: null
   }
 });
 
@@ -138,7 +150,15 @@ onUnmounted(() => {
       </media-player>
     </template>
     <div v-else class="w-full bg-card">
-      <div class="flex items-center justify-center h-screen">
+      <img
+        v-if="props.poster"
+        :src="props.poster"
+        :width="props.posterWidth"
+        :height="props.posterHeight"
+        alt="Video Poster"
+        class="w-full h-full object-cover"
+      />
+      <div v-else class="flex items-center justify-center h-screen">
         <div class="flex flex-col items-center gap-4">
           <div class="relative flex items-center justify-center">
             <div class="h-16 w-16 rounded-full bg-gradient-to-r from-brownish to-primary animate-pulse" aria-hidden="true"></div>

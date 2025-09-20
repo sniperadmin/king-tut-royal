@@ -17,11 +17,17 @@
           <div class="flex flex-wrap justify-center gap-4">
             <div v-for="partner in packageItem.partners" :key="partner.name" class="flex flex-col items-center p-4 bg-muted rounded-lg shadow-sm">
               <img
-                :src="(partner.logo?.large) || '/images/default-logo.webp'"
-                :srcset="`${partner.logo?.small || '/images/default-logo.webp'} 640w, ${partner.logo?.medium || '/images/default-logo.webp'} 1024w, ${partner.logo?.large || '/images/default-logo.webp'} 1920w`"
-                sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024w, 1920px"
+                :src="getImageUrl(partner.logo?.large, 100, 100)"
+                :srcset="`
+                  ${getImageUrl(partner.logo?.small, 60, 60)} 640w,
+                  ${getImageUrl(partner.logo?.medium, 100, 100)} 1024w,
+                  ${getImageUrl(partner.logo?.large, 150, 150)} 1920w
+                `"
+                sizes="(max-width: 640px) 60px, (max-width: 1024px) 100px, 150px"
                 :alt="partner.name || 'Partner Logo'"
                 class="w-full h-auto object-contain mb-2"
+                width="100"
+                height="100"
               />
             </div>
           </div>
@@ -73,16 +79,16 @@
 
         <div v-if="packageItem.details.images && packageItem.details.images.length > 0" class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-3">Gallery</h3>
-          <div class="relative mx-auto h-52 sm:h-60 md:h-80 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
+          <div class="relative mx-auto aspect-w-4 aspect-h-3 overflow-hidden rounded-lg mb-4 w-full max-w-[900px] min-w-[200px] md:min-w-[320px] sm:min-w-[120px]">
             <img
-              :src="getImageUrl(packageItem.details.images[currentImageIndex])"
+              :src="getImageUrl(packageItem.details.images[currentImageIndex], 800, 600)"
               :srcset="`
-                ${String(getImageUrl(packageItem.details.images[currentImageIndex])).replace('.webp', '-412w.webp')} 412w,
-                ${String(getImageUrl(packageItem.details.images[currentImageIndex])).replace('.webp', '-853w.webp')} 853w
+                ${getImageUrl(packageItem.details.images[currentImageIndex], 412, 309)} 412w,
+                ${getImageUrl(packageItem.details.images[currentImageIndex], 853, 640)} 853w
               `"
               sizes="(max-width: 768px) 412px, 853px"
               alt="Package Image"
-              class="w-full h-full object-contain transition-opacity duration-300 max-h-52 sm:max-h-60 md:max-h-80"
+              class="w-full h-full object-cover transition-opacity duration-300"
               fetchpriority="high"
               loading="eager"
               decoding="async"
@@ -104,7 +110,7 @@
               sizes="(max-width: 768px) 412px, 853px"
               @click="setCurrentImage(idx)"
               :class="{'border-2 border-primary': idx === currentImageIndex}"
-              class="w-20 h-16 object-contain rounded-lg cursor-pointer flex-shrink-0"
+              class="w-20 h-16 object-cover rounded-lg cursor-pointer flex-shrink-0"
               width="80"
               height="64"
             />
@@ -142,13 +148,22 @@ const loading = ref(true) // Add loading state
 
 const videos = computed(() => packageItem.value?.videos || [])
 
-const getImageUrl = (img: any): string => {
-  if (!img) return '/images/default.webp'
-  if (typeof img === 'string') return img
-  if (typeof img === 'object') {
-    return img.url ?? img.src ?? img.large ?? img.path ?? img.key ?? '/images/default.webp'
+const getImageUrl = (img: any, width: number | null = null, height: number | null = null): string => {
+  if (!img) return '/placeholder.svg'
+  let url: string
+  if (typeof img === 'string') url = img
+  else if (typeof img === 'object') {
+    url = img.srcSet ?? img.url ?? img.src ?? img.large ?? img.path ?? img.key ?? '/placeholder.svg'
+  } else {
+    url = String(img)
   }
-  return String(img)
+
+  if (url.startsWith('http') && width && height) {
+    return `${url}?width=${width}&height=${height}&quality=80`
+  } else if (url.startsWith('http') && width) {
+    return `${url}?width=${width}&quality=80`
+  }
+  return url
 }
 
 onMounted(async () => {
