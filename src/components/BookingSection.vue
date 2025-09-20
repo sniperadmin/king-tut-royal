@@ -20,31 +20,22 @@
           <div class="space-y-4 mb-8">
             <Label class="text-foreground text-lg">Select Package *</Label>
             <div class="grid md:grid-cols-2 gap-4">
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'vip' 
-                    ? 'bg-primary/20 border-primary' 
-                    : 'bg-muted border-border hover:border-primary/50'
-                }`"
-                @click="selectPackage('vip')"
-              >
-                <h3 class="text-lg font-semibold text-primary mb-2">{{ packagesData[0]?.title }}</h3>
-                <p class="text-foreground text-2xl font-bold">{{ packagesData[0]?.price }}</p>
-                <p class="text-muted-foreground text-sm">{{ packagesData[0]?.itinerary?.length }} Days / {{ packagesData[0]?.itinerary?.length ? packagesData[0].itinerary.length - 1 : 0 }} Nights</p>
-              </div>
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'oneday' 
-                    ? 'bg-primary/20 border-primary' 
-                    : 'bg-muted border-border hover:border-primary/50'
-                }`"
-                @click="selectPackage('oneday')"
-              >
-                <h3 class="text-lg font-semibold text-foreground mb-2">{{ packagesData[1]?.title }}</h3>
-                <p class="text-foreground text-2xl font-bold">{{ packagesData[1]?.price }}</p>
-                <p class="text-muted-foreground text-sm">Full Day Experience</p>
-                <p class="text-muted-foreground text-sm">per person</p>
-              </div>
+              <template v-for="(pkg, index) in packagesData" :key="pkg.key || index">
+                <div 
+                  :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
+                    formData.selectedPackage === pkg.slug
+                      ? 'bg-primary/20 border-primary'
+                      : 'bg-muted border-border hover:border-primary/50'
+                  }`"
+                  @click="selectPackage(pkg.slug)"
+                >
+                  <h3 class="text-lg font-semibold text-primary mb-2">{{ pkg.title }}</h3>
+                  <p class="text-foreground text-2xl font-bold">{{ pkg.price }}</p>
+                  <p v-if="pkg.details?.itinerary" class="text-muted-foreground text-sm">{{ pkg.details.itinerary.length }} Days / {{ pkg.details.itinerary.length ? pkg.details.itinerary.length - 1 : 0 }} Nights</p>
+                  <p v-else class="text-muted-foreground text-sm">Full Day Experience</p>
+                  <p v-if="pkg.details?.per_person" class="text-muted-foreground text-sm">per person</p>
+                </div>
+              </template>
             </div>
           </div>
           
@@ -94,13 +85,13 @@
                   style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
                 >
                   <option value="" disabled selected>Select number of guests</option>
-                  <template v-if="formData.selectedPackage === 'oneday'">
+                  <template v-if="formData.selectedPackage === 'king-tut-vip-one-day'">
                     <option value="4">4 Guests</option>
                     <option value="5">5 Guests</option>
                     <option value="6">6 Guests</option>
                   </template>
                   
-                  <template v-if="formData.selectedPackage === 'vip'">
+                  <template v-if="formData.selectedPackage === 'king-tut-royal-vip'">
                     <option value="1">1 Guest</option>
                     <option value="2">2 Guests</option>
                     <option value="3">3 Guests</option>
@@ -114,7 +105,7 @@
 
             <div class="space-y-2">
               <Label class="text-foreground">Select Date *</Label>
-              <div v-if="formData.selectedPackage === 'oneday'" class="relative">
+              <div v-if="formData.selectedPackage === 'king-tut-vip-one-day'" class="relative">
                 <LuxuryDatePicker
                   v-model="selectedOneDayDate"
                   placeholder="Choose your exclusive day"
@@ -187,7 +178,7 @@ import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
 import { useRoute } from 'vue-router';
 import { useToast } from '@/composables/useToast';
-import { getPackages, PACKAGE_PRICING } from '@/composables/packagesData';
+import { PackageData } from '@/types';
 
 const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
 
@@ -220,20 +211,65 @@ const props = defineProps({
 const emit = defineEmits(['loaded']);
 
 const packagesData = ref<PackageData[]>([]);
+const PACKAGE_PRICING = ref<{[key: string]: number}>({});
 
 onMounted(async () => {
-  packagesData.value = await getPackages();
-  emit('loaded');
-  if (props.preselectedPackageId) {
-    selectPackage(props.preselectedPackageId as 'vip' | 'oneday');
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    packagesData.value = []; // Provide default empty array to prevent rendering issues
   } else {
-    // Set default package to 'vip' if no preselected package is provided
-    selectPackage('vip');
+    packagesData.value = (data || []).map(pkg => {
+      const packageInfo = pkg.package || {};
+      const slug = packageInfo.slug || '';
+      return {
+        key: slug,
+        slug: slug,
+        id: packageInfo.id || '',
+        title: packageInfo.title || 'Unknown',
+        price: packageInfo.price || '0',
+        duration: packageInfo.details?.itinerary?.length ? `${packageInfo.details.itinerary.length} Days` : 'Full Day',
+        image: packageInfo.image || '',
+        highlights: packageInfo.highlights || [],
+        details: packageInfo.details || {}
+      };
+    });
+    
+    PACKAGE_PRICING.value = packagesData.value.reduce((acc, pkg) => {
+      const price = pkg.price;
+      const cleanPrice = pkg.price.replace(/[^0-9]/g, '');
+      acc[pkg.key] = parseFloat(cleanPrice) || 0; // Ensure price is a number, default to 0 if NaN
+      console.log('acc', acc);
+      return acc;
+    }, {} as {[key: string]: number});
   }
-  if (props.preselectedDate && props.preselectedPackageId === 'oneday') {
+  emit('loaded');
+
+  // Resolve preselected package id/slug to a package slug from packagesData
+  const resolveToSlug = (input: string | null | undefined) => {
+    if (!input) return '';
+    const candidate = String(input);
+    const found = packagesData.value.find(p => p.slug === candidate || p.id === candidate || p.key === candidate);
+    return found ? found.slug : candidate;
+  };
+
+  const resolvedPreselected = resolveToSlug(props.preselectedPackageId);
+
+  if (resolvedPreselected) {
+    selectPackage(resolvedPreselected);
+  } else {
+    // Set default package to 'royal vip' if no preselected package is provided
+    selectPackage('king-tut-royal-vip');
+  }
+
+  if (props.preselectedDate && resolvedPreselected === 'king-tut-vip-one-day') {
     selectedOneDayDate.value = new Date(props.preselectedDate);
   }
-  if (props.preselectedWeek && props.preselectedPackageId === 'vip') {
+  if (props.preselectedWeek && resolvedPreselected === 'king-tut-royal-vip') {
     formData.selectedWeek = props.preselectedWeek;
   }
 });
@@ -253,7 +289,7 @@ const formData = reactive({
   email: '',
   selectedWeek: '',
   participants: '1',
-  selectedPackage: 'vip',
+  selectedPackage: 'king-tut-royal-vip',
   specialRequests: '',
   oneDayDate: '' // Store as string directly for date input
 })
@@ -294,11 +330,11 @@ const isFormValid = computed(() => {
   
   if (!hasName || !hasEmail) return false
   
-  if (formData.selectedPackage === 'vip') {
+  if (formData.selectedPackage === 'king-tut-royal-vip') {
     return formData.selectedWeek && formData.selectedWeek.length > 0
   }
   
-  if (formData.selectedPackage === 'oneday') {
+  if (formData.selectedPackage === 'king-tut-vip-one-day') {
     return selectedOneDayDate.value !== null
   }
   
@@ -315,7 +351,8 @@ const fetchAvailableWeeks = async () => {
     const available = data.data.filter((week: WeeklyBooking) => week.booking_count < MAX_CAPACITY)
     availableWeeks.value = available
   } catch (error) {
-    console.error('Error fetching available weeks:', error)
+    console.error('Error fetching available weeks:', error);
+    availableWeeks.value = []; // Provide default empty array to prevent rendering issues
   } finally {
     loading.value = false
   }
@@ -330,18 +367,19 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
   return MAX_CAPACITY - weekData.booking_count
 }
 
-function calculateTotalPrice(packageType: string, guests: number) {
-  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0;
-  return pricePerPerson * guests;
+function calculateTotalPrice(packageId: string, guests: number) {
+  const pricing = PACKAGE_PRICING.value || {};
+  const pricePerPerson = pricing[packageId] || 0;
+  const numGuests = isNaN(guests) ? 0 : guests; // Ensure guests is a number, default to 0 if NaN
+  return pricePerPerson * numGuests;
 }
 
-const selectPackage = (packageType: 'vip' | 'oneday') => {
-  formData.selectedPackage = packageType;
-  // Set default participants based on package type
-  if (packageType === 'oneday') {
-    formData.participants = '4'; // Minimum for one day package
-  } else if (packageType === 'vip') {
-    formData.participants = '1'; // Minimum for VIP package
+const selectPackage = (packageId: string) => {
+  formData.selectedPackage = packageId;
+  if (packageId === 'king-tut-vip-one-day') {
+    formData.participants = '4';
+  } else if (packageId === 'king-tut-royal-vip') {
+    formData.participants = '1';
   }
 };
 
@@ -368,12 +406,12 @@ const handleSubmit = async () => {
     return
   }
 
-  if (formData.selectedPackage === 'vip' && !formData.selectedWeek) {
+  if (formData.selectedPackage === 'king-tut-royal-vip' && !formData.selectedWeek) {
     alert('Please select a week for the Royal VIP package.')
     return
   }
 
-  if (formData.selectedPackage === 'oneday' && !formData.oneDayDate) {
+  if (formData.selectedPackage === 'king-tut-vip-one-day' && !formData.oneDayDate) {
     alert('Please select a date for the One Day package.')
     return
   }
@@ -385,7 +423,7 @@ const handleSubmit = async () => {
   let remainingSlots = 0
 
   try {
-    if (formData.selectedPackage === 'vip') {
+    if (formData.selectedPackage === 'king-tut-royal-vip') {
       // Check if enough slots are available
       const selectedWeekData = availableWeeks.value.find(w => w.week_start_date === formData.selectedWeek)
       if (!selectedWeekData) {
@@ -412,7 +450,7 @@ const handleSubmit = async () => {
       newBookingCount = data.newCount
       bookingDateDisplay = getThursdayDate(formData.selectedWeek)
       remainingSlots = MAX_CAPACITY - newBookingCount
-    } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
+    } else if (formData.selectedPackage === 'king-tut-vip-one-day' && formData.oneDayDate) {
       // For one-day package, no slot booking needed on backend for now
       // Just format the date for display
       bookingDateDisplay = format(new Date(formData.oneDayDate), 'EEEE dd, MMMM yyyy') // e.g., 'Monday 25, October 2024'
@@ -421,20 +459,20 @@ const handleSubmit = async () => {
     }
 
     const totalPrice = calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants))
-    const packageName = formData.selectedPackage === 'vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
+    const packageName = formData.selectedPackage === 'king-tut-royal-vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
 
     const message = `
 🎁 *${packageName}*
 
 📋 *Booking Details:*
-${formData.selectedPackage === 'vip' ? `🎫 Booking number: ${newBookingCount}` : ''}
+${formData.selectedPackage === 'king-tut-royal-vip' ? `🎫 Booking number: ${newBookingCount}` : ''}
 👤 Name: ${formData.name}
 📱 Phone: ${formData.phone}
 📧 Email: ${formData.email}
 👥 Guests: ${formData.participants}
 📅 Booking Date: ${bookingDateDisplay}
 € Total Price: €${totalPrice.toLocaleString()}
-${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
+${formData.selectedPackage === 'king-tut-royal-vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `
 
@@ -442,7 +480,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
     window.open(whatsappUrl, '_blank')
 
     // Refresh available weeks (only relevant for VIP package)
-    if (formData.selectedPackage === 'vip') {
+    if (formData.selectedPackage === 'king-tut-royal-vip') {
       await fetchAvailableWeeks()
     }
 
@@ -453,7 +491,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
       email: '',
       selectedWeek: '',
       participants: '1',
-      selectedPackage: 'vip',
+      selectedPackage: 'king-tut-royal-vip',
       specialRequests: '',
       oneDayDate: ''
     })
@@ -493,7 +531,9 @@ watch(
   () => props.preselectedPackageId,
   (newValue) => {
     if (newValue) {
-      selectPackage(newValue as 'vip' | 'oneday');
+      const candidate = String(newValue);
+      const found = packagesData.value.find(p => p.slug === candidate || p.id === candidate || p.key === candidate);
+      selectPackage(found ? found.slug : candidate);
     }
   },
   { immediate: true }

@@ -23,7 +23,7 @@
           :isPopular="pkg.isPopular"
           :onBookNowClick="scrollToBooking"
           :packageTitleForDetails="pkg.title"
-          :icon="pkg.icon"
+          :icon="pkg.iconLabel"
         />
       </div>
       <div class="text-center mt-10">
@@ -38,7 +38,8 @@
 <script setup lang="ts">
 import { smoothScroll } from '../utils/smoothScroll'
 import { ref, defineAsyncComponent, onMounted } from 'vue'
-import { getPackages, PackageData } from '../composables/packagesData';
+import { supabase } from '../lib/supabase';
+import { PackageData } from '../types';
 
 const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
 const scrollToBooking = () => {
@@ -48,8 +49,17 @@ const scrollToBooking = () => {
 const packages = ref<PackageData[]>([]);
 
 onMounted(async () => {
-  packages.value = await getPackages();
-  console.log('Packages data:', packages.value);
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    return;
+  }
+
+  packages.value = (data || []).map((row: { package: PackageData }) => row.package);
 });
 </script>
 

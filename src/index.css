@@ -174,15 +174,3 @@
     @apply text-gray-600;
   }
 }
-
-.luxury-gradient {
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-}
-
-.gold-gradient {
-  background: linear-gradient(135deg, #C09A49 0%, #E0BBE4 100%);
-}
-
-.elegant-shadow {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}

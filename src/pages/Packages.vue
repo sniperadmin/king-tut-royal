@@ -26,7 +26,7 @@
           :isPopular="pkg.isPopular"
           :onBookNowClick="() => {}" 
           :packageTitleForDetails="pkg.title"
-          :icon="pkg.icon"
+          :icon="pkg.iconLabel"
         /> <!-- Placeholder for now -->
       </div>
     </div>
@@ -36,8 +36,9 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { getPackages, PackageData } from '@/composables/packagesData';
 import AppLayout from '@/components/AppLayout.vue';
+import { supabase } from '../lib/supabase';
+import { PackageData } from '../types';
 
 const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
 const router = useRouter()
@@ -45,13 +46,23 @@ const router = useRouter()
 const packages = ref<PackageData[]>([]);
 
 onMounted(async () => {
-  packages.value = await getPackages();
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    return;
+  }
+
+  packages.value = data.map((row: { package: PackageData }) => row.package);
 });
 
 const gridColsClass = computed(() => {
-  if (packages.length === 1) {
+  if (packages.value.length === 1) {
     return 'lg:grid-cols-1';
-  } else if (packages.length === 2) {
+  } else if (packages.value.length === 2) {
     return 'lg:grid-cols-2';
   } else {
     return 'lg:grid-cols-3';

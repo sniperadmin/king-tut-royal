@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import AppLayout from '@/components/AppLayout.vue'
-import { defineAsyncComponent, nextTick, ref } from 'vue'
+import { defineAsyncComponent, nextTick, ref, onMounted, watch } from 'vue'
 import { provideAppContext } from '@/composables/useAppContext'
 import { useRoute } from 'vue-router'
 import { smoothScroll } from '../utils/smoothScroll'
@@ -95,6 +95,24 @@ provideAppContext()
 
 const route = useRoute();
 const bookingSectionRef = ref(null);
+
+// Handle scrolling for non-booking targets on mount and when query.scroll changes
+onMounted(() => {
+  const scrollTarget = route.query.scroll;
+  if (scrollTarget && scrollTarget !== 'booking') {
+    nextTick(() => {
+      smoothScroll(String(scrollTarget));
+    });
+  }
+});
+
+watch(() => route.query.scroll, (newVal) => {
+  if (!newVal) return;
+  if (newVal === 'booking') return;
+  nextTick(() => {
+    smoothScroll(String(newVal));
+  });
+});
 
 const handleBookingSectionLoaded = () => {
   if (route.query.scroll === 'booking') {
