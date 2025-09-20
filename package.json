@@ -38,6 +38,7 @@
     "vue": "^3.4.0",
     "vue-router": "^4.5.1",
     "vue-tel-input": "^9.5.0",
+    "vue3-moment": "^1.0.0",
     "vue3-q-tel-input": "^2.0.4",
     "zod": "^3.23.8"
   },

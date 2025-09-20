@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <div class="flex items-center">
-          <span class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</span>
+          <router-link to="/" class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</router-link>
         </div>
 
         <!-- Desktop Menu -->
