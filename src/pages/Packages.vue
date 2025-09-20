@@ -24,8 +24,9 @@
           :image-srcset="pkg.imageSrcset ?? (pkg.image_412w && pkg.image_853w ? `${pkg.image_412w} 412w, ${pkg.image_853w} 853w` : '')"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
-          :onBookNowClick="() => {}" 
+          @bookNow="bookNow(pkg.slug)" 
           :packageTitleForDetails="pkg.title"
+          :packageSlug="pkg.slug"
           :icon="pkg.iconLabel"
         /> <!-- Placeholder for now -->
       </div>
@@ -39,6 +40,8 @@ import { useRouter } from 'vue-router'
 import AppLayout from '@/components/AppLayout.vue';
 import { supabase } from '../lib/supabase';
 import { PackageData } from '../types';
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
+
 
 const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
 const router = useRouter()
@@ -68,6 +71,11 @@ const gridColsClass = computed(() => {
     return 'lg:grid-cols-3';
   }
 });
+
+const bookNow = (packageSlug: string) => {
+  console.log('bookNow', packageSlug)
+  router.push({ path: '/', query: { scroll: 'booking', packageId: packageSlug } })
+}
 
 onMounted(() => {
   window.scrollTo(0, 0);

@@ -129,3 +129,9 @@ const scrollToSection = (id: string) => {
   }
 };
 </script>
+
+<script lang="ts">
+export default {
+  name: 'Footer'
+}
+</script>

@@ -173,6 +173,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComponent } from 'vue'
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
@@ -192,6 +193,7 @@ const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
 const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
 const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryDatePicker.vue'))
 
+// Define constants for package IDs
 
 const props = defineProps({
   preselectedPackageId: {
@@ -263,13 +265,13 @@ onMounted(async () => {
     selectPackage(resolvedPreselected);
   } else {
     // Set default package to 'royal vip' if no preselected package is provided
-    selectPackage('king-tut-royal-vip');
+    selectPackage(KING_TUT_ROYAL_VIP);
   }
 
-  if (props.preselectedDate && resolvedPreselected === 'king-tut-vip-one-day') {
+  if (props.preselectedDate && resolvedPreselected === KING_TUT_VIP_ONE_DAY) {
     selectedOneDayDate.value = new Date(props.preselectedDate);
   }
-  if (props.preselectedWeek && resolvedPreselected === 'king-tut-royal-vip') {
+  if (props.preselectedWeek && resolvedPreselected === KING_TUT_ROYAL_VIP) {
     formData.selectedWeek = props.preselectedWeek;
   }
 });
@@ -289,7 +291,7 @@ const formData = reactive({
   email: '',
   selectedWeek: '',
   participants: '1',
-  selectedPackage: 'king-tut-royal-vip',
+  selectedPackage: KING_TUT_ROYAL_VIP,
   specialRequests: '',
   oneDayDate: '' // Store as string directly for date input
 })
@@ -330,11 +332,11 @@ const isFormValid = computed(() => {
   
   if (!hasName || !hasEmail) return false
   
-  if (formData.selectedPackage === 'king-tut-royal-vip') {
+  if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
     return formData.selectedWeek && formData.selectedWeek.length > 0
   }
   
-  if (formData.selectedPackage === 'king-tut-vip-one-day') {
+  if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY) {
     return selectedOneDayDate.value !== null
   }
   
@@ -376,9 +378,9 @@ function calculateTotalPrice(packageId: string, guests: number) {
 
 const selectPackage = (packageId: string) => {
   formData.selectedPackage = packageId;
-  if (packageId === 'king-tut-vip-one-day') {
+  if (packageId === KING_TUT_VIP_ONE_DAY) {
     formData.participants = '4';
-  } else if (packageId === 'king-tut-royal-vip') {
+  } else if (packageId === KING_TUT_ROYAL_VIP) {
     formData.participants = '1';
   }
 };
@@ -406,12 +408,12 @@ const handleSubmit = async () => {
     return
   }
 
-  if (formData.selectedPackage === 'king-tut-royal-vip' && !formData.selectedWeek) {
+  if (formData.selectedPackage === KING_TUT_ROYAL_VIP && !formData.selectedWeek) {
     alert('Please select a week for the Royal VIP package.')
     return
   }
 
-  if (formData.selectedPackage === 'king-tut-vip-one-day' && !formData.oneDayDate) {
+  if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY && !formData.oneDayDate) {
     alert('Please select a date for the One Day package.')
     return
   }
@@ -423,7 +425,7 @@ const handleSubmit = async () => {
   let remainingSlots = 0
 
   try {
-    if (formData.selectedPackage === 'king-tut-royal-vip') {
+    if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
       // Check if enough slots are available
       const selectedWeekData = availableWeeks.value.find(w => w.week_start_date === formData.selectedWeek)
       if (!selectedWeekData) {
@@ -450,7 +452,7 @@ const handleSubmit = async () => {
       newBookingCount = data.newCount
       bookingDateDisplay = getThursdayDate(formData.selectedWeek)
       remainingSlots = MAX_CAPACITY - newBookingCount
-    } else if (formData.selectedPackage === 'king-tut-vip-one-day' && formData.oneDayDate) {
+    } else if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY && formData.oneDayDate) {
       // For one-day package, no slot booking needed on backend for now
       // Just format the date for display
       bookingDateDisplay = format(new Date(formData.oneDayDate), 'EEEE dd, MMMM yyyy') // e.g., 'Monday 25, October 2024'
@@ -459,20 +461,20 @@ const handleSubmit = async () => {
     }
 
     const totalPrice = calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants))
-    const packageName = formData.selectedPackage === 'king-tut-royal-vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
+    const packageName = formData.selectedPackage === KING_TUT_ROYAL_VIP ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
 
     const message = `
 🎁 *${packageName}*
 
 📋 *Booking Details:*
-${formData.selectedPackage === 'king-tut-royal-vip' ? `🎫 Booking number: ${newBookingCount}` : ''}
+${formData.selectedPackage === KING_TUT_ROYAL_VIP ? `🎫 Booking number: ${newBookingCount}` : ''}
 👤 Name: ${formData.name}
 📱 Phone: ${formData.phone}
 📧 Email: ${formData.email}
 👥 Guests: ${formData.participants}
 📅 Booking Date: ${bookingDateDisplay}
 € Total Price: €${totalPrice.toLocaleString()}
-${formData.selectedPackage === 'king-tut-royal-vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
+${formData.selectedPackage === KING_TUT_ROYAL_VIP ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `
 
@@ -480,7 +482,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
     window.open(whatsappUrl, '_blank')
 
     // Refresh available weeks (only relevant for VIP package)
-    if (formData.selectedPackage === 'king-tut-royal-vip') {
+    if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
       await fetchAvailableWeeks()
     }
 
@@ -491,7 +493,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
       email: '',
       selectedWeek: '',
       participants: '1',
-      selectedPackage: 'king-tut-royal-vip',
+      selectedPackage: KING_TUT_ROYAL_VIP,
       specialRequests: '',
       oneDayDate: ''
     })
@@ -511,7 +513,7 @@ onMounted(async () => {
   // Subscribe to realtime changes
   channel = supabase
     .channel('weekly_bookings_changes')
-    .on('postgres_changes', 
+    .on('postgres_changes',
       { event: '*', schema: 'public', table: 'weekly_bookings' },
       () => {
         fetchAvailableWeeks()

@@ -96,3 +96,9 @@ const scrollToSection = (id: string) => {
   }
 }
 </script>
+
+<script lang="ts">
+export default {
+  name: 'Navigation'
+}
+</script>

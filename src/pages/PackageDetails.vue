@@ -132,6 +132,7 @@ import AppLayout from '@/components/AppLayout.vue'
 import VideoPlayer from '../components/ui/VideoPlayer.vue'
 import { supabase } from '../lib/supabase'
 import { PackageData } from '../types'
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
 
 const route = useRoute()
 const router = useRouter()
@@ -228,8 +229,8 @@ const setCurrentImage = (index: number) => {
 }
 
 const bookNow = () => {
-  const title = packageItem.value?.title ?? ''
-  const packageKey = title === 'King Tut Royal VIP' ? 'vip' : 'oneday'
+  const title = packageItem.value?.slug ?? ''
+  const packageKey = title === KING_TUT_ROYAL_VIP ? KING_TUT_ROYAL_VIP : KING_TUT_VIP_ONE_DAY
   router.push({ path: '/', query: { scroll: 'booking', packageId: packageKey } })
 }
 </script>

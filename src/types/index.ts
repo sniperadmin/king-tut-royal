@@ -32,6 +32,8 @@ export interface Partner {
 
 export interface PackageData {
   key?: string;
+  slug: string;
+  id: string;
   title: string;
   price: string;
   duration: string;
