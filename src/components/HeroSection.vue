@@ -2,7 +2,7 @@
   <section class="relative w-full pt-16 bg-foreground text-foreground">
     <!-- Background Video - Full Width, Contained -->
     <div class="w-full">
-      <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-hero.m3u8' }]" poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp?width=853&quality=80" poster-width="853" poster-height="1280" />
+      <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-hero.m3u8' }]" poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp" />
     </div>
   </section>
 </template>
