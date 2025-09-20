@@ -59,8 +59,7 @@ export default defineConfig(({ mode }) => ({
             './src/components/HeroSection.vue'
           ],
           packageCard: [
-            './src/components/PackageCard.vue',
-            './src/components/PackageDetailsModal.vue'
+            './src/components/PackageCard.vue'
           ],
           bookingSection: [
             './src/components/BookingSection.vue'
