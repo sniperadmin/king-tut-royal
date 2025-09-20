@@ -6,16 +6,27 @@
         <div class="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div class="w-full md:w-1/3">
             <img
-              :src="partner.logo.medium"
-              :srcset="`${partner.logo.small} 200w, ${partner.logo.medium} 600w, ${partner.logo.large} 1200w`"
+              v-if="partnerInfo?.logo"
+              :src="partnerInfo?.logo?.medium || ''"
+              :srcset="[
+                partnerInfo?.logo?.small ? `${partnerInfo.logo.small} 200w` : null,
+                partnerInfo?.logo?.medium ? `${partnerInfo.logo.medium} 600w` : null,
+                partnerInfo?.logo?.large ? `${partnerInfo.logo.large} 1200w` : null
+              ].filter(Boolean).join(', ')"
               sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
-              :alt="partner.name + ' Logo'"
+              :alt="partnerInfo?.name + ' Logo'"
+              class="w-full h-auto rounded-lg shadow-lg"
+            />
+            <img
+              v-else
+              :src="'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22150%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23f3f4f6%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%236b7280%22 font-family=%22Arial%22 font-size=%2224%22>No Logo</text></svg>'"
+              alt="No Logo"
               class="w-full h-auto rounded-lg shadow-lg"
             />
           </div>
           <div class="w-full md:w-2/3">
-            <h1 class="text-4xl font-bold text-primary mb-4">{{ partner.name }}</h1>
-            <p class="text-lg text-muted-foreground mb-6">{{ partner.description }}</p>
+            <h1 class="text-4xl font-bold text-primary mb-4">{{ partnerInfo?.name }}</h1>
+            <p class="text-lg text-muted-foreground mb-6">{{ partnerInfo?.description }}</p>
             <div class="flex flex-wrap gap-4">
               <button 
                 @click="$router.push('/partners')"
@@ -29,30 +40,30 @@
 
         <!-- Partner Content Sections -->
         <div class="space-y-12">
-          <section v-if="partner.about">
-            <h2 class="text-2xl font-bold text-foreground mb-6">About {{ partner.name }}</h2>
+          <section v-if="partnerInfo?.about">
+            <h2 class="text-2xl font-bold text-foreground mb-6">About {{ partnerInfo?.name }}</h2>
             <div class="prose max-w-none text-muted-foreground">
-              <p v-for="(paragraph, index) in partner.about.split('\n\n')" :key="index">
+              <p v-for="(paragraph, index) in partnerInfo?.about.split('\n\n')" :key="index">
                 {{ paragraph }}
               </p>
             </div>
           </section>
 
-          <section v-if="partner.media && partner.media.length > 0">
+          <section v-if="partnerInfo?.media && partnerInfo.media.length > 0">
             <h2 class="text-2xl font-bold text-foreground mb-6">Gallery</h2>
             <div class="relative w-full max-w-4xl mx-auto aspect-video rounded-lg overflow-hidden shadow-lg group">
               <!-- Main Media Display -->
               <div class="w-full h-full flex items-center justify-center bg-black">
                 <img
-                  v-if="currentMedia.type === 'image'"
+                  v-if="currentMedia && currentMedia.type === 'image'"
                   :src="currentMedia.src"
                   :srcset="currentMedia.srcSet"
                   :sizes="currentMedia.sizes"
-                  :alt="partner.name + ' Media ' + (currentSlide + 1)"
+                  :alt="partnerInfo?.name + ' Logo'"
                   class="max-h-full max-w-full object-contain"
                 />
                 <iframe
-                  v-else-if="currentMedia.type === 'video'"
+                  v-else-if="currentMedia && currentMedia.type === 'video'"
                   :src="currentMedia.src"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -87,7 +98,7 @@
             <!-- Thumbnail Navigation -->
             <div class="flex justify-center gap-2 mt-4 flex-wrap">
               <img
-                v-for="(mediaItem, index) in partner.media"
+                v-for="(mediaItem, index) in partnerInfo?.media"
                 :key="index"
                 :src="mediaItem.thumbnail || mediaItem.src"
                 :srcset="mediaItem.srcSet"
@@ -98,11 +109,11 @@
               />
             </div>
           </section>
-          <section v-if="partner.services">
+          <section v-if="partnerInfo?.services">
             <h2 class="text-2xl font-bold text-foreground mb-6">Services</h2>
             <ul class="space-y-4">
-              <li 
-                v-for="(service, index) in partner.services" 
+              <li
+                v-for="(service, index) in partnerInfo?.services"
                 :key="index"
                 class="flex items-start gap-4"
               >
@@ -117,22 +128,23 @@
       </div>
 
       <!-- Image Modal -->
-      <div 
-        v-if="isModalOpen" 
+      <div
+        v-if="isModalOpen"
+        @click.self="closeModal"
         class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
       >
         <div class="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
           <!-- Modal Media -->
           <img
-            v-if="currentModalMedia.type === 'image'"
+            v-if="currentModalMedia && currentModalMedia.type === 'image'"
             :src="currentModalMedia.src"
             :srcset="currentModalMedia.srcSet"
             :sizes="currentModalMedia.sizes"
-            :alt="partner.name + ' Media ' + (modalImageIndex + 1)"
+            :alt="partnerInfo?.name + ' Media ' + (modalImageIndex + 1)"
             class="max-h-full max-w-full object-contain"
           />
           <iframe
-            v-else-if="currentModalMedia.type === 'video'"
+            v-else-if="currentModalMedia && currentModalMedia.type === 'video'"
             :src="currentModalMedia.src"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -171,111 +183,128 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, onUnmounted, watch } from 'vue'
+import { onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import AppLayout from '@/components/AppLayout.vue'
-import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next'
-import { ALL_PARTNERS, Partner, MediaItem } from '../composables/partnersData'
+import AppLayout from '@/components/AppLayout.vue';
+import { supabase } from '../lib/supabase';
+import { Partner } from '../types';
+import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next';
 
 const route = useRoute()
 const partner = ref<Partner | null>(null)
 
+// Gallery state
 const currentSlide = ref(0)
 const isModalOpen = ref(false)
 const modalImageIndex = ref(0)
-let autoSlideInterval: number | undefined = undefined
 
-const totalSlides = computed(() => partner.value?.media?.length || 0)
+const partnerInfo = computed(() => {
+  return partner.value?.partner || {} as Partner['partner']
+})
 
 const currentMedia = computed(() => {
-  if (!partner.value || !partner.value.media || partner.value.media.length === 0) {
-    return null
+  const media = partnerInfo.value?.media || []
+  const item = media[currentSlide.value]
+  if (!item) return null
+  return {
+    ...item,
+    src: item.src || item.url || '',
+    srcSet: item.srcSet || item.srcset || null,
+    sizes: item.sizes || null,
+    type: item.type || (typeof item.src === 'string' && item.src.includes('youtube') ? 'video' : 'image')
   }
-  return partner.value.media[currentSlide.value]
 })
 
 const currentModalMedia = computed(() => {
-  if (!partner.value || !partner.value.media || partner.value.media.length === 0) {
-    return null
+  const media = partnerInfo.value?.media || []
+  const item = media[modalImageIndex.value]
+  if (!item) return null
+  return {
+    ...item,
+    src: item.src || item.url || '',
+    srcSet: item.srcSet || item.srcset || null,
+    sizes: item.sizes || null,
+    type: item.type || (typeof item.src === 'string' && item.src.includes('youtube') ? 'video' : 'image')
   }
-  return partner.value.media[modalImageIndex.value]
 })
 
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-  stopAutoSlide()
-  startAutoSlide()
+function prevSlide() {
+  const len = partnerInfo.value?.media?.length || 0
+  if (!len) return
+  currentSlide.value = (currentSlide.value - 1 + len) % len
 }
 
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % totalSlides.value
-  stopAutoSlide()
-  startAutoSlide()
+function nextSlide() {
+  const len = partnerInfo.value?.media?.length || 0
+  if (!len) return
+  currentSlide.value = (currentSlide.value + 1) % len
 }
 
-const prevSlide = () => {
-  currentSlide.value = (currentSlide.value - 1 + totalSlides.value) % totalSlides.value
-  stopAutoSlide()
-  startAutoSlide()
+function goToSlide(index: number) {
+  const len = partnerInfo.value?.media?.length || 0
+  if (!len) return
+  currentSlide.value = Math.max(0, Math.min(index, len - 1))
 }
 
-const openModal = (index: number) => {
-  modalImageIndex.value = index
+function openModal(index: any) {
+  const i = typeof index === 'number' ? index : (index && typeof index.value === 'number' ? index.value : currentSlide.value)
+  modalImageIndex.value = i
   isModalOpen.value = true
-  stopAutoSlide()
 }
 
-const closeModal = () => {
+function closeModal() {
   isModalOpen.value = false
-  if (partner.value && partner.value.media && partner.value.media.length > 0) {
-    startAutoSlide()
-  }
 }
 
-const nextModalImage = () => {
-  modalImageIndex.value = (modalImageIndex.value + 1) % totalSlides.value
+function prevModalImage() {
+  const len = partnerInfo.value?.media?.length || 0
+  if (!len) return
+  modalImageIndex.value = (modalImageIndex.value - 1 + len) % len
 }
 
-const prevModalImage = () => {
-  modalImageIndex.value = (modalImageIndex.value - 1 + totalSlides.value) % totalSlides.value
+function nextModalImage() {
+  const len = partnerInfo.value?.media?.length || 0
+  if (!len) return
+  modalImageIndex.value = (modalImageIndex.value + 1) % len
 }
 
-const startAutoSlide = () => {
-  stopAutoSlide()
-  autoSlideInterval = setInterval(() => {
-    nextSlide()
-  }, 5000) as unknown as number // 5 seconds
+// Keyboard navigation and body scroll lock for modal
+function handleKeydown(e: KeyboardEvent) {
+  if (!isModalOpen.value) return
+  if (e.key === 'Escape') closeModal()
+  if (e.key === 'ArrowLeft') prevModalImage()
+  if (e.key === 'ArrowRight') nextModalImage()
 }
 
-const stopAutoSlide = () => {
-  if (autoSlideInterval) {
-    clearInterval(autoSlideInterval)
-    autoSlideInterval = undefined
-  }
-}
-
-watch(isModalOpen, (newVal) => {
-  if (newVal) {
+watch(isModalOpen, (val) => {
+  if (val) {
     document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeydown)
   } else {
     document.body.style.overflow = ''
-  }
-})
-
-onMounted(() => {
-  window.scrollTo(0, 0);
-  const partnerId = route.params.id as string
-  console.log('Route partnerId:', partnerId)
-  partner.value = ALL_PARTNERS.find(p => p.id === partnerId) || null
-  console.log('Found partner:', partner.value)
-  if (partner.value && partner.value.media && partner.value.media.length > 0) {
-    startAutoSlide()
+    window.removeEventListener('keydown', handleKeydown)
   }
 })
 
 onUnmounted(() => {
-  stopAutoSlide()
+  document.body.style.overflow = ''
+  window.removeEventListener('keydown', handleKeydown)
 })
+onMounted(async () => {
+  window.scrollTo(0, 0);
+  const { data, error } = await supabase
+    .from('partners_view')
+    .select('*')
+    .eq('id', route.params.id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching partner details:', error);
+    return;
+  }
+
+  partner.value = data;
+});
 </script>
 
 <style scoped>

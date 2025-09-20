@@ -23,9 +23,13 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     mode === 'report' && visualizer({ filename: 'dist/bundle-stats.html', open: true }),
-    vidstack(),
     json5Plugin(),
-    compression({ algorithm: 'brotliCompress' }),
+    compression({
+      algorithm: 'brotliCompress',
+      deleteOriginalAssets: false,
+      skipIfLargerOrEqual: true
+    }),
+    vidstack(),
     viteImagemin({
       mozjpeg: { quality: 80 },
       pngquant: { quality: [0.7, 0.9] },
@@ -38,11 +42,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   optimizeDeps: {
-    include: ['@tanstack/vue-query', 'vee-validate', 'hls.js']
-  },
-  define: {
-    __VUE_OPTIONS_API__: false,
-    'process.env.NODE_ENV': JSON.stringify(mode)
+    include: ['@tanstack/vue-query', 'vee-validate']
   },
   build: {
     target: 'esnext',
@@ -54,14 +54,12 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['vue', 'vue-router'],
           ui: ['@tanstack/vue-query', 'lucide-vue-next'],
-          video: ['vidstack', 'hls.js'],
           forms: ['vee-validate', 'zod', 'vue-tel-input'],
           heroSection: [
             './src/components/HeroSection.vue'
           ],
           packageCard: [
-            './src/components/PackageCard.vue',
-            './src/components/PackageDetailsModal.vue'
+            './src/components/PackageCard.vue'
           ],
           bookingSection: [
             './src/components/BookingSection.vue'

@@ -6,12 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:report": "vite build --mode report",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "lh": "npx --yes lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html --no-open"
   },
   "dependencies": {
+    "@playwright/test": "^1.55.0",
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/vue-query": "^5.85.9",
     "@types/uuid": "^10.0.0",

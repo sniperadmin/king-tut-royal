@@ -12,3 +12,9 @@
 import Navigation from './Navigation.vue'
 import Footer from './Footer.vue'
 </script>
+
+<script lang="ts">
+export default {
+  name: 'AppLayout'
+}
+</script>

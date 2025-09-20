@@ -268,15 +268,32 @@ onMounted(() => {
   if (mediaItems.length > 1) startAutoSlide();
 });
 
+function handleKeydown(e: KeyboardEvent) {
+  if (!isModalOpen.value) return;
+  if (e.key === 'Escape') {
+    isModalOpen.value = false;
+  } else if (e.key === 'ArrowLeft') {
+    prevModalImage();
+  } else if (e.key === 'ArrowRight') {
+    nextModalImage();
+  }
+}
+
 onUnmounted(() => {
   stopAutoSlide();
+  document.body.style.overflow = '';
+  window.removeEventListener('keydown', handleKeydown);
 });
 
 watch(isModalOpen, (newValue) => {
   if (newValue) {
     stopAutoSlide();
-  } else if (mediaItems.length > 1) {
-    startAutoSlide();
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeydown);
+  } else {
+    document.body.style.overflow = '';
+    window.removeEventListener('keydown', handleKeydown);
+    if (mediaItems.length > 1) startAutoSlide();
   }
 });
 const currentMedia = computed(() => mediaItems[currentSlide.value]);

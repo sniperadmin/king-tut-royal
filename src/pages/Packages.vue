@@ -24,9 +24,10 @@
           :image-srcset="pkg.imageSrcset ?? (pkg.image_412w && pkg.image_853w ? `${pkg.image_412w} 412w, ${pkg.image_853w} 853w` : '')"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
-          :onBookNowClick="() => {}" 
+          @bookNow="bookNow(pkg.slug)" 
           :packageTitleForDetails="pkg.title"
-          :icon="pkg.icon"
+          :packageSlug="pkg.slug"
+          :icon="pkg.iconLabel"
         /> <!-- Placeholder for now -->
       </div>
     </div>
@@ -36,23 +37,45 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { PACKAGES } from '@/composables/packagesData';
 import AppLayout from '@/components/AppLayout.vue';
+import { supabase } from '../lib/supabase';
+import { PackageData } from '../types';
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
+
 
 const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
 const router = useRouter()
 
-const packages = PACKAGES;
+const packages = ref<PackageData[]>([]);
+
+onMounted(async () => {
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    return;
+  }
+
+  packages.value = data.map((row: { package: PackageData }) => row.package);
+});
 
 const gridColsClass = computed(() => {
-  if (packages.length === 1) {
+  if (packages.value.length === 1) {
     return 'lg:grid-cols-1';
-  } else if (packages.length === 2) {
+  } else if (packages.value.length === 2) {
     return 'lg:grid-cols-2';
   } else {
     return 'lg:grid-cols-3';
   }
 });
+
+const bookNow = (packageSlug: string) => {
+  console.log('bookNow', packageSlug)
+  router.push({ path: '/', query: { scroll: 'booking', packageId: packageSlug } })
+}
 
 onMounted(() => {
   window.scrollTo(0, 0);
