@@ -116,6 +116,7 @@ const fetchTourLeader = async () => {
 };
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   fetchTourLeader();
 });
 </script>

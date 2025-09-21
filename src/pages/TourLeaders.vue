@@ -11,9 +11,10 @@
             Back to Home
           </button>
         </div>
-        <div class="flex items-center justify-between mb-6">
+        <div class="mb-6">
           <div class="mx-auto text-center">
-            <h2 class="text-3xl font-bold text-foreground">Our Tour Leaders <span class="text-primary">({{ leaders.length }} total)</span></h2>
+            <h2 class="text-3xl font-bold text-foreground max-w-full">Our Tour Leaders</h2>
+            <h4 class="text-primary my-2">({{ leaders.length }} total)</h4>
             <p class="text-brownish font-bold mt-1">Meet our hand-picked experts who will guide your next luxury experience.</p>
           </div>
         </div>
