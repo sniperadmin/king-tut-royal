@@ -104,6 +104,7 @@ function formatLanguages(l: TourLeader) {
 }
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   fetchTourLeaders();
 });
 </script>
