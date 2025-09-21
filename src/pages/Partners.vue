@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="container mx-auto px-4 py-20 bg-brownish/10">
+    <div class="mx-auto px-4 py-20 bg-brownish/10">
       <div class="flex flex-col md:flex-row items-center mb-8">
         <button
           type="button"
