@@ -5,7 +5,7 @@
     :href="post.internal ? null : post.link"
     :target="post.internal ? null : '_blank'"
     :rel="post.internal ? null : 'noopener noreferrer'"
-    class="block my-6 bg-card-light dark:bg-card-dark rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+    class="block my-6 max-w-lg mx-auto bg-card-light dark:bg-card-dark rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
   >
     <img :src="post.image" :alt="post.title" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300" width="512" height="256" />
     <div class="p-8">
