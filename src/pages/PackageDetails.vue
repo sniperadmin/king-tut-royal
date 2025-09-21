@@ -47,7 +47,7 @@
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-4">Itinerary Highlights</h3>
           <div v-for="(day, index) in packageItem.details.itinerary" :key="index" class="mb-4 last:mb-0">
-            <h3 class="text-xl font-bold text-foreground">{{ day.day }}</h3>
+            <h3 class="text-xl font-bold text-foreground text-left">{{ day.day }}</h3>
             <ul class="fancy-list text-lg text-muted-foreground text-left">
               <li v-for="(item, itemIndex) in day.description" :key="itemIndex">
                 <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />

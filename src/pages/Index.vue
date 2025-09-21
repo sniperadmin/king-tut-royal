@@ -105,7 +105,7 @@ const posts1 = ref([
     title: "Sherin Yosry Consulting FZ-LLC: Crafting Unique Luxury Experiences with the King Tut Royal Package",
     excerpt: "In the heart of Egypt, where the majestic Pyramids of Giza stand watch over the land, a monumental cultural event is unfolding. The Grand Egyptian Museum (GEM), set to open its doors on November 1, 2025, will forever change the global tourism landscape.",
     image: "https://framerusercontent.com/images/mYzqsDBWUVLpvmQ534wIe1N58to.png?width=1200&height=600",
-    link: "/media/sherin-yosry-consulting-fz-llc-crafting-unique-luxury-experiences-with-the-king-tut-royal-package",
+    link: "https://usanews.com/newsroom/sherin-yosry-consulting-fz-llc-crafting-unique-luxury-experiences-with-the-king-tut-royal-package",
     internal: false,
   }
 ])
