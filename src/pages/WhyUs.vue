@@ -1,15 +1,16 @@
 <template>
   <AppLayout>
-    <div class="mx-auto py-20">
+    <div class="mx-auto pt-20">
       <button @click="router.push('/')" class="text-primary hover:underline mb-4 flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
         </svg>
         Back
       </button>
-      <h1 class="text-5xl font-bold text-primary mb-8 text-center">Why Us?</h1>
+      <h1 class="text-5xl font-bold text-primary text-center">Why Us?</h1>
 
-      <div class="py-8 rounded-lg mb-12">
+      <div class="py-2 rounded-lg mb-12">
+        <ArticleCard v-for="(post, index) in posts" :key="index" :post="post" />
         <h2 class="text-4xl font-bold text-foreground mb-6">Introduction to SY Consulting</h2>
         <p class="text-lg text-muted-foreground mb-4">
           SY Consulting FZ-LLC, headquartered in the United Arab Emirates, brings together more than 30 years of global expertise in the fields of luxury, lifestyle, hospitality, and tourism innovation. Over three decades, our team has worked alongside world-class brands, celebrities, high-net-worth individuals, and government entities, creating bespoke products, high-profile events, and iconic lifestyle concepts across Europe, the Middle East, and beyond.
@@ -45,9 +46,20 @@
 <script setup lang="ts">
 import AppLayout from '@/components/AppLayout.vue';
 import VideoPlayer from '@/components/ui/VideoPlayer.vue';
-import { onMounted, computed } from 'vue';
+import ArticleCard from '../components/ArticleCard.vue'
+import { onMounted, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Sparkles } from 'lucide-vue-next';
+
+const posts = ref([
+  {
+    title: "Sherin Yosry Consulting and the King Tut Royal Legacy",
+    excerpt: "An exclusive journey into Egypt’s timeless heritage meets modern luxury through Sherin Yosry’s visionary leadership. The lights of Cairo glistened on the horizon, casting their golden reflection on the timeless Nile.",
+    image: "https://ceotimes.com/wp-content/uploads/2025/09/download-2-23-1170x585.png",
+    link: "https://ceotimes.com/sherin-yosry-consulting-and-the-king-tut-royal-legacy/",
+    internal: false,
+  }
+]);
 
 const benefits = [
   '<strong>Attractive Commission Structure</strong> – Earn competitive commissions on every confirmed booking made via your network.',

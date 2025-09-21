@@ -1,6 +1,6 @@
 <template>
   <section class="mx-auto bg-light-blue">
-    <div class="bg-card/60 border border-border p-10">
+    <div class="py-6">
       <div class="flex items-center justify-between mb-6">
         <div class="mx-auto text-center">
           <h2 class="text-3xl font-bold text-foreground">Featured Tour Leaders</h2>
@@ -26,7 +26,7 @@
           <p class="leader-desc text-muted-foreground mt-4 text-sm flex-grow">{{ getDescription(leader) }}</p>
 
           <div class="mt-4 w-full flex flex-col sm:flex-row items-center justify-between">
-            <router-link :to="`/tour-leaders/${getSlug(leader.name)}`" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold rounded-full shadow hover:scale-105 transition-transform mb-2 sm:mb-0" :aria-label="`View profile of ${leader.name}`">
+            <router-link :to="`/tour-leaders/${leader.id}`" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold rounded-full shadow hover:scale-105 transition-transform mb-2 sm:mb-0" :aria-label="`View profile of ${leader.name}`">
               Profile
             </router-link>
             <div class="text-sm text-muted-foreground">Languages: <span class="text-muted-foreground">{{ formatLanguages(leader) }}</span></div>

@@ -1,5 +1,5 @@
 <template>
-  <section id="booking" class="py-20 bg-light-yellow">
+  <section id="booking" class="py-10 bg-light-yellow">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>

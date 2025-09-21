@@ -37,14 +37,14 @@
         <MediaSliderSection />
       </Suspense>
 
+      <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
+
       <Suspense>
         <template #fallback>
           <WhyChooseSkeleton />
         </template>
         <WhyChooseSection />
       </Suspense>
-
-      <ArticleCard v-for="(post, index) in posts" :key="index" :post="post" />
 
       <Suspense>
         <template #fallback>
@@ -53,7 +53,6 @@
         <FeaturedTourLeaders id="tour-leaders" />
       </Suspense>
 
-      <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
 
       <Suspense>
         <template #fallback>
@@ -100,16 +99,6 @@ provideAppContext()
 
 const route = useRoute();
 const bookingSectionRef = ref(null);
-
-const posts = ref([
-  {
-    title: "Sherin Yosry Consulting and the King Tut Royal Legacy",
-    excerpt: "An exclusive journey into Egypt’s timeless heritage meets modern luxury through Sherin Yosry’s visionary leadership. The lights of Cairo glistened on the horizon, casting their golden reflection on the timeless Nile.",
-    image: "https://ceotimes.com/wp-content/uploads/2025/09/download-2-23-1170x585.png",
-    link: "https://ceotimes.com/sherin-yosry-consulting-and-the-king-tut-royal-legacy/",
-    internal: false,
-  }
-]);
 
 const posts1 = ref([
    {

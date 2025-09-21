@@ -46,22 +46,14 @@
 
         <div class="mb-8 bg-card border border-border rounded-lg p-6">
           <h3 class="text-2xl font-semibold text-foreground mb-4">Itinerary Highlights</h3>
-          <div class="stepper">
-            <div v-for="(day, index) in packageItem.details.itinerary" :key="index" class="stepper-item">
-              <div class="stepper-item-content">
-                <div class="stepper-item-circle">{{ index + 1 }}</div>
-                <div class="stepper-item-line"></div>
-              </div>
-              <div class="stepper-item-details">
-                <h3 class="text-xl font-medium text-foreground">{{ day.day }}</h3>
-                <ul class="fancy-list text-lg text-muted-foreground text-left">
-                  <li v-for="(item, itemIndex) in day.description" :key="itemIndex">
-                    <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />
-                    <span v-html="item"></span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <div v-for="(day, index) in packageItem.details.itinerary" :key="index" class="mb-4 last:mb-0">
+            <h3 class="text-xl font-bold text-foreground">{{ day.day }}</h3>
+            <ul class="fancy-list text-lg text-muted-foreground text-left">
+              <li v-for="(item, itemIndex) in day.description" :key="itemIndex">
+                <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />
+                <span v-html="item"></span>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -245,28 +237,7 @@ const bookNow = () => {
   router.push({ path: '/', query: { scroll: 'booking', packageId: packageKey } })
 }
 </script>
-
 <style scoped>
-.stepper {
-  @apply relative;
-}
-
-.stepper-item {
-  @apply flex items-start pb-6 last:pb-0;
-}
-
-.stepper-item-content {
-  @apply flex flex-col items-center mr-4;
-}
-
-.stepper-item-circle {
-  @apply w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold;
-}
-
-.stepper-item-line {
-  @apply w-0.5 h-full bg-border mt-2;
-}
-
 .fancy-list li {
   @apply flex items-start mb-2;
 }
