@@ -15,13 +15,6 @@
           <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
           <!-- <button @click="scrollToSection('news-media')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">News & Media</button> -->
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
-          <!-- <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link> -->
-          <button 
-            @click="scrollToSection('booking')"
-            class="bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-2 rounded-lg font-semibold transition-all duration-300"
-          >
-            Inquiry
-          </button>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -46,12 +39,6 @@
           <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
           <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
-          <!-- <button 
-            @click="scrollToSection('booking')"
-            class="bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-2 rounded-lg font-semibold w-full"
-          >
-            Inquiry
-          </button> -->
         </div>
       </div>
     </div>

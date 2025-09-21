@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="container mx-auto p-4 pt-20">
+    <div class="mx-auto pt-20">
       <h1 class="text-3xl font-bold mb-2 text-center text-foreground">{{ packageItem?.title }}</h1>
       <p v-if="packageItem?.price" class="text-xl text-center text-primary mb-6">{{ packageItem?.price }} per person</p>
       
@@ -47,8 +47,11 @@
               </div>
               <div class="stepper-item-details">
                 <h3 class="text-xl font-medium text-foreground">{{ day.day }}</h3>
-                <ul class="list-disc pl-5 text-muted-foreground">
-                  <li v-for="(item, itemIndex) in day.description" :key="itemIndex">{{ item }}</li>
+                <ul class="fancy-list text-lg text-muted-foreground">
+                  <li v-for="(item, itemIndex) in day.description" :key="itemIndex">
+                    <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />
+                    <span v-html="item"></span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -132,7 +135,8 @@ import AppLayout from '@/components/AppLayout.vue'
 import VideoPlayer from '../components/ui/VideoPlayer.vue'
 import { supabase } from '../lib/supabase'
 import { PackageData } from '../types'
-import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds'
+import { Sparkles } from 'lucide-vue-next';
 
 const route = useRoute()
 const router = useRouter()
@@ -256,7 +260,11 @@ const bookNow = () => {
   @apply w-0.5 h-full bg-border mt-2;
 }
 
-.stepper-item-details {
-  @apply flex-1;
+.fancy-list li {
+  @apply flex items-start mb-2;
+}
+
+.fancy-list li .lucide {
+  @apply flex-shrink-0 mt-1;
 }
 </style>
