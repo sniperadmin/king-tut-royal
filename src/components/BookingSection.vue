@@ -19,7 +19,7 @@
           <!-- Package Selection -->
           <div class="space-y-4 mb-8">
             <Label class="text-foreground text-base sm:text-lg">Your Package *</Label>
-            <div class="grid md:grid-cols-2 gap-4">
+            <div class="grid md:grid-cols-1 gap-4">
               <template v-for="(pkg, index) in packagesData" :key="pkg.key || index">
                 <div 
                   :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
@@ -198,7 +198,7 @@ const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryD
 const props = defineProps({
   preselectedPackageId: {
     type: String,
-    default: null
+    default: KING_TUT_ROYAL_VIP
   },
   preselectedDate: {
     type: String,
@@ -261,16 +261,27 @@ onMounted(async () => {
   };
 
   const resolvedPreselected = resolveToSlug(props.preselectedPackageId);
+  console.log(resolvedPreselected)
 
   if (resolvedPreselected) {
+    // If an explicit preselected package was provided, use it
     selectPackage(resolvedPreselected);
+    if (props.preselectedDate && resolvedPreselected === KING_TUT_VIP_ONE_DAY) {
+      selectedOneDayDate.value = new Date(props.preselectedDate);
+    }
+  } else if (packagesData && Array.isArray(packagesData.value) && packagesData.value.length === 1) {
+    // If there's exactly one package available, select it automatically
+    const onlyPackage = packagesData.value[0];
+    const slug = onlyPackage.slug || onlyPackage.id || onlyPackage.key || KING_TUT_ROYAL_VIP;
+    selectPackage(slug);
+
+    // If the single package is the one-day package and a preselected date exists, apply it
+    if (props.preselectedDate && slug === KING_TUT_VIP_ONE_DAY) {
+      selectedOneDayDate.value = new Date(props.preselectedDate);
+    }
   } else {
     // Set default package to 'royal vip' if no preselected package is provided
     selectPackage(KING_TUT_ROYAL_VIP);
-  }
-
-  if (props.preselectedDate && resolvedPreselected === KING_TUT_VIP_ONE_DAY) {
-    selectedOneDayDate.value = new Date(props.preselectedDate);
   }
   if (props.preselectedWeek && resolvedPreselected === KING_TUT_ROYAL_VIP) {
     formData.selectedWeek = props.preselectedWeek;
@@ -292,7 +303,7 @@ const formData = reactive({
   email: '',
   selectedWeek: '',
   participants: '1',
-  selectedPackage: KING_TUT_ROYAL_VIP,
+  selectedPackage: '', // default empty — will be set on mount if only package exists
   specialRequests: '',
   oneDayDate: '' // Store as string directly for date input
 })
@@ -530,17 +541,13 @@ onUnmounted(() => {
 })
 
 // Watch for preselectedPackageId changes to update the selected package and participants
-watch(
-  () => props.preselectedPackageId,
-  (newValue) => {
-    if (newValue) {
-      const candidate = String(newValue);
-      const found = packagesData.value.find(p => p.slug === candidate || p.id === candidate || p.key === candidate);
-      selectPackage(found ? found.slug : candidate);
-    }
-  },
-  { immediate: true }
-);
+watch(packagesData, (newVal) => {
+  if (Array.isArray(newVal) && newVal.length === 1) {
+    const onlyPackage = newVal[0];
+    const slug = onlyPackage.slug || onlyPackage.id || onlyPackage.key || KING_TUT_ROYAL_VIP;
+    selectPackage(slug);
+  }
+}, { immediate: true });
 </script>
 
 <style>
