@@ -44,7 +44,7 @@
           <router-link to="/packages" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
           <router-link to="/partners" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
           <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</button>
-          <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button>
+          <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
           <button 
             @click="scrollToSection('booking')"
