@@ -2,23 +2,23 @@
   <section id="booking" class="py-10 bg-light-yellow">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
-        <p class="text-xl text-brownish font-bold max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
+        <p class="text-lg sm:text-xl text-brownish font-bold max-w-2xl mx-auto">
           Limited to 50 bookings per week - Secure your spot now!
         </p>
       </div>
 
       <Card class="bg-card border border-primary/20 shadow-xl">
         <CardHeader class="text-center border-b border-border">
-          <CardTitle class="flex items-center justify-center gap-2 text-2xl text-foreground">
-            Select Your Package
+          <CardTitle class="flex items-center justify-center gap-2 text-xl sm:text-2xl text-foreground">
+            Booking Details
           </CardTitle>
-          <CardDescription class="text-muted-foreground">Choose your preferred package and date</CardDescription>
+          <CardDescription class="text-sm sm:text-base text-muted-foreground">Choose your preferred date</CardDescription>
         </CardHeader>
         <CardContent class="space-y-6 p-8">
           <!-- Package Selection -->
           <div class="space-y-4 mb-8">
-            <Label class="text-foreground text-lg">Select Package *</Label>
+            <Label class="text-foreground text-base sm:text-lg">Your Package *</Label>
             <div class="grid md:grid-cols-2 gap-4">
               <template v-for="(pkg, index) in packagesData" :key="pkg.key || index">
                 <div 
@@ -29,11 +29,11 @@
                   }`"
                   @click="selectPackage(pkg.slug)"
                 >
-                  <h3 class="text-lg font-semibold text-primary mb-2">{{ pkg.title }}</h3>
-                  <p class="text-foreground text-2xl font-bold">{{ pkg.price }}</p>
-                  <p v-if="pkg.details?.itinerary" class="text-muted-foreground text-sm">{{ pkg.details.itinerary.length }} Days / {{ pkg.details.itinerary.length ? pkg.details.itinerary.length - 1 : 0 }} Nights</p>
-                  <p v-else class="text-muted-foreground text-sm">Full Day Experience</p>
-                  <p v-if="pkg.details?.per_person" class="text-muted-foreground text-sm">per person</p>
+                  <h3 class="text-base sm:text-lg font-semibold text-primary mb-2">{{ pkg.title }}</h3>
+                  <p class="text-lg sm:text-2xl font-bold text-foreground">{{ pkg.price }}</p>
+                  <p v-if="pkg.details?.itinerary" class="text-xs sm:text-sm text-muted-foreground">{{ pkg.details.itinerary.length }} Days / {{ pkg.details.itinerary.length ? pkg.details.itinerary.length - 1 : 0 }} Nights</p>
+                  <p v-else class="text-xs sm:text-sm text-muted-foreground">Full Day Experience</p>
+                  <p v-if="pkg.details?.per_person" class="text-xs sm:text-sm text-muted-foreground">per person</p>
                 </div>
               </template>
             </div>
@@ -161,7 +161,7 @@
               class="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary font-semibold disabled:opacity-90"
             >
               <MessageCircle class="mr-2 h-5 w-5" />
-              {{ submitting ? 'Processing...' : 'Send us your inquiry' }}
+              {{ submitting ? 'Processing...' : 'Send inquiry' }}
             </Button>
             <Label v-if="!isFormValid" class="text-red-500 font-bold">Fill in the required fields and we will get back to you.</Label>
           </form>
@@ -219,6 +219,7 @@ onMounted(async () => {
   const { data, error } = await supabase
     .from('packages_view')
     .select('package, sort_rank')
+    .limit(1)
     .order('sort_rank', { ascending: true });
 
   if (error) {
