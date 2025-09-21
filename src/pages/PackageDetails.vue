@@ -1,6 +1,13 @@
 <template>
   <AppLayout>
     <div class="mx-auto pt-20">
+      <button
+          type="button"
+          @click="router.push('/packages')"
+          class="rounded-sm border border-brownish hover:bg-brownish hover:text-background text-brownish py-2 px-4 font-semibold tracking-wider transition-all duration-300 uppercase text-sm w-full md:w-auto mb-4 md:mb-0"
+        >
+          Back to Packages
+      </button>
       <h1 class="text-3xl font-bold mb-2 text-center text-foreground">{{ packageItem?.title }}</h1>
       <p v-if="packageItem?.price" class="text-xl text-center text-primary mb-6">{{ packageItem?.price }} per person</p>
       
@@ -47,7 +54,7 @@
               </div>
               <div class="stepper-item-details">
                 <h3 class="text-xl font-medium text-foreground">{{ day.day }}</h3>
-                <ul class="fancy-list text-lg text-muted-foreground">
+                <ul class="fancy-list text-lg text-muted-foreground text-left">
                   <li v-for="(item, itemIndex) in day.description" :key="itemIndex">
                     <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />
                     <span v-html="item"></span>
@@ -265,6 +272,6 @@ const bookNow = () => {
 }
 
 .fancy-list li .lucide {
-  @apply flex-shrink-0 mt-1;
+  @apply flex-shrink-0;
 }
 </style>
