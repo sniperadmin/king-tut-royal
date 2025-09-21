@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <div class="flex items-center">
-          <span class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</span>
+          <router-link to="/" class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</router-link>
         </div>
 
         <!-- Desktop Menu -->
@@ -12,16 +12,9 @@
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
           <router-link to="/packages" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
           <router-link to="/partners" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
-          <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</button>
-          <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Newsletter</button>
-          <button @click="scrollToSection('tour-leaders')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</button>
-          <!-- <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link> -->
-          <button 
-            @click="scrollToSection('booking')"
-            class="bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-2 rounded-lg font-semibold transition-all duration-300"
-          >
-            Inquiry
-          </button>
+          <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
+          <!-- <button @click="scrollToSection('news-media')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">News & Media</button> -->
+          <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -43,15 +36,9 @@
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
           <router-link to="/packages" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
           <router-link to="/partners" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
-          <button @click="scrollToSection('why-us')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</button>
-          <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button>
+          <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
+          <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
           <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
-          <button 
-            @click="scrollToSection('booking')"
-            class="bg-primary hover:bg-primary/80 text-primary-foreground px-6 py-2 rounded-lg font-semibold w-full"
-          >
-            Inquiry
-          </button>
         </div>
       </div>
     </div>
@@ -94,5 +81,11 @@ const scrollToSection = (id: string) => {
       isMenuOpen.value = false
     })
   }
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'Navigation'
 }
 </script>

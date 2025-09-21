@@ -1,108 +1,122 @@
 <template>
   <AppLayout>
-    <div id="main-content" class="container mx-auto p-4 pt-24 sm:pt-28" role="main">
-    <!-- <a href="#main-content" class="sr-only focus:not-sr-only inline-block p-2 bg-primary text-primary-foreground rounded" aria-label="Skip to main content">Skip to main content</a> -->
-      <div v-if="leader" class="w-full mx-auto bg-card border border-border rounded-lg shadow-lg p-4 sm:p-6 md:p-8 text-foreground max-w-full sm:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <a href="#" @click.prevent="router.back()" class="text-primary hover:text-primary-foreground font-semibold mb-4 inline-flex items-center"><span class="mr-2">&larr;</span>Back</a>
-        <header class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
-          <img v-if="leader.avatar" :src="leader.avatar" :alt="leader.name" loading="lazy" class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full object-cover border-4 border-border shadow-lg" />
-          <div>
-            <h1 id="leader-name" class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-1 leading-tight">{{ leader.name }}</h1>
-            <p class="text-muted-foreground font-semibold mb-2" aria-hidden="true">{{ leader.portfolio.experience }}</p>
-            <p class="text-muted-foreground text-sm">{{ leader.age ? `Age: ${leader.age}` : '' }} <span v-if="leader.languages"> • <span class="sr-only">Languages: </span><span aria-hidden="true">{{ Array.isArray(leader.languages) ? leader.languages.join(', ') : leader.languages }}</span></span></p>
-            <!-- <div class="mt-4">
-              <a class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 bg-primary text-primary-foreground font-semibold rounded-full shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" :href="`tel:${leader.phone.replace(/\s+/g,'')}`" :aria-label="`Call ${leader.name} at ${leader.phone}`">Call: <span class="font-mono">{{ leader.phone }}</span></a>
-            </div> -->
+    <div class="mx-auto p-0 mt-20">
+    <div v-if="loading" class="text-center text-muted-foreground">Loading tour leader profile...</div>
+    <div v-else-if="error" class="text-center text-red-500">Error: {{ error }}</div>
+    <div v-else-if="leader" class="rounded-lg py-6 md:p-8 lg:p-10">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
+      <button
+          type="button"
+          @click="router.push('/tour-leaders')"
+          class="rounded-sm border border-brownish hover:bg-brownish hover:text-background text-brownish py-2 px-4 font-semibold tracking-wider transition-all duration-300 uppercase text-sm w-full md:w-auto mb-4 md:mb-0"
+        >
+          Back to Tour Leaders
+      </button>
+        <div class="flex-shrink-0">
+          <img v-if="leader.avatar_url" :src="leader.avatar_url" :alt="leader.name" class="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md" />
+          <div v-else class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-muted flex items-center justify-center text-5xl font-semibold text-muted-foreground shadow-md">
+            {{ leader.name ? leader.name.charAt(0) : '?' }}
           </div>
-        </header>
-
-        <main class="mt-6 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12" aria-labelledby="about-heading">
-          <section id="about-section" aria-labelledby="about-heading" class="md:col-span-8 lg:col-span-8">
-            <h2 id="about-heading" class="text-xl md:text-2xl font-semibold mb-2">About</h2>
-            <p class="text-muted-foreground mb-4">{{ leader.portfolio.bio }}</p>
-
-            <h3 class="text-lg font-semibold mt-6">Specialties</h3>
-            <ul class="list-disc list-inside text-muted-foreground">
-              <li v-for="(s, i) in leader.portfolio.specialties" :key="i" class="mb-2">{{ s }}</li>
-            </ul>
-
-            <h3 class="text-lg font-semibold mt-6">Certifications</h3>
-            <ul class="list-disc list-inside text-muted-foreground">
-              <li v-for="(c, i) in leader.portfolio.certifications" :key="i" class="mb-2">{{ c }}</li>
-            </ul>
-          </section>
-
-          <aside id="engagements" class="prose prose-invert md:col-span-4 lg:col-span-4" role="region" aria-labelledby="engagements-heading">
-            <h2 id="engagements-heading" class="text-xl md:text-2xl font-semibold mb-2">Engagements</h2>
-            <h5 class="font-medium text-primary">Highlighted Tours</h5>
-            <ul class="list-disc list-inside text-muted-foreground mb-4">
-              <li v-for="(t, i) in leader.engagement.highlight_tours" :key="i" class="mb-2">{{ t }}</li>
-            </ul>
-
-            <h5 class="font-medium text-primary">Reviews</h5>
-            <div class="space-y-2 text-muted-foreground mb-6">
-              <blockquote v-for="(r, i) in leader.engagement.reviews" :key="i" class="border-l-2 border-primary pl-3 italic" aria-label="Review">"{{ r }}"</blockquote>
-            </div>
-
-            <!-- <div class="mt-4">
-              <a v-if="leader.portfolio.video_persona" :href="leader.portfolio.video_persona" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground hover:bg-primary-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-md" :aria-label="`Watch intro video for ${leader.name}`">Watch intro video</a>
-            </div> -->
-          </aside>
-        </main>
-
-        <div class="mt-8 space-y-3">
-          <button
-            type="button"
-            @click="router.back()"
-            class="w-full rounded-sm border-primary hover:bg-primary hover:text-primary-foreground text-primary py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm block text-center"
-          >
-            Back to Tour Leaders
-          </button>
+        </div>
+        <div class="flex-grow text-center md:text-left">
+          <h1 class="text-3xl md:text-4xl font-bold text-primary-foreground">{{ leader.name }}</h1>
+          <p class="text-lg text-primary mt-2">{{ leader.specialties && leader.specialties.length > 0 ? leader.specialties.join(', ') : leader.experience || 'Private & Bespoke Tours' }}</p>
+          <p class="text-md text-muted-foreground mt-1">Languages: {{ leader.languages ? leader.languages.join(', ') : 'N/A' }}</p>
+          <p v-if="leader.bio" class="text-foreground mt-4 leading-relaxed">{{ leader.bio }}</p>
         </div>
       </div>
 
-      <div v-else class="text-center text-muted-foreground">
-        <h2 class="text-2xl font-semibold">Tour leader not found</h2>
-        <p class="mt-2">Please return to the <a href="#" @click.prevent="router.back()" class="text-primary underline">tour leaders list</a>.</p>
+      <div class="mt-10 border-t border-border pt-8">
+        <h2 class="text-2xl font-bold text-primary-foreground mb-6">Experience & Certifications</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-primary-foreground mb-3">Experience</h3>
+            <ul class="list-disc list-inside text-foreground space-y-2">
+              <li class="flex items-center gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />{{ leader.experience || 'Years of experience in luxury travel guidance.' }}</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-primary-foreground mb-3">Certifications</h3>
+            <ul class="list-disc list-inside text-foreground space-y-2">
+              <li v-for="(cert, index) in leader.certifications" :key="index" class="flex items-center gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />{{ cert }}</li>
+              <li v-if="!leader.certifications || leader.certifications.length === 0" class="flex items-center gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />Licensed Tour Guide – Ministry of Tourism</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 border-t border-border pt-8">
+        <h2 class="text-2xl font-bold text-primary-foreground mb-6">Highlight Tours</h2>
+        <ul class="list-disc list-inside text-foreground space-y-2">
+          <li v-for="(tour, index) in leader.highlight_tours" :key="index" class="flex items-center gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />{{ tour }}</li>
+          <li v-if="!leader.highlight_tours || leader.highlight_tours.length === 0" class="flex items-center gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />Customized luxury tours available upon request.</li>
+        </ul>
+      </div>
+
+      <div class="mt-10 border-t border-border pt-8">
+        <h2 class="text-2xl font-bold text-primary-foreground mb-6">Reviews</h2>
+        <div v-if="leader.reviews && leader.reviews.length > 0" class="space-y-4">
+          <p v-for="(review, index) in leader.reviews" :key="index" class="italic text-muted-foreground flex items-start gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary mt-1" />"{{ review }}"</p>
+        </div>
+        <p v-else class="text-muted-foreground flex items-start gap-2"><Sparkles class="inline-block h-5 w-5 mr-2 text-primary mt-1" />No reviews yet. Be the first to share your experience!</p>
       </div>
     </div>
+    <div v-else class="text-center text-muted-foreground">Tour leader not found.</div>
+  </div>
   </AppLayout>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { supabase } from '@/lib/supabase'
 import AppLayout from '../components/AppLayout.vue'
-import tourLeadersData from '../utils/tour_leaders.json'
+import { Sparkles, Award, MapPin, MessageSquare } from 'lucide-vue-next'
 
-const route = useRoute()
-const router = useRouter()
-const slugParam = String(route.params.slug || '')
-
-const getSlug = (name: string): string => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
-
-const leader = computed(() => {
-  return (tourLeadersData as any[]).find(l => getSlug(l.name) === slugParam) || null
-})
-
-onMounted(() => { window.scrollTo(0,0) })
-</script>
-
-<style scoped>
-:root{--accent:var(--primary);--accent-strong:var(--primary-foreground);--bg:var(--background);--card:var(--card)}
-/* Focus styles for keyboard users */
-a:focus-visible, button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
-/* Ensure readable line-length and comfortable leading */
-.prose{line-height:1.7;color:var(--text,var(--muted-foreground))}
-/* Slight heading tweak for better visual hierarchy */
-#leader-name{letter-spacing:-0.5px}
-/* Subtle image background for avatar to improve perceived contrast while lazy-loading */
-img[loading="lazy"]{background-color:rgba(255,255,255,0.02)}
-/* Make call-to-action more accessible and high contrast on small screens */
-@media (max-width:640px){
-  .inline-flex.items-center.px-4.py-2{font-weight:700;width:100%;justify-content:center}
+interface TourLeader {
+  id: string;
+  name: string;
+  languages: string[];
+  avatar_url?: string;
+  experience?: string;
+  bio?: string;
+  specialties?: string[];
+  certifications?: string[];
+  highlight_tours?: string[];
+  reviews?: string[];
 }
-/* Ensure sufficient contrast for decorative accents when necessary */
-.text-amber-300{color:var(--primary)}
-.text-yellow-400{color:var(--primary)}
-</style>
+
+const leader = ref<TourLeader | null>(null);
+const loading = ref(true);
+const error = ref<string | null>(null);
+const route = useRoute();
+const router = useRouter()
+
+const fetchTourLeader = async () => {
+  try {
+    loading.value = true;
+    const leaderId = route.params.id;
+    
+    const { data, error: supabaseError } = await supabase
+      .from('guides_public')
+      .select('id, name, languages, avatar_url, experience, bio, specialties, certifications, highlight_tours, reviews')
+      .eq('id', leaderId)
+      .single();
+
+    if (supabaseError) {
+      throw supabaseError;
+    }
+    leader.value = data as TourLeader;
+  } catch (err: any) {
+    error.value = err.message;
+    console.error('Error fetching tour leader:', err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+  fetchTourLeader();
+});
+</script>

@@ -23,18 +23,10 @@
         </p>
         <h3 class="text-xl font-semibold mb-3 text-primary">Information We Collect</h3>
         <p class="mb-4 text-muted-foreground">We may collect and process the following types of information:</p>
-        <ul class="list-disc list-inside mb-4 pl-4 text-muted-foreground">
-          <li>
-            <strong>Personal information:</strong> full name, email address, phone number, billing address, passport or ID details (where required for travel), details of any group members you are travelling with, and preferences.
-          </li>
-          <li>
-            <strong>Booking information:</strong> travel arrangements, accommodation details, special requirements (e.g., dietary or medical needs), and booking/payment confirmations.
-          </li>
-          <li>
-            <strong>Communication data:</strong> any correspondence with us via email, telephone, social media, or in person.
-          </li>
-          <li>
-            <strong>Technical information:</strong> IP addresses, browser type, operating system, browsing activity (through tools such as Google Analytics), and cookies (see our Cookies Policy).
+        <ul class="fancy-list text-lg text-muted-foreground text-left">
+          <li v-for="(item, index) in informationCollected" :key="index">
+            <Sparkles :size="16" class="lucide-icon" />
+            <span v-html="item"></span>
           </li>
         </ul>
         <h3 class="text-xl font-semibold mb-3 text-primary">How We Collect Information</h3>
@@ -51,19 +43,18 @@
         </ol>
         <h3 class="text-xl font-semibold mb-3 text-primary">Use of Information</h3>
         <p class="mb-4 text-muted-foreground">Your information may be used for:</p>
-        <ul class="list-disc list-inside mb-4 pl-4 text-muted-foreground">
-          <li>Processing enquiries, bookings, and payments.</li>
-          <li>Sharing with third-party providers (e.g., hotels, airlines, tour operators) to fulfil your bookings.</li>
-          <li>Sending you updates, offers, or marketing communications (where you have opted in or where a prior business relationship exists).</li>
-          <li>Personalizing offers and recommendations.</li>
-          <li>Improving our services, analytics, and internal market research.</li>
-          <li>Compliance with applicable laws, regulations, or legal requests.</li>
+        <ul class="fancy-list text-lg text-muted-foreground text-left">
+          <li v-for="(item, index) in useOfInformation" :key="index">
+            <Sparkles :size="16" class="lucide-icon" />
+            <span v-html="item"></span>
+          </li>
         </ul>
         <h3 class="text-xl font-semibold mb-3 text-primary">Sharing of Information</h3>
-        <ul class="list-disc list-inside mb-4 pl-4 text-muted-foreground">
-          <li>We only share information with carefully selected service providers and third parties necessary to fulfil your travel arrangements.</li>
-          <li>SY Consulting FZ-LLC is not responsible for the privacy practices of third parties (e.g., airlines, hotels, event organizers). We recommend reviewing their individual policies.</li>
-          <li>We may share anonymized, aggregated data for research and marketing purposes.</li>
+        <ul class="fancy-list text-lg text-muted-foreground">
+          <li v-for="(item, index) in sharingOfInformation" :key="index">
+            <Sparkles :size="16" class="lucide-icon" />
+            <span v-html="item"></span>
+          </li>
         </ul>
         <h3 class="text-xl font-semibold mb-3 text-primary">Your Rights</h3>
         <p class="mb-4 text-muted-foreground">
@@ -117,11 +108,34 @@
 </template>
 
 <script setup lang="ts">
+import { Sparkles } from 'lucide-vue-next';
 const props = defineProps<{
   isOpen: boolean;
 }>();
 
 const emit = defineEmits(['close']);
+
+const informationCollected = [
+  '<strong>Personal information:</strong> full name, email address, phone number, billing address, passport or ID details (where required for travel), details of any group members you are travelling with, and preferences.',
+  '<strong>Booking information:</strong> travel arrangements, accommodation details, special requirements (e.g., dietary or medical needs), and booking/payment confirmations.',
+  '<strong>Communication data:</strong> any correspondence with us via email, telephone, social media, or in person.',
+  '<strong>Technical information:</strong> IP addresses, browser type, operating system, browsing activity (through tools such as Google Analytics), and cookies (see our Cookies Policy).',
+];
+
+const useOfInformation = [
+  'Processing enquiries, bookings, and payments.',
+  'Sharing with third-party providers (e.g., hotels, airlines, tour operators) to fulfil your bookings.',
+  'Sending you updates, offers, or marketing communications (where you have opted in or where a prior business relationship exists).',
+  'Personalizing offers and recommendations.',
+  'Improving our services, analytics, and internal market research.',
+  'Compliance with applicable laws, regulations, or legal requests.',
+];
+
+const sharingOfInformation = [
+  'We only share information with carefully selected service providers and third parties necessary to fulfil your travel arrangements.',
+  'SY Consulting FZ-LLC is not responsible for the privacy practices of third parties (e.g., airlines, hotels, event organizers). We recommend reviewing their individual policies.',
+  'We may share anonymized, aggregated data for research and marketing purposes.',
+];
 
 const closeModal = () => {
   emit('close');
@@ -129,5 +143,15 @@ const closeModal = () => {
 </script>
 
 <style scoped>
-/* Add any specific styles for the modal here if needed */
+.fancy-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fancy-list li .lucide-icon {
+  flex-shrink: 0;
+  color: hsl(var(--primary));
+}
 </style>

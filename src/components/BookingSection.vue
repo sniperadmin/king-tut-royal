@@ -1,5 +1,5 @@
 <template>
-  <section id="booking" class="py-20 bg-light-yellow">
+  <section id="booking" class="py-10 bg-light-yellow">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
@@ -20,32 +20,22 @@
           <div class="space-y-4 mb-8">
             <Label class="text-foreground text-lg">Select Package *</Label>
             <div class="grid md:grid-cols-2 gap-4">
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'vip' 
-                    ? 'bg-primary/20 border-primary' 
-                    : 'bg-muted border-border hover:border-primary/50'
-                }`"
-                @click="selectPackage('vip')"
-              >
-                <h3 class="text-lg font-semibold text-primary mb-2">King Tut Royal VIP</h3>
-                <p class="text-foreground text-2xl font-bold">€3,900</p>
-                <p class="text-muted-foreground text-sm">5 Days / 4 Nights</p>
-                <p class="text-muted-foreground text-sm">per person</p>
-              </div>
-              <div 
-                :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
-                  formData.selectedPackage === 'oneday' 
-                    ? 'bg-primary/20 border-primary' 
-                    : 'bg-muted border-border hover:border-primary/50'
-                }`"
-                @click="selectPackage('oneday')"
-              >
-                <h3 class="text-lg font-semibold text-foreground mb-2">King Tut VIP One Day</h3>
-                <p class="text-foreground text-2xl font-bold">€1200</p>
-                <p class="text-muted-foreground text-sm">Full Day Experience</p>
-                <p class="text-muted-foreground text-sm">per person</p>
-              </div>
+              <template v-for="(pkg, index) in packagesData" :key="pkg.key || index">
+                <div 
+                  :class="`cursor-pointer rounded-lg p-4 border-2 transition-all ${
+                    formData.selectedPackage === pkg.slug
+                      ? 'bg-primary/20 border-primary'
+                      : 'bg-muted border-border hover:border-primary/50'
+                  }`"
+                  @click="selectPackage(pkg.slug)"
+                >
+                  <h3 class="text-lg font-semibold text-primary mb-2">{{ pkg.title }}</h3>
+                  <p class="text-foreground text-2xl font-bold">{{ pkg.price }}</p>
+                  <p v-if="pkg.details?.itinerary" class="text-muted-foreground text-sm">{{ pkg.details.itinerary.length }} Days / {{ pkg.details.itinerary.length ? pkg.details.itinerary.length - 1 : 0 }} Nights</p>
+                  <p v-else class="text-muted-foreground text-sm">Full Day Experience</p>
+                  <p v-if="pkg.details?.per_person" class="text-muted-foreground text-sm">per person</p>
+                </div>
+              </template>
             </div>
           </div>
           
@@ -95,13 +85,13 @@
                   style="-webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 32px;"
                 >
                   <option value="" disabled selected>Select number of guests</option>
-                  <template v-if="formData.selectedPackage === 'oneday'">
+                  <template v-if="formData.selectedPackage === 'king-tut-vip-one-day'">
                     <option value="4">4 Guests</option>
                     <option value="5">5 Guests</option>
                     <option value="6">6 Guests</option>
                   </template>
                   
-                  <template v-if="formData.selectedPackage === 'vip'">
+                  <template v-if="formData.selectedPackage === 'king-tut-royal-vip'">
                     <option value="1">1 Guest</option>
                     <option value="2">2 Guests</option>
                     <option value="3">3 Guests</option>
@@ -115,7 +105,7 @@
 
             <div class="space-y-2">
               <Label class="text-foreground">Select Date *</Label>
-              <div v-if="formData.selectedPackage === 'oneday'" class="relative">
+              <div v-if="formData.selectedPackage === 'king-tut-vip-one-day'" class="relative">
                 <LuxuryDatePicker
                   v-model="selectedOneDayDate"
                   placeholder="Choose your exclusive day"
@@ -161,7 +151,7 @@
 
             <div class="mt-8 text-center">
               <p class="text-primary text-2xl font-bold">
-                Total Price: €{{ calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)).toLocaleString() }}
+                Total Price: €{{ calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants)) }}
               </p>
             </div>
 
@@ -183,10 +173,13 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted, computed, watch, defineAsyncComponent } from 'vue'
+import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
 import { format } from 'date-fns'
 import { MessageCircle } from 'lucide-vue-next'
 import { supabase } from '@/lib/supabase'
-import { PACKAGE_PRICING } from '@/composables/packagesData'
+import { useRoute } from 'vue-router';
+import { useToast } from '@/composables/useToast';
+import { PackageData } from '@/types';
 
 const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
 
@@ -200,9 +193,18 @@ const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
 const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
 const LuxuryDatePicker = defineAsyncComponent(() => import('@/components/LuxuryDatePicker.vue'))
 
+// Define constants for package IDs
 
 const props = defineProps({
   preselectedPackageId: {
+    type: String,
+    default: null
+  },
+  preselectedDate: {
+    type: String,
+    default: null
+  },
+  preselectedWeek: {
     type: String,
     default: null
   }
@@ -210,10 +212,67 @@ const props = defineProps({
 
 const emit = defineEmits(['loaded']);
 
-onMounted(() => {
+const packagesData = ref<PackageData[]>([]);
+const PACKAGE_PRICING = ref<{[key: string]: number}>({});
+
+onMounted(async () => {
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    packagesData.value = []; // Provide default empty array to prevent rendering issues
+  } else {
+    packagesData.value = (data || []).map(pkg => {
+      const packageInfo = pkg.package || {};
+      const slug = packageInfo.slug || '';
+      return {
+        key: slug,
+        slug: slug,
+        id: packageInfo.id || '',
+        title: packageInfo.title || 'Unknown',
+        price: packageInfo.price || '0',
+        duration: packageInfo.details?.itinerary?.length ? `${packageInfo.details.itinerary.length} Days` : 'Full Day',
+        image: packageInfo.image || '',
+        highlights: packageInfo.highlights || [],
+        details: packageInfo.details || {}
+      };
+    });
+    
+    PACKAGE_PRICING.value = packagesData.value.reduce((acc, pkg) => {
+      const price = pkg.price;
+      const cleanPrice = pkg.price.replace(/[^0-9]/g, '');
+      acc[pkg.key] = parseFloat(cleanPrice) || 0; // Ensure price is a number, default to 0 if NaN
+      console.log('acc', acc);
+      return acc;
+    }, {} as {[key: string]: number});
+  }
   emit('loaded');
-  if (props.preselectedPackageId) {
-    selectPackage(props.preselectedPackageId as 'vip' | 'oneday');
+
+  // Resolve preselected package id/slug to a package slug from packagesData
+  const resolveToSlug = (input: string | null | undefined) => {
+    if (!input) return '';
+    const candidate = String(input);
+    const found = packagesData.value.find(p => p.slug === candidate || p.id === candidate || p.key === candidate);
+    return found ? found.slug : candidate;
+  };
+
+  const resolvedPreselected = resolveToSlug(props.preselectedPackageId);
+
+  if (resolvedPreselected) {
+    selectPackage(resolvedPreselected);
+  } else {
+    // Set default package to 'royal vip' if no preselected package is provided
+    selectPackage(KING_TUT_ROYAL_VIP);
+  }
+
+  if (props.preselectedDate && resolvedPreselected === KING_TUT_VIP_ONE_DAY) {
+    selectedOneDayDate.value = new Date(props.preselectedDate);
+  }
+  if (props.preselectedWeek && resolvedPreselected === KING_TUT_ROYAL_VIP) {
+    formData.selectedWeek = props.preselectedWeek;
   }
 });
 
@@ -232,7 +291,7 @@ const formData = reactive({
   email: '',
   selectedWeek: '',
   participants: '1',
-  selectedPackage: 'vip',
+  selectedPackage: KING_TUT_ROYAL_VIP,
   specialRequests: '',
   oneDayDate: '' // Store as string directly for date input
 })
@@ -273,11 +332,11 @@ const isFormValid = computed(() => {
   
   if (!hasName || !hasEmail) return false
   
-  if (formData.selectedPackage === 'vip') {
+  if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
     return formData.selectedWeek && formData.selectedWeek.length > 0
   }
   
-  if (formData.selectedPackage === 'oneday') {
+  if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY) {
     return selectedOneDayDate.value !== null
   }
   
@@ -294,7 +353,8 @@ const fetchAvailableWeeks = async () => {
     const available = data.data.filter((week: WeeklyBooking) => week.booking_count < MAX_CAPACITY)
     availableWeeks.value = available
   } catch (error) {
-    console.error('Error fetching available weeks:', error)
+    console.error('Error fetching available weeks:', error);
+    availableWeeks.value = []; // Provide default empty array to prevent rendering issues
   } finally {
     loading.value = false
   }
@@ -309,17 +369,21 @@ const getAvailableSlots = (weekData: WeeklyBooking) => {
   return MAX_CAPACITY - weekData.booking_count
 }
 
-const calculateTotalPrice = (packageType: string, guests: number) => {
-  const pricePerPerson = PACKAGE_PRICING[packageType] ?? 0
-  return pricePerPerson * guests
+function calculateTotalPrice(packageId: string, guests: number) {
+  const pricing = PACKAGE_PRICING.value || {};
+  const pricePerPerson = pricing[packageId] || 0;
+  const numGuests = isNaN(guests) ? 0 : guests; // Ensure guests is a number, default to 0 if NaN
+  return pricePerPerson * numGuests;
 }
 
-const selectPackage = (packageType: 'vip' | 'oneday') => {
-  formData.selectedPackage = packageType
-  if (packageType === 'oneday') {
-    formData.participants = '4' // Set minimum for one day package
+const selectPackage = (packageId: string) => {
+  formData.selectedPackage = packageId;
+  if (packageId === KING_TUT_VIP_ONE_DAY) {
+    formData.participants = '4';
+  } else if (packageId === KING_TUT_ROYAL_VIP) {
+    formData.participants = '1';
   }
-}
+};
 
 const handleSubmit = async () => {
   if (!formData.name.trim()) {
@@ -344,12 +408,12 @@ const handleSubmit = async () => {
     return
   }
 
-  if (formData.selectedPackage === 'vip' && !formData.selectedWeek) {
+  if (formData.selectedPackage === KING_TUT_ROYAL_VIP && !formData.selectedWeek) {
     alert('Please select a week for the Royal VIP package.')
     return
   }
 
-  if (formData.selectedPackage === 'oneday' && !formData.oneDayDate) {
+  if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY && !formData.oneDayDate) {
     alert('Please select a date for the One Day package.')
     return
   }
@@ -361,7 +425,7 @@ const handleSubmit = async () => {
   let remainingSlots = 0
 
   try {
-    if (formData.selectedPackage === 'vip') {
+    if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
       // Check if enough slots are available
       const selectedWeekData = availableWeeks.value.find(w => w.week_start_date === formData.selectedWeek)
       if (!selectedWeekData) {
@@ -388,7 +452,7 @@ const handleSubmit = async () => {
       newBookingCount = data.newCount
       bookingDateDisplay = getThursdayDate(formData.selectedWeek)
       remainingSlots = MAX_CAPACITY - newBookingCount
-    } else if (formData.selectedPackage === 'oneday' && formData.oneDayDate) {
+    } else if (formData.selectedPackage === KING_TUT_VIP_ONE_DAY && formData.oneDayDate) {
       // For one-day package, no slot booking needed on backend for now
       // Just format the date for display
       bookingDateDisplay = format(new Date(formData.oneDayDate), 'EEEE dd, MMMM yyyy') // e.g., 'Monday 25, October 2024'
@@ -397,20 +461,20 @@ const handleSubmit = async () => {
     }
 
     const totalPrice = calculateTotalPrice(formData.selectedPackage, parseInt(formData.participants))
-    const packageName = formData.selectedPackage === 'vip' ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
+    const packageName = formData.selectedPackage === KING_TUT_ROYAL_VIP ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
 
     const message = `
 🎁 *${packageName}*
 
 📋 *Booking Details:*
-${formData.selectedPackage === 'vip' ? `🎫 Booking number: ${newBookingCount}` : ''}
+${formData.selectedPackage === KING_TUT_ROYAL_VIP ? `🎫 Booking number: ${newBookingCount}` : ''}
 👤 Name: ${formData.name}
 📱 Phone: ${formData.phone}
 📧 Email: ${formData.email}
 👥 Guests: ${formData.participants}
 📅 Booking Date: ${bookingDateDisplay}
 € Total Price: €${totalPrice.toLocaleString()}
-${formData.selectedPackage === 'vip' ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
+${formData.selectedPackage === KING_TUT_ROYAL_VIP ? `🎟️ Remaining Slots: ${remainingSlots}` : ''}
 ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}` : ''}
 `
 
@@ -418,7 +482,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
     window.open(whatsappUrl, '_blank')
 
     // Refresh available weeks (only relevant for VIP package)
-    if (formData.selectedPackage === 'vip') {
+    if (formData.selectedPackage === KING_TUT_ROYAL_VIP) {
       await fetchAvailableWeeks()
     }
 
@@ -429,7 +493,7 @@ ${formData.specialRequests ? `📝 Special Requests: ${formData.specialRequests}
       email: '',
       selectedWeek: '',
       participants: '1',
-      selectedPackage: 'vip',
+      selectedPackage: KING_TUT_ROYAL_VIP,
       specialRequests: '',
       oneDayDate: ''
     })
@@ -449,7 +513,7 @@ onMounted(async () => {
   // Subscribe to realtime changes
   channel = supabase
     .channel('weekly_bookings_changes')
-    .on('postgres_changes', 
+    .on('postgres_changes',
       { event: '*', schema: 'public', table: 'weekly_bookings' },
       () => {
         fetchAvailableWeeks()
@@ -464,13 +528,14 @@ onUnmounted(() => {
   }
 })
 
+// Watch for preselectedPackageId changes to update the selected package and participants
 watch(
   () => props.preselectedPackageId,
-  (newValue, oldValue) => {
-    console.log('preselectedPackageId changed:', oldValue, '->', newValue);
+  (newValue) => {
     if (newValue) {
-      selectPackage(newValue as 'vip' | 'oneday');
-      console.log('formData.selectedPackage updated via watch:', formData.selectedPackage);
+      const candidate = String(newValue);
+      const found = packagesData.value.find(p => p.slug === candidate || p.id === candidate || p.key === candidate);
+      selectPackage(found ? found.slug : candidate);
     }
   },
   { immediate: true }

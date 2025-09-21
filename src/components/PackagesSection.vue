@@ -1,5 +1,5 @@
 <template>
-  <section id="packages" class="py-20 bg-light-blue text-foreground">
+  <section class="py-20 bg-light-blue text-foreground">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2>
@@ -21,9 +21,10 @@
           :image-srcset="pkg.imageSrcset ?? (pkg.image_412w && pkg.image_853w ? `${pkg.image_412w} 412w, ${pkg.image_853w} 853w` : '')"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
-          :onBookNowClick="scrollToBooking"
+          @bookNow="scrollToBooking(pkg.slug)"
           :packageTitleForDetails="pkg.title"
-          :icon="pkg.icon"
+          :packageSlug="pkg.slug"
+          :icon="pkg.iconLabel"
         />
       </div>
       <div class="text-center mt-10">
@@ -37,15 +38,33 @@
 
 <script setup lang="ts">
 import { smoothScroll } from '../utils/smoothScroll'
-import { ref, defineAsyncComponent } from 'vue'
-import { PACKAGES } from '@/composables/packagesData';
+import { ref, defineAsyncComponent, onMounted } from 'vue'
+import { supabase } from '../lib/supabase';
+import { PackageData } from '../types';
 
 const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
-const scrollToBooking = () => {
+const scrollToBooking = (packageSlug: string) => {
   smoothScroll('booking')
+  // Optionally, you can also pass the packageSlug to the booking section if needed
+  // For example, by updating a reactive variable or using a router query parameter
+  // router.push({ path: '/', query: { scroll: 'booking', packageId: packageSlug } })
 }
 
-const packages = PACKAGES;
+const packages = ref<PackageData[]>([]);
+
+onMounted(async () => {
+  const { data, error } = await supabase
+    .from('packages_view')
+    .select('package, sort_rank')
+    .order('sort_rank', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching packages:', error);
+    return;
+  }
+
+  packages.value = (data || []).map((row: { package: PackageData }) => row.package);
+});
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 <template>
-  <section id="why-us" class="py-20 bg-light-blue text-foreground">
+  <section id="why-us" class="py-10 bg-light-blue text-foreground">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-foreground mb-4">Why Choose Egypt in Style?</h2>
+        <h2 class="text-4xl font-bold text-foreground mb-4">Why Us?</h2>
         <p class="text-xl text-brownish max-w-2xl text-bold mx-auto">
           Experience the difference with our premium service and attention to detail
         </p>

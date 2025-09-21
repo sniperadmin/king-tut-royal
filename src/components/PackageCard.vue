@@ -46,7 +46,7 @@
           View Details
         </router-link>
         <button
-          @click="onBookNowClick"
+          @click="console.log('Emitting bookNow with slug:', props.packageSlug); emit('bookNow', props.packageSlug)"
           class="w-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground py-3 font-semibold tracking-wider transition-all duration-300 uppercase text-sm"
         >
           INQUIRY
@@ -72,8 +72,8 @@ interface PackageCardProps {
   imageSizes?: string;
   highlights: string[];
   isPopular?: boolean;
-  onBookNowClick: () => void;
   packageTitleForDetails: string;
+  packageSlug: string; // Add new prop
   icon?: string;
 }
 
@@ -88,10 +88,12 @@ const props = defineProps({
   imageSizes: { type: String, default: '(max-width: 768px) 100vw, 50vw' },
   highlights: { type: Array as PropType<string[]>, required: true },
   isPopular: { type: Boolean, default: false },
-  onBookNowClick: { type: Function as PropType<() => void>, required: true },
   packageTitleForDetails: { type: String, required: true },
+  packageSlug: { type: String, required: true }, // Add new prop
   icon: { type: String, default: 'CircleAlert' },
 } as const);
+
+const emit = defineEmits(['bookNow']);
 
 const LucideIcon = computed(() => {
   // Map possible icon strings to components
