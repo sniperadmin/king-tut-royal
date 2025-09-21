@@ -79,7 +79,7 @@
           >
             Privacy Policy
           </button>
-          <a href="#" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors duration-200" aria-label="Terms of Service">Terms of Service</a>
+          <!-- <a href="#" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors duration-200" aria-label="Terms of Service">Terms of Service</a> -->
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@
           <template #fallback>
             <NewsletterSkeleton />
           </template>
-          <NewsletterSection id="newsletter" />
+          <NewsMediaSection id="news-media" />
         </Suspense>
         <Suspense>
           <template #fallback>
@@ -74,7 +74,7 @@ import { smoothScroll } from '../utils/smoothScroll'
 import HeroSection from '../components/HeroSection.vue'
 import PackagesSection from '../components/PackagesSection.vue'
 import PartnersSection from '../components/PartnersSection.vue'
-import NewsletterSection from '../components/NewsletterSection.vue'
+import NewsMediaSection from '../components/NewsMediaSection.vue'
 import WhyChooseSection from '../components/WhyChooseSection.vue'
 import BookingSection from '../components/BookingSection.vue'
 import ContactSection from '../components/ContactSection.vue'

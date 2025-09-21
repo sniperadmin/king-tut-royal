@@ -51,6 +51,16 @@ const router = createRouter({
       component: () => import("@/pages/TourLeaderPortfolio.vue"),
     },
     {
+      path: "/media",
+      name: "NewsMedia",
+      component: () => import("@/pages/NewsMediaPage.vue"),
+    },
+    {
+      path: "/media/:title",
+      name: "ArticlePage",
+      component: () => import("@/pages/ArticlePage.vue"),
+    },
+    {
       path: "/:catchAll(.*)",
       name: "NotFound",
       component: () => import("@/pages/NotFound.vue"),
