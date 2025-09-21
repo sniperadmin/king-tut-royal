@@ -4,7 +4,7 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        'https://kingtutroyal-696ea--pr14-performance-pasaekql.web.app/',
+        'https://kingtutroyal-696ea--pr16-footer-pkmcfmcq.web.app/',
         // ex) 'http://localhost:3000'
         // add additional urls to audit
       ],
