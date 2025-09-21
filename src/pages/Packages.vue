@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="mx-auto py-20 bg-brownish/10 justify-center min-h-screen">
+    <div class="mx-auto py-20 justify-center min-h-screen">
       <div class="container flex flex-col md:flex-row items-center mb-8 w-full max-w-6xl mx-auto">
         <button
           type="button"
@@ -11,7 +11,7 @@
         </button>
         <h1 class="text-4xl font-bold text-center flex-grow md:ml-4">Our Exclusive Packages</h1>
       </div>
-      <div :class="gridColsClass" class="container grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl w-full mx-auto justify-items-center">
+      <div :class="gridColsClass" class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl w-full mx-auto justify-items-center">
         <PackageCard
           v-for="pkg in packages"
           :key="pkg.title"
