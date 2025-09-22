@@ -2,18 +2,69 @@
   <header class="fixed top-0 left-0 right-0 z-50 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-background/80 backdrop-blur-md text-sm py-3 border-b border-primary/20">
     <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
       <div class="flex items-center justify-between">
-        <router-link to="/" class="flex-none text-xl font-royal font-bold text-primary focus:outline-hidden focus:opacity-80" aria-label="Brand">
+        <router-link
+          to="/"
+          class="flex-none text-xl font-royal font-bold text-primary focus:outline-hidden focus:opacity-80"
+          aria-label="Brand"
+        >
           EGYPT IN STYLE
         </router-link>
+
+        <!-- Mobile toggle -->
         <div class="sm:hidden">
-          <button type="button" @click="isMenuOpen = !isMenuOpen" class="hs-collapse-toggle relative size-9 flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10" id="hs-navbar-example-collapse" aria-expanded="false" aria-controls="hs-navbar-example" aria-label="Toggle navigation" data-hs-collapse="#hs-navbar-example">
-            <svg class="hs-collapse-open:hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-            <svg class="hs-collapse-open:block hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <button
+            type="button"
+            @click="isMenuOpen = !isMenuOpen"
+            :aria-expanded="isMenuOpen ? 'true' : 'false'"
+            aria-controls="mobile-navbar"
+            aria-label="Toggle navigation"
+            class="
+              w-10
+              h-10
+              relative
+              flex
+              justify-center
+              items-center
+              rounded-lg
+              border
+              border-gray-200
+              bg-white
+              text-gray-800
+              shadow-2xs
+              hover:bg-gray-50
+              focus:outline-hidden
+              focus:bg-gray-50
+              disabled:opacity-50
+              disabled:pointer-events-none
+              dark:bg-transparent
+              dark:border-neutral-700
+              dark:text-white
+              dark:hover:bg-white/10
+              dark:focus:bg-white/10
+            "
+          >
+            <!-- Hamburger -->
+            <svg v-if="!isMenuOpen" class="shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" x2="21" y1="6" y2="6"/>
+              <line x1="3" x2="21" y1="12" y2="12"/>
+              <line x1="3" x2="21" y1="18" y2="18"/>
+            </svg>
+            <!-- Close -->
+            <svg v-else class="shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
             <span class="sr-only">Toggle navigation</span>
           </button>
         </div>
       </div>
-      <div id="hs-navbar-example" :class="isMenuOpen ? '' : 'hidden'" class="hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse">
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-navbar"
+        :class="isMenuOpen ? 'block' : 'hidden'"
+        class="transition-all duration-300 basis-full grow sm:block"
+      >
         <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
           <button @click="scrollToSection('home')" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Home</button>
           <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Packages</router-link>

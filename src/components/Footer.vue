@@ -10,7 +10,7 @@
             Experience the timeless wonders of ancient Egypt with exclusive VIP access,
             luxury accommodations, and unforgettable cultural encounters. Heritage, luxury, and technology combined.
           </p>
-          <nav aria-label="Social media" class="flex space-x-4">
+          <nav aria-label="Social media" class="flex space-x-4 justify-center">
             <!-- <a href="https://www.facebook.com/sherin.yousri/" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="Facebook" target="_blank" rel="noopener">
               <Facebook :size="24" />
             </a> -->
