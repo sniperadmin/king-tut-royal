@@ -29,7 +29,7 @@
   - `# Reason: <why this logic exists>` for complex decisions.
 
 ## 📦 Dependency Management & Technology Stack
-- **Frontend**: Use `yarn` for package management.
+- **Frontend**: Use `npm` for package management.
   - **Core Stack**: Vite.js, TypeScript, Tailwind CSS.
 - **Deprecation Policy**:
   - Flag deprecated dependencies in `README.md`.

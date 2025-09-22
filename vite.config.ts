@@ -7,6 +7,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import json5Plugin from 'vite-plugin-json5'
 import compression from 'vite-plugin-compression'
 import viteImagemin from 'vite-plugin-imagemin'
+import generateSitemap from 'vite-ssg-sitemap'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -34,8 +35,27 @@ export default defineConfig(({ mode }) => ({
       mozjpeg: { quality: 80 },
       pngquant: { quality: [0.7, 0.9] },
       webp: { quality: 80 }
-    })
+    }),
   ].filter(Boolean),
+  ssgOptions: {
+    onFinished() {
+      generateSitemap({
+        hostname: 'https://luxurytravel.exclusive',
+        dynamicRoutes: [
+          '/packages/:id',
+          '/package/:title',
+          '/partners/:id',
+          '/tour-leader/:id',
+          '/news-media/:id'
+        ],
+        routes: async () => {
+          const { router } = await import('./src/router');
+          const routes = router.getRoutes();
+          return routes.map(route => route.path);
+        },
+      })
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
