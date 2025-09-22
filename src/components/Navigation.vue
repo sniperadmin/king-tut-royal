@@ -10,11 +10,11 @@
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-8">
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
-          <router-link to="/packages" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
-          <router-link to="/partners" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
-          <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
+          <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
+          <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
+          <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
           <!-- <button @click="scrollToSection('news-media')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">News & Media</button> -->
-          <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
+          <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -34,11 +34,11 @@
       <div v-if="isMenuOpen" class="md:hidden py-4 border-t border-primary/20">
         <div class="flex flex-col space-y-4">
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
-          <router-link to="/packages" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
-          <router-link to="/partners" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
-          <router-link to="/why-us" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
+          <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
+          <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
+          <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
           <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
-          <router-link to="/tour-leaders" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
+          <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
         </div>
       </div>
     </div>
@@ -46,13 +46,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { smoothScroll } from '../utils/smoothScroll'
 import { RouterLink, useRouter } from 'vue-router'
 
 const isMenuOpen = ref(false)
 
 const router = useRouter()
+
+const isActive = (path: string) => {
+  return router.currentRoute.value.path.startsWith(path)
+}
 
 const headerHeight = () => {
   const nav = typeof document !== 'undefined' ? document.querySelector('nav') : null

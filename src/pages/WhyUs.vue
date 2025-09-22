@@ -24,7 +24,7 @@
 
         <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/why-us/why-us.m3u8' }]" />
 
-        <h3 class="text-3xl font-bold text-foreground mb-4">Key Benefits for Our Partners:</h3>
+        <h3 class="text-3xl font-bold text-foreground text-left mb-4">Key Benefits for Our Partners:</h3>
         <ul class="fancy-list text-left text-lg text-muted-foreground mb-4 pl-4">
           <li v-for="(benefit, index) in benefits" :key="index">
             <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />

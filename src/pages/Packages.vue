@@ -52,6 +52,7 @@ onMounted(async () => {
   const { data, error } = await supabase
     .from('packages_view')
     .select('package, sort_rank')
+    .limit(1)
     .order('sort_rank', { ascending: true });
 
   if (error) {

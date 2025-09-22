@@ -11,15 +11,15 @@
             luxury accommodations, and unforgettable cultural encounters. Heritage, luxury, and technology combined.
           </p>
           <nav aria-label="Social media" class="flex space-x-4">
-            <a href="https://www.facebook.com/sherin.yousri/" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="Facebook" target="_blank" rel="noopener">
+            <!-- <a href="https://www.facebook.com/sherin.yousri/" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="Facebook" target="_blank" rel="noopener">
               <Facebook :size="24" />
-            </a>
+            </a> -->
             <a href="https://www.instagram.com/sherinyosry/" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="Instagram" target="_blank" rel="noopener">
               <Instagram :size="24" />
             </a>
-            <a href="https://www.youtube.com/channel/UC-TA4QGzBC1wEt_1uy9dqOg/videos" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="YouTube" target="_blank" rel="noopener">
+            <!-- <a href="https://www.youtube.com/channel/UC-TA4QGzBC1wEt_1uy9dqOg/videos" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded transition-colors" aria-label="YouTube" target="_blank" rel="noopener">
               <Youtube :size="24" />
-            </a>
+            </a> -->
           </nav>
         </div>
 
@@ -29,10 +29,8 @@
           <ul class="space-y-2" aria-label="Quick Links">
             <li><router-link to="/packages" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Packages section link">Packages</router-link></li>
             <li><router-link to="/partners" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Partners section link">Partners</router-link></li>
-            <li><button @click="scrollToSection('why-us')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</button></li>
-            <li><button @click="scrollToSection('newsletter')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Newsletter section link">Newsletter</button></li>
-            <li><button @click="scrollToSection('tour-leaders')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Tour Leaders section link">Tour Leaders</button></li>
-            <li><button @click="scrollToSection('booking')" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Inquiry section link">Inquiry</button></li>
+            <li><router-link to="/why-us" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</router-link></li>
+            <li><router-link to="/tour-leaders" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Tour Leaders section link">Tour Leaders</router-link></li>
           </ul>
         </div>
 
