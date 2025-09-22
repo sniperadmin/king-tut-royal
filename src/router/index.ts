@@ -172,6 +172,10 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
+router.afterEach(async (to, from, failure) => {
+  if (!failure) setTimeout(() => window.HSStaticMethods.autoInit(), 100);
+});
+
 function updateOrCreateMeta(attributeType: string, attributeValue: string, content: string) {
   let element = document.head.querySelector(`meta[${attributeType}="${attributeValue}"]`);
   if (!element) {

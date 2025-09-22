@@ -31,6 +31,7 @@
 ## 📦 Dependency Management & Technology Stack
 - **Frontend**: Use `npm` for package management.
   - **Core Stack**: Vite.js, TypeScript, Tailwind CSS.
+  - **Development Server**: Always running at `http://localhost:8080`.
 - **Deprecation Policy**:
   - Flag deprecated dependencies in `README.md`.
 

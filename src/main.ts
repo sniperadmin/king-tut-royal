@@ -3,6 +3,7 @@ import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query'
 import App from './App.vue'
 import router from './router'
 
+import "preline/variants.css"
 import './index.css'
 
 // Create Vue Query client
@@ -24,3 +25,5 @@ app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 
 app.mount('#root')
+// Preline UI
+import("preline/dist/index.js");

@@ -1,48 +1,29 @@
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-primary/20">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex items-center">
-          <router-link to="/" class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</router-link>
-        </div>
-
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center space-x-8">
-          <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
-          <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
-          <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
-          <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
-          <!-- <button @click="scrollToSection('news-media')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">News & Media</button> -->
-          <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden">
-          <button
-            @click="isMenuOpen = !isMenuOpen"
-            class="text-foreground hover:text-primary transition-colors duration-200"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
-            </svg>
+  <header class="fixed top-0 left-0 right-0 z-50 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-background/80 backdrop-blur-md text-sm py-3 border-b border-primary/20">
+    <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
+      <div class="flex items-center justify-between">
+        <router-link to="/" class="flex-none text-xl font-royal font-bold text-primary focus:outline-hidden focus:opacity-80" aria-label="Brand">
+          EGYPT IN STYLE
+        </router-link>
+        <div class="sm:hidden">
+          <button type="button" @click="isMenuOpen = !isMenuOpen" class="hs-collapse-toggle relative size-9 flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10" id="hs-navbar-example-collapse" aria-expanded="false" aria-controls="hs-navbar-example" aria-label="Toggle navigation" data-hs-collapse="#hs-navbar-example">
+            <svg class="hs-collapse-open:hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+            <svg class="hs-collapse-open:block hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            <span class="sr-only">Toggle navigation</span>
           </button>
         </div>
       </div>
-
-      <!-- Mobile Menu -->
-      <div v-if="isMenuOpen" class="md:hidden py-4 border-t border-primary/20">
-        <div class="flex flex-col space-y-4">
-          <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
-          <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
-          <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
-          <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
-          <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
-          <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
+      <div id="hs-navbar-example" :class="isMenuOpen ? '' : 'hidden'" class="hs-collapse overflow-hidden transition-all duration-300 basis-full grow sm:block" aria-labelledby="hs-navbar-example-collapse">
+        <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+          <button @click="scrollToSection('home')" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Home</button>
+          <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Packages</router-link>
+          <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Partners</router-link>
+          <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Why Us</router-link>
+          <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="font-medium text-foreground hover:text-primary focus:outline-hidden focus:text-primary bg-transparent border-none p-0">Tour Leaders</router-link>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -59,7 +40,7 @@ const isActive = (path: string) => {
 }
 
 const headerHeight = () => {
-  const nav = typeof document !== 'undefined' ? document.querySelector('nav') : null
+  const nav = typeof document !== 'undefined' ? document.querySelector('header') : null
   return nav ? (nav as HTMLElement).offsetHeight : 64
 }
 

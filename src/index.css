@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import "preline/variants.css"; */
+@source "../../node_modules/preline/dist/*.js";
+
 @layer base {
   :root {
     --background: 0 0% 98%; /* Lighter Background */
