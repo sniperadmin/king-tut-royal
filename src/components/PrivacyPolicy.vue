@@ -98,10 +98,6 @@
           Email: <a href="mailto:info@kingtutroyal.com" class="text-primary hover:underline">info@kingtutroyal.com</a><br />
           Website: <a href="https://www.kingtutroyal.com" class="text-primary hover:underline">www.kingtutroyal.com</a>
         </p>
-        <hr class="mb-4 border-border" />
-        <p class="mb-4 text-muted-foreground">
-          ⚖️ This is now fully aligned with King Tut Royal, keeping the same legal protection structure.
-        </p>
       </div>
     </div>
   </div>
