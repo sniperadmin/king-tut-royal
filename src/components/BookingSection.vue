@@ -475,8 +475,6 @@ const handleSubmit = async () => {
     const packageName = formData.selectedPackage === KING_TUT_ROYAL_VIP ? 'King Tut Royal VIP (5 Days / 4 Nights)' : 'King Tut VIP One Day'
 
     const message = `
-🎁 *${packageName}*
-
 📋 *Booking Details:*
 King Tut Royal VIP
 👤 Name: ${formData.name}
