@@ -157,7 +157,6 @@
 
             <Button
               type="submit"
-              :disabled="!isFormValid || submitting"
               class="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary font-semibold disabled:opacity-90"
             >
               <MessageCircle class="mr-2 h-5 w-5" />
