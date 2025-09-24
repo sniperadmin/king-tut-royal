@@ -479,7 +479,6 @@ const handleSubmit = async () => {
 
 📋 *Booking Details:*
 King Tut Royal VIP
-🎫 Booking number: ${newBookingCount}
 👤 Name: ${formData.name}
 📱 Phone: ${formData.phone}
 📧 Email: ${formData.email}
