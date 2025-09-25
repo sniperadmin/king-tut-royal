@@ -13,6 +13,15 @@
         </Suspense>
       </section>
 
+      <ContactSection />
+
+      <Suspense>
+        <template #fallback>
+          <BookingSkeleton />
+        </template>
+        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+      </Suspense>
+
       <section id="partners">
         <section class="py-12">
           <Suspense>
@@ -53,19 +62,9 @@
         <FeaturedTourLeaders id="tour-leaders" />
       </Suspense>
 
-
-      <Suspense>
-        <template #fallback>
-          <BookingSkeleton />
-        </template>
-        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
-      </Suspense>
-
       <Suspense>
         <VideoSection />
       </Suspense>
-
-      <ContactSection />
   </AppLayout>
 </template>
 

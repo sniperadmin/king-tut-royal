@@ -1,6 +1,6 @@
 <template>
 <div class="flex flex-col h-full w-full">
-  <h3 class="text-2xl font-semibold text-foreground my-5">{{ title }}</h3>
+  <h3 class="text-3xl font-semibold text-foreground my-5">{{ title }}</h3>
   <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden w-full', isPopular ? 'border-primary' : 'border-border']">
     <div class="relative overflow-hidden bg-muted">
       <img
@@ -15,7 +15,7 @@
         height="240"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
-        Popular
+        Limited Edition
       </div>
     </div>
 

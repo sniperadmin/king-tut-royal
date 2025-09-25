@@ -2,8 +2,8 @@
   <section class="py-20 bg-light-blue text-foreground">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2>
-        <p class="text-xl text-brownish font-bold max-w-2xl mx-auto">
+        <!-- <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2> -->
+        <p class="text-2xl text-brownish font-bold max-w-2xl mx-auto">
           Exclusive packages designed for the discerning traveler
         </p>
       </div>
@@ -27,11 +27,11 @@
           :icon="pkg.iconLabel"
         />
       </div>
-      <div class="text-center mt-10">
+      <!-- <div class="text-center mt-10">
         <router-link to="/packages" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
           View All Packages
         </router-link>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
