@@ -26,14 +26,14 @@
         </div>
         <h3 class="text-xl font-semibold text-foreground">{{ title }} Package</h3>
       </div>
-      <p class="text-muted-foreground text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
-      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-sm font-medium">per person</span></div>
+      <p class="text-muted-foreground text-md tracking-wide font-medium mb-2">{{ duration }}</p>
+      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-md font-medium">per person</span></div>
 
       <div class="mb-6 flex-grow">
         <ul class="space-y-2 text-left">
           <li v-for="(highlight, index) in highlights" :key="index" class="flex items-start text-sm">
             <span class="text-primary mr-2 text-base">•</span>
-            <span class="text-foreground font-medium leading-tight">{{ highlight }}</span>
+            <span class="text-foreground text-lg font-medium leading-tight">{{ highlight }}</span>
           </li>
         </ul>
       </div>

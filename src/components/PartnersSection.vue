@@ -3,11 +3,11 @@
     <div class="container mx-auto px-4">
       <h2 class="text-center text-2xl font-bold mb-8">Our Official Partners</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl w-full mx-auto justify-items-center">
-        <template v-for="partner in partners.slice(0, 2)" :key="partner.id">
+        <template v-for="partner in partners" :key="partner.id">
           <router-link
             v-if="!partner.partner.comingSoon"
             :to="{ name: 'PartnerDetails', params: { id: partner.id } }"
-            class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs mx-auto h-[250px]"
+            class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs mx-auto h-[180px]"
           >
             <img
               v-if="partner.partner.logo"
@@ -15,7 +15,7 @@
               :srcset="logoSrcSet(partner.partner)"
               sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
               :alt="partner.partner.name + ' Logo'"
-              class="w-full h-auto mb-6 max-h-[150px]"
+              class="w-full h-auto mb-6 object-cover max-h-[150px]"
               width="200"
               height="80"
             />
