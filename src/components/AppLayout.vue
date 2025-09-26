@@ -4,6 +4,9 @@
     <main>
       <slot />
     </main>
+
+    <ContactSection class="my-7" />
+
     <Footer />
   </div>
 </template>
@@ -11,6 +14,7 @@
 <script setup lang="ts">
 import Navigation from './Navigation.vue'
 import Footer from './Footer.vue'
+import ContactSection from '../components/ContactSection.vue'
 </script>
 
 <script lang="ts">
