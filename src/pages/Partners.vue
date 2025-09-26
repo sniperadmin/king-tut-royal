@@ -16,7 +16,7 @@
           <router-link
             v-if="!partner.comingSoon"
             :to="{ name: 'PartnerDetails', params: { id: partner.id } }"
-            class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs h-[250px]"
+            class="bg-card p-8 rounded-xl border border-primary shadow-sm flex flex-col items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-primary w-full max-w-xs h-[200px]"
           >
             <img
               v-if="partner.partner.logo"
@@ -24,7 +24,7 @@
               :srcset="`${partner.partner.logo?.small || '/images/default-logo.webp'} 200w, ${partner.partner.logo?.medium || '/images/default-logo.webp'} 600w, ${partner.partner.logo?.large || '/images/default-logo.webp'} 1200w`"
               sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
               :alt="partner.partner.name + ' Logo'"
-              class="w-full h-auto mb-6 object-contain max-h-[150px]"
+              class="w-full h-auto mb-6 object-cover max-h-[100px]"
               width="200"
               height="80"
             />

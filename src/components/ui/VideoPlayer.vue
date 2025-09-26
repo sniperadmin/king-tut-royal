@@ -163,15 +163,6 @@ onUnmounted(() => {
 /* NOTE: Don't delete aspect ratio */
 .aspect-video {
   aspect-ratio: v-bind(--aspect-ratio);
-  /* Reserve layout space matching the player to prevent layout shifts while JS loads */
-  /* display: block;
-  width: 100%; */
-}
-
-@media (min-width: 1024px) {
-  .aspect-video {
-    aspect-ratio: 16/9 !important;
-  }
 }
 
 .aspect-video video {

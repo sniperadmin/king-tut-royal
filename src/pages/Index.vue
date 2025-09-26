@@ -13,6 +13,17 @@
         </Suspense>
       </section>
 
+      <ContactSection />
+
+      <Suspense>
+        <template #fallback>
+          <BookingSkeleton />
+        </template>
+        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+      </Suspense>
+
+      <VideoPlayer class="mt-10" :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/pack-highlight.m3u8', title: 'package highlight' }]" />
+
       <section id="partners">
         <section class="py-12">
           <Suspense>
@@ -53,19 +64,9 @@
         <FeaturedTourLeaders id="tour-leaders" />
       </Suspense>
 
-
-      <Suspense>
-        <template #fallback>
-          <BookingSkeleton />
-        </template>
-        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
-      </Suspense>
-
       <Suspense>
         <VideoSection />
       </Suspense>
-
-      <ContactSection />
   </AppLayout>
 </template>
 
@@ -78,6 +79,7 @@ import { smoothScroll } from '../utils/smoothScroll'
 import HeroSection from '../components/HeroSection.vue'
 import PackagesSection from '../components/PackagesSection.vue'
 import PartnersSection from '../components/PartnersSection.vue'
+import VideoPlayer from '../components/ui/VideoPlayer.vue'
 // import NewsMediaSection from '../components/NewsMediaSection.vue'
 import WhyChooseSection from '../components/WhyChooseSection.vue'
 import BookingSection from '../components/BookingSection.vue'

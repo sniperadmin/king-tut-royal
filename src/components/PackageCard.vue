@@ -1,6 +1,6 @@
 <template>
 <div class="flex flex-col h-full w-full">
-  <h3 class="text-2xl font-semibold text-foreground my-5">{{ title }}</h3>
+  <h3 class="text-3xl font-semibold text-foreground my-5">{{ title }}</h3>
   <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden w-full', isPopular ? 'border-primary' : 'border-border']">
     <div class="relative overflow-hidden bg-muted">
       <img
@@ -15,7 +15,7 @@
         height="240"
       />
       <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
-        Popular
+        Limited Edition
       </div>
     </div>
 
@@ -26,14 +26,14 @@
         </div>
         <h3 class="text-xl font-semibold text-foreground">{{ title }} Package</h3>
       </div>
-      <p class="text-muted-foreground text-sm tracking-wide font-medium mb-2">{{ duration }}</p>
-      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-sm font-medium">per person</span></div>
+      <p class="text-muted-foreground text-md tracking-wide font-medium mb-2">{{ duration }}</p>
+      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-md font-medium">per person</span></div>
 
       <div class="mb-6 flex-grow">
         <ul class="space-y-2 text-left">
           <li v-for="(highlight, index) in highlights" :key="index" class="flex items-start text-sm">
             <span class="text-primary mr-2 text-base">•</span>
-            <span class="text-foreground font-medium leading-tight">{{ highlight }}</span>
+            <span class="text-foreground text-lg font-medium leading-tight">{{ highlight }}</span>
           </li>
         </ul>
       </div>
