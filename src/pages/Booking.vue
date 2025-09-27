@@ -8,8 +8,6 @@
         >
           Back to Home
       </button>
-      <h1 class="text-3xl font-bold mb-2 text-center text-foreground">Book Your Luxury Experience</h1>
-      <p class="text-xl text-center text-primary mb-6">Secure your exclusive King Tut Royal VIP package</p>
       
       <Suspense>
         <template #fallback>
