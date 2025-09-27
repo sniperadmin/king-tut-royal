@@ -3,11 +3,14 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <!-- <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2> -->
-        <p class="text-2xl text-brownish font-bold max-w-2xl mx-auto">
-          Exclusive packages designed for the discerning traveler
+        <p class="text-2xl text-brownish font-bold max-w-2xl mx-auto mb-4">
+          Unlock Egypt’s Hidden Luxury – Exclusively for the World’s Elite.
+        </p>
+        <p class="text-2xl text-primary font-bold max-w-2xl mx-auto">
+          Limited Edition to 50 travellers per week
         </p>
       </div>
-      
+
       <div class="flex flex-wrap justify-center gap-8">
         <PackageCard
           v-for="pkg in packages.slice(0, 1)"
