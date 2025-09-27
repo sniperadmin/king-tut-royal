@@ -22,68 +22,20 @@ const vidstackLoaded = ref(false);
 const rootElRef = ref(null);
 const autoplayAttempted = ref(false);
 
-// Handle autoplay success
-const handleAutoPlay = () => {
-  console.log('Autoplay successful - video should be muted');
-  // No need to call player.play() here, as the 'autoplay' attribute handles it.
-  // Ensure muted state is maintained.
-  if (videoPlayer.value) {
-    videoPlayer.value.muted = true;
-    videoPlayer.value.volume = 0;
-  }
-};
-
 // Handle autoplay failure
 const handleAutoPlayFail = (event) => {
   console.warn('Autoplay failed:', event.detail);
   autoplayAttempted.value = true;
 };
 
-const handlePlay = () => {
-  console.log('Video started playing - ensuring still muted');
-  if (videoPlayer.value) {
-    videoPlayer.value.muted = true;
-    // videoPlayer.value.volume = 0;
-    console.log('Play event - Player muted:', videoPlayer.value.muted);
-  }
-};
-
-let __videoObserver = null;
-onMounted(() => {
-  const rootEl = (rootElRef && rootElRef.value) ? rootElRef.value : document.querySelector('#video-player-container');
-  if (!rootEl) return;
-  
-  __videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        (async () => {
-          try {
-            await import('vidstack/bundle');
-            await import('vidstack/icons');
-            // Dynamically import hls.js only if the video URL is an .m3u8 file
-            if (props.videos[currentVideoIndex.value].url.includes('.m3u8')) {
-              await import('hls.js');
-            }
-            vidstackLoaded.value = true;
-            await nextTick();
-            // No need to manually trigger play - autoplay prop will handle it
-          } catch (err) {
-            console.error('Failed to load vidstack:', err);
-          }
-        })();
-      }
-    });
-  }, { threshold: 0.1 }); // Reduced threshold for earlier loading
-  
-  __videoObserver.observe(rootEl);
-});
-
-onUnmounted(() => {
-  if (__videoObserver) {
-    __videoObserver.disconnect();
-    __videoObserver = null;
-  }
-});
+import('vidstack/bundle');
+import('vidstack/icons');
+// Dynamically import hls.js only if the video URL is an .m3u8 file
+if (props.videos[currentVideoIndex.value].url.includes('.m3u8')) {
+  import('hls.js');
+}
+vidstackLoaded.value = true;
+nextTick();
 </script>
 
 <template>
@@ -104,8 +56,6 @@ onUnmounted(() => {
         loop
         playsinline
         fullscreenOrientation="portrait"
-        @play="handlePlay"
-        @auto-play="handleAutoPlay"
         @auto-play-fail="handleAutoPlayFail"
       >
         <media-provider></media-provider>
