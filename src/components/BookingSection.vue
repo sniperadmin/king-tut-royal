@@ -2,8 +2,8 @@
   <section id="booking" class="py-10 bg-light-yellow font-sans">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
-        <p class="text-lg sm:text-xl text-brownish font-bold max-w-2xl mx-auto">
+        <h2 class="text-2xl sm:text-2xl font-bold text-foreground mb-4">Book Your Royal Experience</h2>
+        <p class="text-md sm:text-md text-brownish font-bold max-w-2xl mx-auto">
           Limited to 50 bookings per week - Secure your spot now!
         </p>
       </div>
