@@ -25,6 +25,7 @@
             <li><router-link to="/partners" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Partners section link">Partners</router-link></li>
             <li><router-link to="/why-us" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Why Us section link">Why Us</router-link></li>
             <li><router-link to="/tour-leaders" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Tour Leaders section link">Tour Leaders</router-link></li>
+            <li><router-link to="/become-agent" class="text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-none p-0 transition-colors" aria-label="Become an Agent section link">Become an Agent</router-link></li>
           </ul>
         </div>
 

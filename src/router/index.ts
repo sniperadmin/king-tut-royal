@@ -51,6 +51,11 @@ const router = createRouter({
       component: () => import("@/pages/TourLeaderPortfolio.vue"),
     },
     {
+      path: "/become-agent",
+      name: "BecomeAnAgent",
+      component: () => import("@/pages/BecomeAnAgent.vue"),
+    },
+    {
       path: "/media",
       name: "NewsMedia",
       component: () => import("@/pages/NewsMediaPage.vue"),

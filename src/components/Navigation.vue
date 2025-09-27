@@ -3,29 +3,35 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <div class="flex items-center">
+        <div class="flex items-center mt-3">
           <router-link to="/" class="text-2xl font-royal font-bold text-primary">EGYPT IN STYLE</router-link>
         </div>
 
         <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center space-x-8">
+        <div class="hidden md:flex items-center space-x-8 mt-3">
           <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
           <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
           <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
           <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Why Us</router-link>
           <!-- <button @click="scrollToSection('news-media')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">News & Media</button> -->
           <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Tour Leaders</router-link>
+          <router-link to="/become-agent" :class="{'text-primary': isActive('/become-agent')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Become an Agent</router-link>
         </div>
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden">
           <button
             @click="isMenuOpen = !isMenuOpen"
-            class="text-foreground hover:text-primary transition-colors duration-200"
+            class="fixed top-4 right-4 w-12 h-12 bg-transparent border-none outline-none cursor-pointer z-[60]"
+            style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
+            type="button"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
-            </svg>
+            <span class="sr-only">Toggle menu</span>
+            <div class="w-full h-full flex items-center justify-center">
+              <svg class="w-6 h-6 pointer-events-none text-foreground hover:text-primary transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
+              </svg>
+            </div>
           </button>
         </div>
       </div>
@@ -39,6 +45,7 @@
           <router-link to="/why-us" :class="{'text-primary': isActive('/why-us')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Why Us</router-link>
           <!-- <button @click="scrollToSection('newsletter')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Newsletter</button> -->
           <router-link to="/tour-leaders" :class="{'text-primary': isActive('/tour-leaders')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Tour Leaders</router-link>
+          <router-link to="/become-agent" :class="{'text-primary': isActive('/become-agent')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Become an Agent</router-link>
         </div>
       </div>
     </div>
