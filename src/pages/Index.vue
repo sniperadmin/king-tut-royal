@@ -48,6 +48,8 @@
         <MediaSliderSection />
       </Suspense>
 
+      <BecomeAgentSection />
+
       <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
 
       <Suspense>
@@ -56,8 +58,6 @@
         </template>
         <WhyChooseSection />
       </Suspense>
-
-      <BecomeAgentSection />
 
       <Suspense>
         <template #fallback>

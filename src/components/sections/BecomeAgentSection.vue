@@ -15,7 +15,7 @@
       </div>
 
       <!-- Value Proposition Cards -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <div v-if="route.path === '/become-agent'" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         <div class="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-primary/20">
           <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
             <Gem class="w-6 h-6 text-primary" />
@@ -49,11 +49,11 @@
         </div>
       </div>
 
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6">
+      <p v-if="route.path === '/become-agent'" class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6">
         Offer your clients the King Tut Royal Experience and other once-in-a-lifetime journeys across Egypt.
         Backed by world-class hotels, luxury experiences, and AI-powered logistics, this is your chance to elevate your business and grow your revenue—effortlessly.
       </p>
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+      <p v-if="route.path === '/become-agent'" class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
         Apply now and become a certified Egypt In Style agent.
         Let your clients travel like royalty — and earn like one, too.
       </p>
@@ -125,7 +125,7 @@
                     class="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
                     :placeholder="formData.instagram ? `instagram.com/${formData.instagram}` : 'Enter username only (e.g., johnsmith)'"
                   >
-                  <div v-if="formData.instagram" class="mt-1 text-xs text-muted-foreground">
+                  <div class="mt-1 text-xs text-muted-foreground">
                     Preview: instagram.com/{{ formData.instagram }}
                   </div>
                 </div>
@@ -143,7 +143,7 @@
                     class="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
                     :placeholder="formData.linkedin ? `linkedin.com/in/${formData.linkedin}` : 'Enter username only (e.g., johnsmith)'"
                   >
-                  <div v-if="formData.linkedin" class="mt-1 text-xs text-muted-foreground">
+                  <div class="mt-1 text-xs text-muted-foreground">
                     Preview: linkedin.com/in/{{ formData.linkedin }}
                   </div>
                 </div>
@@ -161,7 +161,7 @@
                     class="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
                     :placeholder="formData.x ? `x.com/${formData.x}` : 'Enter username only (e.g., johnsmith)'"
                   >
-                  <div v-if="formData.x" class="mt-1 text-xs text-muted-foreground">
+                  <div class="mt-1 text-xs text-muted-foreground">
                     Preview: x.com/{{ formData.x }}
                   </div>
                 </div>
@@ -201,29 +201,9 @@
               :disabled="isSubmitting"
               class="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {{ isSubmitting ? 'Submitting...' : 'Apply Now via WhatsApp' }}
+              {{ isSubmitting ? 'Submitting...' : 'Apply Now' }}
             </button>
           </form>
-        </div>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="text-center mt-16">
-        <p class="text-muted-foreground mb-4">
-          Prefer to contact us directly?
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="https://wa.me/20123456789"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
-          >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.413 3.106"/>
-            </svg>
-            WhatsApp Direct
-          </a>
         </div>
       </div>
     </div>
@@ -232,6 +212,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useToast } from '@/composables/useToast'
 import AppLayout from '@/components/AppLayout.vue'
 import PhoneInput from '@/components/ui/PhoneInput.vue'
@@ -247,6 +228,8 @@ interface AgentFormData {
   website: string
   message: string
 }
+
+const route = useRoute()
 
 onMounted(() => {
   window.scrollTo(0, 0)
