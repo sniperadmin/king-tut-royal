@@ -57,6 +57,8 @@
         <WhyChooseSection />
       </Suspense>
 
+      <BecomeAgentSection />
+
       <Suspense>
         <template #fallback>
           <FeaturedTourLeadersSkeleton />
@@ -92,6 +94,8 @@ import BookingSkeleton from '../components/skeletons/BookingSkeleton.vue'
 import NewsletterSkeleton from '../components/skeletons/NewsletterSkeleton.vue'
 import FeaturedTourLeadersSkeleton from '../components/skeletons/FeaturedTourLeadersSkeleton.vue'
 import ArticleCard from '../components/ArticleCard.vue'
+import BecomeAgentSection from '../components/sections/BecomeAgentSection.vue'
+
 const VideoSection = defineAsyncComponent(() => import('../components/sections/VideoSection.vue'))
 const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))
 const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
