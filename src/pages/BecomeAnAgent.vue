@@ -102,14 +102,15 @@
               <label for="phoneNumber" class="block text-sm font-medium text-foreground mb-2">
                 Phone Number *
               </label>
-              <input
-                id="phoneNumber"
+              <PhoneInput
                 v-model="formData.phoneNumber"
-                type="tel"
-                required
-                class="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
-                placeholder="Enter your phone number"
-              >
+                :inputOptions="{
+                  id: 'phoneNumber',
+                  required: true,
+                  placeholder: 'Enter your phone number',
+                  class: 'w-full px-4 py-3 bg-background border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200'
+                }"
+              />
             </div>
 
             <!-- Social Media Profiles -->
@@ -233,6 +234,7 @@
 import { ref, onMounted } from 'vue'
 import { useToast } from '@/composables/useToast'
 import AppLayout from '@/components/AppLayout.vue'
+import PhoneInput from '@/components/ui/PhoneInput.vue'
 
 interface AgentFormData {
   fullName: string
@@ -250,7 +252,7 @@ onMounted(() => {
   window.scrollTo(0, 0)
 })
 
-const { showToast } = useToast()
+const { toast } = useToast()
 
 const formData = ref<AgentFormData>({
   fullName: '',
@@ -299,7 +301,7 @@ const submitForm = async () => {
     if (!formData.value.fullName || !formData.value.email || !formData.value.companyName || 
         !formData.value.phoneNumber || !formData.value.linkedin || 
         !formData.value.instagram || !formData.value.facebook) {
-      showToast({
+      toast({
         title: 'Missing Required Fields',
         description: 'Please fill in all required fields marked with *',
         variant: 'destructive'
@@ -310,7 +312,7 @@ const submitForm = async () => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.value.email)) {
-      showToast({
+      toast({
         title: 'Invalid Email',
         description: 'Please enter a valid email address',
         variant: 'destructive'
@@ -324,7 +326,7 @@ const submitForm = async () => {
     
     for (const url of socialUrls) {
       if (!urlRegex.test(url)) {
-        showToast({
+        toast({
           title: 'Invalid Social Media URL',
           description: 'Please enter valid URLs for social media profiles (starting with http:// or https://)',
           variant: 'destructive'
@@ -337,7 +339,7 @@ const submitForm = async () => {
     const whatsappMessage = formatWhatsAppMessage(formData.value)
     
     // WhatsApp Business API number (replace with your actual number)
-    const whatsappNumber = '20123456789' // TODO: Replace with actual WhatsApp Business number
+    const whatsappNumber = '201270389777' // TODO: Replace with actual WhatsApp Business number
     
     // Open WhatsApp with pre-filled message
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
@@ -346,7 +348,7 @@ const submitForm = async () => {
     window.open(whatsappUrl, '_blank')
     
     // Show success message
-    showToast({
+    toast({
       title: 'Application Submitted Successfully!',
       description: 'Your application has been sent via WhatsApp. We will contact you within 24 hours.',
       variant: 'default'
@@ -366,7 +368,7 @@ const submitForm = async () => {
     }
     
   } catch (error) {
-    showToast({
+    toast({
       title: 'Submission Error',
       description: 'An error occurred while submitting your application. Please try again.',
       variant: 'destructive'
