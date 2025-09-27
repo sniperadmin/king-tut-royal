@@ -21,10 +21,10 @@
           :image-srcset="pkg.imageSrcset ?? (pkg.image_412w && pkg.image_853w ? `${pkg.image_412w} 412w, ${pkg.image_853w} 853w` : '')"
           :highlights="pkg.highlights"
           :isPopular="pkg.isPopular"
-          @bookNow="scrollToBooking(pkg.slug)"
           :packageTitleForDetails="pkg.title"
           :packageSlug="pkg.slug"
           :icon="pkg.iconLabel"
+          @bookNow="router.push('/booking')"
         />
       </div>
       <!-- <div class="text-center mt-10">
@@ -39,16 +39,12 @@
 <script setup lang="ts">
 import { smoothScroll } from '../utils/smoothScroll'
 import { ref, defineAsyncComponent, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { supabase } from '../lib/supabase';
 import { PackageData } from '../types';
 
+const router = useRouter()
 const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
-const scrollToBooking = (packageSlug: string) => {
-  smoothScroll('booking')
-  // Optionally, you can also pass the packageSlug to the booking section if needed
-  // For example, by updating a reactive variable or using a router query parameter
-  // router.push({ path: '/', query: { scroll: 'booking', packageId: packageSlug } })
-}
 
 const packages = ref<PackageData[]>([]);
 

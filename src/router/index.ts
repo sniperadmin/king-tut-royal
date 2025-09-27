@@ -61,6 +61,11 @@ const router = createRouter({
       component: () => import("@/pages/ArticlePage.vue"),
     },
     {
+      path: "/booking",
+      name: "Booking",
+      component: () => import("@/pages/Booking.vue"),
+    },
+    {
       path: "/:catchAll(.*)",
       name: "NotFound",
       component: () => import("@/pages/NotFound.vue"),
