@@ -9,7 +9,7 @@
         >
           Back to Home
         </button>
-        <h1 class="text-4xl font-bold text-center flex-grow md:ml-4">Our Esteemed Partners</h1>
+        <h1 class="text-2xl font-bold text-center capitalize flex-grow md:ml-4">King tut royal experience official partners</h1>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl w-full mx-auto justify-items-center">
         <template v-for="partner in partners" :key="partner.id">
