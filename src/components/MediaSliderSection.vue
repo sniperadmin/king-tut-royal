@@ -148,17 +148,17 @@ const prevModalImage = () => {
 const mediaItems = [
   {
     id: 0,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-853w.webp",
-    title: "Bus Experience",
-    description: "Luxury transportation"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-dawn.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-dawn-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-dawn-853w.webp",
+    title: "Pyramid in Dawn time",
+    description: "Unforgettable pyramid experience"
   },
   {
     id: 1,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/perfume-853w.webp",
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/bus-853w.webp",
     title: "Perfume Experience",
     description: "Unforgettable perfume package"
   },
@@ -172,11 +172,11 @@ const mediaItems = [
   },
   {
     id: 3,
-    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket.webp",
-    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket-412w.webp",
-    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ticket-853w.webp",
-    title: "Core Services",
-    description: "Luxury accommodations and premium experiences"
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/m-out.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/m-out-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/m-out-853w.webp",
+    title: "Museum of the Ancient World",
+    description: "Museum from outer side"
   },
   {
     id: 4,
@@ -188,6 +188,14 @@ const mediaItems = [
   },
   {
     id: 5,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-camel.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-camel-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/pyramid-camel-853w.webp",
+    title: "Pyramid in Camel time",
+    description: "Unforgettable pyramid experience"
+  },
+  {
+    id: 6,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/CROHA%20Exterior%20ByDay-853w.webp",
@@ -195,7 +203,7 @@ const mediaItems = [
     description: "Unforgettable CROHA experience"
   },
   {
-    id: 6,
+    id: 7,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/ICSemiramis%20lobby-853w.webp",
@@ -203,7 +211,7 @@ const mediaItems = [
     description: "Unforgettable ICSemiramis experience"
   },
   {
-    id: 7,
+    id: 8,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9166-853w.webp",
@@ -211,7 +219,7 @@ const mediaItems = [
     description: "ICSemiramis rooms experience"
   },
   {
-    id: 8,
+    id: 9,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/Intercontinental%20rooms9196-853w.webp",
@@ -219,7 +227,7 @@ const mediaItems = [
     description: "ICSemiramis rooms experience"
   },
   {
-    id: 9,
+    id: 10,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-out-853w.webp",
@@ -227,7 +235,7 @@ const mediaItems = [
     description: "Unforgettable museum experience"
   },
   {
-    id: 10,
+    id: 11,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/museum-in-853w.webp",
@@ -235,13 +243,21 @@ const mediaItems = [
     description: "Unforgettable museum experience"
   },
   {
-    id: 11,
+    id: 12,
     src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car.webp",
     src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-412w.webp",
     src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/car-853w.webp",
     title: "Car",
     description: "Unforgettable museum experience"
   },
+  {
+    id: 13,
+    src: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/grave.webp",
+    src_412w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/grave-412w.webp",
+    src_853w: "https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/media-slider/grave-853w.webp",
+    title: "King Tut Grave",
+    description: "Unforgettable King Tut Grave experience"
+  }
 ];
 
 let intervalId: number | undefined;
