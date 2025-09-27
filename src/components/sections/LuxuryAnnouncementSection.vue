@@ -1,6 +1,6 @@
 <template>
   <section 
-    class="relative w-full py-24 mt-10 bg-black text-center cursor-pointer transition-all duration-300 hover:bg-gray-900 group"
+    class="relative w-full py-10 mt-10 bg-black text-center cursor-pointer transition-all duration-300 hover:bg-gray-900 group"
     @click="navigateToPackages"
   >
     <!-- Top decorative star -->
@@ -16,7 +16,7 @@
 
     <!-- Main heading -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-light text-gold mb-6 tracking-wider leading-tight">
+      <h2 class="text-3xl md:text-3xl lg:text-6xl font-light text-gold mb-6 tracking-wider leading-tight">
         A NEW ERA OF<br>
         LUXURY TRAVEL
       </h2>

@@ -23,9 +23,14 @@ const rootElRef = ref(null);
 const autoplayAttempted = ref(false);
 
 // Handle autoplay success
-const handleAutoPlay = (event) => {
-  console.log('Autoplay started successfully:', event.detail);
-  autoplayAttempted.value = true;
+const handleAutoPlay = () => {
+  console.log('Autoplay successful - video should be muted');
+  // No need to call player.play() here, as the 'autoplay' attribute handles it.
+  // Ensure muted state is maintained.
+  if (videoPlayer.value) {
+    videoPlayer.value.muted = true;
+    videoPlayer.value.volume = 0;
+  }
 };
 
 // Handle autoplay failure
@@ -95,6 +100,7 @@ onUnmounted(() => {
         class="aspect-video w-full h-full"
         :src="props.videos[currentVideoIndex].url"
         autoplay
+        muted
         loop
         playsinline
         fullscreenOrientation="portrait"
