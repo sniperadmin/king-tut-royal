@@ -4,6 +4,7 @@
         <HeroSection />
       </section>
 
+
       <section id="packages">
         <Suspense>
           <template #fallback>
@@ -22,7 +23,8 @@
         <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
       </Suspense>
 
-      <VideoPlayer class="mt-10" :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/pack-highlight.m3u8', title: 'package highlight' }]" />
+      <!-- Luxury Announcement Section -->
+      <LuxuryAnnouncementSection />
 
       <section id="partners">
         <section class="py-12">
@@ -95,6 +97,7 @@ import NewsletterSkeleton from '../components/skeletons/NewsletterSkeleton.vue'
 import FeaturedTourLeadersSkeleton from '../components/skeletons/FeaturedTourLeadersSkeleton.vue'
 import ArticleCard from '../components/ArticleCard.vue'
 import BecomeAgentSection from '../components/sections/BecomeAgentSection.vue'
+import LuxuryAnnouncementSection from '../components/sections/LuxuryAnnouncementSection.vue'
 
 const VideoSection = defineAsyncComponent(() => import('../components/sections/VideoSection.vue'))
 const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))

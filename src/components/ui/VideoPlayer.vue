@@ -18,24 +18,28 @@ const props = defineProps({
 
 const currentVideoIndex = ref(props.initialVideoIndex);
 const videoPlayer = ref(null);
-const pendingPlay = ref(false);
 const vidstackLoaded = ref(false);
 const rootElRef = ref(null);
+const autoplayAttempted = ref(false);
 
-const handleReady = () => {
-  if (videoPlayer.value && videoPlayer.value.player) {
-    // Slight delay to ensure the player is fully initialized
-    setTimeout(() => {
-      videoPlayer.value.player.muted = true;
-      videoPlayer.value.player.play().catch((error) => {
-        console.error('Autoplay failed:', error);
-      });
-      console.log('Video player ready. Muted:', videoPlayer.value.player.muted);
-      if (pendingPlay.value) {
-        videoPlayer.value.player.play().catch(() => {});
-        pendingPlay.value = false;
-      }
-    }, 100);
+// Handle autoplay success
+const handleAutoPlay = (event) => {
+  console.log('Autoplay started successfully:', event.detail);
+  autoplayAttempted.value = true;
+};
+
+// Handle autoplay failure
+const handleAutoPlayFail = (event) => {
+  console.warn('Autoplay failed:', event.detail);
+  autoplayAttempted.value = true;
+};
+
+const handlePlay = () => {
+  console.log('Video started playing - ensuring still muted');
+  if (videoPlayer.value) {
+    videoPlayer.value.muted = true;
+    // videoPlayer.value.volume = 0;
+    console.log('Play event - Player muted:', videoPlayer.value.muted);
   }
 };
 
@@ -43,6 +47,7 @@ let __videoObserver = null;
 onMounted(() => {
   const rootEl = (rootElRef && rootElRef.value) ? rootElRef.value : document.querySelector('#video-player-container');
   if (!rootEl) return;
+  
   __videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -56,24 +61,18 @@ onMounted(() => {
             }
             vidstackLoaded.value = true;
             await nextTick();
-            // Give the template a short moment to render the media-player before attempting play
-            setTimeout(() => {
-              if (videoPlayer.value && videoPlayer.value.player) {
-                videoPlayer.value.player.play().catch(() => {});
-                pendingPlay.value = false;
-              } else {
-                pendingPlay.value = true;
-              }
-            }, 50);
+            // No need to manually trigger play - autoplay prop will handle it
           } catch (err) {
             console.error('Failed to load vidstack:', err);
           }
         })();
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.1 }); // Reduced threshold for earlier loading
+  
   __videoObserver.observe(rootEl);
 });
+
 onUnmounted(() => {
   if (__videoObserver) {
     __videoObserver.disconnect();
@@ -95,11 +94,13 @@ onUnmounted(() => {
         ref="videoPlayer"
         class="aspect-video w-full h-full"
         :src="props.videos[currentVideoIndex].url"
-        :muted="true"
-        :volume="0"
+        autoplay
+        loop
         playsinline
         fullscreenOrientation="portrait"
-        @ready="handleReady"
+        @play="handlePlay"
+        @auto-play="handleAutoPlay"
+        @auto-play-fail="handleAutoPlayFail"
       >
         <media-provider></media-provider>
         <media-controls

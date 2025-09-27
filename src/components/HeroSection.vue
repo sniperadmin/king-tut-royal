@@ -3,7 +3,7 @@
     <!-- Background Video - Full Width, Contained -->
     <div class="w-full">
       <VideoPlayer
-        :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/king-hero.m3u8' }]"
+        :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/pack-highlight.m3u8', title: 'package highlight' }]"
         poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp"
       />
     </div>
