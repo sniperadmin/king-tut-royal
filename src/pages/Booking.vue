@@ -13,7 +13,7 @@
         <template #fallback>
           <BookingSkeleton />
         </template>
-        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query?.packageId" />
       </Suspense>
     </div>
   </AppLayout>
@@ -34,7 +34,7 @@ const bookingSectionRef = ref(null)
 onMounted(() => {
   window.scrollTo(0, 0)
   
-  if (route.query.scroll === 'booking') {
+  if (route.query?.scroll === 'booking') {
     nextTick(() => {
       smoothScroll('booking')
     })
@@ -42,7 +42,7 @@ onMounted(() => {
 })
 
 const handleBookingSectionLoaded = () => {
-  if (route.query.scroll === 'booking') {
+  if (route.query?.scroll === 'booking') {
     nextTick(() => {
       smoothScroll('booking')
     })

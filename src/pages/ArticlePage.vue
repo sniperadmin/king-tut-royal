@@ -59,11 +59,11 @@ const fetchArticleContent = async (url) => {
 };
 
 onMounted(() => {
-  const externalUrl = route.query.url;
+  const externalUrl = route.query?.url;
   fetchArticleContent(externalUrl);
 });
 
-watch(() => route.query.url, (newUrl) => {
+watch(() => route.query?.url, (newUrl) => {
   fetchArticleContent(newUrl);
 });
 </script>

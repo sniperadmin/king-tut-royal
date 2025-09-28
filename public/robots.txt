@@ -12,3 +12,23 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://kingtutroyal.com/sitemap.xml
+
+# Disallow crawling of admin or private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /.git/
+
+# Allow crawling of important pages
+Allow: /packages/
+Allow: /partners/
+Allow: /tour-leaders/
+Allow: /why-us/
+Allow: /become-an-agent/
+Allow: /news-media/
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1

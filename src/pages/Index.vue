@@ -20,7 +20,7 @@
         <template #fallback>
           <BookingSkeleton />
         </template>
-        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query.packageId" />
+        <BookingSection ref="bookingSectionRef" @loaded="handleBookingSectionLoaded" :preselectedPackageId="route.query?.packageId" />
       </Suspense>
 
       <!-- Luxury Announcement Section -->
@@ -70,39 +70,29 @@
 </template>
 
 <script setup lang="ts">
-import AppLayout from '@/components/AppLayout.vue'
-import { defineAsyncComponent, nextTick, ref, onMounted, watch } from 'vue'
-import { provideAppContext } from '@/composables/useAppContext'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { smoothScroll } from '../utils/smoothScroll'
-import HeroSection from '../components/HeroSection.vue'
-import PackagesSection from '../components/PackagesSection.vue'
-import PartnersSection from '../components/PartnersSection.vue'
-import VideoPlayer from '../components/ui/VideoPlayer.vue'
-// import NewsMediaSection from '../components/NewsMediaSection.vue'
-import WhyChooseSection from '../components/WhyChooseSection.vue'
-import BookingSection from '../components/BookingSection.vue'
-import ContactSection from '../components/ContactSection.vue'
-import PackagesSkeleton from '../components/skeletons/PackagesSkeleton.vue'
-import PartnersSkeleton from '../components/skeletons/PartnersSkeleton.vue'
-import MediaSliderSkeleton from '../components/skeletons/MediaSliderSkeleton.vue'
-import WhyChooseSkeleton from '../components/skeletons/WhyChooseSkeleton.vue'
-import BookingSkeleton from '../components/skeletons/BookingSkeleton.vue'
-import NewsletterSkeleton from '../components/skeletons/NewsletterSkeleton.vue'
-import FeaturedTourLeadersSkeleton from '../components/skeletons/FeaturedTourLeadersSkeleton.vue'
-import ArticleCard from '../components/ArticleCard.vue'
-import BecomeAgentSection from '../components/sections/BecomeAgentSection.vue'
-import LuxuryAnnouncementSection from '../components/sections/LuxuryAnnouncementSection.vue'
+import { useSeo, seoConfigs } from '@/composables/useSeo'
+import { useStructuredData } from '@/composables/useStructuredData'
+import AppLayout from '@/components/AppLayout.vue'
+import HeroSection from '@/components/HeroSection.vue'
+import PackagesSection from '@/components/PackagesSection.vue'
+import WhyChooseSection from '@/components/WhyChooseSection.vue'
+import FeaturedTourLeaders from '@/components/FeaturedTourLeaders.vue'
+import PartnersSection from '@/components/PartnersSection.vue'
+import MediaSliderSection from '@/components/MediaSliderSection.vue'
+import NewsMediaSection from '@/components/NewsMediaSection.vue'
+import ContactSection from '@/components/ContactSection.vue'
+import BookingSection from '@/components/BookingSection.vue'
+import LuxuryAnnouncementSection from '@/components/sections/LuxuryAnnouncementSection.vue'
+import VideoPlayer from '@/components/ui/VideoPlayer.vue'
+import BecomeAgentSection from '@/components/sections/BecomeAgentSection.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
+// SEO Configuration
+useSeo(seoConfigs.home)
 
-const VideoSection = defineAsyncComponent(() => import('../components/sections/VideoSection.vue'))
-const FeaturedTourLeaders = defineAsyncComponent(() => import('../components/FeaturedTourLeaders.vue'))
-const MediaSliderSection = defineAsyncComponent(() => import('../components/MediaSliderSection.vue'))
-
-// Provide app context for child components
-provideAppContext()
-
-const route = useRoute();
-const bookingSectionRef = ref(null);
+// Router
+const route = useRoute()
 
 const posts1 = ref([
    {
@@ -114,29 +104,13 @@ const posts1 = ref([
   }
 ])
 
-// Handle scrolling for non-booking targets on mount and when query.scroll changes
+
+// Structured Data
+const { addOrganizationSchema, addWebsiteSchema } = useStructuredData()
+
 onMounted(() => {
-  const scrollTarget = route.query.scroll;
-  if (scrollTarget && scrollTarget !== 'booking') {
-    nextTick(() => {
-      smoothScroll(String(scrollTarget));
-    });
-  }
-});
-
-watch(() => route.query.scroll, (newVal) => {
-  if (!newVal) return;
-  if (newVal === 'booking') return;
-  nextTick(() => {
-    smoothScroll(String(newVal));
-  });
-});
-
-const handleBookingSectionLoaded = () => {
-  if (route.query.scroll === 'booking') {
-    nextTick(() => {
-      smoothScroll('booking');
-    });
-  }
-};
+  // Add organization and website structured data
+  addOrganizationSchema()
+  addWebsiteSchema()
+})
 </script>

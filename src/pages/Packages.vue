@@ -37,10 +37,18 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useSeo, seoConfigs } from '@/composables/useSeo'
+import { useStructuredData } from '@/composables/useStructuredData'
 import AppLayout from '@/components/AppLayout.vue';
 import { supabase } from '../lib/supabase';
 import { PackageData } from '../types';
 import { KING_TUT_VIP_ONE_DAY, KING_TUT_ROYAL_VIP } from '@/constants/packageIds';
+
+// SEO Configuration
+useSeo(seoConfigs.packages)
+
+// Structured Data
+const { addOrganizationSchema, addBreadcrumbSchema } = useStructuredData()
 
 
 const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
@@ -80,6 +88,11 @@ const bookNow = (packageSlug: string) => {
 
 onMounted(() => {
   window.scrollTo(0, 0);
+  addOrganizationSchema()
+  addBreadcrumbSchema([
+    { name: 'Home', url: 'https://kingtutroyal.com/' },
+    { name: 'Packages', url: 'https://kingtutroyal.com/packages' }
+  ])
 })
 </script>
 
