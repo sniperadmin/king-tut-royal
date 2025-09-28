@@ -45,6 +45,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useSeo, seoConfigs } from '@/composables/useSeo'
+import { useStructuredData } from '@/composables/useStructuredData'
 import AppLayout from '@/components/AppLayout.vue';
 import { supabase } from '../lib/supabase';
 import { Partner } from '../types';
@@ -52,11 +54,29 @@ import { Partner } from '../types';
 const partners = ref<Partner[]>([]);
 const router = useRouter()
 
+// SEO and Structured Data
+const { addOrganizationSchema, addBreadcrumbSchema } = useStructuredData()
+
+// Apply SEO configuration - must be called directly in setup, not in onMounted
+console.log('Partners.vue: Calling useSeo with partners config:', seoConfigs.partners)
+useSeo(seoConfigs.partners)
+console.log('Partners.vue: useSeo called')
+
 onMounted(async () => {
   window.scrollTo(0, 0);
+  
+  // Add structured data
+  addOrganizationSchema()
+  addBreadcrumbSchema([
+    { name: 'Home', url: 'https://kingtutroyal.com/' },
+    { name: 'Partners', url: 'https://kingtutroyal.com/partners' }
+  ])
+  
   const { data, error } = await supabase
     .from('partners_view')
-    .select('*');
+    .select('partner, id, sort_rank')
+    .order('sort_rank', { ascending: true })
+    .order('partner->>name', { ascending: true });
 
   if (error) {
     console.error('Error fetching partners:', error);

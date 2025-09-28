@@ -128,8 +128,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useSeo } from '@/composables/useSeo'
+import { useStructuredData } from '@/composables/useStructuredData'
 import AppLayout from '@/components/AppLayout.vue'
 import VideoPlayer from '../components/ui/VideoPlayer.vue'
 import { supabase } from '../lib/supabase'
@@ -145,6 +147,69 @@ const loading = ref(true) // Add loading state
 
 const videos = computed(() => packageItem.value?.videos || [])
 
+// SEO and Structured Data - Initialize safely
+const { updateSeo } = useSeo()
+const { addTravelPackageSchema, addBreadcrumbSchema } = useStructuredData()
+
+console.log('SEO Composables initialized:', { updateSeo: !!updateSeo, addTravelPackageSchema: !!addTravelPackageSchema, addBreadcrumbSchema: !!addBreadcrumbSchema })
+
+// Update SEO when package data changes - with proper safeguards
+watch(packageItem, (newPackage) => {
+  console.log('SEO Watch triggered:', { newPackage, loading: loading.value })
+  if (newPackage && !loading.value) {
+    console.log('Updating SEO for package:', newPackage.title)
+    try {
+      // Only update SEO if we have valid package data
+      const title = newPackage.title || 'Luxury Egypt Travel Package'
+      const description = newPackage.details?.overview?.substring(0, 160) || 
+        `Experience the luxury of ${title} with exclusive amenities and personalized service.`
+      const imageUrl = newPackage.images?.[0] ? getImageUrl(newPackage.images[0]) : '/og.webp'
+      
+      console.log('SEO Data:', { title, description, imageUrl })
+      
+      updateSeo({
+        title: `${title} | Luxury Egypt Travel Package`,
+        description: description,
+        keywords: `${title}, luxury Egypt tour, premium travel package, exclusive Egypt experience`,
+        image: imageUrl,
+        type: 'article'
+      })
+
+      // Add travel package structured data with safe property access
+      const packageImages = newPackage.images?.map(img => getImageUrl(img)) || [imageUrl]
+      const priceValue = newPackage.price ? newPackage.price.replace(/[^0-9]/g, '') : '0'
+      
+      addTravelPackageSchema({
+        name: title,
+        description: newPackage.details?.overview || `Luxury travel package: ${title}`,
+        image: packageImages,
+        offers: {
+          price: priceValue,
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock'
+        },
+        duration: newPackage.duration || '1 day',
+        location: [{
+          '@type': 'Place',
+          name: 'Egypt',
+          address: 'Egypt'
+        }]
+      })
+
+      // Add breadcrumb
+      addBreadcrumbSchema([
+        { name: 'Home', url: 'https://kingtutroyal.com/' },
+        { name: 'Packages', url: 'https://kingtutroyal.com/packages' },
+        { name: title, url: `https://kingtutroyal.com${route.path}` }
+      ])
+      
+      console.log('SEO updated successfully')
+    } catch (error) {
+      console.error('Error updating SEO:', error)
+    }
+  }
+})
+
 const getImageUrl = (img: any): string => {
   if (!img) return '/images/default.webp'
   if (typeof img === 'string') return img
@@ -155,6 +220,7 @@ const getImageUrl = (img: any): string => {
 }
 
 onMounted(async () => {
+  console.log('PackageDetails onMounted started')
   window.scrollTo(0, 0)
   loading.value = true // Set loading to true before fetching data
 
@@ -187,7 +253,7 @@ onMounted(async () => {
     .from('packages_view')
     .select('package, sort_rank')
     .order('sort_rank', { ascending: true })
-  if (data) { loading.value = false }
+  
   if (error) {
     console.error('Error fetching packages:', error)
     loading.value = false // Set loading to false on error
@@ -210,7 +276,34 @@ onMounted(async () => {
     return titleLower === normalizedRoute || slugify(p.title) === routeParam
   }) ?? null
 
+  // Always set loading to false after all fetch attempts
+  loading.value = false
   console.log('Package Details:', packageItem.value)
+  
+  // Direct SEO update after package is loaded
+  if (packageItem.value) {
+    console.log('Direct SEO update after onMounted')
+    try {
+      const title = packageItem.value.title || 'Luxury Egypt Travel Package'
+      const description = packageItem.value.details?.overview?.substring(0, 160) || 
+        `Experience the luxury of ${title} with exclusive amenities and personalized service.`
+      const imageUrl = packageItem.value.images?.[0] ? getImageUrl(packageItem.value.images[0]) : '/og.webp'
+      
+      console.log('Direct SEO Data:', { title, description, imageUrl })
+      
+      updateSeo({
+        title: `${title} | Luxury Egypt Travel Package`,
+        description: description,
+        keywords: `${title}, luxury Egypt tour, premium travel package, exclusive Egypt experience`,
+        image: imageUrl,
+        type: 'article'
+      })
+      
+      console.log('Direct SEO update completed')
+    } catch (error) {
+      console.error('Error in direct SEO update:', error)
+    }
+  }
 })
 
 const prevImage = () => {
