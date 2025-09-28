@@ -43,16 +43,13 @@
         </Suspense>
       </section>
 
-      <Suspense>
-        <template #fallback>
-          <MediaSliderSkeleton />
-        </template>
-        <MediaSliderSection />
-      </Suspense>
+      <VideoPlayer :videos="[{ id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/hotel.m3u8', title: 'hotels', muted: true }]" />
 
       <BecomeAgentSection />
 
-      <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
+      <Suspense>
+        <VideoSection />
+      </Suspense>
 
       <Suspense>
         <template #fallback>
@@ -61,15 +58,13 @@
         <WhyChooseSection />
       </Suspense>
 
+      <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
+
       <Suspense>
         <template #fallback>
           <FeaturedTourLeadersSkeleton />
         </template>
         <FeaturedTourLeaders id="tour-leaders" />
-      </Suspense>
-
-      <Suspense>
-        <VideoSection />
       </Suspense>
   </AppLayout>
 </template>

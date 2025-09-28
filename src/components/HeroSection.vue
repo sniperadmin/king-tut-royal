@@ -5,6 +5,7 @@
       <VideoPlayer
         :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8', title: 'package highlight' }]"
         poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp"
+        autoplay
       />
     </div>
   </section>

@@ -10,29 +10,38 @@
 
       <div v-if="loading" class="text-center text-muted-foreground">Loading featured tour leaders...</div>
       <div v-else-if="error" class="text-center text-red-500">Error: {{ error }}</div>
-      <transition-group v-else name="fade" tag="div" id="leaders-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-auto" aria-live="polite">
-        <article v-for="leader in visibleLeaders" :key="leader.id" class="leader-card bg-card border border-border rounded-lg p-5 flex flex-col items-start text-foreground transition-shadow hover:shadow-xl" role="article">
-          <div class="flex flex-col sm:flex-row items-center w-full gap-4">
-            <div class="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden bg-muted flex items-center justify-center mb-2 sm:mb-0">
-              <img v-if="leader.avatar_url" :src="leader.avatar_url" :alt="leader.name" class="w-full h-full object-cover" loading="lazy" width="80" height="80" />
-              <div v-else class="text-2xl font-semibold text-muted-foreground">{{ leader.name ? leader.name.charAt(0) : '?' }}</div>
+      <div v-else-if="leaders.length === 0" class="text-center text-muted-foreground">No featured tour leaders available.</div>
+      
+      <SplideCarousel 
+        v-else
+        :options="carouselOptions"
+        aria-label="Featured Tour Leaders"
+        class="max-w-6xl mx-auto"
+      >
+        <SplideSlide v-for="leader in leaders" :key="leader.id">
+          <article class="leader-card bg-card border border-border rounded-lg p-5 flex flex-col items-start text-foreground transition-shadow hover:shadow-xl h-full mx-2" role="article">
+            <div class="flex flex-col sm:flex-row items-center w-full gap-4">
+              <div class="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden bg-muted flex items-center justify-center mb-2 sm:mb-0">
+                <img v-if="leader.avatar_url" :src="leader.avatar_url" :alt="leader.name" class="w-full h-full object-cover" loading="lazy" width="80" height="80" />
+                <div v-else class="text-2xl font-semibold text-muted-foreground">{{ leader.name ? leader.name.charAt(0) : '?' }}</div>
+              </div>
+              <div class="flex-1 text-center sm:text-left">
+                <h3 class="text-xl font-semibold">{{ leader.name }}</h3>
+                <p class="text-sm text-primary font-medium mt-1">{{ getSpecialty(leader) }}</p>
+              </div>
             </div>
-            <div class="flex-1 text-center sm:text-left">
-              <h3 class="text-xl font-semibold">{{ leader.name }}</h3>
-              <p class="text-sm text-primary font-medium mt-1">{{ getSpecialty(leader) }}</p>
+
+            <p class="leader-desc text-muted-foreground mt-4 text-sm flex-grow">{{ getDescription(leader) }}</p>
+
+            <div class="mt-4 w-full flex flex-col sm:flex-row items-center justify-between">
+              <router-link :to="`/tour-leaders/${leader.id}`" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold rounded-full shadow hover:scale-105 transition-transform mb-2 sm:mb-0" :aria-label="`View profile of ${leader.name}`">
+                Profile
+              </router-link>
+              <div class="text-sm text-muted-foreground">Languages: <span class="text-muted-foreground">{{ formatLanguages(leader) }}</span></div>
             </div>
-          </div>
-
-          <p class="leader-desc text-muted-foreground mt-4 text-sm flex-grow">{{ getDescription(leader) }}</p>
-
-          <div class="mt-4 w-full flex flex-col sm:flex-row items-center justify-between">
-            <router-link :to="`/tour-leaders/${leader.id}`" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold rounded-full shadow hover:scale-105 transition-transform mb-2 sm:mb-0" :aria-label="`View profile of ${leader.name}`">
-              Profile
-            </router-link>
-            <div class="text-sm text-muted-foreground">Languages: <span class="text-muted-foreground">{{ formatLanguages(leader) }}</span></div>
-          </div>
-        </article>
-      </transition-group>
+          </article>
+        </SplideSlide>
+      </SplideCarousel>
 
       <div class="flex justify-center mt-6">
         <router-link to="/tour-leaders" class="px-6 py-3 bg-transparent border border-primary text-primary font-semibold hover:bg-primary/10 transition shadow-lg">
@@ -44,8 +53,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { supabase } from '@/lib/supabase'
+import SplideCarousel from './SplideCarousel.vue';
+import { SplideSlide } from '@splidejs/vue-splide';
 
 interface TourLeader {
   id: string;
@@ -60,6 +71,25 @@ interface TourLeader {
 const leaders = ref<TourLeader[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
+
+const carouselOptions = {
+  rewind: true,
+  autoplay: true,
+  interval: 3000,
+  pauseOnHover: true,
+  lazyLoad: true,
+  perPage: 3,
+  gap: '1rem',
+  pagination: false,
+  breakpoints: {
+    1024: {
+      perPage: 2
+    },
+    768: {
+      perPage: 1
+    }
+  }
+};
 
 const fetchFeaturedTourLeaders = async () => {
   try {
@@ -81,9 +111,7 @@ const fetchFeaturedTourLeaders = async () => {
   }
 };
 
-const visibleLeaders = computed(() => {
-  return leaders.value;
-});
+
 
 function getSpecialty(l: TourLeader) {
   return l.specialties && l.specialties.length > 0 ? l.specialties[0] : l.experience || 'Private & Bespoke Tours';
