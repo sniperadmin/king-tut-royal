@@ -59,6 +59,8 @@ export default {
         'light-blue': 'hsl(var(--light-blue))',
         'light-yellow': 'hsl(var(--light-yellow))',
         'brownish': 'hsl(var(--brownish))',
+        gold: "#C8A24A",
+        brown: "#5a3f40",
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',

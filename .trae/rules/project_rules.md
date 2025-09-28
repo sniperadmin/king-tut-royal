@@ -28,14 +28,14 @@
 
 ## 📚 Documentation & Explainability
 - Update `README.md` for **frontend/backend** with:
-  - Setup instructions (e.g., `yarn install` for frontend).
+  - Setup instructions (e.g., `npm install` for frontend).
   - New feature summaries and dependencies.
 - **Comment code** with:
   - `# Reason: <why this logic exists>` for complex decisions.
 - **CHANGELOG.md**: Document breaking changes.
 
 ## 📦 Dependency Management & Technology Stack
-- **Frontend**: Use `yarn` for package management.
+- **Frontend**: Use `npm` for package management.
   - **Core Stack**: Vite.js, TypeScript, Tailwind CSS.
 - **Deprecation Policy**:
   - Flag deprecated dependencies in `README.md`.

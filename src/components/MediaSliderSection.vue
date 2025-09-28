@@ -8,63 +8,11 @@
       </div>
 
       <div class="relative max-w-6xl mx-auto">
-        <div
-          class="relative h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] overflow-hidden rounded-2xl group cursor-pointer"
-          @click="openModal(currentSlide)"
-        >
-          <img
-            :src="mediaItems[currentSlide].src"
-            :alt="mediaItems[currentSlide].title"
-            :srcset="`${mediaItems[currentSlide].src_412w} 412w, ${mediaItems[currentSlide].src_853w} 853w`"
-            sizes="(max-width: 640px) 412px, 853px"
-            class="w-full h-full object-contain transition-all duration-500"
-            width="853"
-            height="480"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent"></div>
-
-          <!-- Maximize button -->
-          <div
-            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          >
-            <Button
-              variant="ghost"
-              size="icon"
-              class="bg-card/50 hover:bg-card/70 text-foreground border-0 h-10 w-10 rounded-full"
-            >
-              <Maximize2 class="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-
-        <Button
-          @click="prevSlide"
-          variant="ghost"
-          size="icon"
-          class="absolute left-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
-        >
-          <ChevronLeft class="h-6 w-6" />
-        </Button>
-
-        <Button
-          @click="nextSlide"
-          variant="ghost"
-          size="icon"
-          class="absolute right-4 top-1/2 -translate-y-1/2 bg-card/50 hover:bg-card/70 text-foreground border-0 h-12 w-12 rounded-full"
-        >
-          <ChevronRight class="h-6 w-6" />
-        </Button>
-
-        <div class="flex justify-center mt-8 space-x-3">
-          <button
-            v-for="(item, index) in mediaItems"
-            :key="index"
-            @click="goToSlide(index)"
-            :class="`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-primary scale-125' : 'bg-muted-foreground hover:bg-foreground'
-            }`"
-          />
-        </div>
+        <SplideCarousel
+          :slides="splideSlides"
+          :options="splideOptions"
+          aria-label="Luxury Egyptian Experiences Carousel"
+        />
       </div>
     </div>
   </section>
@@ -117,33 +65,10 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next';
 import Button from './ui/button.vue';
+import SplideCarousel from './SplideCarousel.vue';
 
-const currentSlide = ref(0);
 const isModalOpen = ref(false);
 const modalImageIndex = ref(0);
-const autoSlideInterval = ref(null);
-
-const goToSlide = (index) => {
-  stopAutoSlide();
-  // Only update if slide changes
-  if (currentSlide.value !== index) {
-    currentSlide.value = index;
-  }
-  startAutoSlide();
-};
-
-const nextModalImage = () => {
-  // Only update if next image is different
-  if (mediaItems.length > 1) {
-    modalImageIndex.value = (modalImageIndex.value + 1) % mediaItems.length;
-  }
-};
-
-const prevModalImage = () => {
-  if (mediaItems.length > 1) {
-    modalImageIndex.value = (modalImageIndex.value - 1 + mediaItems.length) % mediaItems.length;
-  }
-};
 
 const mediaItems = [
   {
@@ -260,29 +185,55 @@ const mediaItems = [
   }
 ];
 
-let intervalId: number | undefined;
+const splideSlides = computed(() => mediaItems.map(item => ({
+  type: 'image',
+  src: item.src,
+  alt: item.title,
+  id: item.id
+})));
 
-const startAutoSlide = () => {
-  stopAutoSlide(); // Ensure any existing interval is cleared
-  intervalId = setInterval(() => {
-    // Optimize: only update if not modal open and slides > 1
-    if (!isModalOpen.value && mediaItems.length > 1) {
-      currentSlide.value = (currentSlide.value + 1) % mediaItems.length;
-    }
-  }, 4000);
+const splideOptions = {
+  rewind: true,
+  autoplay: true,
+  interval: 4000,
+  pauseOnHover: true,
+  lazyLoad: true,
+  perPage: 1,
+  height: '500px',
+  breakpoints: {
+    640: {
+      height: '250px',
+    },
+    768: {
+      height: '350px',
+    },
+    1024: {
+      height: '450px',
+    },
+  },
 };
 
-const stopAutoSlide = () => {
-  if (intervalId) {
-    clearInterval(intervalId);
-    intervalId = undefined;
+function openModal(index: number) {
+  if (!isModalOpen.value) {
+    isModalOpen.value = true;
+    modalImageIndex.value = index;
   }
-};
+}
+function closeModal() {
+  isModalOpen.value = false;
+}
 
-onMounted(() => {
-  // Only start auto slide if more than one item
-  if (mediaItems.length > 1) startAutoSlide();
-});
+function nextModalImage() {
+  if (mediaItems.length > 1) {
+    modalImageIndex.value = (modalImageIndex.value + 1) % mediaItems.length;
+  }
+}
+
+function prevModalImage() {
+  if (mediaItems.length > 1) {
+    modalImageIndex.value = (modalImageIndex.value - 1 + mediaItems.length) % mediaItems.length;
+  }
+}
 
 function handleKeydown(e: KeyboardEvent) {
   if (!isModalOpen.value) return;
@@ -295,52 +246,20 @@ function handleKeydown(e: KeyboardEvent) {
   }
 }
 
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
 onUnmounted(() => {
-  stopAutoSlide();
-  document.body.style.overflow = '';
   window.removeEventListener('keydown', handleKeydown);
 });
 
 watch(isModalOpen, (newValue) => {
   if (newValue) {
-    stopAutoSlide();
     document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeydown);
   } else {
     document.body.style.overflow = '';
-    window.removeEventListener('keydown', handleKeydown);
-    if (mediaItems.length > 1) startAutoSlide();
   }
 });
-const currentMedia = computed(() => mediaItems[currentSlide.value]);
-// Removed active, isOpen, and duplicate autoSlideInterval
-// const active = ref(0);
-// const isOpen = ref(false);
-// const autoSlideInterval = ref<number | null>(null);
-
-const totalSlides = computed(() => mediaItems.length);
-
-function nextSlide() {
-  if (totalSlides.value > 1) {
-    currentSlide.value = (currentSlide.value + 1) % totalSlides.value;
-  }
-}
-function prevSlide() {
-  if (totalSlides.value > 1) {
-    currentSlide.value = (currentSlide.value - 1 + totalSlides.value) % totalSlides.value;
-  }
-}
-
-function openModal(index: number) {
-  if (!isModalOpen.value) {
-    isModalOpen.value = true;
-    modalImageIndex.value = index;
-  }
-}
-function closeModal() {
-  isModalOpen.value = false;
-}
-
-// Removed handleAutoSlide as its functionality is now integrated into startAutoSlide and watch
 
 </script>
