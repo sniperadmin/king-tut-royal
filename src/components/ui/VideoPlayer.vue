@@ -13,13 +13,23 @@ const props = defineProps({
   aspectRatio: {
     type: String,
     default: '16/9' // Default to 16:9 if not provided
+  },
+  autoplay: {
+    type: Boolean,
+    default: false
+  },
+  muted: {
+    type: Boolean,
+    default: true
+  },
+  loop: {
+    type: Boolean,
+    default: false
   }
 });
 
 const currentVideoIndex = ref(props.initialVideoIndex);
-const videoPlayer = ref(null);
 const vidstackLoaded = ref(false);
-const rootElRef = ref(null);
 const autoplayAttempted = ref(false);
 
 // Handle autoplay failure
@@ -41,19 +51,17 @@ nextTick();
 <template>
   <div
     id="video-player-container"
-    ref="rootElRef"
     class="relative w-full mx-auto rounded-lg overflow-hidden object-cover"
     :style="{ '--aspect-ratio': props.aspectRatio }"
   >
     <template v-if="vidstackLoaded">
       <!-- NOTE: Never delete aspect-video class from media-player -->
       <media-player
-        ref="videoPlayer"
         class="aspect-video w-full h-full"
         :src="props.videos[currentVideoIndex].url"
-        autoplay
-        muted
-        loop
+        v-bind="props.autoplay ? { autoplay: true } : {}"
+        :muted="props.muted"
+        :loop="props.loop"
         playsinline
         fullscreenOrientation="portrait"
         @auto-play-fail="handleAutoPlayFail"

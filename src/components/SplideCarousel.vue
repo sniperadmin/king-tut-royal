@@ -5,7 +5,7 @@
       <!-- Fallback to slides prop if no slot provided -->
       <SplideSlide v-for="(item, i) in slides" :key="item.id ?? i">
         <template v-if="item.type === 'image'">
-          <img :src="item.src" :alt="item.alt ?? ''" class="w-full h-auto" />
+          <img :src="item.src" :alt="item.alt ?? ''" class="w-full h-56" />
         </template>
 
         <template v-else-if="item.type === 'component'">
