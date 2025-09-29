@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import Navigation from './Navigation.vue'
 import Footer from './Footer.vue'
-import ContactSection from '../components/ContactSection.vue'
+import ContactSection from './sections/ContactSection.vue'
 </script>
 
 <script lang="ts">

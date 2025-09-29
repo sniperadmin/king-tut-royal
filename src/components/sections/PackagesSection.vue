@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-light-blue text-foreground">
+  <section class="py-10 bg-light-blue text-foreground">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <!-- <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Royal Experience</h2> -->
@@ -40,14 +40,14 @@
 </template>
 
 <script setup lang="ts">
-import { smoothScroll } from '../utils/smoothScroll'
+import { smoothScroll } from '../../utils/smoothScroll'
 import { ref, defineAsyncComponent, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { supabase } from '../lib/supabase';
-import { PackageData } from '../types';
+import { supabase } from '../../lib/supabase';
+import { PackageData } from '../../types';
 
 const router = useRouter()
-const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
+const PackageCard = defineAsyncComponent(() => import('../ui/PackageCard.vue'))
 
 const packages = ref<PackageData[]>([]);
 

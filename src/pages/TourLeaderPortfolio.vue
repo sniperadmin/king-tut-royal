@@ -3,7 +3,7 @@
     <div class="mx-auto p-0 mt-20">
     <div v-if="loading" class="text-center text-muted-foreground">Loading tour leader profile...</div>
     <div v-else-if="error" class="text-center text-red-500">Error: {{ error }}</div>
-    <div v-else-if="leader" class="rounded-lg py-6 md:p-8 lg:p-10">
+    <div v-else-if="leader" class="container rounded-lg py-6 md:p-8 lg:p-10">
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
       <button
           type="button"

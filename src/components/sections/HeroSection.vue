@@ -2,8 +2,9 @@
   <section class="relative w-full pt-16 bg-black text-foreground">
     <!-- Background Video - Full Width, Contained -->
     <div class="w-full">
+      <!-- https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king/king.m3u8 -->
       <VideoPlayer
-        :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8', title: 'package highlight' }]"
+        :videos="[{ id: 1, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king/king.m3u8', title: 'package highlight' }]"
         poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/images/homepage/hero/king-tut-853x1280.webp"
         autoplay
       />
@@ -13,8 +14,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { smoothScroll } from '../utils/smoothScroll'
-import VideoPlayer from './ui/VideoPlayer.vue'
+import { smoothScroll } from '../../utils/smoothScroll'
+import VideoPlayer from '../ui/VideoPlayer.vue'
 
 const scrollToPackages = () => {
   smoothScroll('packages')

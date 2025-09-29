@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="mx-auto pt-20">
+    <div class="p-4 mx-auto pt-20">
       <button
           type="button"
           @click="router.push('/packages')"
@@ -114,7 +114,7 @@
         </div>
 
         <div class="text-center mt-8 space-y-4">
-          <button @click="bookNow" class="w-full bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
+          <button @click="router.push('/booking')" class="w-full bg-primary hover:bg-primary/80 text-primary-foreground py-3 px-8 rounded-lg font-semibold text-lg transition-all duration-300">
             Inquiry
           </button>
         </div>
@@ -322,12 +322,6 @@ const nextImage = () => {
 
 const setCurrentImage = (index: number) => {
   currentImageIndex.value = index
-}
-
-const bookNow = () => {
-  const title = packageItem.value?.slug ?? ''
-  const packageKey = title === KING_TUT_ROYAL_VIP ? KING_TUT_ROYAL_VIP : KING_TUT_VIP_ONE_DAY
-  router.push({ path: '/', query: { scroll: 'booking', packageId: packageKey } })
 }
 </script>
 <style scoped>

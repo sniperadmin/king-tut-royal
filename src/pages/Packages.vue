@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="mx-auto py-20 justify-center min-h-screen">
+    <div class="container mx-auto py-20 justify-center min-h-screen">
       <div class="container flex flex-col md:flex-row items-center mb-8 w-full max-w-6xl mx-auto">
         <button
           type="button"
@@ -51,7 +51,7 @@ useSeo(seoConfigs.packages)
 const { addOrganizationSchema, addBreadcrumbSchema } = useStructuredData()
 
 
-const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
+const PackageCard = defineAsyncComponent(() => import('../components/ui/PackageCard.vue'))
 const router = useRouter()
 
 const packages = ref<PackageData[]>([]);

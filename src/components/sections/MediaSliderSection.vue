@@ -64,8 +64,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-vue-next';
-import Button from './ui/button.vue';
-import SplideCarousel from './SplideCarousel.vue';
+import Button from '../ui/button.vue';
+import SplideCarousel from '../SplideCarousel.vue';
 
 const isModalOpen = ref(false);
 const modalImageIndex = ref(0);
