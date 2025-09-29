@@ -8,14 +8,14 @@
         </p>
       </div>
 
-      <Card class="bg-card border border-primary/20 shadow-xl">
-        <CardHeader class="text-center border-b border-border">
-          <CardTitle class="flex items-center justify-center gap-2 text-xl sm:text-2xl text-foreground">
+      <div class="bg-card border border-primary/20 shadow-xl rounded-lg">
+        <div class="text-center border-b border-border p-6">
+          <h3 class="flex items-center justify-center gap-2 text-xl sm:text-2xl text-foreground font-semibold">
             Booking Details
-          </CardTitle>
-          <CardDescription class="text-sm sm:text-base text-muted-foreground">Choose your preferred date</CardDescription>
-        </CardHeader>
-        <CardContent class="space-y-6 p-8">
+          </h3>
+          <p class="text-sm sm:text-base text-muted-foreground mt-2">Choose your preferred date</p>
+        </div>
+        <div class="space-y-6 p-8">
           <!-- Package Selection -->
           <div class="space-y-4 mb-8">
             <Label class="text-foreground text-base sm:text-lg">Your Package *</Label>
@@ -145,8 +145,8 @@
               </span>
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -163,11 +163,6 @@ import type { PackageData } from '@/types';
 
 const PhoneInput = defineAsyncComponent(() => import('@/components/ui/PhoneInput.vue'))
 
-const Card = defineAsyncComponent(() => import('@/components/ui/card.vue'))
-const CardHeader = defineAsyncComponent(() => import('@/components/ui/card-header.vue'))
-const CardTitle = defineAsyncComponent(() => import('@/components/ui/card-title.vue'))
-const CardDescription = defineAsyncComponent(() => import('@/components/ui/card-description.vue'))
-const CardContent = defineAsyncComponent(() => import('@/components/ui/card-content.vue'))
 const Button = defineAsyncComponent(() => import('@/components/ui/button.vue'))
 const Input = defineAsyncComponent(() => import('@/components/ui/input.vue'))
 const Label = defineAsyncComponent(() => import('@/components/ui/label.vue'))
