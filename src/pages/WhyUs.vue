@@ -7,11 +7,11 @@
         </svg>
         Back
       </button>
-      <h1 class="text-5xl font-bold text-primary text-center">Why Us?</h1>
+      <h1 class="text-2xl font-bold text-primary text-center">Why Us?</h1>
 
       <div class="py-2 rounded-lg mb-12">
         <ArticleCard v-for="(post, index) in posts" :key="index" :post="post" />
-        <h2 class="text-4xl font-bold text-foreground mb-6">Introduction to SY Consulting</h2>
+        <h2 class="text-xl font-bold text-foreground mb-6">Introduction to SY Consulting</h2>
         <p class="text-lg text-muted-foreground mb-4">
           SY Consulting FZ-LLC, headquartered in the United Arab Emirates, brings together more than 30 years of global expertise in the fields of luxury, lifestyle, hospitality, and tourism innovation. Over three decades, our team has worked alongside world-class brands, celebrities, high-net-worth individuals, and government entities, creating bespoke products, high-profile events, and iconic lifestyle concepts across Europe, the Middle East, and beyond.
         </p>
@@ -24,9 +24,9 @@
 
         <VideoPlayer :videos="[{ url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/why-us/why-us.m3u8' }]" />
 
-        <h3 class="text-3xl font-bold text-foreground text-left mb-4">Key Benefits for Our Partners:</h3>
+        <h3 class="text-xl font-bold text-foreground text-left my-4">Key Benefits for Our Partners:</h3>
         <ul class="fancy-list text-left text-lg text-muted-foreground mb-4 pl-4">
-          <li v-for="(benefit, index) in benefits" :key="index">
+          <li v-for="(benefit, index) in benefits" :key="index" class="my-5">
             <Sparkles class="inline-block h-5 w-5 mr-2 text-primary" />
             <span v-html="benefit"></span>
           </li>

@@ -1,6 +1,6 @@
 <template>
 <div class="flex flex-col h-full w-full">
-  <h3 class="text-3xl font-semibold text-foreground my-5">{{ title }}</h3>
+  <h3 class="text-xl font-semibold text-foreground my-5">{{ title }}</h3>
   
   <BaseCard
     variant="default"
@@ -30,7 +30,7 @@
       
       <p class="text-muted-foreground text-md tracking-wide font-medium mb-2">{{ duration }}</p>
       
-      <div class="text-2xl font-semibold text-primary mb-4">
+      <div class="text-xl font-semibold text-primary mb-4">
         {{ price }} <span class="text-muted-foreground text-md font-medium">per person</span>
       </div>
 

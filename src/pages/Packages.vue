@@ -9,7 +9,7 @@
         >
           Back to Home
         </button>
-        <h1 class="text-4xl font-bold text-center flex-grow md:ml-4">Our Exclusive Packages</h1>
+        <h1 class="text-2xl font-bold text-center flex-grow md:ml-4">Our Exclusive Packages</h1>
       </div>
       <div :class="gridColsClass" class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl w-full mx-auto justify-items-center">
         <PackageCard
