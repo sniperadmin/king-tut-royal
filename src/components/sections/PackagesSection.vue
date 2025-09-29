@@ -40,14 +40,14 @@
 </template>
 
 <script setup lang="ts">
-import { smoothScroll } from '../utils/smoothScroll'
+import { smoothScroll } from '../../utils/smoothScroll'
 import { ref, defineAsyncComponent, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { supabase } from '../lib/supabase';
-import { PackageData } from '../types';
+import { supabase } from '../../lib/supabase';
+import { PackageData } from '../../types';
 
 const router = useRouter()
-const PackageCard = defineAsyncComponent(() => import('./PackageCard.vue'))
+const PackageCard = defineAsyncComponent(() => import('../ui/PackageCard.vue'))
 
 const packages = ref<PackageData[]>([]);
 

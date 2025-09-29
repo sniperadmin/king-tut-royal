@@ -55,9 +55,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { supabase } from '../lib/supabase';
-import { Partner } from '../types';
-import SplideCarousel from './SplideCarousel.vue';
+import { supabase } from '../../lib/supabase';
+import { Partner } from '../../types';
+import SplideCarousel from '../SplideCarousel.vue';
 import { SplideSlide } from '@splidejs/vue-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 

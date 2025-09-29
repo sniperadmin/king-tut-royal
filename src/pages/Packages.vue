@@ -51,7 +51,7 @@ useSeo(seoConfigs.packages)
 const { addOrganizationSchema, addBreadcrumbSchema } = useStructuredData()
 
 
-const PackageCard = defineAsyncComponent(() => import('../components/PackageCard.vue'))
+const PackageCard = defineAsyncComponent(() => import('../components/ui/PackageCard.vue'))
 const router = useRouter()
 
 const packages = ref<PackageData[]>([]);

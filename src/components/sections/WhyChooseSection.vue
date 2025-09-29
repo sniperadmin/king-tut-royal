@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import SplideCarousel from './SplideCarousel.vue';
+import SplideCarousel from '../SplideCarousel.vue';
 import { SplideSlide } from '@splidejs/vue-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 

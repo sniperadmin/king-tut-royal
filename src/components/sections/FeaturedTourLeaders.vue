@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { supabase } from '@/lib/supabase'
-import SplideCarousel from './SplideCarousel.vue';
+import SplideCarousel from '../SplideCarousel.vue';
 import { SplideSlide } from '@splidejs/vue-splide';
 
 interface TourLeader {
@@ -97,7 +97,7 @@ const fetchFeaturedTourLeaders = async () => {
     const { data, error: supabaseError } = await supabase
       .from('guides_public')
       .select('id, name, languages, avatar_url, experience, bio, specialties')
-      .limit(3); // Fetch only 3 for featured section
+      .limit(6); // Fetch only 3 for featured section
 
     if (supabaseError) {
       throw supabaseError;

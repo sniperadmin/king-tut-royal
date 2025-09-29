@@ -20,10 +20,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import PDFCard from './PDFCard.vue';
-import PDFPreviewModal from './PDFPreviewModal.vue';
-import type { ItineraryPDF } from '../types';
-import { supabase } from '../lib/supabase';
+import PDFCard from '../PDFCard.vue';
+import PDFPreviewModal from '../PDFPreviewModal.vue';
+import type { ItineraryPDF } from '../../types';
+import { supabase } from '../../lib/supabase';
 
 const itineraries = ref<ItineraryPDF[]>([]);
 const loading = ref(true);

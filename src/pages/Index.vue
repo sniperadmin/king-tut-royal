@@ -37,12 +37,6 @@
             <PartnersSection />
           </Suspense>
         </section>
-        <Suspense>
-          <template #fallback>
-            <NewsletterSkeleton />
-          </template>
-          <!-- <NewsMediaSection id="news-media" /> -->
-        </Suspense>
       </section>
 
       <!-- https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8 -->
@@ -80,20 +74,20 @@ import { useRoute } from 'vue-router'
 import { useSeo, seoConfigs } from '@/composables/useSeo'
 import { useStructuredData } from '@/composables/useStructuredData'
 import AppLayout from '@/components/AppLayout.vue'
-import HeroSection from '@/components/HeroSection.vue'
-import PackagesSection from '@/components/PackagesSection.vue'
-import WhyChooseSection from '@/components/WhyChooseSection.vue'
-import FeaturedTourLeaders from '@/components/FeaturedTourLeaders.vue'
-import PartnersSection from '@/components/PartnersSection.vue'
-import MediaSliderSection from '@/components/MediaSliderSection.vue'
-import NewsMediaSection from '@/components/NewsMediaSection.vue'
-import ContactSection from '@/components/ContactSection.vue'
-import BookingSection from '@/components/BookingSection.vue'
+import HeroSection from '@/components/sections/HeroSection.vue'
+import PackagesSection from '@/components/sections/PackagesSection.vue'
+import WhyChooseSection from '@/components/sections/WhyChooseSection.vue'
+import FeaturedTourLeaders from '@/components/sections/FeaturedTourLeaders.vue'
+import PartnersSection from '@/components/sections/PartnersSection.vue'
+import MediaSliderSection from '@/components/sections/MediaSliderSection.vue'
+// import NewsMediaSection from '@/components/sections/NewsMediaSection.vue'
+import ContactSection from '@/components/sections/ContactSection.vue'
+import BookingSection from '@/components/sections/BookingSection.vue'
 import LuxuryAnnouncementSection from '@/components/sections/LuxuryAnnouncementSection.vue'
 import VideoPlayer from '@/components/ui/VideoPlayer.vue'
 import BecomeAgentSection from '@/components/sections/BecomeAgentSection.vue'
-import ArticleCard from '@/components/ArticleCard.vue'
-import ItineraryPDFSection from '@/components/ItineraryPDFSection.vue'
+import ArticleCard from '@/components/ui/ArticleCard.vue'
+import ItineraryPDFSection from '@/components/sections/ItineraryPDFSection.vue'
 import VideoSection from '@/components/sections/VideoSection.vue'
 // SEO Configuration
 useSeo(seoConfigs.home)

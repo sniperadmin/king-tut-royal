@@ -23,7 +23,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppLayout from '@/components/AppLayout.vue'
-import BookingSection from '@/components/BookingSection.vue'
+import BookingSection from '@/components/sections/BookingSection.vue'
 import BookingSkeleton from '@/components/skeletons/BookingSkeleton.vue'
 import { smoothScroll } from '@/utils/smoothScroll'
 

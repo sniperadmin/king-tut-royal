@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { smoothScroll } from '../utils/smoothScroll'
-import VideoPlayer from './ui/VideoPlayer.vue'
+import { smoothScroll } from '../../utils/smoothScroll'
+import VideoPlayer from '../ui/VideoPlayer.vue'
 
 const scrollToPackages = () => {
   smoothScroll('packages')

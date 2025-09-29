@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import AppLayout from '@/components/AppLayout.vue';
 import VideoPlayer from '@/components/ui/VideoPlayer.vue';
-import ArticleCard from '../components/ArticleCard.vue'
+import ArticleCard from '../components/ui/ArticleCard.vue'
 import { onMounted, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Sparkles } from 'lucide-vue-next';
