@@ -52,3 +52,14 @@ export interface PackageData {
     images: string[];
   };
 }
+
+export interface ItineraryPDF {
+  id: string;
+  title: string;
+  file_url: string;
+  file_size: number;
+  thumbnail_url?: string; // Made optional
+  category: string;
+  created_at: string;
+  is_featured: boolean;
+}

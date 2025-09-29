@@ -14,6 +14,8 @@
         </Suspense>
       </section>
 
+      <ItineraryPDFSection />
+
       <ContactSection />
 
       <Suspense>
@@ -90,6 +92,7 @@ import LuxuryAnnouncementSection from '@/components/sections/LuxuryAnnouncementS
 import VideoPlayer from '@/components/ui/VideoPlayer.vue'
 import BecomeAgentSection from '@/components/sections/BecomeAgentSection.vue'
 import ArticleCard from '@/components/ArticleCard.vue'
+import ItineraryPDFSection from '@/components/ItineraryPDFSection.vue'
 // SEO Configuration
 useSeo(seoConfigs.home)
 
