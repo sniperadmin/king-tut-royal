@@ -1,22 +1,30 @@
 <template>
-  <div class="pdf-card relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl group">
-    <div class="relative h-48 w-full overflow-hidden">
-      <img
-        :src="itinerary.thumbnail_url || '/placeholder.svg'"
-        :alt="itinerary.title"
-        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-300"></div>
+  <BaseCard
+    variant="default"
+    :image="itinerary.thumbnail_url || '/placeholder.svg'"
+    :imageAlt="itinerary.title"
+    :hoverable="true"
+    :group="true"
+    :overlay="true"
+    customClass="pdf-card bg-white"
+    :mediaClass="'relative h-48 w-full overflow-hidden'"
+    :contentClass="'p-4'"
+  >
+    <template #media-overlay>
       <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
         <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors duration-300">{{ itinerary.title }}</h3>
         <p class="text-sm text-gray-300">{{ itinerary.category }}</p>
       </div>
-    </div>
-    <div class="p-4">
+    </template>
+
+    <template #content>
       <div class="flex justify-between items-center mb-4 text-gray-500 text-xs">
         <span>{{ itinerary.file_size ? itinerary.file_size.toFixed(1) + ' KB' : 'N/A' }}</span>
         <span>{{ new Date(itinerary.created_at).toLocaleDateString() }}</span>
       </div>
+    </template>
+
+    <template #actions>
       <div class="flex space-x-4">
         <button
           @click="emit('preview', itinerary.file_url)"
@@ -33,11 +41,12 @@
           Download
         </a>
       </div>
-    </div>
-  </div>
+    </template>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
+import BaseCard from './ui/BaseCard.vue';
 import type { ItineraryPDF } from '../types';
 
 const props = defineProps<{ itinerary: ItineraryPDF }>();

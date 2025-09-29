@@ -1,33 +1,38 @@
 <template>
 <div class="flex flex-col h-full w-full">
   <h3 class="text-3xl font-semibold text-foreground my-5">{{ title }}</h3>
-  <div :class="['bg-card border group hover:border-primary/50 transition-all duration-300 rounded-lg text-center overflow-hidden w-full', isPopular ? 'border-primary' : 'border-border']">
-    <div class="relative overflow-hidden bg-muted">
-      <img
-        :src="image"
-        :srcset="computedImageSrcset"
-        :sizes="imageSizes"
-        :alt="title + ' thumbnail'"
-        loading="lazy"
-        decoding="async"
-        class="w-full rounded-t-lg drop-shadow h-48 object-contain"
-        width="412"
-        height="240"
-      />
-      <div v-if="isPopular" class="absolute top-2 right-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
+  
+  <BaseCard
+    variant="default"
+    :image="image"
+    :imageSrcset="computedImageSrcset"
+    :imageSizes="imageSizes"
+    :imageAlt="title + ' thumbnail'"
+    :hoverable="true"
+    :group="true"
+    customClass="text-center w-full"
+    :mediaClass="'relative overflow-hidden bg-muted'"
+    :contentClass="'p-6 flex flex-col flex-grow'"
+  >
+    <template #badge>
+      <div v-if="isPopular" class="bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
         Limited Edition
       </div>
-    </div>
+    </template>
 
-    <div class="p-6 flex flex-col flex-grow">
+    <template #content>
       <div class="flex items-center justify-center mb-3">
         <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-2">
           <component :is="LucideIcon" :size="20" class="text-primary-foreground" />
         </div>
         <h3 class="text-xl font-semibold text-foreground">{{ title }} Package</h3>
       </div>
+      
       <p class="text-muted-foreground text-md tracking-wide font-medium mb-2">{{ duration }}</p>
-      <div class="text-2xl font-semibold text-primary mb-4">{{ price }} <span class="text-muted-foreground text-md font-medium">per person</span></div>
+      
+      <div class="text-2xl font-semibold text-primary mb-4">
+        {{ price }} <span class="text-muted-foreground text-md font-medium">per person</span>
+      </div>
 
       <div class="mb-6 flex-grow">
         <ul class="space-y-2 text-left">
@@ -37,7 +42,9 @@
           </li>
         </ul>
       </div>
+    </template>
 
+    <template #actions>
       <div class="mt-auto space-y-3">
         <router-link
           :to="`/packages/${packageTitleForDetails.toLowerCase().replace(/ /g, '-')}`"
@@ -52,15 +59,15 @@
           INQUIRY
         </button>
       </div>
-    </div>
-  </div>
-
+    </template>
+  </BaseCard>
 </div>
 </template>
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import { Crown, Star, CircleAlert } from 'lucide-vue-next';
+import BaseCard from './BaseCard.vue';
 // Add here any other icons passed as props.icon, e.g., import { Star, Heart } from 'lucide-vue-next'
 
 interface PackageCardProps {

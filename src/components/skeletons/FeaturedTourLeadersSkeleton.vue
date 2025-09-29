@@ -1,9 +1,13 @@
 <template>
-    <div class="space-y-4">
-      <div class="h-4 bg-gray-300 rounded w-3/4 animate-pulse"></div>
-      <div class="h-4 bg-gray-300 rounded animate-pulse"></div>
-      <div class="h-4 bg-gray-300 rounded w-1/2 animate-pulse"></div>
-    </div>
-  </template>
+  <BaseCardSkeleton
+    :showMedia="false"
+    :showTitle="false"
+    :showDescription="true"
+    :showHighlights="false"
+    :showActions="false"
+  />
+</template>
   
-  <script setup lang="ts"></script>
+  <script setup lang="ts">
+import BaseCardSkeleton from './BaseCardSkeleton.vue';
+</script>
