@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   videos: {
@@ -45,7 +45,6 @@ if (props.videos[currentVideoIndex.value].url.includes('.m3u8')) {
   import('hls.js');
 }
 vidstackLoaded.value = true;
-nextTick();
 </script>
 
 <template>
@@ -56,13 +55,16 @@ nextTick();
     <template v-if="vidstackLoaded">
       <!-- NOTE: Never delete aspect-video class from media-player -->
       <media-player
+        ref="playerRef"
         class="aspect-video w-full h-full"
         :src="props.videos[currentVideoIndex].url"
         v-bind="props.autoplay ? { autoplay: true } : {}"
         :muted="props.muted"
         :loop="props.loop"
         playsinline
-        fullscreenOrientation="portrait"
+        view-type="video"
+        stream-type="on-demand"
+        fullscreen-orientation="portrait"
         @auto-play-fail="handleAutoPlayFail"
       >
         <media-provider></media-provider>
