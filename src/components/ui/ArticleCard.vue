@@ -15,7 +15,7 @@
     :contentClass="'p-8'"
   >
     <template #content>
-      <h3 class="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3">{{ post.title }}</h3>
+      <h3 class="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3">{{ post.title }}</h3>
 
       <p class="text-muted-foreground leading-relaxed mb-6">{{ post.excerpt }}</p>
     </template>

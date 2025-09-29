@@ -14,14 +14,14 @@
       </button>
         <div class="flex-shrink-0">
           <img v-if="leader.avatar_url" :src="leader.avatar_url" :alt="leader.name" class="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md" />
-          <div v-else class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-muted flex items-center justify-center text-5xl font-semibold text-muted-foreground shadow-md">
+          <div v-else class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-muted flex items-center justify-center text-2xl font-semibold text-muted-foreground shadow-md">
             {{ leader.name ? leader.name.charAt(0) : '?' }}
           </div>
         </div>
         <div class="flex-grow text-center md:text-left">
-          <h1 class="text-3xl md:text-4xl font-bold text-primary-foreground">{{ leader.name }}</h1>
-          <p class="text-lg text-primary mt-2">{{ leader.specialties && leader.specialties.length > 0 ? leader.specialties.join(', ') : leader.experience || 'Private & Bespoke Tours' }}</p>
-          <p class="text-md text-muted-foreground mt-1">Languages: {{ leader.languages ? leader.languages.join(', ') : 'N/A' }}</p>
+          <h1 class="text-2xl md:text-3xl font-bold text-primary-foreground">{{ leader.name }}</h1>
+          <p class="text-md text-primary mt-2">{{ leader.specialties && leader.specialties.length > 0 ? leader.specialties.join(', ') : leader.experience || 'Private & Bespoke Tours' }}</p>
+          <p class="text-md text-muted-foreground my-5">Languages: {{ leader.languages ? leader.languages.join(', ') : 'N/A' }}</p>
           <p v-if="leader.bio" class="text-foreground mt-4 leading-relaxed">{{ leader.bio }}</p>
         </div>
       </div>
