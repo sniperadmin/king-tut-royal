@@ -79,6 +79,12 @@
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
     line-height: 1.6;
+    /* Prevent font size changes during font loading */
+    font-size-adjust: 0.5;
+    /* Ensure consistent rendering during font load */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
