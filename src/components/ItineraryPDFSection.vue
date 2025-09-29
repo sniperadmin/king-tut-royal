@@ -2,12 +2,14 @@
   <section class="itinerary-pdf-section py-16 bg-gray-100">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-bold text-center text-brown mb-12">Exclusive Itinerary</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
         <!-- PDF Cards will be rendered here -->
         <p v-if="loading" class="text-center">Loading itineraries...</p>
         <p v-else-if="error" class="text-center text-red-500">Error loading itineraries: {{ error.message }}</p>
         <p v-else-if="itineraries.length === 0" class="text-center">No itineraries available at the moment.</p>
-        <PDFCard v-for="itinerary in itineraries" :key="itinerary.id" :itinerary="itinerary" @preview="openPreviewModal" />
+        <div class="lg:container">
+          <PDFCard v-for="itinerary in itineraries" :key="itinerary.id" :itinerary="itinerary" @preview="openPreviewModal" />
+        </div>
       </div>
 
       <!-- PDF Preview Modal -->
