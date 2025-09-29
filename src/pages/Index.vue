@@ -40,7 +40,10 @@
       </section>
 
       <!-- https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8 -->
-      <VideoPlayer :videos="[{ id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8', title: 'hotels', muted: true }]" />
+      <VideoPlayer
+        :videos="[{ id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8', title: 'hotels', muted: true }]"
+        poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/air-cairo.jpg"
+      />
 
       <BecomeAgentSection />
 

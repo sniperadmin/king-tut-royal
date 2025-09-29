@@ -11,7 +11,7 @@ const videos = [
     <div class="mx-auto">
       <p class="text-xl font-semibold text-center mb-8 leading-relaxed">Step into timeless elegance with King's Tut Royal Luxury Experiences.</p>
       <h3 class="text-2xl font-semibold text-foreground mb-3">Video</h3>
-      <VideoPlayer :videos="videos" />
+      <VideoPlayer :videos="videos" poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/vip.jpg" />
     </div>
   </section>
 </template>
