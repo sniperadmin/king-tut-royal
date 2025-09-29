@@ -77,7 +77,6 @@ onMounted(async () => {
     .select('partner, id, sort_rank')
     .order('sort_rank', { ascending: true })
     .order('partner->>name', { ascending: true })
-    .neq('id', 'orascom-pyramids-entertainment');
 
   if (error) {
     console.error('Error fetching partners:', error);
