@@ -45,7 +45,8 @@
         </Suspense>
       </section>
 
-      <VideoPlayer :videos="[{ id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/hotel.m3u8', title: 'hotels', muted: true }]" />
+      <!-- https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8 -->
+      <VideoPlayer :videos="[{ id: 3, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/new/hero-air-cairo.m3u8', title: 'hotels', muted: true }]" />
 
       <BecomeAgentSection />
 
@@ -93,6 +94,7 @@ import VideoPlayer from '@/components/ui/VideoPlayer.vue'
 import BecomeAgentSection from '@/components/sections/BecomeAgentSection.vue'
 import ArticleCard from '@/components/ArticleCard.vue'
 import ItineraryPDFSection from '@/components/ItineraryPDFSection.vue'
+import VideoSection from '@/components/sections/VideoSection.vue'
 // SEO Configuration
 useSeo(seoConfigs.home)
 

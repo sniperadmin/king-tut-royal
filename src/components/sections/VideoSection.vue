@@ -2,7 +2,7 @@
 import VideoPlayer from '../ui/VideoPlayer.vue';
 
 const videos = [
-  { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/king/king.m3u8', title: 'King Tut Package', muted: true },
+  { id: 4, url: 'https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/hotel.m3u8', title: 'King Tut Package', muted: true },
 ];
 </script>
 
