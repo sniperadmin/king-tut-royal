@@ -12,7 +12,8 @@
   >
     <template #media-overlay>
       <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
-        <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors duration-300">{{ itinerary.title }}</h3>
+        <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors duration-300">Download Itinerary</h3>
+        <p class="text-xl text-white font-bold">{{ itinerary.title }}</p>
       </div>
     </template>
 

@@ -37,7 +37,8 @@
       <div v-if="$slots.badge" class="absolute top-2 right-2">
         <slot name="badge"></slot>
       </div>
-      <div v-if="overlay" class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-300"></div>
+      <!-- <div v-if="overlay" class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-300"></div> -->
+      <div v-if="overlay" class="absolute inset-0 transition-opacity duration-300"></div>
       <div v-if="$slots['media-overlay']" class="absolute inset-0">
         <slot name="media-overlay"></slot>
       </div>
