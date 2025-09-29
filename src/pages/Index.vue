@@ -58,7 +58,9 @@
         <WhyChooseSection />
       </Suspense>
 
-      <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
+      <section class="container">
+        <ArticleCard v-for="(post, index) in posts1" :key="index" :post="post" />
+      </section>
 
       <Suspense>
         <template #fallback>

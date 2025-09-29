@@ -1,5 +1,5 @@
 <template>
-  <section class="mx-auto bg-light-blue">
+  <section class="container mx-auto bg-light-blue">
     <div class="py-6">
       <div class="flex items-center justify-between mb-6">
         <div class="mx-auto text-center">

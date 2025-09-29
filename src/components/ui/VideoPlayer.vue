@@ -52,7 +52,6 @@ nextTick();
   <div
     id="video-player-container"
     class="relative w-full mx-auto rounded-lg overflow-hidden object-cover"
-    :style="{ '--aspect-ratio': props.aspectRatio }"
   >
     <template v-if="vidstackLoaded">
       <!-- NOTE: Never delete aspect-video class from media-player -->
@@ -127,7 +126,41 @@ nextTick();
 /* Add any custom styles here if needed */
 /* NOTE: Don't delete aspect ratio */
 .aspect-video {
-  aspect-ratio: v-bind(--aspect-ratio);
+  /* Mobile: Full screen aspect ratio (9:16 portrait or dynamic based on viewport) */
+  aspect-ratio: 9/16;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for better mobile support */
+}
+
+/* Mobile landscape: Use full width */
+@media (max-width: 767px) and (orientation: landscape) {
+  .aspect-video {
+    aspect-ratio: 16/9;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+/* Tablet and up: 21:9 aspect ratio for wider screens */
+@media (min-width: 768px) {
+  .aspect-video {
+    aspect-ratio: 21/9;
+    min-height: auto; /* Reset min-height for larger screens */
+  }
+}
+
+/* Large screens: 2.35:1 cinematic aspect ratio */
+@media (min-width: 1024px) {
+  .aspect-video {
+    aspect-ratio: 2.35/1;
+  }
+}
+
+/* Extra large screens: even wider aspect ratio */
+@media (min-width: 1536px) {
+  .aspect-video {
+    aspect-ratio: 2.5/1;
+  }
 }
 
 .aspect-video video {

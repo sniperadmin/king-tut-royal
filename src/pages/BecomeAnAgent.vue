@@ -1,6 +1,6 @@
 <template>
 <AppLayout>
-  <BecomeAgentSection />
+  <BecomeAgentSection class="p-4" />
 </AppLayout>
 </template>
 

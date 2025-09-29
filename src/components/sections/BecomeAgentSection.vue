@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-    <div class="x-4 py-16">
+    <div class="px-2 x-4 py-16">
       <!-- Hero Section -->
       <div class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6 font-royal">

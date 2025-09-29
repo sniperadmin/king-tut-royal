@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <div class="mx-auto pt-20">
+    <div class="p-4 mx-auto pt-20">
       <button
           type="button"
           @click="router.push('/packages')"

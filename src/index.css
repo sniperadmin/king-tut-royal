@@ -134,7 +134,7 @@
   /* Styles migrated from App.css */
   #root {
     /* @apply max-w-5xl mx-auto p-8 text-center; */
-    @apply mx-auto p-8 text-center;
+    @apply mx-auto text-center;
   }
 
   .logo {

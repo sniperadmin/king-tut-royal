@@ -1,6 +1,6 @@
 <template>
   <AppLayout>
-    <section class="mx-auto bg-light-blue pt-20">
+    <section class="container mx-auto bg-light-blue pt-20">
       <div>
         <div class="flex justify-center mb-6">
           <button
