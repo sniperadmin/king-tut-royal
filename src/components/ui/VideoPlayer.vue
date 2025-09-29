@@ -62,6 +62,7 @@ vidstackLoaded.value = true;
         :muted="props.muted"
         :loop="props.loop"
         playsinline
+        load="idle"
         view-type="video"
         stream-type="on-demand"
         fullscreen-orientation="portrait"
