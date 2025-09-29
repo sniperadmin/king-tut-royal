@@ -1,7 +1,7 @@
 <template>
   <section class="itinerary-pdf-section py-16 bg-gray-100">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-brown mb-12">Exclusive Itinerary</h2>
+      <h2 class="text-4xl font-bold text-center text-brown mb-12">Download Itinerary</h2>
       <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
         <!-- PDF Cards will be rendered here -->
         <p v-if="loading" class="text-center">Loading itineraries...</p>
