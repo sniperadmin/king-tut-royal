@@ -94,7 +94,8 @@ onMounted(async () => {
     console.log('Fetching partners from partners_view...');
     const { data, supabaseError } = await supabase
       .from('partners_view')
-      .select('*');
+      .select('*')
+      .neq('id', 'orascom-pyramids-entertainment');
 
     if (supabaseError) {
       console.error('Error fetching partners:', supabaseError);
