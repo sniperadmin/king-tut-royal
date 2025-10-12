@@ -24,7 +24,7 @@
               :srcset="`${partner.partner.logo?.small || '/images/default-logo.webp'} 200w, ${partner.partner.logo?.medium || '/images/default-logo.webp'} 600w, ${partner.partner.logo?.large || '/images/default-logo.webp'} 1200w`"
               sizes="(max-width: 600px) 200px, (max-width: 1200px) 600px, 1200px"
               :alt="partner.partner.name + ' Logo'"
-              class="w-full h-auto mb-6 object-cover max-h-[100px]"
+              class="w-full h-auto mb-6 object-cover max-h-[150px]"
               width="200"
               height="80"
             />

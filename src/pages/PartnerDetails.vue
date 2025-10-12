@@ -120,7 +120,7 @@
                 <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-muted-foreground">{{ service }}</span>
+                <span class="text-muted-foreground capitalize">{{ service }}</span>
               </li>
             </ul>
           </section>
