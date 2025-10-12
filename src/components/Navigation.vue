@@ -9,7 +9,7 @@
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-8 mt-3">
-          <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button>
+          <!-- <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Home</button> -->
           <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Packages</router-link>
           <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Partners</router-link>
           <router-link to="/become-agent" :class="{'text-primary': isActive('/become-agent')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0">Become an Agent</router-link>
@@ -38,7 +38,7 @@
       <!-- Mobile Menu -->
       <div v-if="isMenuOpen" class="md:hidden py-4 border-t border-primary/20">
         <div class="flex flex-col space-y-4">
-          <button @click="scrollToSection('home')" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</button>
+          <!-- <router-link to="/" :class="{'text-primary': isActive('/')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Home</router-link> -->
           <router-link to="/packages" :class="{'text-primary': isActive('/packages')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Packages</router-link>
           <router-link to="/partners" :class="{'text-primary': isActive('/partners')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Partners</router-link>
           <router-link to="/become-agent" :class="{'text-primary': isActive('/become-agent')}" class="text-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none p-0 w-full text-left">Become an Agent</router-link>

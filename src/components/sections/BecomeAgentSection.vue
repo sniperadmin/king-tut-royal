@@ -3,10 +3,10 @@
     <div class="px-2 x-4 py-16">
       <!-- Hero Section -->
       <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6 font-royal">
+        <h1 class="text-2xl md:text-5xl font-bold text-primary mb-6 font-royal">
           Become a Global Agent
         </h1>
-        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6">
+        <p class="text-md text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6">
           Travel Agents | DMCs | Lifestyle Consultants | Influencers
         </p>
         <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">

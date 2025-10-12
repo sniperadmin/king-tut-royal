@@ -24,10 +24,22 @@
               class="w-full h-auto rounded-lg shadow-lg"
             />
           </div>
-          <div class="w-full md:w-2/3">
-            <h1 class="text-4xl font-bold text-primary mb-4">{{ partnerInfo?.name }}</h1>
+          <!-- <div class="w-full md:w-2/3">
+            <h1 class="text-2xl font-bold text-primary mb-4">{{ partnerInfo?.name }}</h1>
             <p class="text-lg text-muted-foreground mb-6">{{ partnerInfo?.description }}</p>
             <div class="flex flex-wrap gap-4">
+            </div>
+          </div> -->
+        </div>
+
+        <!-- Partner Content Sections -->
+        <div class="space-y-12">
+          <section v-if="partnerInfo?.about">
+            <h2 class="text-xl font-bold text-foreground mb-6">About {{ partnerInfo?.name }}</h2>
+            <div class="prose max-w-none text-muted-foreground">
+              <p v-for="(paragraph, index) in partnerInfo?.about.split('\n\n')" :key="index">
+                {{ paragraph }}
+              </p>
               <button 
                 @click="$router.push('/partners')"
                 class="border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
@@ -35,22 +47,10 @@
                 Back to Partners
               </button>
             </div>
-          </div>
-        </div>
-
-        <!-- Partner Content Sections -->
-        <div class="space-y-12">
-          <section v-if="partnerInfo?.about">
-            <h2 class="text-2xl font-bold text-foreground mb-6">About {{ partnerInfo?.name }}</h2>
-            <div class="prose max-w-none text-muted-foreground">
-              <p v-for="(paragraph, index) in partnerInfo?.about.split('\n\n')" :key="index">
-                {{ paragraph }}
-              </p>
-            </div>
           </section>
 
           <section v-if="partnerInfo?.media && partnerInfo.media.length > 0">
-            <h2 class="text-2xl font-bold text-foreground mb-6">Gallery</h2>
+            <h2 class="text-xl font-bold text-foreground mb-6">Gallery</h2>
             <div class="relative w-full max-w-4xl mx-auto aspect-video rounded-lg overflow-hidden shadow-lg group">
               <!-- Main Media Display -->
               <div class="w-full h-full flex items-center justify-center bg-black">
@@ -110,7 +110,7 @@
             </div>
           </section>
           <section v-if="partnerInfo?.services">
-            <h2 class="text-2xl font-bold text-foreground mb-6">Services</h2>
+            <h2 class="text-xl font-bold text-foreground mb-6">Services</h2>
             <ul class="space-y-4">
               <li
                 v-for="(service, index) in partnerInfo?.services"

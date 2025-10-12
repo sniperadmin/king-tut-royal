@@ -7,10 +7,9 @@ const videos = [
 </script>
 
 <template>
-  <section id="video-section" class="pt-10 pb-0 bg-background text-foreground">
+  <section id="video-section" class="pt-5 pb-0 bg-background text-foreground">
     <div class="mx-auto">
-      <p class="text-xl font-semibold text-center mb-8 leading-relaxed">Step into timeless elegance with King's Tut Royal Luxury Experiences.</p>
-      <h3 class="text-2xl font-semibold text-foreground mb-3">Video</h3>
+      <p class="text-2xl font-semibold text-center mb-8 leading-relaxed">Step into timeless elegance with King's Tut Royal Luxury Experiences.</p>
       <VideoPlayer :videos="videos" poster="https://mhwjdkzpnhzmduolfgmy.supabase.co/storage/v1/object/public/videos/hero/mid-page/vip.jpg" />
     </div>
   </section>
